@@ -29,12 +29,12 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - Adapt to whatever versioning the project uses.
 6. Update `CHANGELOG.md` with the changes included in this release (summarize from task descriptions, journal entries, and commit history).
 7. If the version bump wasn't handled by `npm version`, commit the version change and changelog update, then create a git tag: `git tag v{version}`.
-7. Push the commit and tag to the remote: `git push && git push --tags`.
-8. Cut a GitHub release using `gh release create v{version} --generate-notes` (or provide a custom title/body from the task description and changelog).
-9. Verify the release appears on GitHub and that any CI/CD workflows triggered by the tag/release are running.
-10. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
-11. Set the task status to `done`.
-12. Write a journal entry summarizing: version released, tag name, registry targets, CI/CD status, and any notes for the team.
+8. Push the commit and tag to the remote: `git push && git push --tags`.
+9. Cut a GitHub release using `gh release create v{version} --generate-notes` (or provide a custom title/body from the task description and changelog).
+10. Verify the release appears on GitHub and that any CI/CD workflows triggered by the tag/release are running.
+11. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
+12. Set the task status to `done`.
+13. Write a journal entry summarizing: version released, tag name, registry targets, CI/CD status, and any notes for the team.
 
 ## Outputs
 

@@ -36,17 +36,22 @@ projects/        # Project directories (each with its own git repo)
 AGENT_COMMS.md   # Shared coordination API reference
 ```
 
-## Running agents
+## Running
 
-Each agent has a launch script in `scripts/`:
+The main entrypoint is `scripts/agent_loop.sh`, which continuously cycles through the pipeline:
 
 ```sh
-./scripts/architect.sh
-./scripts/developer.sh
-./scripts/project_manager.sh
-./scripts/qa.sh
-./scripts/documentation_writer.sh
-./scripts/release_manager.sh
+./scripts/agent_loop.sh
 ```
+
+It runs each agent in sequence with the project manager coordinating between stages:
+
+```
+project_manager → developer → project_manager → qa → project_manager → documentation_writer → project_manager → release_manager → architect
+```
+
+Failed agents are retried with exponential backoff (5min initial, 15min cap). The loop sleeps between stages and repeats indefinitely.
+
+Individual agents can also be run standalone via `scripts/{role}.sh`.
 
 Agents require the agent-comms API server to be running at `http://localhost:8000`.

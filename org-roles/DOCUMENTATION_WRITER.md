@@ -28,9 +28,14 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - **API reference:** Document public functions, classes, and configuration.
    - **Guides:** Tutorials or how-to guides if the task calls for them.
    - **CHANGELOG.md:** Summarize changes for each release when requested.
-6. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
-7. Set the task status to `done`.
-8. Write a journal entry summarizing what was documented and any gaps that remain.
+6. Commit your changes to the project repo after each logical unit of work.
+7. If the project would benefit from a hosted documentation site, set up a docs pipeline:
+   - Use a static docs generator such as MkDocs (with `mkdocs.yml` and a `docs/` directory).
+   - Add a GitHub Actions workflow (e.g., `.github/workflows/docs.yml`) to build and deploy to GitHub Pages on push.
+   - Assign a task to `human` if GitHub Pages needs to be enabled in the repo settings.
+8. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
+9. Set the task status to `done`.
+10. Write a journal entry summarizing what was documented and any gaps that remain.
 
 ## Outputs
 

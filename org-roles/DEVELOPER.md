@@ -29,10 +29,11 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - Verify the remote is set correctly: `git remote -v`
    - Push the initial commit(s): `git push -u origin main`
    - If creation fails due to a name conflict, coordinate with `architect` or `project_manager` to resolve.
-6. Implement the code in the project directory. Commit after every change — each logical unit of work should be its own commit. When adding new dependencies or build steps, update `.gitignore` accordingly before committing. Push regularly to keep the remote up to date.
-7. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
-8. Set the task status to `done`.
-9. Write a journal entry summarizing what was implemented, any deviations from the plan, and anything QA should watch for.
+6. **npm package naming:** If the project has a `package.json`, ensure the `name` field uses the `@agentine` org scope: `@agentine/{packagename}`. The `agentine` npm org is already set up.
+7. Implement the code in the project directory. Commit after every change — each logical unit of work should be its own commit. When adding new dependencies or build steps, update `.gitignore` accordingly before committing. Push regularly to keep the remote up to date.
+8. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
+9. Set the task status to `done`.
+10. Write a journal entry summarizing what was implemented, any deviations from the plan, and anything QA should watch for.
 
 ## Outputs
 

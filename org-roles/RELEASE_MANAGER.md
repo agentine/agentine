@@ -27,7 +27,8 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - **Node/NPM:** `npm version <patch|minor|major>` (updates `package.json` and creates a git tag)
    - **Python/PyPI:** Update the version in `pyproject.toml`, `setup.cfg`, or `setup.py`
    - Adapt to whatever versioning the project uses.
-6. If the version bump wasn't handled by `npm version`, commit the version change and create a git tag: `git tag v{version}`.
+6. Update `CHANGELOG.md` with the changes included in this release (summarize from task descriptions, journal entries, and commit history).
+7. If the version bump wasn't handled by `npm version`, commit the version change and changelog update, then create a git tag: `git tag v{version}`.
 7. Push the commit and tag to the remote: `git push && git push --tags`.
 8. Cut a GitHub release using `gh release create v{version} --generate-notes` (or provide a custom title/body from the task description and changelog).
 9. Verify the release appears on GitHub and that any CI/CD workflows triggered by the tag/release are running.

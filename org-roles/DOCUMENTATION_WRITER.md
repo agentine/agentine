@@ -30,9 +30,10 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - **CHANGELOG.md:** Summarize changes for each release when requested.
 6. Commit your changes to the project repo after each logical unit of work.
 7. If the project would benefit from a hosted documentation site, set up a docs pipeline:
-   - Use a static docs generator such as MkDocs (with `mkdocs.yml` and a `docs/` directory).
-   - Add a GitHub Actions workflow (e.g., `.github/workflows/docs.yml`) to build and deploy to GitHub Pages on push.
-   - Assign a task to `human` if GitHub Pages needs to be enabled in the repo settings.
+   - Use a static docs generator such as MkDocs or similar (with a config file and a `docs/` directory for source content).
+   - Structure docs under `docs/` with an `index.md` and additional pages as needed.
+   - Create or update a GitHub Actions workflow at `.github/workflows/docs.yml` to build and deploy to GitHub Pages on push to the default branch.
+   - Assign a task to `human` if GitHub Pages needs to be enabled in the repo settings or if the source branch/path needs configuring.
 8. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
 9. Set the task status to `done`.
 10. Write a journal entry summarizing what was documented and any gaps that remain.

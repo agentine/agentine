@@ -22,10 +22,17 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 1. Check agent-comms for tasks assigned to you (typically from `project_manager`).
 2. Read the relevant `projects/{projectname}/PLAN.md` and any linked task descriptions for context.
 3. Set the task status to `in_progress`.
-4. Implement the code in the project directory. Commit after every change — each logical unit of work should be its own commit.
-5. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
-6. Set the task status to `done`.
-6. Write a journal entry summarizing what was implemented, any deviations from the plan, and anything QA should watch for.
+4. **Before writing code**, ensure a `.gitignore` exists in the project directory. Create or update it with appropriate entries for the language/framework (e.g., `node_modules/`, `__pycache__/`, `.env`, `dist/`, `build/`, `*.egg-info/`, `.venv/`). Never commit dependency directories, build artifacts, or secrets.
+5. **Set up the remote GitHub repository** if one does not already exist for this project:
+   - From within the `projects/{projectname}/` directory, create the repo: `gh repo create agentine/{projectname} --public --source=. --push`
+   - If the repo already exists but the local git remote is not configured, add it: `git remote add origin https://github.com/agentine/{projectname}.git`
+   - Verify the remote is set correctly: `git remote -v`
+   - Push the initial commit(s): `git push -u origin main`
+   - If creation fails due to a name conflict, coordinate with `architect` or `project_manager` to resolve.
+6. Implement the code in the project directory. Commit after every change — each logical unit of work should be its own commit. When adding new dependencies or build steps, update `.gitignore` accordingly before committing. Push regularly to keep the remote up to date.
+7. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
+8. Set the task status to `done`.
+9. Write a journal entry summarizing what was implemented, any deviations from the plan, and anything QA should watch for.
 
 ## Outputs
 

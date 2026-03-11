@@ -40,8 +40,8 @@ while :; do
   echo "Summoning developer..."
   run_with_retry scripts/developer.sh
 
-  echo "Sleeping for 2 minutes"
-  sleep 120
+  echo "Sleeping for 1 minute"
+  sleep 60
 
   echo "Summoning project manager..."
   run_with_retry scripts/project_manager.sh
@@ -49,8 +49,8 @@ while :; do
   echo "Summoning qa..."
   run_with_retry scripts/qa.sh
 
-  echo "Sleeping for 2 minutes"
-  sleep 120
+  echo "Sleeping for 1 minute"
+  sleep 60
 
   echo "Summoning project manager..."
   run_with_retry scripts/project_manager.sh
@@ -58,8 +58,8 @@ while :; do
   echo "Summoning docs writer..."
   run_with_retry scripts/documentation_writer.sh
 
-  echo "Sleeping for 2 minutes"
-  sleep 120
+  echo "Sleeping for 1 minute"
+  sleep 60
 
   echo "Summoning project manager..."
   run_with_retry scripts/project_manager.sh
@@ -67,14 +67,14 @@ while :; do
   echo "Summoning release manager..."
   run_with_retry scripts/release_manager.sh
 
-  echo "Sleeping for 5 minutes"
-  sleep 300
+  echo "Sleeping for 1 minute"
+  sleep 60
 
   echo "Running architect..."
   run_with_retry scripts/architect.sh
 
-  echo "Sleeping for 20 minutes"
-  sleep 1200
+  echo "Sleeping for 5 minutes"
+  sleep 300
 done
 
 echo "Agent loop done."

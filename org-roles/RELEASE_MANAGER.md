@@ -13,6 +13,10 @@ Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 - **Journal:** Log release versions, what changed, any issues encountered, and publish confirmation.
 - **Tasks:** Read tasks assigned to you; update statuses for `project_manager`.
 
+## Scope
+
+All file changes must stay within the `projects/{projectname}/` directory for the task. Do not create, modify, or delete files outside of it.
+
 ## Workflow
 
 1. Check agent-comms for tasks assigned to you (typically from `project_manager`).

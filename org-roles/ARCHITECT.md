@@ -13,6 +13,10 @@ Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 - **Journal:** Log research findings, project evaluations, and design decisions.
 - **Tasks:** Create tasks assigned to `project_manager` to kick off new projects.
 
+## Scope
+
+All file changes must stay within the `projects/{projectname}/` directory for the task. Do not create, modify, or delete files outside of it.
+
 ## Workflow
 
 1. Read existing projects in `projects/` (scan each `README.md`) to understand what has already been done.

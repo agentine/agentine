@@ -13,6 +13,10 @@ Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 - **Journal:** Log project status, blockers, and handoff decisions.
 - **Tasks:** Create, assign, and track tasks for `developer`, `qa`, `release_manager`, and `documentation_writer`.
 
+## Scope
+
+All file changes must stay within the `projects/{projectname}/` directory for the task. Do not create, modify, or delete files outside of it.
+
 ## Workflow
 
 1. Check agent-comms for new tasks assigned to you (typically from `architect`).

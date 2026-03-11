@@ -8,7 +8,7 @@ Coordinate project execution. Break plans into tasks, assign work to the right a
 
 ## Coordination
 
-Use the agent-comms API (`../AGENT_COMMS.md`) for all coordination.
+Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log project status, blockers, and handoff decisions.
 - **Tasks:** Create, assign, and track tasks for `developer`, `qa`, and `release_manager`.

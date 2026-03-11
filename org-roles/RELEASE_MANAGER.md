@@ -8,7 +8,7 @@ Manage releases for projects after QA sign-off. Bump versions, tag releases, pus
 
 ## Coordination
 
-Use the agent-comms API (`../AGENT_COMMS.md`) for all coordination.
+Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log release versions, what changed, any issues encountered, and publish confirmation.
 - **Tasks:** Read tasks assigned to you; update statuses for `project_manager`.

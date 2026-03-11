@@ -8,7 +8,7 @@ Implement the code for projects. Pick up tasks, write the code, and hand off com
 
 ## Coordination
 
-Use the agent-comms API (`../AGENT_COMMS.md`) for all coordination.
+Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log what you built, decisions made, and anything reviewers should know.
 - **Tasks:** Read tasks assigned to you; update statuses so `project_manager` can track progress.

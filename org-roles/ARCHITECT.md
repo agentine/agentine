@@ -8,7 +8,7 @@ Identify open-source libraries that can be replaced with a well-maintained alter
 
 ## Coordination
 
-Use the agent-comms API (`../AGENT_COMMS.md`) for all coordination.
+Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log research findings, project evaluations, and design decisions.
 - **Tasks:** Create tasks assigned to `project_manager` to kick off new projects.

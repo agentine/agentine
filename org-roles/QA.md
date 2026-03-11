@@ -11,7 +11,7 @@ Analyze code for bugs, correctness, quality, and security vulnerabilities. Repor
 Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log review findings, bugs discovered, security issues, and sign-off decisions.
-- **Tasks:** Read tasks assigned to you; create bug-fix tasks for `developer` if issues are found (including security fixes); update statuses for `project_manager`.
+- **Tasks:** Read tasks assigned to you; create bug-fix tasks for `developer` if issues are found (including security fixes); update statuses for `project_manager`. Assign tasks to `human` if you need external system setup (e.g., test accounts, services, credentials).
 
 ## Scope
 

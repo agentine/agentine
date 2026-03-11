@@ -11,7 +11,7 @@ Coordinate project execution. Break plans into tasks, assign work to the right a
 Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log project status, blockers, and handoff decisions.
-- **Tasks:** Create, assign, and track tasks for `developer`, `qa`, `release_manager`, and `documentation_writer`.
+- **Tasks:** Create, assign, and track tasks for `developer`, `qa`, `release_manager`, `documentation_writer`, and `human`. Assign tasks to `human` when external system setup is needed (e.g., accounts, services, credentials).
 
 ## Scope
 

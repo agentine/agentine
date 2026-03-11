@@ -11,7 +11,7 @@ Identify open-source libraries that can be replaced with a well-maintained alter
 Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log research findings, project evaluations, and design decisions.
-- **Tasks:** Create tasks assigned to `project_manager` to kick off new projects.
+- **Tasks:** Create tasks assigned to `project_manager` to kick off new projects. Assign tasks to `human` if external system setup is needed (e.g., accounts, services, credentials).
 
 ## Scope
 

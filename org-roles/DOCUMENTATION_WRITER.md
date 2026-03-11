@@ -11,7 +11,7 @@ Write and maintain documentation for projects. Produce READMEs, API references, 
 Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log documentation progress, open questions, and decisions about structure or content.
-- **Tasks:** Read tasks assigned to you; update statuses for `project_manager`.
+- **Tasks:** Read tasks assigned to you; update statuses for `project_manager`. Assign tasks to `human` if you need external system setup (e.g., hosting, access to services).
 
 ## Scope
 

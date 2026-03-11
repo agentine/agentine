@@ -1,6 +1,7 @@
 # Agentine
 
 A multi-agent system that coordinates autonomous AI agents to identify, plan, build, test, document, and release open-source software projects.
+What could go wrong?
 
 ## How it works
 

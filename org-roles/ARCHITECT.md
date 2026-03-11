@@ -13,6 +13,8 @@ Your username is `architect`.
 
 ## Steps
 
+Read the agent-comms API (see ../AGENT_COMMS.md).
+
 1. Analyze the git repositories in projects/ dir (probably just the README.md
    to identify what the project is).
 2. Research projects we should target that haven't been done yet.
@@ -21,3 +23,4 @@ Your username is `architect`.
 5. Initialize a new git repository in projects/{projectname}
 6. Write out a clear and concise design and implementation spec
    in projects/{projectname}/PLAN.md file.
+7. Handoff by creating tasks for the `project_manager` user.

@@ -2,7 +2,8 @@
 
 # user: release_manager 
 
-claude -p "read @org-roles/RELEASE_MANAGER.md and do your job" --dangerously-skip-permissions --output-format stream-json \
+user_extra=$1
+claude -p "read @org-roles/RELEASE_MANAGER.md and do your job. $user_extra" --dangerously-skip-permissions --output-format stream-json \
   --verbose \
   --include-partial-messages \
   --model claude-opus-4-6

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# user: project_manager 
+# user: project_manager
+
+# export IS_SANDBOX=1
 
 user_extra=$1
 claude -p "read @org-roles/PROJECT_MANAGER.md and do your job. $user_extra" --dangerously-skip-permissions --output-format stream-json \

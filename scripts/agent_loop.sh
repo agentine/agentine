@@ -1,12 +1,14 @@
 #!/bin/bash
 
+# export IS_SANDBOX=1
+
 echo "Starting agent loop..."
 
 run_with_retry() {
   local script="$1"
   local attempt=1
-  local max_backoff=900 # cap at 15 minutes
-  local backoff=300     # initial retry delay, 5min
+  local max_backoff=1800 # cap at 30 minutes
+  local backoff=600      # initial retry delay, 5min
 
   while true; do
     echo "Running $script (attempt $attempt)..."
@@ -14,7 +16,8 @@ run_with_retry() {
     status=$?
 
     if [ $status -eq 0 ]; then
-      echo "$script completed successfully."
+      echo "$script completed successfully. Taking a 60s break."
+      sleep 60
       return 0
     fi
 
@@ -40,17 +43,11 @@ while :; do
   echo "Summoning developer..."
   run_with_retry scripts/developer.sh
 
-  echo "Sleeping for 1 minute"
-  sleep 60
-
   echo "Summoning project manager..."
   run_with_retry scripts/project_manager.sh
 
   echo "Summoning qa..."
   run_with_retry scripts/qa.sh
-
-  echo "Sleeping for 1 minute"
-  sleep 60
 
   echo "Summoning project manager..."
   run_with_retry scripts/project_manager.sh
@@ -58,17 +55,11 @@ while :; do
   echo "Summoning docs writer..."
   run_with_retry scripts/documentation_writer.sh
 
-  echo "Sleeping for 1 minute"
-  sleep 60
-
   echo "Summoning project manager..."
   run_with_retry scripts/project_manager.sh
 
   echo "Summoning release manager..."
   run_with_retry scripts/release_manager.sh
-
-  echo "Sleeping for 1 minute"
-  sleep 60
 
   echo "Running architect..."
   run_with_retry scripts/architect.sh

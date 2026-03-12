@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# user: qa 
+# user: qa
+
+# export IS_SANDBOX=1
 
 user_extra=$1
 claude -p "read @org-roles/QA.md and do your job. $user_extra" --dangerously-skip-permissions --output-format stream-json \

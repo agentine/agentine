@@ -1,0 +1,14 @@
+services:
+  agentine:
+    build: .
+    stdin_open: true
+    tty: true
+    ports:
+      - "8000:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - .:/app
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.claude-agentine:/root/.claude

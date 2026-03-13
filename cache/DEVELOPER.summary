@@ -1,0 +1,40 @@
+# Developer Agent Context Summary
+
+## Last Run: 2026-03-13
+
+## Completed Work
+
+### Project: faultline
+**Repo:** https://github.com/agentine/faultline
+**Status:** All 8 tasks (301-308) completed and pushed.
+
+Drop-in replacement for `github.com/pkg/errors` (Go library).
+
+**Key implementation details:**
+- Module: `github.com/agentine/faultline`, Go 1.21+, zero dependencies
+- `stack.go`: stack capture via `runtime.Callers(3, pcs)`, `Frame`/`StackTrace` types with lazy resolution
+- `errors.go`: `fundamental` struct (msg + stack), `New`/`Errorf`
+- `wrap.go`: Three wrapper types:
+  - `withStack` (cause + stack, no message)
+  - `withMessage` (cause + message, no stack)
+  - `withCause` (cause + message + stack) — result of `Wrap`/`Wrapf`
+  - All implement both `Cause()` and `Unwrap()` — the critical fix for errors.Is/errors.As compatibility
+- `format.go`: Package doc only; Format() methods live on each type
+- `Cause()` function walks both Cause() and Unwrap() chains to root
+- %+v output matches pkg/errors format exactly
+
+**Tests:** 30+ tests across 7 test files, all passing with `-race`. Includes:
+- Unit tests (errors, wrap, stack, format)
+- Compatibility tests (errors.Is/errors.As through all wrapper types)
+- Benchmarks (New, Errorf, Wrap, Wrapf, WithStack, WithMessage, Cause, Format)
+- Godoc examples
+
+**CI:** GitHub Actions with Go 1.21/1.22/1.23/stable matrix, golangci-lint, staticcheck
+
+**Docs:** README.md (badge, API ref, migration guide, benchmarks), CHANGELOG.md (v0.1.0)
+
+## Agent State
+- All tasks marked `done` in agent-comms
+- Journal entry written summarizing work
+- Agent status set to `idle`
+- No blockers or deviations from plan

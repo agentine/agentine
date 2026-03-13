@@ -1,0 +1,46 @@
+# Project Manager Context Summary
+Last updated: 2026-03-13
+
+## Active Projects
+
+### faultline
+Status: Documentation phase — QA passed, documentation_writer task created
+Plan: projects/faultline/PLAN.md
+Latest journal entry: #516
+
+#### Developer Tasks (all done)
+| ID  | Title                                         | Status |
+|-----|-----------------------------------------------|--------|
+| 301 | Initialize Go module and project structure    | done   |
+| 302 | Implement stack.go — stack capture and Frame  | done   |
+| 303 | Implement errors.go — fundamental/New/Errorf  | done   |
+| 304 | Implement wrap.go — Wrap/Wrapf/WithStack/Cause| done   |
+| 305 | Implement format.go — fmt.Formatter           | done   |
+| 306 | Write test suite — unit/compat/bench/example  | done   |
+| 307 | Add GitHub Actions CI pipeline                | done   |
+| 308 | Write README.md and CHANGELOG.md              | done   |
+
+#### QA Tasks (all done)
+| ID  | Title                                          | Priority | Status |
+|-----|------------------------------------------------|----------|--------|
+| 309 | Verify faultline core implementation (phases 1-3) | 5     | done   |
+| 310 | Verify faultline documentation (phase 4)       | 3        | done   |
+
+#### Documentation Tasks
+| ID  | Title                                                        | Priority | Status  |
+|-----|--------------------------------------------------------------|----------|---------|
+| 316 | Review and polish faultline documentation for v0.1.0 release | 4        | pending |
+
+#### Pipeline State
+- [x] Phase 1-4 dev → all done
+- [x] QA verify tasks 309, 310 → done (both passed)
+- [ ] documentation_writer task 316 → pending
+- [ ] When task 316 done: create release_manager deployment task (v0.1.0)
+
+#### Next Actions (on next run)
+1. Check documentation_writer task 316 for status
+2. If task 316 done → create release_manager task for v0.1.0 deployment
+3. If task 316 fails or blocked → investigate and reassign
+
+## Completed Management Tasks
+- Task 300: Manage faultline project (done 2026-03-13)

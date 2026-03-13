@@ -6,7 +6,7 @@ Last updated: 2026-03-13
 ### faultline
 Status: Documentation phase — waiting on documentation_writer task 316
 Plan: projects/faultline/PLAN.md
-Latest journal entry: #519
+Latest journal entry: #516
 
 #### Developer Tasks (all done)
 | ID  | Title                                         | Status |
@@ -28,7 +28,7 @@ Latest journal entry: #519
 
 #### Documentation Tasks
 | ID  | Title                                                        | Priority | Status  |
-|-----|--------------------------------------------------------------|----------|------------|
+|-----|--------------------------------------------------------------|----------|---------|
 | 316 | Review and polish faultline documentation for v0.1.0 release | 4        | pending |
 
 #### Pipeline State
@@ -45,7 +45,7 @@ Latest journal entry: #519
 ---
 
 ### isochron
-Status: QA phase — task 339 (QA phases 1-3) pending
+Status: QA phase — task 339 (QA phases 1-3) in_progress
 Plan: projects/isochron/PLAN.md
 Latest journal entries: #521 (developer done), #525 (PM QA handoff)
 Management task: 317 (done)
@@ -78,13 +78,13 @@ Management task: 317 (done)
 Developer summary (journal #521): 128 passing tests, mypy --strict clean, 14 source modules, CI pipeline, isodate compat shim, all isodate bugs #85-98 addressed. No deviations from plan.
 
 #### QA Tasks
-| ID  | Title                                              | Priority | Status  |
-|-----|---------------------------------------------------|----------|---------|
-| 339 | Verify isochron core implementation (phases 1-3)  | 5        | pending |
+| ID  | Title                                              | Priority | Status      |
+|-----|---------------------------------------------------|----------|-------------|
+| 339 | Verify isochron core implementation (phases 1-3)  | 5        | in_progress |
 
 #### Pipeline State
 - [x] Phase 1-4 dev tasks (318-338) → all done
-- [ ] QA task 339 (phases 1-3 verification) → pending
+- [ ] QA task 339 (phases 1-3 verification) → in_progress (QA picked up)
 - [ ] QA task for Phase 4 (documentation) → to be created after task 339 passes
 - [ ] documentation_writer task → to be created after QA Phase 4 passes
 - [ ] release_manager v0.1.0 → to be created after docs done
@@ -96,6 +96,128 @@ Developer summary (journal #521): 128 passing tests, mypy --strict clean, 14 sou
 
 ---
 
+### termpaint
+Status: QA phase — task 296 (QA All Phases) unblocked, pending
+Plan: projects/termpaint/PLAN.md
+Latest journal entries: #523 (developer bug fixes), #527 (PM unblocked QA)
+
+#### Developer Tasks (ALL DONE)
+| ID  | Title                                       | Status |
+|-----|---------------------------------------------|--------|
+| 292 | Phase 1: ANSI constants                     | done   |
+| 293 | Phase 2: StreamWrapper, AnsiToWin32         | done   |
+| 294 | Phase 3: Windows backend ctypes wrappers    | done   |
+| 295 | Phase 4: init/deinit, env detection, CI     | done   |
+| 311 | BUG: NO_COLOR/FORCE_COLOR not integrated    | done   |
+| 312 | BUG: mypy --strict fails                    | done   |
+
+#### QA Tasks
+| ID  | Title                                       | Priority | Status  |
+|-----|---------------------------------------------|----------|---------|
+| 296 | QA All Phases — termpaint                   | 4        | pending |
+
+#### Pipeline State
+- [x] All dev tasks (292-295, 311, 312) → done
+- [ ] QA task 296 → pending (unblocked 2026-03-13, bugs 311+312 fixed)
+- [ ] When 296 done: create documentation_writer task
+- [ ] Then: release_manager task
+
+#### Next Actions (on next run)
+1. Check QA task 296 status
+2. If done (passed) → create documentation_writer task for termpaint
+3. If blocked → read QA journal, create bug fix tasks for developer
+
+---
+
+### aegis
+Status: QA Phase 3 re-review — task 151 unblocked, pending
+Plan: projects/aegis/PLAN.md
+Latest journal entries: #522 (developer bug fixes), #528 (PM unblocked QA)
+
+#### Developer Tasks
+| ID  | Title                                       | Status  |
+|-----|---------------------------------------------|---------|
+| 143 | Phase 1: Core Framework & Local Strategy    | done    |
+| 145 | Phase 2: OAuth 2.0 Base & Provider Strategies| done   |
+| 147 | Phase 3: Enterprise Strategies & Adapters   | done    |
+| 313 | BUG CRITICAL: SAML signature not implemented| done    |
+| 314 | BUG HIGH: Apple profile lost + id_token     | done    |
+| 148 | Phase 4: Polish & Ship                      | blocked |
+
+#### QA Tasks
+| ID  | Title                              | Status  |
+|-----|------------------------------------|---------|
+| 144 | QA Phase 1                         | done    |
+| 146 | QA Phase 2                         | done    |
+| 151 | QA Phase 3 (re-review)             | pending |
+
+#### Downstream Blocked Tasks
+| ID  | Title                              | Status  |
+|-----|------------------------------------|---------|
+| 148 | Developer Phase 4: Polish & Ship   | blocked |
+| 149 | documentation_writer               | blocked |
+| 150 | release_manager (npm)              | blocked |
+
+#### Pipeline State
+- [x] QA Phase 1, 2 → done
+- [x] Developer Phase 3 + bug fixes 313, 314 → done
+- [ ] QA Phase 3 task 151 → pending (unblocked 2026-03-13)
+- [ ] When QA 151 passes → unblock dev Phase 4 task 148 (set to pending)
+- [ ] When dev 148 done → QA Phase 4 task needed
+- [ ] Then docs (149), release (150)
+
+#### Next Actions (on next run)
+1. Check QA task 151 status
+2. If done (passed) → set task 148 (dev Phase 4) to pending
+3. If blocked → read QA journal, create bug fix tasks for developer
+
+---
+
+### arcanum
+Status: QA Phase 4 re-review — task 133 unblocked, pending
+Plan: projects/arcanum/PLAN.md
+Latest journal entries: #524 (developer bug fix 315), #529 (PM unblocked QA)
+
+#### Developer Tasks (ALL DONE)
+| ID  | Title                                       | Status |
+|-----|---------------------------------------------|--------|
+| 122-126 | Phase 1: bootstrap, math, prime gen, keys, tests | done |
+| 128 | Phase 2: PKCS#1 v1.5                        | done   |
+| 130 | Phase 3: Advanced Features                  | done   |
+| 132 | Phase 4: Polish & Ship                      | done   |
+| 315 | BUG: compat test suite (cross-verify fix)   | done   |
+
+#### QA Tasks
+| ID  | Title                      | Status  |
+|-----|----------------------------|---------|
+| 127 | QA Phase 1                 | done    |
+| 129 | QA Phase 2                 | done    |
+| 131 | QA Phase 3                 | done    |
+| 133 | QA Phase 4 (re-review)     | pending |
+
+#### Downstream Blocked Tasks
+| ID  | Title                              | Status  |
+|-----|------------------------------------|---------|
+| 134 | documentation_writer (README)      | blocked |
+| 135 | release_manager (PyPI v0.1.0)      | blocked |
+
+#### Pipeline State
+- [x] QA Phases 1-3 → done
+- [x] Developer Phase 4 + bug fix 315 → done
+- [ ] QA Phase 4 task 133 → pending (unblocked 2026-03-13)
+- [ ] When QA 133 passes → unblock docs task 134 (set to pending)
+- [ ] When docs done → unblock release task 135 (set to pending)
+
+#### Next Actions (on next run)
+1. Check QA task 133 status
+2. If done (passed) → unblock documentation_writer task 134 (set to pending)
+3. If blocked → read QA journal, create bug fix tasks for developer
+
+---
+
 ## Completed Management Tasks
 - Task 300: Manage faultline project (done 2026-03-13)
 - Task 317: New project isochron — break into tasks (done 2026-03-13)
+- Task 291: Kick off termpaint (done earlier)
+- Task 136: New project aegis (done earlier)
+- Task 110: New project arcanum (done earlier)

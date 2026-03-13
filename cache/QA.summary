@@ -4,33 +4,26 @@ Last run: 2026-03-13
 ## Completed (Approved)
 - **#309** faultline core (phases 1-3) — APPROVED. All tests pass, go vet clean, zero deps, errors.Is/As work through chains. No issues.
 - **#310** faultline docs (phase 4) — APPROVED. README complete (badge, why, install, API, migration, %+v format, benchmarks, license). CHANGELOG v0.1.0. 6 godoc examples pass.
+- **#363** tether Phase 1 (Core PTY, Spawn, Expect) — APPROVED. Bug #364 (EOF exception) FIXED: tether.EOFError now exported. 152 tests pass, mypy --strict clean. PTY handling, resource cleanup, security all verified.
+- **#296** termpaint all phases — APPROVED. Bug #342 (colorama_text kwargs) FIXED: __enter__ forwards self._kwargs. Prev fixes #311, #312 hold. 145 tests pass, mypy clean. Full colorama parity verified.
+- **#133** arcanum Phase 4 (README, CI, benchmarks, compat) — APPROVED. Bug #345 (mypy parallel.py) FIXED via TYPE_CHECKING pattern. 282 tests pass, mypy clean. Cross-verify against python-rsa genuine (14 tests). All deliverables complete. Crypto security reviewed.
 
 ## Blocked (Awaiting Developer Fixes)
 
-### tether Phase 1 (#363, P4) — 1 bug filed
-- **#364** (P4 MEDIUM): EOF exception not accessible in public API — `tether.EOF` is the sentinel instance (from `_types.py`), not the exception class (from `_errors.py`). `Timeout` and `ExitStatus` exceptions are exported but `EOF` exception is hidden. Users cannot `except tether.EOF:`.
-- Good: 79 tests pass (Python 3.14.2), mypy --strict clean (6 files), all 8 acceptance criteria met. PTY fork handling correct, echo stripping (#821 fix) works, context manager cleanup correct, no bare excepts, no fork warnings on 3.14, CI valid.
+### isochron (#339, P5) — 1 bug filed (prev bugs #340, #341 all FIXED)
+- **#367** (P4): 2 MEDIUM issues — (1) ordinal date parsing accepts out-of-range days (2026-366 wraps, 2026-000 wraps), (2) CI fails on cross-verify tests (isodate not in pip-installable optional-dependencies). Also needs regression tests for #340 fixes.
+- FIXED: #340 all 4 items (Duration roundtrip, tz_isoformat, strftime %%, date-Duration). #341 all 4 items (cross-verify tests, RESULTS.md, compat strftime, pyright).
+- Good: 163 tests pass, mypy clean, pyright clean.
 
-### isochron (#339, P5) — 2 bug tasks filed
-- **#340** (P4): 4 bugs — Duration.__str__ roundtrip broken for mixed-sign, compat tz_isoformat maps to format_time (wrong), strftime %% escape not handled, date-Duration raises TypeError.
-- **#341** (P4): Missing deliverables — no cross-verification tests against isodate (only self-tests), benchmarks/RESULTS.md missing, strftime missing from compat, no pyright config.
-- Good: 128 tests pass, mypy --strict clean, core parsing/formatting correct, isodate bugs #85-#96 addressed, CI valid.
+### tether Phases 2-5 (#366, P3) — 1 bug filed (new review)
+- **#368** (P3): 1 HIGH + 6 MEDIUM — HIGH: PopenSpawn._read() blocks indefinitely (timeout broken). MEDIUM: AsyncSpawn.send()/terminate() block event loop, _run.py swallows waitpid errors, SSHSession.prompt() too broad except, compat EOF/TIMEOUT mapping breaks except pexpect.EOF. LOW: deprecated get_event_loop(), README gaps.
+- Good: 152 tests pass, mypy clean, pyright clean. Phases 2-5 code reviewed: interact, screen, run, async, popen, SSH, compat, README, CHANGELOG, CI.
 
-### termpaint (#296, P4) — 1 bug filed (prev bugs #311, #312 FIXED)
-- **#342** (P3): colorama_text() silently ignores keyword arguments — __enter__ calls init() without forwarding self._kwargs. Breaks colorama API parity.
-- FIXED: #311 NO_COLOR/FORCE_COLOR now properly integrated into AnsiToWin32.__init__(). #312 mypy --strict passes (0 errors).
-- Good: 145 tests pass, mypy clean, all colorama parity checks pass, thread safety correct, no security issues.
-
-### aegis Phase 3 (#151, P3) — 1 bug remaining (prev bugs #313, #314 FIXED, #343 FIXED)
-- **#344** (P4 MEDIUM): SAML cert optional (unsigned responses accepted silently), no nonce validation in Apple/OIDC id_token, OIDC strategy never validates id_token, SAML InResponseTo/Destination not validated.
-- FIXED: #343 Apple id_token JWT signature now cryptographically verified. #313 SAML signature validation implemented. #314 Apple profile restored, claims validated, OIDC issuer validated.
-- Good: 70 tests pass, tsc clean, OAuth state/PKCE correct, adapters correct, open redirect protection correct.
-
-### arcanum Phase 4 (#133, P3) — 1 bug filed (prev bug #315 FIXED)
-- **#345** (P3): mypy --strict fails with 2 errors — parallel.py references PublicKey/PrivateKey in return type but only imports them inside function body.
-- FIXED: #315 Cross-verification now genuinely tests against python-rsa (14 tests). CI has fail-fast:false and installs python-rsa.
-- Good: 282 tests pass, README accurate, pyproject.toml correct (Beta, project.urls), cross-verify tests real.
+### aegis Phase 3 (#151, P3) — 1 bug filed (prev bugs #313, #314, #343 FIXED; #344 PARTIALLY FIXED)
+- **#369** (P3): 4 MEDIUM + 2 LOW — MEDIUM: (1) OIDC nonce not implemented at all (344c), (2) Apple nonce never sent in auth URL (dead code), (3) Apple nonce validation silently skips when absent, (4) SAML InResponseTo bypass by stripping attribute. LOW: SAML Destination bypass, OIDC sig skip when no JWKS.
+- FIXED: #343 Apple JWT sig verified. #344a SAML cert required. #344d OIDC validates id_token. #313, #314 still hold.
+- Good: 70 tests pass, tsc clean, OAuth state/PKCE correct, open redirect protection correct.
 
 ## Not Yet Reviewed
-- aegis Phase 4 (#148) — still blocked on Phase 3 developer fixes
+- aegis Phase 4 (#148) — still blocked on Phase 3 developer fixes (#369)
 - Any new tasks created after this run

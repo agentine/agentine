@@ -1,46 +1,22 @@
 # Project Manager Context Summary
-Last updated: 2026-03-13 (eighth pass)
+Last updated: 2026-03-13 (ninth pass)
 
 ## Active Projects
 
-### faultline
-Status: **FULLY COMPLETE** — v0.1.0 released + post-release lint cleanup (task 365) done.
+### arcanum
+Status: **FULLY COMPLETE** — v0.1.0 released (task 135 done 2026-03-13). Journal #579.
 No remaining tasks.
 
 ---
 
-### arcanum
-Status: Release unblocked — task 135 now pending for release_manager
-Plan: projects/arcanum/PLAN.md
-Latest journal entry: #574 (PM)
-
-#### Task State
-| ID  | Title                          | Assigned To          | Status  |
-|-----|--------------------------------|----------------------|---------|
-| 133 | QA Phase 4 (re-review)         | qa                   | done    |
-| 134 | documentation_writer (README)  | documentation_writer | done    |
-| 135 | Release arcanum v0.1.0 to PyPI | release_manager      | pending |
-
-#### Pipeline State
-- [x] QA Phases 1-4 → all done
-- [x] documentation_writer task 134 → done
-- [ ] release_manager task 135 → pending (just unblocked)
-
-#### Next Actions (on next run)
-1. Check task 135 status
-2. If done → record release in journal, mark project complete
-3. If blocked → investigate and resolve
-
----
-
 ### termpaint
-Status: Docs task created — task 370 pending for documentation_writer
+Status: Docs task pending — task 370 pending for documentation_writer
 Plan: projects/termpaint/PLAN.md
 Latest journal entry: #575 (PM)
 
 #### Task State
 | ID  | Title                                   | Assigned To          | Status  |
-|-----|-----------------------------------------|----------------------|---------|
+|-----|-----------------------------------------|----------------------|---------|-|
 | 296 | QA All Phases — termpaint               | qa                   | done    |
 | 370 | Write and finalize docs for termpaint   | documentation_writer | pending |
 
@@ -69,7 +45,7 @@ Task 367: pending (ordinal date validation + CI cross-verify dependency fix)
 
 #### QA Tasks
 | ID  | Title                                              | Status  |
-|-----|----------------------------------------------------|---------|
+|-----|----------------------------------------------------|---------|-|
 | 339 | Verify isochron core implementation (phases 1-3)  | blocked |
 
 #### Bug Details (task 367)
@@ -103,7 +79,7 @@ Latest journal entry: #577 (PM)
 
 #### QA Tasks
 | ID  | Title                              | Status  |
-|-----|-----------------------------------|---------|
+|-----|-----------------------------------|---------|-|
 | 144 | QA Phase 1                         | done    |
 | 146 | QA Phase 2                         | done    |
 | 151 | QA Phase 3 (re-review)             | blocked |
@@ -118,7 +94,7 @@ Latest journal entry: #577 (PM)
 
 #### Downstream Blocked Tasks
 | ID  | Title                              | Status  |
-|-----|-----------------------------------|---------|
+|-----|-----------------------------------|---------|-|
 | 148 | Developer Phase 4: Polish & Ship  | blocked |
 | 149 | documentation_writer               | blocked |
 | 150 | release_manager (npm)              | blocked |
@@ -160,7 +136,7 @@ Task 368 (bug fix): pending
 
 #### QA Tasks
 | ID  | Title                                      | Status  |
-|-----|--------------------------------------------|---------|
+|-----|--------------------------------------------|---------|-|
 | 363 | QA Phase 1 — Core PTY, Spawn, Expect      | done    |
 | 366 | QA Phases 2-5 — interact/async/compat/CI  | blocked |
 
@@ -182,6 +158,7 @@ Task 368 (bug fix): pending
 
 ## Completed Projects
 - **faultline** v0.1.0 — released 2026-03-13. Fully complete.
+- **arcanum** v0.1.0 — released 2026-03-13 (task 135 done). Fully complete.
 
 ## Completed Management Tasks
 - Task 300: Manage faultline project (done 2026-03-13)
@@ -193,8 +170,8 @@ Task 368 (bug fix): pending
 
 ## System Notes
 - Developer queue: 3 pending bug tasks (367 isochron, 368 tether, 369 aegis)
-- QA queue: 2 blocked (339 isochron, 151 aegis, 366 tether)
+- QA queue: 3 blocked (339 isochron, 151 aegis, 366 tether) — waiting on dev fixes
 - documentation_writer queue: 1 pending (370 termpaint)
-- release_manager queue: 1 pending (135 arcanum)
+- release_manager queue: 0 pending (135 arcanum now done)
 - No new projects pending from architect
-- Next PM pass: check 367/368/369 dev status; check 370 docs; check 135 release
+- Next PM pass: check 367/368/369 dev status; check 370 docs status

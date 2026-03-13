@@ -7,19 +7,26 @@ Last run: 2026-03-13
 
 ## Blocked (Awaiting Developer Fixes)
 
-### termpaint (#296, P4) — 2 bugs filed
-- **#311** (P4): NO_COLOR/FORCE_COLOR env vars not integrated. environ.py has detection functions but init()/AnsiToWin32 never call them. Dead code.
-- **#312** (P3): mypy --strict fails with 7 errors. Platform-specific type: ignore comments flagged as unused on non-Windows. pyproject.toml has strict=true so CI will also fail.
-- Otherwise: 145 tests pass, all colorama parity checks pass, adapters work, init/deinit/reinit correct.
+### isochron (#339, P5) — 2 bug tasks filed
+- **#340** (P4): 4 bugs — Duration.__str__ roundtrip broken for mixed-sign, compat tz_isoformat maps to format_time (wrong), strftime %% escape not handled, date-Duration raises TypeError.
+- **#341** (P4): Missing deliverables — no cross-verification tests against isodate (only self-tests), benchmarks/RESULTS.md missing, strftime missing from compat, no pyright config.
+- Good: 128 tests pass, mypy --strict clean, core parsing/formatting correct, isodate bugs #85-#96 addressed, CI valid.
 
-### aegis Phase 3 (#151, P3) — 2 bugs filed
-- **#313** (P5 CRITICAL): SAML signature validation NOT IMPLEMENTED. cert option accepted but never used — complete authentication bypass. Also: assertion conditions not validated (audience, time, issuer, InResponseTo, Destination). AuthnRequest ID uses Date.now() instead of crypto.randomUUID().
-- **#314** (P4 HIGH): AppleStrategy userProfile() returns empty profile — id_token data from _exchangeCode() is discarded. Apple login functionally broken. Also: OIDC strategy never validates id_token (spec violation); discovery issuer not validated.
-- Otherwise: 70 tests pass, tsc clean, Fastify/Koa adapters correct, authorize() correct, multi-strategy correct.
+### termpaint (#296, P4) — 1 bug filed (prev bugs #311, #312 FIXED)
+- **#342** (P3): colorama_text() silently ignores keyword arguments — __enter__ calls init() without forwarding self._kwargs. Breaks colorama API parity.
+- FIXED: #311 NO_COLOR/FORCE_COLOR now properly integrated into AnsiToWin32.__init__(). #312 mypy --strict passes (0 errors).
+- Good: 145 tests pass, mypy clean, all colorama parity checks pass, thread safety correct, no security issues.
 
-### arcanum Phase 4 (#133, P3) — 1 bug filed
-- **#315** (P3): Compat test suite does NOT cross-verify with python-rsa. Tests only verify arcanum against itself. PLAN requires actual cross-library verification. Also: CI missing fail-fast:false, pyproject Alpha vs Beta, missing project.urls.
-- Otherwise: 268 tests pass, README complete with migration guide, security docs correct, CI valid.
+### aegis Phase 3 (#151, P3) — 2 new bug tasks filed (prev bugs #313, #314 FIXED)
+- **#343** (P5 HIGH): Apple id_token JWT signature NOT cryptographically verified against Apple JWKS. Claims checked but signature ignored — forgery possible via MITM.
+- **#344** (P4 MEDIUM): SAML cert optional (unsigned responses accepted silently), no nonce validation in Apple/OIDC id_token, OIDC strategy never validates id_token, SAML InResponseTo/Destination not validated.
+- FIXED: #313 SAML signature validation implemented, assertion conditions validated, randomUUID for AuthnRequest ID. #314 Apple profile restored via _pendingProfile, claims validated, OIDC issuer validated.
+- Good: 70 tests pass, tsc clean, OAuth state/PKCE correct, adapters correct, open redirect protection correct.
+
+### arcanum Phase 4 (#133, P3) — 1 bug filed (prev bug #315 FIXED)
+- **#345** (P3): mypy --strict fails with 2 errors — parallel.py references PublicKey/PrivateKey in return type but only imports them inside function body.
+- FIXED: #315 Cross-verification now genuinely tests against python-rsa (14 tests). CI has fail-fast:false and installs python-rsa.
+- Good: 282 tests pass, README accurate, pyproject.toml correct (Beta, project.urls), cross-verify tests real.
 
 ## Not Yet Reviewed
 - aegis Phase 4 (#148) — still blocked on Phase 3 developer fixes

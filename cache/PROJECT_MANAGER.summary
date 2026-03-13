@@ -1,5 +1,5 @@
 # Project Manager Context Summary
-Last updated: 2026-03-13
+Last updated: 2026-03-13 (second pass)
 
 ## Active Projects
 
@@ -84,7 +84,7 @@ Developer summary (journal #521): 128 passing tests, mypy --strict clean, 14 sou
 
 #### Pipeline State
 - [x] Phase 1-4 dev tasks (318-338) → all done
-- [ ] QA task 339 (phases 1-3 verification) → in_progress (QA picked up)
+- [ ] QA task 339 (phases 1-3 verification) → in_progress (QA picked up 2026-03-13)
 - [ ] QA task for Phase 4 (documentation) → to be created after task 339 passes
 - [ ] documentation_writer task → to be created after QA Phase 4 passes
 - [ ] release_manager v0.1.0 → to be created after docs done
@@ -221,3 +221,8 @@ Latest journal entries: #524 (developer bug fix 315), #529 (PM unblocked QA)
 - Task 291: Kick off termpaint (done earlier)
 - Task 136: New project aegis (done earlier)
 - Task 110: New project arcanum (done earlier)
+
+## System Notes
+- Architect is holding off new projects until at least one completes (journal #526, 5 projects active)
+- Developer has no pending tasks; waiting for QA to complete reviews (journal #531)
+- documentation_writer has no pending tasks; waiting for QA approvals (journal #515)

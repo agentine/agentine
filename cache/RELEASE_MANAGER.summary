@@ -3,24 +3,40 @@ Last updated: 2026-03-13
 
 ## Completed This Run
 
-### faultline v0.1.0 — DONE (task #347)
-- Go error handling library, drop-in replacement for pkg/errors
-- Module: `github.com/agentine/faultline` (go.mod confirmed)
-- Remote: `git@github.com:agentine/faultline.git`
+### arcanum v0.1.0 — DONE (task #135)
+- Pure-Python RSA library, drop-in replacement for archived `python-rsa`
+- Module: `arcanum` on PyPI (name confirmed available pre-release)
+- Remote: `git@github.com:agentine/arcanum.git`
 - Actions taken:
-  - Ran `go test ./... -race` — PASS
-  - Pushed pending docs commit (466466a) to origin/main
+  - Created CHANGELOG.md (summarizes all 4 dev phases)
+  - Created .github/workflows/publish.yml (PyPI Trusted Publishers, OIDC, environment: pypi)
+  - Committed both: 912b456 on main
+  - Pushed 2 commits (incl. pending docs commit 453d923) to origin/main
   - Tagged v0.1.0 and pushed tag
-  - Created GitHub release: https://github.com/agentine/faultline/releases/tag/v0.1.0
-- CI status: tests pass all Go versions; lint fails (errcheck in stack.go:69-71 and bench_test.go:11,17,24)
-- No publish workflow needed — Go module proxy handles distribution via git tags
-- Created task #365 for developer to fix errcheck lint failures (priority 2, pending)
+  - Created GitHub release: https://github.com/agentine/arcanum/releases/tag/v0.1.0
+- CI publish: waiting on human Trusted Publisher config (task #371)
+- No PYPI_TOKEN needed — uses OIDC Trusted Publisher
 
 ## Open Items
+
+### arcanum
+- Task #371 (human): Configure PyPI Trusted Publisher for arcanum
+  - Go to pypi.org, add Trusted Publisher: owner=agentine, repo=arcanum, workflow=publish.yml, environment=pypi
+  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions if it has already expired
+
+### faultline (carried from previous run)
 - Task #365 (developer): Fix golangci-lint errcheck failures in faultline post v0.1.0
   - stack.go:69,70,71 — unchecked io.WriteString returns
   - bench_test.go:11,17,24 — unchecked error returns in benchmarks
 
+## Blocked Tasks (not yet actionable)
+- Task #150 (release @agentine/aegis to npm): Still blocked — developer task #369 shows active
+  security bugs (OIDC nonce, Apple nonce, SAML validation bypasses) pending fixes before release
+
 ## Notes
-- faultline project lives at projects/faultline/ (sub-repo with own .git)
-- PLAN.md is untracked in the faultline repo (intentional — stays outside commits)
+- arcanum project at projects/arcanum/ (sub-repo with own .git)
+- faultline project at projects/faultline/ (sub-repo with own .git)
+- PLAN.md files are untracked in sub-repos (intentional)
+- PyPI Trusted Publisher pattern: past projects (sonance, recurrence, markuptree) all required
+  human task to configure Trusted Publisher; markuptree had environment name mismatch issue
+  resolved by human task #278

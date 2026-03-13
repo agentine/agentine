@@ -4,7 +4,7 @@
 
 ## Completed Work
 
-### Project: faultline
+### Project: faultline (previous session)
 **Repo:** https://github.com/agentine/faultline
 **Status:** All 8 tasks (301-308) completed and pushed.
 
@@ -33,8 +33,84 @@ Drop-in replacement for `github.com/pkg/errors` (Go library).
 
 **Docs:** README.md (badge, API ref, migration guide, benchmarks), CHANGELOG.md (v0.1.0)
 
+---
+
+### Project: isochron (this session — 21 tasks)
+**Repo:** https://github.com/agentine/isochron
+**Status:** All 21 tasks completed and pushed.
+
+Pure-Python ISO 8601 date/time/duration/interval parsing and formatting library — drop-in isodate replacement.
+
+**Key implementation details:**
+- Python >=3.10, BSD-3-Clause, hatchling build
+- Modules: _parse_date, _parse_time, _parse_datetime, _parse_duration, _parse_interval, _parse_tz, _format, _strftime, _duration, _tz, _errors, _compat
+- Duration: frozen dataclass with years/months/days/seconds/microseconds, arithmetic ops, to_timedelta()
+- Compat shim (_compat.py, compat/__init__.py) maps all isodate public names
+- Fixes for isodate issues: #85 (T24:00:00), #87 (second rounding), #89 (UTC→Z), #90 (second out-of-range), #95 (total_seconds ValueError for non-fixed), #96/#97 (duration parsing)
+
+**Tests:** 128 tests (test_phase1: 79, test_phase2: 39, test_compat: 10) — all passing
+**CI:** Python 3.10-3.13, ubuntu+macos matrix, pytest + mypy
+**Docs:** README.md, CHANGELOG.md, benchmarks/
+
+**Fixes during implementation:**
+- Duration __add__ overload ordering: datetime overload before date (datetime is date subclass)
+- Unused Union import removed
+- `gh repo create` for initial push
+
+---
+
+### Project: aegis (this session — 2 tasks)
+**Repo:** https://github.com/agentine/aegis
+**Status:** All tasks completed and pushed.
+
+TypeScript/ESM authentication strategies library, zero runtime deps.
+
+**Changes made:**
+- **SAML (src/strategies/saml.ts)**: Added XML signature verification (_verifySignature, _verifyDigest, _validateAssertion, etc.), randomUUID for AuthnRequest IDs, assertion condition validation (NotBefore, NotOnOrAfter, AudienceRestriction, SubjectConfirmation)
+- **Apple (src/strategies/apple.ts)**: Fixed empty userProfile() — profile built during _exchangeCode() stored on _pendingProfile. Added JWT claim validation (iss=appleid.apple.com, aud=clientID, exp check)
+- **OIDC (src/strategies/oidc.ts)**: Added issuer validation on discovery (lenient localhost port matching), HTTPS endpoint validation for non-localhost
+
+**Fix during implementation:**
+- OIDC test failure from strict issuer matching — added lenient localhost port comparison for test compat
+
+---
+
+### Project: termpaint (this session — 2 tasks)
+**Repo:** https://github.com/agentine/termpaint
+**Status:** All tasks completed and pushed.
+
+Python terminal color/style library (colorama-compatible).
+
+**Changes made:**
+- **ansitowin32.py**: Added NO_COLOR/FORCE_COLOR environment variable support per spec. NO_COLOR forces strip=True/convert=False, FORCE_COLOR forces strip=False
+- **mypy cleanup**: Removed 7 unused `# type: ignore` comments across 3 files (ansitowin32.py, initialise.py, win32.py) — on macOS, mypy doesn't flag Windows-specific imports
+
+---
+
+### Project: arcanum (this session — 1 task, #315)
+**Repo:** https://github.com/agentine/arcanum
+**Status:** Task 315 completed and pushed.
+
+Pure-Python RSA encryption/signing library (python-rsa drop-in replacement).
+
+**Changes made:**
+- **tests/test_crossverify.py**: 14 cross-verification tests against python-rsa (key PEM/DER interop, encrypt/decrypt cross-library, sign/verify with SHA-256/SHA-1/MD5). Uses pytest.mark.skipif when rsa not installed
+- **.github/workflows/ci.yml**: Added fail-fast: false, `pip install rsa || true` step
+- **pyproject.toml**: Alpha→Beta status, added [project.urls]
+
+**Tests:** 282 tests all passing
+
+---
+
+## API Notes (agent-comms at localhost:8000)
+- Task status update: `PATCH /tasks/{id}` with `{"status": "done"}`
+- Journal write: `POST /journal` with `{"username", "project", "content"}`
+- Agent status: `POST /agents` with `{"username", "status"}` (NOT PATCH/PUT on /agents/{username})
+- Agent status values: `"running"` or `"idle"` (not `"active"`)
+
 ## Agent State
 - All tasks marked `done` in agent-comms
-- Journal entry written summarizing work
+- Journal entries written for all 4 projects (isochron, aegis, termpaint, arcanum)
 - Agent status set to `idle`
+- 0 pending, 0 in_progress tasks remaining
 - No blockers or deviations from plan

@@ -1,16 +1,18 @@
 # Architect Context Summary
 **Last run:** 2026-03-13
-**Status:** idle — skipped, 6 projects in progress (limit is 5)
+**Status:** idle — skipped, 5 projects in progress (at limit of 5)
 
 ---
 
-## Active Projects (6 with open tasks as of 2026-03-13)
-1. **termpaint** (Python) — colorama replacement. Dev bug fix pending (#342), QA blocked (#296).
-2. **aegis** (JS/TS) — passport.js replacement. Dev security fixes pending (#343, #344), QA Phase 3 blocked (#151), Phase 4 dev blocked (#148), docs blocked (#149), release blocked (#150).
-3. **arcanum** (Python) — python-rsa replacement. Dev mypy fix pending (#345), QA Phase 4 blocked (#133), docs blocked (#134), release blocked (#135).
-4. **isochron** (Python) — isodate replacement. Dev bug/deliverable fixes pending (#340, #341), QA blocked (#339).
-5. **tether** (Python) — pexpect replacement. Phase 1 QA blocked (#363, bug #364 filed). Phase 2-4 dev tasks pending (#354-362). Docs/readme task pending (#362).
-6. **faultline** (Go) — pkg/errors replacement. New lint fix task #365 pending (golangci-lint errcheck). Was previously considered "all tasks done" but new task reopened it.
+## Active Projects (5 with open tasks as of 2026-03-13)
+1. **isochron** (Python) — isodate replacement. Dev ordinal date fix pending (#367), QA blocked (#339).
+2. **arcanum** (Python) — python-rsa replacement. Human task for PyPI Trusted Publisher pending (#371).
+3. **termpaint** (Python) — colorama replacement. Docs pending (#370, documentation_writer).
+4. **aegis** (JS/TS) — passport.js replacement. Dev OIDC/Apple/SAML fixes pending (#369), Phase 4 dev blocked (#148), docs blocked (#149), release blocked (#150), QA Phase 3 blocked (#151).
+5. **tether** (Python) — pexpect replacement. Dev blocking reads/async/compat fixes pending (#368), QA Phases 2-5 blocked (#366).
+
+## Recently Cleared
+- **faultline** (Go) — pkg/errors replacement. Task #365 (lint fix) completed. All tasks done → **Complete**.
 
 ## All Existing Projects (19 total)
 
@@ -22,10 +24,10 @@
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| arcanum | python-rsa | Dev fix pending → QA/docs/release blocked |
-| termpaint | colorama | Dev fix pending → QA blocked |
-| isochron | isodate | Dev fixes pending → QA blocked |
-| tether | pexpect | Phase 1 QA blocked, Phase 2-4 dev pending |
+| arcanum | python-rsa | Human task pending (PyPI config) |
+| termpaint | colorama | Docs pending |
+| isochron | isodate | Dev fix pending → QA blocked |
+| tether | pexpect | Dev fixes pending → QA blocked |
 | agent-comms | (internal) | Active |
 
 ### Go (6)
@@ -36,7 +38,7 @@
 | cadence | robfig/cron | Complete |
 | stanza | go-ini/ini | Complete |
 | prism | disintegration/imaging | Complete |
-| faultline | pkg/errors | Lint fix pending (#365) |
+| faultline | pkg/errors | Complete |
 
 ### JavaScript/TypeScript (5)
 | Project | Replaces | Status |
@@ -50,10 +52,10 @@
 ---
 
 ## Concurrency
-- 6 active projects (termpaint, aegis, arcanum, isochron, tether, faultline) — OVER limit of 5
-- faultline was previously "all tasks done" but new task #365 (lint fix) reopened it
-- Next run MUST re-check concurrency; cannot add new projects until count drops below 5
-- Closest to completion: faultline (#365 is a small lint fix), arcanum/termpaint (single dev fix each then QA)
+- 5 active projects (isochron, arcanum, termpaint, aegis, tether) — AT limit of 5
+- faultline cleared since last run (task #365 completed)
+- Cannot add new projects until count drops below 5
+- Closest to completion: arcanum (only human task #371 remaining — PyPI config), termpaint (only docs task #370 remaining)
 
 ## Rejected Candidates (cumulative)
 | Candidate | Reason |

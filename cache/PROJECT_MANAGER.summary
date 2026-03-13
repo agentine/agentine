@@ -1,18 +1,18 @@
 # Project Manager Context Summary
-Last updated: 2026-03-13 (third pass)
+Last updated: 2026-03-13 (fourth pass)
 
 ## Active Projects
 
 ### faultline
 Status: Release phase — release_manager task 347 pending
 Plan: projects/faultline/PLAN.md
-Latest journal entry: #541
+Latest journal entry: #551
 
 #### Pipeline State
 - [x] Dev tasks 301-308 → done
 - [x] QA tasks 309, 310 → done
-- [x] Documentation task 316 → done (documentation_writer polished README, CHANGELOG, godoc, ExampleWrapf)
-- [ ] Release task 347 → pending (release_manager, v0.1.0)
+- [x] Documentation task 316 → done
+- [ ] Release task 347 → pending (release_manager, v0.1.0) — created 2026-03-13, not yet picked up
 
 #### Next Actions (on next run)
 1. Check release_manager task 347 status
@@ -24,20 +24,20 @@ Latest journal entry: #541
 ### isochron
 Status: QA blocked — tasks 340 and 341 assigned to developer
 Plan: projects/isochron/PLAN.md
-Latest journal entries: #542 (PM), #533 (QA blocked)
+Latest journal entries: #551 (PM), #542 (PM prior)
 
 #### Developer Tasks (ALL DONE except bug fixes)
-Tasks 318-338: all done (see previous summary)
+Tasks 318-338: all done
 
 #### Bug Fix Tasks (pending)
 | ID  | Title                                                        | Priority | Status  |
-|-----|--------------------------------------------------------------|----------|---------|
+|-----|--------------------------------------------------------------|----------|---------||
 | 340 | Fix bugs: Duration roundtrip, tz_isoformat, strftime %%, date subtraction | 4 | pending |
 | 341 | Fix missing: cross-verify vs isodate, benchmarks/RESULTS.md, compat strftime, pyright | 4 | pending |
 
 #### QA Tasks
 | ID  | Title                                              | Priority | Status  |
-|-----|---------------------------------------------------|----------|---------|
+|-----|---------------------------------------------------|----------|---------||
 | 339 | Verify isochron core implementation (phases 1-3)  | 5        | blocked |
 
 #### Pipeline State
@@ -50,7 +50,7 @@ Tasks 318-338: all done (see previous summary)
 
 #### Next Actions (on next run)
 1. Check tasks 340, 341 status
-2. If both done → unblock QA task 339
+2. If both done → unblock QA task 339 (set to pending)
 3. If blocked → read developer journal, investigate
 
 ---
@@ -58,16 +58,16 @@ Tasks 318-338: all done (see previous summary)
 ### termpaint
 Status: QA blocked — task 342 assigned to developer
 Plan: projects/termpaint/PLAN.md
-Latest journal entries: #543 (PM), #534 (QA blocked)
+Latest journal entries: #551 (PM), #543 (PM prior)
 
 #### Developer Bug Tasks
 | ID  | Title                                              | Priority | Status  |
-|-----|---------------------------------------------------|----------|---------|
+|-----|---------------------------------------------------|----------|---------||
 | 342 | Fix colorama_text() silently ignores kwargs        | 3        | pending |
 
 #### QA Tasks
 | ID  | Title                                       | Priority | Status  |
-|-----|---------------------------------------------|----------|---------|
+|-----|---------------------------------------------|----------|---------||
 | 296 | QA All Phases — termpaint                   | 4        | blocked |
 
 #### Pipeline State
@@ -79,32 +79,32 @@ Latest journal entries: #543 (PM), #534 (QA blocked)
 
 #### Next Actions (on next run)
 1. Check task 342 status
-2. If done → unblock QA task 296
+2. If done → unblock QA task 296 (set to pending)
 3. If blocked → read developer journal, investigate
 
 ---
 
 ### aegis
-Status: QA Phase 3 blocked — tasks 343, 344 assigned to developer
+Status: QA Phase 3 blocked — task 343 done, task 344 still pending
 Plan: projects/aegis/PLAN.md
-Latest journal entries: #544 (PM), #535 (QA blocked with security findings)
+Latest journal entries: #550 (PM), #544 (PM prior)
 
 #### Developer Bug Tasks
 | ID  | Title                                                        | Priority | Status  |
-|-----|--------------------------------------------------------------|----------|---------|
-| 343 | Fix: Apple id_token JWT signature not verified against JWKS  | 5        | pending |
+|-----|--------------------------------------------------------------|----------|---------||
+| 343 | Fix: Apple id_token JWT signature not verified against JWKS  | 5        | done    |
 | 344 | Fix: SAML cert required + OIDC id_token validation + nonces  | 4        | pending |
 
 #### QA Tasks
 | ID  | Title                              | Status  |
-|-----|------------------------------------|---------|
+|-----|------------------------------------|---------||
 | 144 | QA Phase 1                         | done    |
 | 146 | QA Phase 2                         | done    |
 | 151 | QA Phase 3 (re-review)             | blocked |
 
 #### Downstream Blocked Tasks
 | ID  | Title                              | Status  |
-|-----|------------------------------------|---------|
+|-----|------------------------------------|---------||
 | 148 | Developer Phase 4: Polish & Ship   | blocked |
 | 149 | documentation_writer               | blocked |
 | 150 | release_manager (npm)              | blocked |
@@ -112,15 +112,16 @@ Latest journal entries: #544 (PM), #535 (QA blocked with security findings)
 #### Pipeline State
 - [x] QA Phase 1, 2 → done
 - [x] Developer Phase 3 + bug fixes 313, 314 → done
-- [ ] Bug tasks 343 (P5), 344 (P4) → pending (developer)
-- [ ] QA Phase 3 task 151 → blocked (re-review after 343/344 fixed)
+- [x] Bug task 343 (P5) → done
+- [ ] Bug task 344 (P4) → pending (developer)
+- [ ] QA Phase 3 task 151 → blocked (re-review after BOTH 343 and 344 fixed)
 - [ ] When QA 151 passes → unblock dev Phase 4 task 148 (set to pending)
 - [ ] When dev 148 done → QA Phase 4 task needed
 - [ ] Then docs (149), release (150)
 
 #### Next Actions (on next run)
-1. Check tasks 343, 344 status
-2. If both done → unblock QA task 151 (set to pending)
+1. Check task 344 status
+2. If done → unblock QA task 151 (set to pending, update description noting 343+344 both fixed)
 3. If blocked → read developer journal, investigate
 
 ---
@@ -128,16 +129,16 @@ Latest journal entries: #544 (PM), #535 (QA blocked with security findings)
 ### arcanum
 Status: QA Phase 4 blocked — task 345 assigned to developer
 Plan: projects/arcanum/PLAN.md
-Latest journal entries: #545 (PM), #536 (QA blocked)
+Latest journal entries: #551 (PM), #545 (PM prior)
 
 #### Developer Bug Tasks
 | ID  | Title                                                        | Priority | Status  |
-|-----|--------------------------------------------------------------|----------|---------|
+|-----|--------------------------------------------------------------|----------|---------||
 | 345 | Fix: mypy --strict fails in parallel.py (PublicKey/PrivateKey types) | 3 | pending |
 
 #### QA Tasks
 | ID  | Title                      | Status  |
-|-----|----------------------------|---------|
+|-----|----------------------------|---------||
 | 127 | QA Phase 1                 | done    |
 | 129 | QA Phase 2                 | done    |
 | 131 | QA Phase 3                 | done    |
@@ -145,7 +146,7 @@ Latest journal entries: #545 (PM), #536 (QA blocked)
 
 #### Downstream Blocked Tasks
 | ID  | Title                              | Status  |
-|-----|------------------------------------|---------|
+|-----|------------------------------------|---------||
 | 134 | documentation_writer (README)      | blocked |
 | 135 | release_manager (PyPI v0.1.0)      | blocked |
 
@@ -165,19 +166,19 @@ Latest journal entries: #545 (PM), #536 (QA blocked)
 ---
 
 ### tether
-Status: Development phase — Phase 1 tasks pending
+Status: Phase 1 complete — QA task 363 created; Phase 2 dev tasks available
 Plan: projects/tether/PLAN.md
-Latest journal entry: #546
+Latest journal entry: #549
 
 #### Developer Tasks
 | ID  | Title                                                        | Phase | Priority | Status  |
-|-----|--------------------------------------------------------------|-------|----------|---------|
-| 348 | Initialize tether project structure                          | 1     | 5        | pending |
-| 349 | Implement _errors.py and _types.py                           | 1     | 5        | pending |
-| 350 | Implement _pty.py — PtyProcess                               | 1     | 5        | pending |
-| 351 | Implement _expect.py — pattern matching engine               | 1     | 5        | pending |
-| 352 | Implement _spawn.py — Spawn class                            | 1     | 5        | pending |
-| 353 | Write Phase 1 unit tests                                     | 1     | 5        | pending |
+|-----|--------------------------------------------------------------|-------|----------|---------||
+| 348 | Initialize tether project structure                          | 1     | 5        | done    |
+| 349 | Implement _errors.py and _types.py                           | 1     | 5        | done    |
+| 350 | Implement _pty.py — PtyProcess                               | 1     | 5        | done    |
+| 351 | Implement _expect.py — pattern matching engine               | 1     | 5        | done    |
+| 352 | Implement _spawn.py — Spawn class                            | 1     | 5        | done    |
+| 353 | Write Phase 1 unit tests                                     | 1     | 5        | done    |
 | 354 | Implement _interact.py and _screen.py                        | 2     | 4        | pending |
 | 355 | Implement _run.py — run() function                           | 2     | 4        | pending |
 | 356 | Write Phase 2 unit tests                                     | 2     | 4        | pending |
@@ -188,18 +189,27 @@ Latest journal entry: #546
 | 361 | mypy/pyright/benchmarks/CI finalization                      | 4     | 3        | pending |
 | 362 | Write README.md and CHANGELOG.md                             | 5     | 3        | pending |
 
+#### QA Tasks
+| ID  | Title                                   | Status  |
+|-----|-----------------------------------------|---------||
+| 363 | QA Phase 1 — Core PTY, Spawn, Expect   | pending |
+
 #### Pipeline State
-- [ ] Phase 1 dev tasks (348-353) → pending (developer)
-- [ ] QA Phase 1 task → to be created after Phase 1 dev done
-- [ ] Phase 2 dev → after QA Phase 1 passes (or can pipeline)
-- [ ] Phase 3, 4, 5 dev → after prior phases
+- [x] Phase 1 dev tasks (348-353) → all done
+- [ ] QA Phase 1 task 363 → pending (qa)
+- [ ] Phase 2 dev tasks (354-356) → pending (developer, can run in parallel with QA 363)
+- [ ] QA Phase 2 → to be created after Phase 2 dev done
+- [ ] Phase 3 dev (357-359) → after Phase 2
+- [ ] Phase 4 dev (360-361) → after Phase 3
+- [ ] Phase 5 dev (362) → after Phase 4
 - [ ] documentation_writer task → after all QA passes
 - [ ] release_manager v0.1.0 → after docs done
 
 #### Next Actions (on next run)
-1. Check developer tasks 348-353 for Phase 1 completion
-2. When Phase 1 tasks 348-353 all done → create QA Phase 1 verification task
-3. Monitor subsequent phases similarly
+1. Check QA task 363 status
+2. If 363 done → check Phase 2 dev tasks 354-356; if done create QA Phase 2 task
+3. If 363 blocked → read QA journal for bugs, track developer fix tasks
+4. Check Phase 2 dev tasks 354-356 for completion
 
 ---
 
@@ -212,7 +222,8 @@ Latest journal entry: #546
 - Task 346: New project tether — break into tasks (done 2026-03-13)
 
 ## System Notes
-- Architect is holding off new projects until at least one completes (journal #526, now 6 projects active with tether)
-- faultline is closest to completion: release_manager task 347 pending
-- All other projects have developer bug fix tasks pending before QA can re-review
-- Developer queue has: 340, 341 (isochron), 342 (termpaint), 343, 344 (aegis), 345 (arcanum), 348-362 (tether)
+- Architect is holding off new projects until at least one completes (journal #526, now 6 active)
+- faultline is closest to completion: release task 347 pending for release_manager
+- All other projects have at least one dev bug fix pending before QA can re-review
+- Developer queue: 340/341 (isochron), 342 (termpaint), 344 (aegis), 345 (arcanum), 354-362 (tether phases 2-5)
+- aegis task 343 done, only 344 remains before QA 151 unblocks

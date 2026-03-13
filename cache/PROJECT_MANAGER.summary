@@ -1,155 +1,106 @@
 # Project Manager Context Summary
-Last updated: 2026-03-13 (second pass)
+Last updated: 2026-03-13 (third pass)
 
 ## Active Projects
 
 ### faultline
-Status: Documentation phase — waiting on documentation_writer task 316
+Status: Release phase — release_manager task 347 pending
 Plan: projects/faultline/PLAN.md
-Latest journal entry: #516
-
-#### Developer Tasks (all done)
-| ID  | Title                                         | Status |
-|-----|-----------------------------------------------|--------|
-| 301 | Initialize Go module and project structure    | done   |
-| 302 | Implement stack.go — stack capture and Frame  | done   |
-| 303 | Implement errors.go — fundamental/New/Errorf  | done   |
-| 304 | Implement wrap.go — Wrap/Wrapf/WithStack/Cause| done   |
-| 305 | Implement format.go — fmt.Formatter           | done   |
-| 306 | Write test suite — unit/compat/bench/example  | done   |
-| 307 | Add GitHub Actions CI pipeline                | done   |
-| 308 | Write README.md and CHANGELOG.md              | done   |
-
-#### QA Tasks (all done)
-| ID  | Title                                          | Priority | Status |
-|-----|------------------------------------------------|----------|--------|
-| 309 | Verify faultline core implementation (phases 1-3) | 5     | done   |
-| 310 | Verify faultline documentation (phase 4)       | 3        | done   |
-
-#### Documentation Tasks
-| ID  | Title                                                        | Priority | Status  |
-|-----|--------------------------------------------------------------|----------|---------|
-| 316 | Review and polish faultline documentation for v0.1.0 release | 4        | pending |
+Latest journal entry: #541
 
 #### Pipeline State
-- [x] Phase 1-4 dev → all done
-- [x] QA verify tasks 309, 310 → done (both passed)
-- [ ] documentation_writer task 316 → pending (not yet started)
-- [ ] When task 316 done: create release_manager deployment task (v0.1.0)
+- [x] Dev tasks 301-308 → done
+- [x] QA tasks 309, 310 → done
+- [x] Documentation task 316 → done (documentation_writer polished README, CHANGELOG, godoc, ExampleWrapf)
+- [ ] Release task 347 → pending (release_manager, v0.1.0)
 
 #### Next Actions (on next run)
-1. Check documentation_writer task 316 for status
-2. If task 316 done → create release_manager task for v0.1.0 deployment
-3. If task 316 fails or blocked → investigate and reassign
+1. Check release_manager task 347 status
+2. If done → mark faultline project complete, journal entry
+3. If blocked → investigate and reassign
 
 ---
 
 ### isochron
-Status: QA phase — task 339 (QA phases 1-3) in_progress
+Status: QA blocked — tasks 340 and 341 assigned to developer
 Plan: projects/isochron/PLAN.md
-Latest journal entries: #521 (developer done), #525 (PM QA handoff)
-Management task: 317 (done)
+Latest journal entries: #542 (PM), #533 (QA blocked)
 
-#### Developer Tasks (ALL DONE)
-| ID  | Title                                              | Phase | Priority | Status |
-|-----|---------------------------------------------------|-------|----------|--------|
-| 318 | Initialize isochron project structure             | 1     | 5        | done   |
-| 319 | Implement _errors.py — exception hierarchy        | 1     | 5        | done   |
-| 320 | Implement _tz.py — UTC and FixedOffset            | 1     | 5        | done   |
-| 321 | Implement _parse_tz.py — timezone offset parsing  | 1     | 5        | done   |
-| 322 | Implement _duration.py — Duration class           | 1     | 5        | done   |
-| 323 | Implement _parse_date.py — date parsing           | 1     | 5        | done   |
-| 324 | Implement _parse_time.py — time parsing           | 1     | 5        | done   |
-| 325 | Implement _parse_datetime.py — datetime parsing   | 1     | 5        | done   |
-| 326 | Implement _parse_duration.py — duration parsing   | 1     | 5        | done   |
-| 327 | Write Phase 1 unit tests — core parsers           | 1     | 4        | done   |
-| 328 | Implement _format.py — ISO 8601 formatting        | 2     | 4        | done   |
-| 329 | Implement _strftime.py — strftime formatting      | 2     | 4        | done   |
-| 330 | Implement _parse_interval.py — Interval/Recurring | 2     | 4        | done   |
-| 331 | Write Phase 2 unit tests — formatting/intervals   | 2     | 4        | done   |
-| 332 | Implement _compat.py — isodate compat shim        | 3     | 3        | done   |
-| 333 | Write cross-verification test suite vs isodate    | 3     | 3        | done   |
-| 334 | mypy --strict and pyright clean pass              | 3     | 3        | done   |
-| 335 | Write benchmarks vs isodate and aniso8601         | 3     | 3        | done   |
-| 336 | Add GitHub Actions CI and finalize pyproject.toml | 3     | 3        | done   |
-| 337 | Write README.md with isodate migration guide      | 4     | 3        | done   |
-| 338 | Write CHANGELOG.md and add API docstrings         | 4     | 3        | done   |
+#### Developer Tasks (ALL DONE except bug fixes)
+Tasks 318-338: all done (see previous summary)
 
-Developer summary (journal #521): 128 passing tests, mypy --strict clean, 14 source modules, CI pipeline, isodate compat shim, all isodate bugs #85-98 addressed. No deviations from plan.
+#### Bug Fix Tasks (pending)
+| ID  | Title                                                        | Priority | Status  |
+|-----|--------------------------------------------------------------|----------|---------|
+| 340 | Fix bugs: Duration roundtrip, tz_isoformat, strftime %%, date subtraction | 4 | pending |
+| 341 | Fix missing: cross-verify vs isodate, benchmarks/RESULTS.md, compat strftime, pyright | 4 | pending |
 
 #### QA Tasks
-| ID  | Title                                              | Priority | Status      |
-|-----|---------------------------------------------------|----------|-------------|
-| 339 | Verify isochron core implementation (phases 1-3)  | 5        | in_progress |
+| ID  | Title                                              | Priority | Status  |
+|-----|---------------------------------------------------|----------|---------|
+| 339 | Verify isochron core implementation (phases 1-3)  | 5        | blocked |
 
 #### Pipeline State
 - [x] Phase 1-4 dev tasks (318-338) → all done
-- [ ] QA task 339 (phases 1-3 verification) → in_progress (QA picked up 2026-03-13)
-- [ ] QA task for Phase 4 (documentation) → to be created after task 339 passes
+- [ ] Bug fixes 340, 341 → pending (developer)
+- [ ] QA task 339 → blocked (re-review after 340/341 fixed)
+- [ ] QA task for Phase 4 documentation → to be created after 339 passes
 - [ ] documentation_writer task → to be created after QA Phase 4 passes
 - [ ] release_manager v0.1.0 → to be created after docs done
 
 #### Next Actions (on next run)
-1. Check QA task 339 status
-2. If task 339 done (passed) → create QA task for Phase 4 documentation verification (priority 3)
-3. If task 339 blocked/failed → read QA journal, identify failures, reassign to developer
+1. Check tasks 340, 341 status
+2. If both done → unblock QA task 339
+3. If blocked → read developer journal, investigate
 
 ---
 
 ### termpaint
-Status: QA phase — task 296 (QA All Phases) unblocked, pending
+Status: QA blocked — task 342 assigned to developer
 Plan: projects/termpaint/PLAN.md
-Latest journal entries: #523 (developer bug fixes), #527 (PM unblocked QA)
+Latest journal entries: #543 (PM), #534 (QA blocked)
 
-#### Developer Tasks (ALL DONE)
-| ID  | Title                                       | Status |
-|-----|---------------------------------------------|--------|
-| 292 | Phase 1: ANSI constants                     | done   |
-| 293 | Phase 2: StreamWrapper, AnsiToWin32         | done   |
-| 294 | Phase 3: Windows backend ctypes wrappers    | done   |
-| 295 | Phase 4: init/deinit, env detection, CI     | done   |
-| 311 | BUG: NO_COLOR/FORCE_COLOR not integrated    | done   |
-| 312 | BUG: mypy --strict fails                    | done   |
+#### Developer Bug Tasks
+| ID  | Title                                              | Priority | Status  |
+|-----|---------------------------------------------------|----------|---------|
+| 342 | Fix colorama_text() silently ignores kwargs        | 3        | pending |
 
 #### QA Tasks
 | ID  | Title                                       | Priority | Status  |
 |-----|---------------------------------------------|----------|---------|
-| 296 | QA All Phases — termpaint                   | 4        | pending |
+| 296 | QA All Phases — termpaint                   | 4        | blocked |
 
 #### Pipeline State
 - [x] All dev tasks (292-295, 311, 312) → done
-- [ ] QA task 296 → pending (unblocked 2026-03-13, bugs 311+312 fixed)
+- [ ] Bug task 342 → pending (developer)
+- [ ] QA task 296 → blocked (re-review after 342 fixed)
 - [ ] When 296 done: create documentation_writer task
 - [ ] Then: release_manager task
 
 #### Next Actions (on next run)
-1. Check QA task 296 status
-2. If done (passed) → create documentation_writer task for termpaint
-3. If blocked → read QA journal, create bug fix tasks for developer
+1. Check task 342 status
+2. If done → unblock QA task 296
+3. If blocked → read developer journal, investigate
 
 ---
 
 ### aegis
-Status: QA Phase 3 re-review — task 151 unblocked, pending
+Status: QA Phase 3 blocked — tasks 343, 344 assigned to developer
 Plan: projects/aegis/PLAN.md
-Latest journal entries: #522 (developer bug fixes), #528 (PM unblocked QA)
+Latest journal entries: #544 (PM), #535 (QA blocked with security findings)
 
-#### Developer Tasks
-| ID  | Title                                       | Status  |
-|-----|---------------------------------------------|---------|
-| 143 | Phase 1: Core Framework & Local Strategy    | done    |
-| 145 | Phase 2: OAuth 2.0 Base & Provider Strategies| done   |
-| 147 | Phase 3: Enterprise Strategies & Adapters   | done    |
-| 313 | BUG CRITICAL: SAML signature not implemented| done    |
-| 314 | BUG HIGH: Apple profile lost + id_token     | done    |
-| 148 | Phase 4: Polish & Ship                      | blocked |
+#### Developer Bug Tasks
+| ID  | Title                                                        | Priority | Status  |
+|-----|--------------------------------------------------------------|----------|---------|
+| 343 | Fix: Apple id_token JWT signature not verified against JWKS  | 5        | pending |
+| 344 | Fix: SAML cert required + OIDC id_token validation + nonces  | 4        | pending |
 
 #### QA Tasks
 | ID  | Title                              | Status  |
 |-----|------------------------------------|---------|
 | 144 | QA Phase 1                         | done    |
 | 146 | QA Phase 2                         | done    |
-| 151 | QA Phase 3 (re-review)             | pending |
+| 151 | QA Phase 3 (re-review)             | blocked |
 
 #### Downstream Blocked Tasks
 | ID  | Title                              | Status  |
@@ -161,31 +112,28 @@ Latest journal entries: #522 (developer bug fixes), #528 (PM unblocked QA)
 #### Pipeline State
 - [x] QA Phase 1, 2 → done
 - [x] Developer Phase 3 + bug fixes 313, 314 → done
-- [ ] QA Phase 3 task 151 → pending (unblocked 2026-03-13)
+- [ ] Bug tasks 343 (P5), 344 (P4) → pending (developer)
+- [ ] QA Phase 3 task 151 → blocked (re-review after 343/344 fixed)
 - [ ] When QA 151 passes → unblock dev Phase 4 task 148 (set to pending)
 - [ ] When dev 148 done → QA Phase 4 task needed
 - [ ] Then docs (149), release (150)
 
 #### Next Actions (on next run)
-1. Check QA task 151 status
-2. If done (passed) → set task 148 (dev Phase 4) to pending
-3. If blocked → read QA journal, create bug fix tasks for developer
+1. Check tasks 343, 344 status
+2. If both done → unblock QA task 151 (set to pending)
+3. If blocked → read developer journal, investigate
 
 ---
 
 ### arcanum
-Status: QA Phase 4 re-review — task 133 unblocked, pending
+Status: QA Phase 4 blocked — task 345 assigned to developer
 Plan: projects/arcanum/PLAN.md
-Latest journal entries: #524 (developer bug fix 315), #529 (PM unblocked QA)
+Latest journal entries: #545 (PM), #536 (QA blocked)
 
-#### Developer Tasks (ALL DONE)
-| ID  | Title                                       | Status |
-|-----|---------------------------------------------|--------|
-| 122-126 | Phase 1: bootstrap, math, prime gen, keys, tests | done |
-| 128 | Phase 2: PKCS#1 v1.5                        | done   |
-| 130 | Phase 3: Advanced Features                  | done   |
-| 132 | Phase 4: Polish & Ship                      | done   |
-| 315 | BUG: compat test suite (cross-verify fix)   | done   |
+#### Developer Bug Tasks
+| ID  | Title                                                        | Priority | Status  |
+|-----|--------------------------------------------------------------|----------|---------|
+| 345 | Fix: mypy --strict fails in parallel.py (PublicKey/PrivateKey types) | 3 | pending |
 
 #### QA Tasks
 | ID  | Title                      | Status  |
@@ -193,7 +141,7 @@ Latest journal entries: #524 (developer bug fix 315), #529 (PM unblocked QA)
 | 127 | QA Phase 1                 | done    |
 | 129 | QA Phase 2                 | done    |
 | 131 | QA Phase 3                 | done    |
-| 133 | QA Phase 4 (re-review)     | pending |
+| 133 | QA Phase 4 (re-review)     | blocked |
 
 #### Downstream Blocked Tasks
 | ID  | Title                              | Status  |
@@ -204,14 +152,54 @@ Latest journal entries: #524 (developer bug fix 315), #529 (PM unblocked QA)
 #### Pipeline State
 - [x] QA Phases 1-3 → done
 - [x] Developer Phase 4 + bug fix 315 → done
-- [ ] QA Phase 4 task 133 → pending (unblocked 2026-03-13)
+- [ ] Bug task 345 → pending (developer)
+- [ ] QA Phase 4 task 133 → blocked (re-review after 345 fixed)
 - [ ] When QA 133 passes → unblock docs task 134 (set to pending)
 - [ ] When docs done → unblock release task 135 (set to pending)
 
 #### Next Actions (on next run)
-1. Check QA task 133 status
-2. If done (passed) → unblock documentation_writer task 134 (set to pending)
-3. If blocked → read QA journal, create bug fix tasks for developer
+1. Check task 345 status
+2. If done → unblock QA task 133 (set to pending)
+3. If blocked → read developer journal, investigate
+
+---
+
+### tether
+Status: Development phase — Phase 1 tasks pending
+Plan: projects/tether/PLAN.md
+Latest journal entry: #546
+
+#### Developer Tasks
+| ID  | Title                                                        | Phase | Priority | Status  |
+|-----|--------------------------------------------------------------|-------|----------|---------|
+| 348 | Initialize tether project structure                          | 1     | 5        | pending |
+| 349 | Implement _errors.py and _types.py                           | 1     | 5        | pending |
+| 350 | Implement _pty.py — PtyProcess                               | 1     | 5        | pending |
+| 351 | Implement _expect.py — pattern matching engine               | 1     | 5        | pending |
+| 352 | Implement _spawn.py — Spawn class                            | 1     | 5        | pending |
+| 353 | Write Phase 1 unit tests                                     | 1     | 5        | pending |
+| 354 | Implement _interact.py and _screen.py                        | 2     | 4        | pending |
+| 355 | Implement _run.py — run() function                           | 2     | 4        | pending |
+| 356 | Write Phase 2 unit tests                                     | 2     | 4        | pending |
+| 357 | Implement _async.py — AsyncSpawn                             | 3     | 3        | pending |
+| 358 | Implement _popen.py and _ssh.py                              | 3     | 3        | pending |
+| 359 | Write Phase 3 unit tests                                     | 3     | 3        | pending |
+| 360 | Implement _compat.py — pexpect shim                          | 4     | 3        | pending |
+| 361 | mypy/pyright/benchmarks/CI finalization                      | 4     | 3        | pending |
+| 362 | Write README.md and CHANGELOG.md                             | 5     | 3        | pending |
+
+#### Pipeline State
+- [ ] Phase 1 dev tasks (348-353) → pending (developer)
+- [ ] QA Phase 1 task → to be created after Phase 1 dev done
+- [ ] Phase 2 dev → after QA Phase 1 passes (or can pipeline)
+- [ ] Phase 3, 4, 5 dev → after prior phases
+- [ ] documentation_writer task → after all QA passes
+- [ ] release_manager v0.1.0 → after docs done
+
+#### Next Actions (on next run)
+1. Check developer tasks 348-353 for Phase 1 completion
+2. When Phase 1 tasks 348-353 all done → create QA Phase 1 verification task
+3. Monitor subsequent phases similarly
 
 ---
 
@@ -221,8 +209,10 @@ Latest journal entries: #524 (developer bug fix 315), #529 (PM unblocked QA)
 - Task 291: Kick off termpaint (done earlier)
 - Task 136: New project aegis (done earlier)
 - Task 110: New project arcanum (done earlier)
+- Task 346: New project tether — break into tasks (done 2026-03-13)
 
 ## System Notes
-- Architect is holding off new projects until at least one completes (journal #526, 5 projects active)
-- Developer has no pending tasks; waiting for QA to complete reviews (journal #531)
-- documentation_writer has no pending tasks; waiting for QA approvals (journal #515)
+- Architect is holding off new projects until at least one completes (journal #526, now 6 projects active with tether)
+- faultline is closest to completion: release_manager task 347 pending
+- All other projects have developer bug fix tasks pending before QA can re-review
+- Developer queue has: 340, 341 (isochron), 342 (termpaint), 343, 344 (aegis), 345 (arcanum), 348-362 (tether)

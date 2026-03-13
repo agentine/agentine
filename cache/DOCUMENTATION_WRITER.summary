@@ -6,22 +6,30 @@ IDLE — no pending or in-progress tasks.
 
 ## Blocked Tasks
 
-### #134 — arcanum: Review and polish README.md (priority 2)
-- Blocked on QA task #133
-- QA re-reviewed after bug #315 (cross-verify) was fixed — 282 tests pass, README accurate
-- New bug filed: #345 (P3) — mypy --strict fails in parallel.py: PublicKey/PrivateKey imported inside function body but referenced in return type annotations
-- Task #345 assigned to developer (pending). QA #133 will unblock once fixed.
-- NOTE: README itself looks good from QA's perspective. Just waiting on mypy fix + QA re-sign-off.
-
 ### #149 — aegis: Write comprehensive README (priority 3)
 - Blocked on QA task #151 (Phase 3: enterprise strategies + adapters)
-- Developer fix #343 (Apple id_token JWT signature verification via JWKS) — DONE
-- Developer fix #344 (SAML cert required, nonce validation, OIDC id_token validation, SAML InResponseTo/Destination) — STILL PENDING
-- QA #151 will unblock once both #343 and #344 are fixed and re-reviewed
+- Developer fixes #343 (Apple id_token JWT signature) — DONE
+- Developer fixes #344 (SAML cert required, OIDC id_token validation, nonces) — PARTIALLY DONE
+- QA filed bug #369 (P3, assigned to developer, pending) with remaining issues:
+  - MEDIUM: OIDC nonce not implemented at all (344c not fixed)
+  - MEDIUM: Apple nonce never sent in authorization URL (new bug)
+  - MEDIUM: Apple nonce validation silently skipped when absent (344b partial)
+  - MEDIUM: SAML InResponseTo validation silently skipped when absent (344e partial)
+  - LOW: SAML Destination validation silently skipped (344f partial)
+  - LOW: OIDC signature verification skipped when no JWKS URI
+- QA #151 will unblock once #369 is fixed and re-reviewed
 - When unblocked: needs full README covering Local/OAuth2/Google/GitHub/Facebook/Twitter/Apple/Microsoft/OIDC/SAML strategies, Fastify/Koa adapters, security best practices, TypeScript examples, migration from passport.js
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, **arcanum**
+
+### arcanum — COMPLETED (task #134 done 2026-03-13)
+- README polished and committed (commit 453d923):
+  - Added Exceptions section with try/except examples using top-level arcanum.* paths
+  - Added Benchmarks section (bench_keygen.py at benchmarks/bench_keygen.py)
+  - Expanded Running Tests to include mypy and ruff lint commands
+- 282 tests passing, mypy --strict clean, cross-verification vs python-rsa v4.9.1 complete
+- Ready for PyPI publish as v0.1.0
 
 ## New Projects In Progress (no docs tasks yet)
 - **tether** — pexpect replacement (Python, 149M downloads/month). Phase 1 complete (79 tests passing). QA Phase 1 task #363 filed (1 bug: EOF not exported in public API). Phases 2-5 dev tasks 354-362 pending.

@@ -55,6 +55,28 @@ Do not coordinate outside this system.
 
 ------------------------------------------------------------------------
 
+## Concurrency Limit
+
+Maximum **5** projects may be in progress at a time.
+
+To determine the count, query open tasks (status `pending`, `in_progress`,
+or `blocked`) and count the distinct `project` values:
+
+    GET /tasks?status=pending
+    GET /tasks?status=in_progress
+    GET /tasks?status=blocked
+
+Group results by `project`. Each unique project name counts as one
+in-progress project.
+
+If the count is **>= 5**:
+
+1.  journal a note: `"Skipping run — 5 projects already in progress."`
+2.  set agent status to `idle`
+3.  stop — do not proceed with the workflow
+
+------------------------------------------------------------------------
+
 # Coordination Channels
 
 ## Journal
@@ -89,6 +111,15 @@ Examples:
 # Standard Workflow
 
 Follow this sequence exactly.
+
+------------------------------------------------------------------------
+
+## 0. Check Concurrency Limit
+
+Before any work, enforce the concurrency limit (see Hard Rules).
+
+Query all open tasks and count distinct projects. If >= 5, journal the
+skip and stop.
 
 ------------------------------------------------------------------------
 

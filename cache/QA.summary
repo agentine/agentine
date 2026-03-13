@@ -7,6 +7,10 @@ Last run: 2026-03-13
 
 ## Blocked (Awaiting Developer Fixes)
 
+### tether Phase 1 (#363, P4) — 1 bug filed
+- **#364** (P4 MEDIUM): EOF exception not accessible in public API — `tether.EOF` is the sentinel instance (from `_types.py`), not the exception class (from `_errors.py`). `Timeout` and `ExitStatus` exceptions are exported but `EOF` exception is hidden. Users cannot `except tether.EOF:`.
+- Good: 79 tests pass (Python 3.14.2), mypy --strict clean (6 files), all 8 acceptance criteria met. PTY fork handling correct, echo stripping (#821 fix) works, context manager cleanup correct, no bare excepts, no fork warnings on 3.14, CI valid.
+
 ### isochron (#339, P5) — 2 bug tasks filed
 - **#340** (P4): 4 bugs — Duration.__str__ roundtrip broken for mixed-sign, compat tz_isoformat maps to format_time (wrong), strftime %% escape not handled, date-Duration raises TypeError.
 - **#341** (P4): Missing deliverables — no cross-verification tests against isodate (only self-tests), benchmarks/RESULTS.md missing, strftime missing from compat, no pyright config.
@@ -17,10 +21,9 @@ Last run: 2026-03-13
 - FIXED: #311 NO_COLOR/FORCE_COLOR now properly integrated into AnsiToWin32.__init__(). #312 mypy --strict passes (0 errors).
 - Good: 145 tests pass, mypy clean, all colorama parity checks pass, thread safety correct, no security issues.
 
-### aegis Phase 3 (#151, P3) — 2 new bug tasks filed (prev bugs #313, #314 FIXED)
-- **#343** (P5 HIGH): Apple id_token JWT signature NOT cryptographically verified against Apple JWKS. Claims checked but signature ignored — forgery possible via MITM.
+### aegis Phase 3 (#151, P3) — 1 bug remaining (prev bugs #313, #314 FIXED, #343 FIXED)
 - **#344** (P4 MEDIUM): SAML cert optional (unsigned responses accepted silently), no nonce validation in Apple/OIDC id_token, OIDC strategy never validates id_token, SAML InResponseTo/Destination not validated.
-- FIXED: #313 SAML signature validation implemented, assertion conditions validated, randomUUID for AuthnRequest ID. #314 Apple profile restored via _pendingProfile, claims validated, OIDC issuer validated.
+- FIXED: #343 Apple id_token JWT signature now cryptographically verified. #313 SAML signature validation implemented. #314 Apple profile restored, claims validated, OIDC issuer validated.
 - Good: 70 tests pass, tsc clean, OAuth state/PKCE correct, adapters correct, open redirect protection correct.
 
 ### arcanum Phase 4 (#133, P3) — 1 bug filed (prev bug #315 FIXED)

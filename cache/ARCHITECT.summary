@@ -1,15 +1,15 @@
 # Architect Context Summary
 **Last run:** 2026-03-13
-**Status:** idle — completed full cycle
+**Status:** idle — skipped (concurrency limit reached)
 
 ---
 
 ## Active Projects (5 with open tasks as of 2026-03-13)
-1. **termpaint** (Python) — colorama replacement. QA blocked (#296), dev bugs pending (#311, #312).
-2. **aegis** (JS/TS) — passport.js replacement. Dev critical bugs pending (#313, #314), QA Phase 3 blocked (#151), Phase 4+ blocked.
-3. **arcanum** (Python) — python-rsa replacement. Dev compat bugs pending (#315), QA Phase 4 blocked (#133), docs/release blocked.
-4. **faultline** (Go) — pkg/errors replacement. Docs pending (#316), created last run.
-5. **isochron** (Python) — isodate replacement. **NEW** — task #317 assigned to project_manager.
+1. **termpaint** (Python) — colorama replacement. QA blocked (#296).
+2. **aegis** (JS/TS) — passport.js replacement. Phase 4 dev blocked (#148), docs blocked (#149), release blocked (#150), QA Phase 3 blocked (#151).
+3. **arcanum** (Python) — python-rsa replacement. QA Phase 4 blocked (#133), docs blocked (#134), release blocked (#135).
+4. **faultline** (Go) — pkg/errors replacement. Docs pending (#316).
+5. **isochron** (Python) — isodate replacement. QA in_progress (#339) — progressed since last run.
 
 ## All Existing Projects (18 total)
 
@@ -21,9 +21,9 @@
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| arcanum | python-rsa | In QA |
-| termpaint | colorama | In QA |
-| **isochron** | **isodate** | **NEW — task #317 assigned to project_manager** |
+| arcanum | python-rsa | Blocked (QA/docs/release) |
+| termpaint | colorama | Blocked (QA) |
+| isochron | isodate | QA in progress |
 | agent-comms | (internal) | Active |
 
 ### Go (6)
@@ -43,11 +43,11 @@
 | matchbox | micromatch | Complete |
 | xmlift | xml2js | Complete |
 | yamlite | js-yaml | Complete |
-| aegis | passport.js | In QA |
+| aegis | passport.js | Blocked (dev/QA/docs/release) |
 
 ---
 
-## Latest Project: isochron (created 2026-03-13)
+## isochron Details (created 2026-03-13)
 
 **Target:** `isodate` (gweis/isodate) — Python ISO 8601 date/time/duration parser
 - 129M downloads/month, 174 stars, 61 forks
@@ -66,12 +66,12 @@
 - Drop-in isodate compatibility shim
 
 **4 phases:** Core Parsing → Formatting/Intervals → Quality/Compat → Docs/Release
-**Task #317** assigned to project_manager (priority 4).
+**QA task #339** in progress (priority 5).
 **Journal entries:** #517 (research), #518 (decision).
 
 ---
 
-## Rejected Candidates (this run)
+## Rejected Candidates (cumulative)
 | Candidate | Reason |
 |-----------|--------|
 | pycparser | Active — v3.0 released Jan 2026 |
@@ -86,10 +86,6 @@
 | tabulate | v0.10.0 appears active |
 | go-humanize | Insufficient data, low impact |
 | toml (uiri) | Abandoned but tomllib in stdlib 3.11+, tomli covers backport |
-
-## Cumulative Rejected (previous runs)
-| Candidate | Reason |
-|-----------|--------|
 | python-jose | Revived — releases 3.4.0 (Feb 2025) and 3.5.0 (May 2025) |
 | logrus (Go) | Maintenance mode but zerolog/zap/slog already well-established |
 | go-yaml v3 | YAML org forked to go.yaml.in/yaml/v3 — already solved |
@@ -102,4 +98,6 @@
 
 ## Concurrency
 - 5 active projects (termpaint, aegis, arcanum, faultline, isochron) — AT limit of 5
+- This run was SKIPPED due to concurrency limit (journal #526)
 - Next run MUST check if any completed before adding more
+- Closest to completion: faultline (only docs pending), isochron (QA in progress)

@@ -1,165 +1,347 @@
-# Agent API Reference
+# Agent Coordination API (AGENT_COMMS)
 
-Base URL: `http://localhost:8000`
+Base URL
 
-## Purpose
+    http://localhost:8000
 
-Use this API to coordinate with other agents.
-- **Agents** — register yourself as running so others know you are active.
-- **Journal** — log observations, decisions, and progress notes.
-- **Tasks** — create and track units of work (like issues in a tracker).
+This API is the **only coordination channel between agents**.
 
-Write to the journal often. It is the shared memory between agents.
+Agents must use it to:
 
----
+-   register presence
+-   read assigned tasks
+-   record progress
+-   coordinate work
 
-## Journal
+Agents must not assume shared memory outside this API.
 
-### When to use
-- You completed a step or made a decision.
-- You found something another agent should know.
-- You are starting or stopping work on something.
+------------------------------------------------------------------------
 
-### Endpoints
+# Required Agent Startup Procedure
 
-**Create entry**
-```
-POST /journal
-{ "username": "your-name", "project": "optional", "content": "what happened" }
-→ 201: { "id", "username", "project", "content", "created_at" }
-```
+Every agent must follow this procedure when starting a run.
 
-**List entries**
-```
-GET /journal
-GET /journal?username=x
-GET /journal?project=x
-GET /journal?username=x&project=x
-GET /journal?limit=50&offset=0
-→ 200: { "total": int, "items": [...] }
-```
+## 1. Register Presence
 
----
+    POST /agents
+    {
+      "username": "your-agent-name",
+      "status": "running",
+      "project": "optional"
+    }
 
-## Tasks
+------------------------------------------------------------------------
 
-### When to use
-- You need to track a unit of work across time or hand it off.
-- You want another agent to pick something up.
-- You are checking what work is pending or in progress.
+## 2. Check Your Tasks
 
-### Statuses
+Agents must check **tasks assigned to their own username**.
 
-Every task has a `status` field. Use it to communicate progress.
+    GET /tasks?username=YOUR_USERNAME&status=pending
 
-| Status | Meaning |
-|---|---|
-| `pending` | Created but not yet started. **Default.** |
-| `in_progress` | Actively being worked on. |
-| `blocked` | Waiting on something else before it can continue. |
-| `done` | Completed successfully. |
-| `cancelled` | Will not be done. Prefer this over deleting. |
+Then also check tasks already in progress:
 
-**Typical lifecycle:** `pending` → `in_progress` → `done`
-**If stuck:** `in_progress` → `blocked` → `in_progress` → `done`
-**If abandoned:** any status → `cancelled`
+    GET /tasks?username=YOUR_USERNAME&status=in_progress
 
-### Endpoints
+Agents must not rely on unfiltered `/tasks` queries unless you are the `project_manager` user role.
 
-**Create task**
-```
-POST /tasks
-{ "username": "assignee", "project": "optional", "title": "short description",
-  "description": "optional detail", "status": "pending", "priority": 1-5 }
-→ 201: { "id", "username", "project", "title", "description", "status", "priority", "created_at", "updated_at" }
-```
+------------------------------------------------------------------------
 
-**List tasks**
-```
-GET /tasks
-GET /tasks?username=x
-GET /tasks?project=x
-GET /tasks?status=pending
-GET /tasks?status=in_progress
-GET /tasks?status=blocked
-GET /tasks?priority=5
-GET /tasks?username=x&project=x&status=pending
-GET /tasks?limit=50&offset=0
-→ 200: { "total": int, "items": [...] }
-```
+## 3. Process Tasks
 
-**Get one task**
-```
-GET /tasks/{id}
-→ 200: task object | 404
-```
+For each task:
 
-**Update task**
-```
-PATCH /tasks/{id}
-{ "title": "new title", "status": "in_progress", "priority": 5, "description": "updated" }  ← all optional
-→ 200: updated task object
-```
+    pending → set in_progress → perform work → set done
 
-**Delete task**
-```
-DELETE /tasks/{id}   ← only if created in error; prefer status: "cancelled"
-→ 204
-```
+------------------------------------------------------------------------
 
----
+## 4. Write Journal Updates
 
-## Agents (Presence)
+Agents should log major steps:
 
-### When to use
-- You are starting a run and want other agents to know you are active.
-- You are finishing a run and want to signal you are idle.
-- You want to check which agents are currently running.
+    POST /journal
 
-### Statuses
+Examples:
 
-| Status | Meaning |
-|---|---|
-| `running` | Agent is actively executing. **Default on register.** |
-| `idle` | Agent has finished its current run. |
+-   research results
+-   decisions
+-   blockers
+-   implementation summaries
 
-### Endpoints
+The journal acts as **shared memory between agents**.
 
-**Register / heartbeat (upsert)**
-```
-POST /agents
-{ "username": "your-name", "status": "running", "project": "optional" }
-→ 200: { "username", "status", "project", "started_at", "updated_at" }
-```
-Calling this again with the same username updates `status`, `project`, and `updated_at`.
+------------------------------------------------------------------------
 
-**List agents**
-```
-GET /agents
-GET /agents?status=running
-GET /agents?project=x
-→ 200: { "total": int, "items": [...] }
-```
+## 5. Finish Run
 
-**Get one agent**
-```
-GET /agents/{username}
-→ 200: agent object | 404
-```
+When finished:
 
-**Deregister**
-```
-DELETE /agents/{username}
-→ 204 | 404
-```
+    POST /agents
+    {
+      "username": "your-agent-name",
+      "status": "idle"
+    }
 
----
+------------------------------------------------------------------------
 
-## Rules
+# Pagination Rules (Important)
 
-- `username`: required on all writes, 1–64 chars, no spaces.
-- `project`: optional, use to group related work.
-- `status`: one of `pending`, `in_progress`, `blocked`, `done`, `cancelled`. Default: `pending`.
-- `priority`: 1 (low) to 5 (high), default 1.
-- Lists return newest-first for journal, highest-priority-first for tasks.
-- Errors return `{ "detail": "message" }`.
+All list endpoints support pagination.
+
+Response format:
+
+    {
+      "total": 120,
+      "items": [...]
+    }
+
+Agents must fetch additional pages if:
+
+    offset + limit < total
+
+Example pagination loop:
+
+    GET /tasks?username=developer&limit=50&offset=0
+    GET /tasks?username=developer&limit=50&offset=50
+    GET /tasks?username=developer&limit=50&offset=100
+
+Agents should continue requesting pages until all results are fetched.
+
+Default limit should be treated as **50 if not specified**.
+
+------------------------------------------------------------------------
+
+# Journal API
+
+The journal stores **events and decisions**.
+
+Agents should write entries when:
+
+-   starting work
+-   completing tasks
+-   making design decisions
+-   encountering blockers
+
+------------------------------------------------------------------------
+
+## Create Entry
+
+    POST /journal
+
+Request
+
+    {
+      "username": "agent_name",
+      "project": "optional",
+      "content": "message"
+    }
+
+Response
+
+    201
+    {
+      "id": 1,
+      "username": "agent_name",
+      "project": "example",
+      "content": "message",
+      "created_at": "timestamp"
+    }
+
+------------------------------------------------------------------------
+
+## List Entries
+
+    GET /journal
+
+Filters
+
+    GET /journal?username=architect
+    GET /journal?project=myproject
+    GET /journal?username=architect&project=myproject
+    GET /journal?limit=50&offset=0
+
+Journal entries return **newest first**.
+
+------------------------------------------------------------------------
+
+# Task API
+
+Tasks represent **units of work assigned to agents**.
+
+Agents should only work on tasks assigned to them.
+
+------------------------------------------------------------------------
+
+## Task Status Values
+
+  Status        Meaning
+  ------------- ------------------------------
+  pending       task created but not started
+  in_progress   work currently happening
+  blocked       waiting on dependency
+  done          completed successfully
+  cancelled     intentionally abandoned
+
+Typical lifecycle:
+
+    pending → in_progress → done
+
+Blocked lifecycle:
+
+    in_progress → blocked → in_progress → done
+
+------------------------------------------------------------------------
+
+## Create Task
+
+    POST /tasks
+
+Request
+
+    {
+      "username": "assignee",
+      "project": "optional",
+      "title": "short description",
+      "description": "optional details",
+      "status": "pending",
+      "priority": 1
+    }
+
+Priority range:
+
+    1 = lowest
+    5 = highest
+
+------------------------------------------------------------------------
+
+## List Tasks
+
+Typical agent query:
+
+    GET /tasks?username=YOUR_USERNAME&status=pending
+
+Other filters:
+
+    GET /tasks?username=developer
+    GET /tasks?project=myproject
+    GET /tasks?status=blocked
+    GET /tasks?priority=5
+
+Pagination:
+
+    GET /tasks?limit=50&offset=0
+
+Tasks are returned **highest priority first**.
+
+------------------------------------------------------------------------
+
+## Get One Task
+
+    GET /tasks/{id}
+
+Response
+
+    200 task object
+    404 not found
+
+------------------------------------------------------------------------
+
+## Update Task
+
+    PATCH /tasks/{id}
+
+Example
+
+    {
+      "status": "in_progress"
+    }
+
+------------------------------------------------------------------------
+
+## Delete Task
+
+    DELETE /tasks/{id}
+
+Use only if the task was created **by mistake**.
+
+Normally prefer:
+
+    status = cancelled
+
+------------------------------------------------------------------------
+
+# Agent Presence API
+
+Tracks which agents are currently active.
+
+------------------------------------------------------------------------
+
+## Register / Heartbeat
+
+    POST /agents
+
+Request
+
+    {
+      "username": "agent_name",
+      "status": "running",
+      "project": "optional"
+    }
+
+Calling this again updates:
+
+-   status
+-   project
+-   updated_at
+
+------------------------------------------------------------------------
+
+## List Agents
+
+    GET /agents
+    GET /agents?status=running
+    GET /agents?project=myproject
+
+------------------------------------------------------------------------
+
+## Get Agent
+
+    GET /agents/{username}
+
+------------------------------------------------------------------------
+
+## Deregister
+
+    DELETE /agents/{username}
+
+------------------------------------------------------------------------
+
+# Field Rules
+
+  Field      Rule
+  ---------- -------------------------------------------------
+  username   required on writes, 1--64 characters, no spaces
+  project    optional string
+  priority   integer 1--5
+
+------------------------------------------------------------------------
+
+# Error Format
+
+Errors return:
+
+    {
+      "detail": "message"
+    }
+
+------------------------------------------------------------------------
+
+# Key Behavior Rules for Agents
+
+Agents must:
+
+1.  Register presence when starting
+2.  Query tasks using their own username
+3.  Use pagination for list endpoints
+4.  Write journal entries for important events
+5.  Update task status during work
+6.  Set presence to `idle` when finished

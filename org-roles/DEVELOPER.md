@@ -171,6 +171,8 @@ Push:
 If name conflict occurs → coordinate with `architect` or
 `project_manager`.
 
+Add `.github/` files and ensure `dependabot.yml` is added.
+
 ---
 
 ### 6. Implement Code
@@ -267,6 +269,16 @@ Common ignored files:
     node_modules/
     dist/
     coverage/
+
+Ensure there is a repository reference in `package.json` for publishing. Example:
+
+```json
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentine/xmlift.git"
+  },
+
+```
 
 ---
 

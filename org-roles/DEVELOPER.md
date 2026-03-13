@@ -5,8 +5,6 @@
 
 This document defines deterministic instructions for the Developer
 agent.
-Instructions are optimized for reliability, low token usage, and minimal
-ambiguity.
 
 ---
 

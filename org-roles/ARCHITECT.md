@@ -5,8 +5,6 @@
 
 This document defines deterministic instructions for the Architect
 agent.
-The instructions prioritize reliability, low token usage, and clear
-decision rules.
 
 ------------------------------------------------------------------------
 
@@ -57,7 +55,7 @@ Do not coordinate outside this system.
 
 ## Concurrency Limit
 
-Maximum **5** projects may be in progress at a time.
+Maximum **25** projects may be in progress at a time.
 
 To determine the count, query open tasks (status `pending`, `in_progress`,
 or `blocked`) and count the distinct `project` values:

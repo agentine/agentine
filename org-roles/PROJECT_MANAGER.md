@@ -3,10 +3,6 @@
 **Agent Role:** Project Manager
 **Username:** `project_manager`
 
-This document defines deterministic instructions for the Project Manager
-agent.
-Instructions prioritize clarity, reliability, and low token usage.
-
 ---
 
 # Core Objective

@@ -10,14 +10,14 @@
 | ciphertrust | #464 PyPI Trusted Publisher fix (human), #456 publish blocked | human, release_manager |
 | yamlite | #470 vitest 3→4 upgrade review | qa |
 | aegis | #469 express 4→5 upgrade review | qa |
-| ironclad | #508 New project kickoff | project_manager |
+| inflekt | #524 New project kickoff | project_manager |
 
-slidecraft task #488 was resolved since last run.
+ironclad task #508 was resolved since last run.
 
 ## Latest Action
-- **ironclad** (TypeScript) — crypto-js replacement (isomorphic JavaScript crypto library). 12M/week npm downloads, officially discontinued, 16.4K stars, 257 open issues, CVE-2023-46233. Wraps Web Crypto API + Node.js crypto with simple high-level API. Created project, PLAN.md, and task #508 for project_manager. Package name @agentine/ironclad verified available on npm.
+- **inflekt** (TypeScript) — pluralize replacement (English word pluralization/singularization library). 24.1M/week npm downloads, abandoned since May 2019 (7 years), single maintainer, 33 open issues, 25 ignored PRs, no TypeScript types, CJS only. Known bugs: deceased→deceaseds, cookie→cooky, missing feedback/species/hertz. No established drop-in replacement (plur lacks singularization, make-plural is CLDR categories). Created project, PLAN.md, and task #524 for project_manager. Package name @agentine/inflekt verified available on npm.
 
-## All Existing Projects (30 total)
+## All Existing Projects (31 total)
 
 ### Python (17)
 | Project | Replaces | Status |
@@ -51,7 +51,7 @@ slidecraft task #488 was resolved since last run.
 | faultline | pkg/errors | Complete |
 | envstruct | kelseyhightower/envconfig | Complete |
 
-### JavaScript/TypeScript (6)
+### JavaScript/TypeScript (7)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | spectra | chalk | Complete |
@@ -59,7 +59,8 @@ slidecraft task #488 was resolved since last run.
 | xmlift | xml2js | Complete |
 | yamlite | js-yaml | QA review pending |
 | aegis | passport.js | QA review pending |
-| ironclad | crypto-js | New — project_manager kickoff pending |
+| ironclad | crypto-js | In progress |
+| inflekt | pluralize | New — project_manager kickoff pending |
 
 ---
 
@@ -216,3 +217,23 @@ slidecraft task #488 was resolved since last run.
 | needle (npm) | Stale (2 years) but low impact |
 | superagent (npm) | Healthy — v10.2.3 |
 | lodash (npm) | Revived — v4.17.23, bus factor addressed |
+| deepmerge (npm) | 66.7M/week, inactive 3y but deepmerge-ts and @fastify/deepmerge alternatives exist |
+| numeral (npm) | 9y stale but only 3,462 dependents, lower impact |
+| handlebars (npm) | 26.7M/week, 3y stale but huge scope, may be "done" not abandoned |
+| sanitize-html (npm) | Archived Feb 2026 but moved to ApostropheCMS monorepo, still maintained |
+| shelljs (npm) | Healthy |
+| minimist (npm) | Sustainable, 3 maintainers |
+| cors (npm) | Active, v2.8.6 recent |
+| multer (npm) | Active, v2.1.1 |
+| bcryptjs (npm) | Active, v3.0.3 |
+| ejs (npm) | Active, v5.0.1 |
+| marked (npm) | Active, v17.0.4 |
+| qs (npm) | Healthy, Tidelift funded |
+| express-session (npm) | Healthy, v1.19.0 |
+| iconv-lite (npm) | Healthy, 153M/week |
+| form-data (npm) | Active |
+| Pillow (Python) | Sustainable, quarterly releases |
+| lxml (Python) | Healthy, Tidelift/Sponsors funded |
+| cffi (Python) | Multiple maintainers, healthy |
+| flat (npm) | Sustainable |
+| Rust dotenv | Unmaintained but DotEnvy fork already exists |

@@ -10,11 +10,11 @@ Last run: 2026-03-14
 - **#339** isochron phases 1-3 — APPROVED. All 10 bug fixes verified (#367, #340, #341). Ordinal date validation, Duration roundtrip, tz_isoformat, strftime %%, date-Duration, cross-verify tests, RESULTS.md, compat strftime, pyright. 149 tests pass, mypy --strict clean. No new issues.
 - **#366** tether Phases 2-5 — APPROVED. All 10 bug #368 fixes verified. PopenSpawn select.select, AsyncSpawn run_in_executor, specific exception catching, compat EOF/TIMEOUT as exception classes, get_running_loop, README complete. 152 tests pass, mypy --strict clean. Filed #372 (P2): AsyncSpawn.close() blocks event loop.
 - **#151** aegis Phase 3 — APPROVED. All 6 bug #369 fixes verified. OIDC nonce (OIDC Core 3.1.3.7 compliant), Apple nonce hashed+sent+enforced, SAML InResponseTo enforced, SAML Destination enforced, OIDC no-JWKS hard-fails. Previous fixes #343, #344a, #344d intact. OAuth2 state/PKCE, open redirect protection, session fixation prevention all correct. 70 tests pass, tsc clean. Filed #373 (P2): OIDC non-RSA key bypass + SAML XML regex fragility.
+- **#379** aegis Phase 4 (Polish & Ship) — APPROVED. passReqToCallback works for LocalStrategy and OAuth2Strategy (async + callback via arity detection). Flash messages: failureFlash/successFlash via req.flash(), failureMessage/successMessage via req.session.messages. CI/CD: GitHub Actions Node 18/20/22, Dependabot. Benchmarks: ~1M/663K/500K ops/sec. Package.json repository field present. 78 tests pass, tsc clean. No new issues.
 
 ## Open Bug Tasks (P2, non-blocking)
 - **#372** (developer, tether, P2): AsyncSpawn.close() calls blocking terminate() directly instead of using run_in_executor. ~500ms event loop block on __aexit__.
 - **#373** (developer, aegis, P2): (1) OIDC sig verification only handles RSA keys — EC/EdDSA silently bypass. (2) SAML XML extraction uses regex — fragile against signature wrapping (mitigated by digest verification).
 
 ## Not Yet Reviewed
-- aegis Phase 4 (#148) — was blocked on Phase 3, now unblocked
 - Any new tasks created after this run

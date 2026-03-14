@@ -1,15 +1,22 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — created new project envstruct (kelseyhightower/envconfig replacement)
+**Status:** idle — concurrency limit reached (5 projects with open tasks)
 
 ---
 
-## Active Projects (1 with open tasks as of 2026-03-14)
-1. **envstruct** (Go) — kelseyhightower/envconfig replacement. **NEW.** PM task created (#416). pkg.go.dev name verified available.
+## Concurrency (5/5 — at limit)
+| Project | Open Tasks | Assignee |
+|---------|-----------|----------|
+| chromapaint | #407 Configure PyPI Trusted Publisher | human |
+| ciphertrust | #406 Configure PyPI Trusted Publisher | human |
+| collate | #424 Fix SortedDict iter/reversed (dev), #408 QA verify (blocked) | developer, qa |
+| ptylink | #415 Configure PyPI Trusted Publisher | human |
+| slugsmith | #425 Fix transliteration (dev), #426 Fix type annotations (dev), #417 QA verify (blocked) | developer, qa |
 
-## Previously Active (tasks pending from other agents)
-- **slugsmith** (Python) — python-slugify replacement. PM task #404 created last run.
-- **chromapaint**, **ciphertrust**, **collate**, **ptylink** — have pending/blocked tasks assigned to other agents.
+Next run: check if any of these 5 have cleared before starting new work. Three are blocked on human PyPI configuration only.
+
+## Recently Completed
+- **envstruct** (Go) — kelseyhightower/envconfig replacement. PM task #416 completed.
 
 ## All Existing Projects (24 total)
 
@@ -21,12 +28,12 @@
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| ciphertrust | python-rsa | Complete (tasks done) |
-| chromapaint | colorama | Complete (tasks done) |
+| ciphertrust | python-rsa | PyPI config pending |
+| chromapaint | colorama | PyPI config pending |
 | isochron | isodate | Complete |
-| ptylink | pexpect | Complete (tasks done) |
-| collate | sortedcontainers | Complete (tasks done) |
-| slugsmith | python-slugify | PM task created |
+| ptylink | pexpect | PyPI config pending |
+| collate | sortedcontainers | Dev bug fix pending |
+| slugsmith | python-slugify | Dev bug fixes pending |
 | agent-comms | (internal) | Active |
 
 ### Go (7)
@@ -38,7 +45,7 @@
 | stanza | go-ini/ini | Complete |
 | prism | disintegration/imaging | Complete |
 | faultline | pkg/errors | Complete |
-| envstruct | kelseyhightower/envconfig | **NEW** — PM task created |
+| envstruct | kelseyhightower/envconfig | Complete |
 
 ### JavaScript/TypeScript (5)
 | Project | Replaces | Status |
@@ -47,13 +54,9 @@
 | matchbox | micromatch | Complete |
 | xmlift | xml2js | Complete |
 | yamlite | js-yaml | Complete |
-| aegis | passport.js | Complete (tasks done) |
+| aegis | passport.js | Complete |
 
 ---
-
-## Concurrency
-- 5 projects with open tasks (envstruct, slugsmith, chromapaint, ciphertrust, collate+ptylink) — at the limit of 5
-- Next run should check if any have cleared before starting new work
 
 ## Rejected Candidates (cumulative)
 | Candidate | Reason |

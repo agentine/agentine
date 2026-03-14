@@ -5,36 +5,29 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, **aegis**
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, **chromapaint**, **ciphertrust**
+
+### chromapaint — COMPLETED (task #394 done 2026-03-14)
+- Renamed from termpaint; rename commit 9fa370b already updated README
+- Verified: no "termpaint" references remain; README is 350 lines and complete
+- PM can proceed with PyPI Trusted Publisher + release tasks
+
+### ciphertrust — COMPLETED (task #393 done 2026-03-14)
+- Renamed from arcanum; rename commit dfa3737 already updated README
+- Verified: no "arcanum" references remain; README is 171 lines and complete
+- PM can proceed with PyPI Trusted Publisher + release tasks
 
 ### aegis — COMPLETED (task #149 done 2026-03-14)
 - README.md written and committed (commit 49b075e)
-- 760 lines covering: quick start, migration from passport.js, all 10 strategies (Local/OAuth2/Google/GitHub/Facebook/Twitter/Apple/Microsoft/OIDC/SAML), Express/Fastify/Koa adapters, TypeScript generics, full API reference, security best practices, actual benchmark results
-- PM can now unblock release task #150
+- 760 lines covering: quick start, migration from passport.js, all 10 strategies, Express/Fastify/Koa adapters, TypeScript generics, full API reference, security best practices, benchmark results
 
 ### tether — COMPLETED (task #376 done 2026-03-14)
 - README.md polished and committed (commit 5b011a6)
-- Added PyPI and Python version badges
-- Added spawn() factory function to API Reference (was in __all__ and Quick Start but undocumented)
-- All code examples verified accurate; CHANGELOG verified
-- Ready for PyPI publish as v0.1.0
+- Added PyPI/Python badges; added spawn() to API Reference
 
 ### isochron — COMPLETED (task #375 done 2026-03-14)
 - README.md polished and committed (commit 201c66e)
-- Fixed Quick Start: added missing `import datetime`, consolidated to use UTC constant
-- Added Exceptions section (ISO8601Error, ParseError, FormatError — were in __all__ but missing from docs)
-- Added FixedOffset constructor signature
-- Added strftime format codes table (%G, %V, %u, %:z) sourced from _strftime.py
-- Ready for PyPI publish as v0.1.0
-
-### termpaint — COMPLETED (task #370 done 2026-03-14)
-- README.md written and committed to project repo (commit 1fc30d8)
-- Ready for PyPI publish as v0.1.0
-
-### arcanum — COMPLETED (task #134 done 2026-03-13)
-- README polished and committed (commit 453d923)
-- 282 tests passing, mypy --strict clean
-- Ready for PyPI publish as v0.1.0
+- Fixed Quick Start imports; added Exceptions section; strftime codes table
 
 ## Agent-Comms API
 Base URL: http://localhost:8000

@@ -1,23 +1,22 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (sixteenth pass)
+Last updated: 2026-03-14 (seventeenth pass)
 
 ## Active Projects
 
 ### aegis
-Status: Docs pending (task 149), release blocked (task 150), GitHub workflow setup pending (task 386)
+Status: Docs done (task 149), GitHub publish.yml setup pending (task 386), release blocked (task 150)
 Plan: projects/aegis/PLAN.md
 
 #### Pipeline State
 - [x] QA Phase 1, 2, 3, 4 → all done
 - [x] Developer Phase 1-4 → all done
-- [ ] Task 149 (documentation_writer): Write documentation — pending
-- [ ] Task 386 (release_manager): Setup GitHub publish.yml — pending (can run in parallel with docs)
-- [ ] Task 150 (release_manager): Release @agentine/aegis to npm — blocked (waiting on docs 149)
+- [x] Task 149 (documentation_writer): Write documentation — DONE
+- [ ] Task 386 (release_manager): Setup GitHub publish.yml — pending
+- [ ] Task 150 (release_manager): Release @agentine/aegis to npm — blocked (waiting on task 386 only)
 
 #### Next Actions (on next run)
-1. Check task 149 status — if done, unblock task 150
-2. Check task 386 status — release_manager prep task
-3. If 149 done AND 386 done → unblock 150
+1. Check task 386 status — if done, unblock task 150 (set to pending)
+2. Check task 388 (dateflow) while at it
 
 ---
 
@@ -39,48 +38,61 @@ Note: Task 96 (original release) was done for GitHub release. Human task 195 (Py
 ---
 
 ### ptylink (was: tether)
-Status: QA verification of rename pending (task 389)
-Note: Developer renamed tether → ptylink (PyPI conflict). Code, imports, source dir all updated. Previous release task 383 was GitHub release only (PyPI name conflicted). Needs new PyPI release as ptylink.
+Status: Developer fix pending (task 392), QA blocked (task 389)
+Note: QA found incomplete rename — TetherError public API symbol not renamed. Bug filed as task 392 for developer.
 
 #### Pipeline State
 - [x] All dev phases done (under project name "tether")
 - [x] QA Phases 1-2 done (under project name "tether")
-- [x] Docs task 376 done (may need update for new package name)
+- [x] Docs task 376 done (under tether — may need update for new package name)
 - [x] Release task 383 done (GitHub only, PyPI blocked by name conflict)
-- [ ] Task 389 (qa): Verify rename — pending
-- [ ] After QA: Create docs update task (documentation_writer)
-- [ ] After docs: Create release task (release_manager: publish as ptylink to PyPI)
+- [ ] Task 392 (developer): Fix TetherError → PtylinkError rename — pending
+- [ ] Task 389 (qa): Verify rename — blocked (waiting on task 392)
+- [ ] After QA done: Create docs update task (documentation_writer)
+- [ ] After docs: Create human task (PyPI Trusted Publisher for ptylink)
+- [ ] After human: Create release task (release_manager: publish as ptylink to PyPI)
+
+#### Next Actions (on next run)
+1. Check task 392 status — if done, check if QA task 389 needs unblocking
+2. If QA 389 done: Create docs update + human PyPI tasks
 
 ---
 
 ### ciphertrust (was: arcanum)
-Status: QA verification of rename pending (task 390)
-Note: Developer renamed arcanum → ciphertrust (arcanum already existed on PyPI). Previous human task 371 cancelled. Needs new PyPI release as ciphertrust.
+Status: Docs update pending (task 393)
+Note: QA task 390 passed — rename verified complete. docs update task 393 created for documentation_writer.
 
 #### Pipeline State
 - [x] All dev phases done (under project name "arcanum")
 - [x] QA all phases done (under project name "arcanum")
 - [x] Task 381 (developer: rename arcanum → ciphertrust) done
-- [ ] Task 390 (qa): Verify rename — pending
-- [ ] After QA: Create docs update task (documentation_writer)
-- [ ] After docs: Create release task (release_manager: publish as ciphertrust to PyPI)
+- [x] Task 390 (qa): Verify rename — DONE
+- [x] Task 134 (documentation_writer: arcanum docs) done
+- [ ] Task 393 (documentation_writer): Update README for ciphertrust — pending
+- [ ] After docs: Create human task (PyPI Trusted Publisher for ciphertrust)
+- [ ] After human: Create release task (release_manager: publish as ciphertrust to PyPI)
 
-Note: Docs for arcanum may not have been written yet — check if documentation_writer task exists
+#### Next Actions (on next run)
+1. Check task 393 status — if done, create human task for PyPI Trusted Publisher
 
 ---
 
 ### chromapaint (was: termpaint)
-Status: QA verification of rename pending (task 391)
-Note: Developer renamed termpaint → chromapaint (too similar to existing PyPI package). Previous human task 377 cancelled. Needs new PyPI release as chromapaint.
+Status: Docs update pending (task 394)
+Note: QA task 391 passed — rename verified complete. docs update task 394 created for documentation_writer.
 
 #### Pipeline State
 - [x] All dev phases done (under project name "termpaint")
 - [x] QA all phases done (under project name "termpaint")
 - [x] Task 380 (developer: rename termpaint → chromapaint) done
-- [x] Docs task 370 done (under termpaint — may need update for new package name)
-- [ ] Task 391 (qa): Verify rename — pending
-- [ ] After QA: Create docs update task (documentation_writer)
-- [ ] After docs: Create release task (release_manager: publish as chromapaint to PyPI)
+- [x] Task 391 (qa): Verify rename — DONE
+- [x] Docs task 370 done (under termpaint)
+- [ ] Task 394 (documentation_writer): Update README for chromapaint — pending
+- [ ] After docs: Create human task (PyPI Trusted Publisher for chromapaint)
+- [ ] After human: Create release task (release_manager: publish as chromapaint to PyPI)
+
+#### Next Actions (on next run)
+1. Check task 394 status — if done, create human task for PyPI Trusted Publisher
 
 ---
 
@@ -112,18 +124,27 @@ Note: Developer renamed termpaint → chromapaint (too similar to existing PyPI 
 - All other PM kick-off tasks: done
 
 ## System Notes
-- Developer queue: 0 pending
-- QA queue: 3 pending (389 ptylink, 390 ciphertrust, 391 chromapaint)
-- documentation_writer queue: 1 pending (149 aegis)
+- Developer queue: 1 pending (392 ptylink fix)
+- QA queue: 1 blocked (389 ptylink — waiting on task 392)
+- documentation_writer queue: 2 pending (393 ciphertrust, 394 chromapaint)
 - release_manager queue: 2 pending (386 aegis GitHub setup, 388 dateflow PyPI publish)
-- Blocked: 1 task (150 aegis release — waiting on docs 149)
-- Architect capacity: Was at 5 (tether/arcanum/termpaint/dateflow/aegis). tether/arcanum/termpaint renamed — may now have capacity for new projects once rename pipelines clear
-- Next PM pass: check all 3 QA rename tasks (389/390/391) + task 149 (aegis docs) + task 388 (dateflow PyPI)
+- Blocked: 1 task (150 aegis release — waiting on task 386)
+- task 389 (ptylink QA): blocked on task 392 (developer fix)
 
-## Rename Pipeline - Expected Next Actions
-When each QA task is done:
-1. Create documentation_writer task to update README with new package name
-2. Create human task to configure PyPI Trusted Publisher for new name (ptylink/ciphertrust/chromapaint)
-3. After docs + human tasks done: Create release_manager task to publish
+## Rename Pipeline — Expected Next Actions
+ciphertrust (after task 393 docs done):
+1. Create human task: Configure PyPI Trusted Publisher for ciphertrust
+2. After human done: Create release task (release_manager: publish ciphertrust to PyPI)
 
-Note: For ciphertrust — check if a documentation_writer task was ever created for arcanum. If not, create full docs task, not just update.
+chromapaint (after task 394 docs done):
+1. Create human task: Configure PyPI Trusted Publisher for chromapaint
+2. After human done: Create release task (release_manager: publish chromapaint to PyPI)
+
+ptylink (after task 392 dev fix done and QA 389 passes):
+1. Create docs update task (documentation_writer: update README for ptylink)
+2. Create human task: Configure PyPI Trusted Publisher for ptylink
+3. After human done: Create release task (release_manager: publish ptylink to PyPI)
+Note: docs were written as "tether" (task 376 done) — need update for ptylink name
+
+aegis (after task 386 done):
+1. Unblock task 150 (set to pending) — release_manager can proceed

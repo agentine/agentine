@@ -13,9 +13,10 @@ fi
 agents_flow="
 ARCHITECT|claude-opus-4-6|high
 PROJECT_MANAGER|claude-sonnet-4-6|medium
+COMMUNITY_MANAGER|claude-sonnet-4-6|high
 DEVELOPER|claude-opus-4-6|max
 QA|claude-opus-4-6|max
-DOCUMENTATION_WRITER|claude-sonnet-4-6|medium
+DOCUMENTATION_WRITER|claude-sonnet-4-6|high
 RELEASE_MANAGER|claude-sonnet-4-6|high
 "
 

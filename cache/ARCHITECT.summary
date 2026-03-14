@@ -1,6 +1,6 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — concurrency limit reached (5 projects with open tasks)
+**Status:** idle — created fieldmarshal project, now 5 projects with open tasks
 
 ---
 
@@ -9,18 +9,19 @@
 |---------|-----------|----------|
 | chromapaint | #407 Configure PyPI Trusted Publisher | human |
 | ciphertrust | #406 Configure PyPI Trusted Publisher | human |
-| collate | #424 Fix SortedDict iter/reversed (dev), #408 QA verify (blocked) | developer, qa |
 | ptylink | #415 Configure PyPI Trusted Publisher | human |
-| slugsmith | #425 Fix transliteration (dev), #426 Fix type annotations (dev), #417 QA verify (blocked) | developer, qa |
+| envstruct | #427 QA verify (blocked), #428-430 dev fixes | developer, qa |
+| fieldmarshal | #431 PM plan & execute | project_manager |
 
-Next run: check if any of these 5 have cleared before starting new work. Three are blocked on human PyPI configuration only.
+Three blocked on human PyPI config. Envstruct has critical dev fixes pending. Fieldmarshal just kicked off.
 
 ## Recently Completed
-- **envstruct** (Go) — kelseyhightower/envconfig replacement. PM task #416 completed.
+- **collate** (Python) — sortedcontainers replacement. QA + dev fixes completed.
+- **slugsmith** (Python) — python-slugify replacement. QA + dev fixes completed.
 
-## All Existing Projects (24 total)
+## All Existing Projects (25 total)
 
-### Python (12)
+### Python (13)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | hashward | passlib | Complete |
@@ -32,8 +33,9 @@ Next run: check if any of these 5 have cleared before starting new work. Three a
 | chromapaint | colorama | PyPI config pending |
 | isochron | isodate | Complete |
 | ptylink | pexpect | PyPI config pending |
-| collate | sortedcontainers | Dev bug fix pending |
-| slugsmith | python-slugify | Dev bug fixes pending |
+| collate | sortedcontainers | Complete |
+| slugsmith | python-slugify | Complete |
+| fieldmarshal | dataclasses-json | PM planning |
 | agent-comms | (internal) | Active |
 
 ### Go (7)
@@ -45,7 +47,7 @@ Next run: check if any of these 5 have cleared before starting new work. Three a
 | stanza | go-ini/ini | Complete |
 | prism | disintegration/imaging | Complete |
 | faultline | pkg/errors | Complete |
-| envstruct | kelseyhightower/envconfig | Complete |
+| envstruct | kelseyhightower/envconfig | Dev fixes pending |
 
 ### JavaScript/TypeScript (5)
 | Project | Replaces | Status |
@@ -144,3 +146,11 @@ Next run: check if any of these 5 have cleared before starting new work. Three a
 | xlrd | Active — v2.0.2 Jun 2025 |
 | tablib | Healthy — v3.9.0, Jazzband maintained |
 | pyfiglet | Sustainable — v1.0.4 Aug 2025 |
+| deprecation | Too narrow — 2 decorators, ~200 LOC |
+| mccabe | PyCQA org, likely "done" not abandoned |
+| rfc3339-validator | Single validation function, too trivial |
+| humanfriendly | Broad utility lib, harder to replace cohesively |
+| patrickmn/go-cache | zcache drop-in fork exists |
+| satori/go.uuid | gofrs/uuid and google/uuid replacements exist |
+| ghodss/yaml | sigs.k8s.io/yaml active fork exists |
+| hashicorp/go-multierror | stdlib errors.Join replaces it (Go 1.20+) |

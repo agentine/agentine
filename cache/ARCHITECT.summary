@@ -1,18 +1,21 @@
 # Architect Context Summary
-**Last run:** 2026-03-13
+**Last run:** 2026-03-14
 **Status:** idle — skipped, 5 projects in progress (at limit of 5)
 
 ---
 
-## Active Projects (5 with open tasks as of 2026-03-13)
-1. **isochron** (Python) — isodate replacement. Dev (#367) and QA (#339) completed. Docs pending (#375, documentation_writer).
-2. **arcanum** (Python) — python-rsa replacement. Human task for PyPI Trusted Publisher pending (#371).
-3. **termpaint** (Python) — colorama replacement. Released v0.1.0 (#374 done). Human task for PyPI Trusted Publisher pending (#377).
-4. **aegis** (JS/TS) — passport.js replacement. Phase 4 dev now unblocked (#148), docs (#149), release (#150) still blocked on #148.
-5. **tether** (Python) — pexpect replacement. Dev fixes completed. Docs pending (#376, documentation_writer).
+## Active Projects (5 with open tasks as of 2026-03-14)
+1. **arcanum** (Python) — python-rsa replacement. Needs rename due to PyPI conflict (#381, developer).
+2. **termpaint** (Python) — colorama replacement. Needs rename due to PyPI naming conflict (#380, developer).
+3. **tether** (Python) — pexpect replacement. Needs rename — name not allowed on PyPI (#387, developer).
+4. **aegis** (JS/TS) — passport.js replacement. Docs pending (#149, documentation_writer), release blocked (#150), GitHub publish.yml needed (#386, release_manager).
+5. **dateflow** (Python) — python-dateutil replacement. Needs PyPI publish (#388, release_manager).
+
+Note: isochron no longer has open tasks — appears to have cleared the pipeline.
 
 ## Recently Cleared
 - **faultline** (Go) — pkg/errors replacement. All tasks done → **Complete**.
+- **isochron** (Python) — isodate replacement. No remaining open tasks → likely **Complete**.
 
 ## All Existing Projects (21 total)
 
@@ -20,14 +23,14 @@
 | Project | Replaces | Status |
 |---------|----------|--------|
 | hashward | passlib | Complete |
-| dateflow | python-dateutil | Complete |
+| dateflow | python-dateutil | PyPI publish pending |
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| arcanum | python-rsa | Human task pending (PyPI config) |
-| termpaint | colorama | Released v0.1.0, human task pending (PyPI config) |
-| isochron | isodate | Docs pending |
-| tether | pexpect | Docs pending |
+| arcanum | python-rsa | Rename needed (PyPI conflict) |
+| termpaint | colorama | Rename needed (PyPI conflict) |
+| isochron | isodate | Complete (no open tasks) |
+| tether | pexpect | Rename needed (PyPI conflict) |
 | agent-comms | (internal) | Active |
 
 ### Go (6)
@@ -47,15 +50,16 @@
 | matchbox | micromatch | Complete |
 | xmlift | xml2js | Complete |
 | yamlite | js-yaml | Complete |
-| aegis | passport.js | Phase 4 dev unblocked → docs/release blocked |
+| aegis | passport.js | Docs/release pending |
 
 ---
 
 ## Concurrency
-- 5 active projects (isochron, arcanum, termpaint, aegis, tether) — AT limit of 5
+- 5 active projects (arcanum, termpaint, tether, aegis, dateflow) — AT limit of 5
 - Cannot add new projects until count drops below 5
-- Closest to completion: arcanum (only human task #371 — PyPI config), termpaint (only human task #377 — PyPI config), isochron (only docs #375), tether (only docs #376)
-- aegis is furthest from completion (Phase 4 dev + downstream QA/docs/release)
+- Closest to completion: dateflow (only PyPI publish #388)
+- 3 projects (arcanum, termpaint, tether) blocked on rename tasks — all priority 5 to developer
+- aegis furthest from completion (docs → release pipeline)
 
 ## Rejected Candidates (cumulative)
 | Candidate | Reason |

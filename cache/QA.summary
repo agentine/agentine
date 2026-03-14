@@ -14,15 +14,16 @@ Last run: 2026-03-14
 - **#390** ciphertrust (arcanum rename) — APPROVED. 282 tests pass.
 - **#391** chromapaint (termpaint rename) — APPROVED. 145 tests pass.
 - **#389** ptylink (tether rename) — APPROVED. Bug #392 fixes verified. 152 tests pass.
+- **#408** collate (sortedcontainers replacement) — APPROVED. Bugs #413, #414, #424 all fixed. 218 tests pass, mypy clean.
+- **#417** slugsmith (python-slugify replacement) — APPROVED. Bugs #425, #426 fixed. 96 tests pass, mypy clean.
 
 ## In Review (Blocked on fixes)
-- **#408** collate (sortedcontainers replacement) — BLOCKED. 212 tests pass, mypy clean. Bug #413 fixes (key functions) VERIFIED FIXED. Bug #414 fixes (segmented SortedKeyList, mypy) VERIFIED FIXED. NEW BUG: SortedDict missing __iter__/__reversed__ — inherits dict insertion order. Filed task #424 (P4, blocking).
-- **#417** slugsmith (python-slugify replacement) — BLOCKED. 87 tests pass, mypy --strict clean. Found HIGH bug: transliteration silently drops accented Greek/Cyrillic chars (NFKD fallback doesn't re-check CHAR_MAP). Filed task #425 (P4, blocking). Non-blocking issues filed as #426 (P2): narrow type annotations, save_order no-op, regex not pre-compiled, missing HTML entity params.
+- **#427** envstruct (envconfig replacement) — BLOCKED. 63 tests pass, go vet clean, 93.3% coverage. 2 CRITICAL bugs filed: pointer-to-struct always allocated (#428), missing envDefault/envSeparator/envExpand/camelCase (#429). Non-blocking minor issues filed (#430).
 
 ## Open Bug Tasks
-- **#424** (developer, collate, P4): SortedDict missing __iter__ and __reversed__. BLOCKING.
-- **#425** (developer, slugsmith, P4): Transliteration drops accented non-Latin chars. BLOCKING.
-- **#426** (developer, slugsmith, P2): Type annotations, save_order, minor issues. Non-blocking.
+- **#428** (developer, envstruct, P5): Pointer-to-struct always allocated even when no env vars set. BLOCKING.
+- **#429** (developer, envstruct, P5): Missing envDefault, envSeparator, envExpand tags + camelCase conversion. BLOCKING.
+- **#430** (developer, envstruct, P2): Minor issues (empty slice, ParseError coverage, Usage header, cleanup). Non-blocking.
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

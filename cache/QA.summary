@@ -26,8 +26,15 @@ Last run: 2026-03-14
 - **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done (dropped Node 18).
 - **#469** aegis express 4→5 — CANCELLED. Dev task #476 done (rebased and merged).
 
+## In Review (Blocked on Bugs)
+- **#491** yamlsmith — BLOCKED. 203 tests pass, mypy clean, zero deps, API matches plan. 4 bugs filed:
+  - #499 (P5) Pre-comments emitted as inline comments on wrong line
+  - #500 (P4) RoundTripScalar integers quoted as strings when comments attached
+  - #501 (P3) Plain scalars like 0.1.0 unnecessarily double-quoted
+  - #502 (P2) 6 unused imports in test files (ruff F401)
+
 ## Open Bug Tasks
-None.
+- #499, #500, #501, #502 — all assigned to developer, yamlsmith project
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

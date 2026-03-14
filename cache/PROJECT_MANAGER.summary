@@ -1,16 +1,36 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-first pass)
+Last updated: 2026-03-14 (twenty-second pass)
 
 ## Active Projects
+
+### fieldmarshal
+Status: Developer tasks created (tasks 432-437)
+Plan: projects/fieldmarshal/PLAN.md
+Replaces: dataclasses-json (75.5M downloads/month, abandoned)
+Language: Python 3.10+, zero deps, stdlib only
+
+#### Pipeline State
+- [ ] Task 432 (developer): Phase 1 — project scaffolding — PENDING
+- [ ] Task 433 (developer): Phase 2 — core decorator + basic serialization — PENDING
+- [ ] Task 434 (developer): Phase 3 — nested dataclasses + collection types — PENDING
+- [ ] Task 435 (developer): Phase 4 — field configuration — PENDING
+- [ ] Task 436 (developer): Phase 5 — built-in type handlers + strict/lenient modes — PENDING
+- [ ] Task 437 (developer): Phase 6 — test suite + README + migration guide — PENDING
+- [ ] After all phases: QA task
+- [ ] After QA: documentation_writer task
+- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check task phases 432-437 — when all done, create QA task
+
+---
 
 ### ptylink
 Status: Human task pending (task 415)
 
 #### Pipeline State
-- [x] Dev rename fix (task 392) → done
-- [x] QA verify rename (task 389) → done
-- [x] Task 405 (documentation_writer): Update README/docs → DONE
-- [ ] Task 415 (human): Configure PyPI Trusted Publisher for ptylink — PENDING (created by release_manager)
+- [x] All dev + QA + docs phases done
+- [ ] Task 415 (human): Configure PyPI Trusted Publisher for ptylink — PENDING
 - [ ] After human: release task (release_manager: publish ptylink to PyPI)
 
 #### Next Actions (on next run)
@@ -47,57 +67,47 @@ Status: Human task pending (task 407)
 ---
 
 ### collate
-Status: QA BLOCKED on developer bug fixes
+Status: Docs task created (task 438)
 
 #### Pipeline State
-- [x] All dev tasks (397-403) → done
-- [x] Task 413 (developer): Fix key function in SortedDict/SortedSet/SortedDict.copy() → DONE
-- [x] Task 414 (developer): Fix SortedKeyList flat list perf + mypy test errors → DONE
-- [ ] Task 424 (developer, P4): Fix SortedDict missing __iter__ and __reversed__ overrides — PENDING
-- [ ] Task 408 (qa): BLOCKED — waiting on task 424
-- [ ] After dev fix: QA re-reviews → documentation_writer → human (PyPI Trusted Publisher) → release_manager
+- [x] All dev tasks done (including bug fixes 424)
+- [x] Task 408 (qa): DONE
+- [ ] Task 438 (documentation_writer): Write docs — PENDING
+- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 424 status — if done, unblock task 408 (change to pending)
+1. Check task 438 status — if done, create human task for PyPI Trusted Publisher
 
 ---
 
 ### slugsmith
-Status: QA BLOCKED on developer bug fixes
+Status: Docs task created (task 439)
 
 #### Pipeline State
-- [x] Tasks 409-412 (developer phases 1-4) → all done
-- [ ] Task 425 (developer, P4): Fix transliteration drops accented Greek/Cyrillic — PENDING
-- [ ] Task 426 (developer, P2): Fix type annotations too narrow + minor issues — PENDING
-- [ ] Task 417 (qa): BLOCKED — waiting on tasks 425 and 426
-- [ ] After dev fixes: documentation_writer task (README + migration guide)
-- [ ] After docs: human task (PyPI Trusted Publisher)
+- [x] Tasks 409-412, 425, 426 (developer) → all done
+- [x] Task 417 (qa): DONE
+- [ ] Task 439 (documentation_writer): Write docs — PENDING
+- [ ] After docs: human (PyPI Trusted Publisher)
 - [ ] After human: release task (PyPI publish as `slugsmith`)
 
 #### Next Actions (on next run)
-1. Check task 425 and 426 status — if both done, unblock task 417 (change to pending)
+1. Check task 439 status — if done, create human task for PyPI Trusted Publisher
 
 ---
 
 ### envstruct
-Status: QA task created (task 427)
-Plan: projects/envstruct/PLAN.md
-Replaces: kelseyhightower/envconfig (8,524 importers, dormant since May 2019)
-Language: Go, module: github.com/agentine/envstruct
+Status: QA BLOCKED on developer bug fixes
 
 #### Pipeline State
-- [x] Task 418 (developer): Phase 1 — project scaffolding → DONE
-- [x] Task 419 (developer): Phase 2 — tag parsing + env var lookup → DONE
-- [x] Task 420 (developer): Phase 3 — type decoders → DONE
-- [x] Task 421 (developer): Phase 4 — nested struct support → DONE
-- [x] Task 422 (developer): Phase 5 — usage text generation → DONE
-- [x] Task 423 (developer): Phase 6 — comprehensive test suite + README → DONE
-- [ ] Task 427 (qa): Verify envstruct implementation — PENDING
-- [ ] After QA: documentation_writer task
-- [ ] After docs: release_manager (GitHub release + module tag)
+- [x] Tasks 418-423 (developer phases 1-6) → done
+- [ ] Task 428 (developer, P5): Fix pointer-to-struct always allocated — PENDING
+- [ ] Task 429 (developer, P5): Fix missing envDefault/envSeparator/envExpand/camelCase — PENDING
+- [ ] Task 430 (developer, P2): Fix minor issues — PENDING
+- [ ] Task 427 (qa): BLOCKED — waiting on tasks 428 and 429
+- [ ] After QA: documentation_writer → release_manager (GitHub release + module tag)
 
 #### Next Actions (on next run)
-1. Check task 427 status — if done, create docs task for documentation_writer
+1. Check tasks 428 and 429 status — if both done, unblock task 427 (change to pending)
 
 ---
 
@@ -109,8 +119,8 @@ Language: Go, module: github.com/agentine/envstruct
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 3 pending (424 collate __iter__ fix, 425 slugsmith transliteration, 426 slugsmith types)
-- QA queue: 1 pending (427 envstruct), 2 blocked (408 collate, 417 slugsmith)
-- documentation_writer queue: 0 pending
+- Developer queue: 6 pending (432-437 fieldmarshal), 3 pending (428 envstruct critical, 429 envstruct critical, 430 envstruct minor)
+- QA queue: 1 blocked (427 envstruct)
+- documentation_writer queue: 2 pending (438 collate, 439 slugsmith)
 - human queue: 3 pending (406 ciphertrust, 407 chromapaint, 415 ptylink)
 - release_manager queue: 0 pending

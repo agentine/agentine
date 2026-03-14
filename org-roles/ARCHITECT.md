@@ -264,26 +264,9 @@ Create a clear and memorable project name.
 
 ## 6. Verify Package Name Availability
 
-Before creating the project, verify the name is available.
+    ../../commands/check-name.sh {name} {language}
 
-Examples:
-
-Check npm:
-
-    npm view {name}
-
-Check PyPI:
-
-    pip index versions {name}
-
-If the name is unavailable:
-
--   choose a different name
--   consider prefixes or scoped names
-
-Example:
-
-    @agentine/{name}
+If unavailable, choose a different name or use scoped names (e.g. @agentine/{name}).
 
 ------------------------------------------------------------------------
 

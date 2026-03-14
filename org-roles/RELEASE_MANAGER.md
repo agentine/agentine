@@ -31,10 +31,9 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - Update the remote URL: `git remote set-url origin {new-url}`.
    - Journal the rename with the old and new names.
    - Notify `project_manager` via a task about the rename.
-6. Bump the version in the appropriate manifest file(s):
-   - **Node/NPM:** Update `version` in `package.json`.
-   - **Python/PyPI:** Update the version in `pyproject.toml`, `setup.cfg`, or `setup.py`.
-   - Adapt to whatever versioning the project uses.
+6. Bump the version:
+
+       ../../commands/bump-version.sh {projectname} {version}
 7. Update `CHANGELOG.md` with the changes included in this release (summarize from task descriptions, journal entries, and commit history).
 8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (or similar) that triggers on GitHub releases and publishes to the appropriate registry (NPM, PyPI, etc.). Create or update it if missing. Assign a task to `human` if registry secrets (e.g., `NPM_TOKEN`, `PYPI_TOKEN`) need to be added to the repo.
 9. Commit the version bump, changelog update, and any CI workflow changes. Create a git tag: `git tag v{version}`.

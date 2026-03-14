@@ -127,49 +127,17 @@ Update task status:
 
 ### 4. Ensure `.gitignore`
 
-Verify `.gitignore` exists before writing code.
+Copy from the appropriate template if missing:
 
-Typical entries:
-
-    node_modules/
-    __pycache__/
-    .venv/
-    .env
-    dist/
-    build/
-    *.egg-info/
-    coverage/
-    target/
-    bin/
+    cp ../../templates/{language}/gitignore .gitignore
 
 ---
 
 ### 5. Ensure GitHub Repository
 
-Run from:
+    ../../commands/setup-github.sh {projectname}
 
-    projects/{projectname}/
-
-Create repository if missing:
-
-    gh repo create agentine/{projectname} --public --source=. --push
-
-If remote missing:
-
-    git remote add origin https://github.com/agentine/{projectname}.git
-
-Verify:
-
-    git remote -v
-
-Push:
-
-    git push -u origin main
-
-If name conflict occurs → coordinate with `architect` or
-`project_manager`.
-
-Add `.github/` files and ensure `dependabot.yml` is added.
+Ensure `.github/dependabot.yml` exists (copy from `../../templates/{language}/dependabot.yml`).
 
 ---
 
@@ -210,109 +178,29 @@ When implementation is complete:
 
 ---
 
-# Language Tooling Rules
+# Language Tooling
 
-Use these tools unless the project specifies otherwise.
+Project scaffolding and templates are in `templates/{language}/` (python, go, node).
 
----
+To scaffold a new project:
 
-# Python
+    ../../commands/init-project.sh {projectname} {language} "{description}"
 
-Use **uv** for dependency and environment management.
+Use the project Makefile for consistent development workflow:
 
-Required file:
+    make install    # Install dependencies
+    make build      # Build the project
+    make test       # Run tests
+    make lint       # Run linters/type-checkers
+    make fmt        # Format code
+    make clean      # Remove generated files
+    make ci         # Run lint + test (CI equivalent)
 
-    pyproject.toml
-
-Initialize project:
-
-    uv init
-
-Add dependency:
-
-    uv add <package>
-
-Install dependencies:
-
-    uv sync
-
-Run code:
-
-    uv run python <script>.py
-
-Virtual environment location:
-
-    .venv/
-
-Never commit `.venv`.
-
----
-
-# Node / TypeScript / JavaScript
-
-Use **npm**.
-
-Packages must use the Agentine scope.
-
-Example:
-
-    "name": "@agentine/{packagename}"
-
-Install dependencies:
-
-    npm install
-
-Common ignored files:
-
-    node_modules/
-    dist/
-    coverage/
-
-Ensure there is a repository reference in `package.json` for publishing. Example:
-
-```json
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/agentine/xmlift.git"
-  },
-
-```
-
----
-
-# Go
-
-Use Go modules.
-
-Initialize module:
-
-    go mod init github.com/agentine/{projectname}
-
-Install dependencies:
-
-    go mod tidy
-
-Ignore:
-
-    bin/
-
----
-
-# Rust
-
-Use Cargo.
-
-Initialize:
-
-    cargo init
-
-Dependencies defined in:
-
-    Cargo.toml
-
-Ignore:
-
-    target/
+Language-specific notes:
+- **Python:** Uses uv (not pip). Config in pyproject.toml. Never commit .venv/.
+- **Node/TS:** Uses npm. Packages scoped as @agentine/{name}. Requires repository field in package.json.
+- **Go:** Uses go modules (github.com/agentine/{name}). Version is git tag only.
+- **Rust:** Uses Cargo. Config in Cargo.toml. Ignore target/.
 
 ---
 
@@ -355,6 +243,7 @@ Before marking a task `done`, verify:
 - `.gitignore` excludes generated files
 - Repository is pushed
 - Journal entry written
+* Ensure `.github/workflows/publish.yml` exists. Do not remove it as a fix if CI/actions fail.
 * GitHub CI/actions status has no recent errors: `gh run list --repo agentine/{projectname}`
 * Make sure the GitHub project description is accurate: `gh repo edit <repository> --description <string>`
 

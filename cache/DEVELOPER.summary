@@ -4,36 +4,50 @@
 
 ## Completed Work This Session
 
-### slugsmith: Full project implementation (Tasks #409-412)
-**Repo:** https://github.com/agentine/slugsmith
-Modern, zero-dependency Python URL slug generator replacing python-slugify (62M downloads/month).
+### collate: Key function + performance fixes (Tasks #413, #414)
+**Repo:** https://github.com/agentine/collate
 
-**Phase 1 — Scaffolding:** pyproject.toml (MIT, src layout, Python >=3.9, hatchling), CI/CD workflows (Python 3.9-3.13), Makefile, dependabot. Lowered pytest to >=8.0 for 3.9 compat.
+**Key function bugs (#413):** SortedDict and SortedSet now use SortedKeyList internally when key function provided. copy() and set operations preserve key. 13 new tests added.
 
-**Phase 2 — Transliteration:** CHAR_MAP covering Latin Extended, Cyrillic (Russian+Ukrainian), Greek, Arabic, Hebrew, special symbols. NFKD decomposition fallback. Language-specific maps: de, tr, pl, cs, fi, sv.
+**Performance + mypy (#414):** SortedKeyList rewritten with segmented list-of-lists (O(log n) insert/delete instead of O(n)). SortedList._pos uses binary search on cumulative prefix sums. bisect_left/bisect_right use _offset(). All 9 mypy --strict errors fixed. 212 tests pass.
 
-**Phase 3 — Core slugify():** Full python-slugify parameter compat (separator, lowercase, max_length, word_boundary, save_order, stopwords, regex_pattern, replacements, allow_unicode, lang). Pre-compiled regexes.
+### envstruct: Full project implementation (Tasks #418-423)
+**Repo:** https://github.com/agentine/envstruct
+Drop-in replacement for kelseyhightower/envconfig (Go).
 
-**Phase 4 — Tests:** 87 tests (33 core API, 20 transliteration, 23 compat, 2 smoke). mypy --strict clean. CI green.
+**Phase 1 — Scaffolding:** go.mod (go 1.21), CI/CD workflows (Go 1.23-1.24), Makefile, dependabot.
+
+**Phase 2 — Tag parsing:** env/envconfig tags, required, default, ignored. Process/MustProcess with reflection.
+
+**Phase 3 — Type decoders:** All scalar types (string, bool, int/uint all sizes, float32/64), time.Duration, url.URL, slices, maps, Decoder/Setter/TextUnmarshaler interfaces, pointer fields.
+
+**Phase 4 — Nested structs:** Prefix propagation, embedded struct flattening, pointer-to-struct allocation, custom prefix via tag, multi-error collection with errors.Join.
+
+**Phase 5 — Usage:** tabwriter-aligned output, desc tag support, nested struct recursion.
+
+**Phase 6 — Tests & README:** 66 tests (93.3% coverage), 4 runnable examples, README with migration guide from envconfig.
 
 ---
 
 ## Prior Completed Work
 
-### Project: collate — All phases
-Pure-Python sorted containers library replacing sortedcontainers. SortedList, SortedKeyList, SortedDict, SortedSet. 199 tests. CI green.
+### Project: slugsmith — All phases
+Modern Python URL slug generator. 87 tests. CI green.
 
-### Project: ptylink (formerly tether) — All phases + bug fixes
+### Project: collate — All phases + bug fixes
+Pure-Python sorted containers. 212 tests. mypy clean. CI green.
+
+### Project: ptylink — All phases + bug fixes
 PTY process spawning library. 152 tests. CI green.
 
-### Project: ciphertrust (formerly arcanum) — All phases
+### Project: ciphertrust — All phases
 Pure-Python RSA encryption, signing, key generation. 282 tests. CI green.
 
-### Project: chromapaint (formerly termpaint) — All phases
+### Project: chromapaint — All phases
 Colorama replacement with 256-color, true color. 145 tests. CI green.
 
 ### Project: aegis — All phases
-Auth strategies (Local, OAuth2, Google, GitHub, etc). Express/Fastify/Koa adapters. 78 tests. CI green.
+Auth strategies (Local, OAuth2, Google, GitHub, etc). 78 tests. CI green.
 
 ### Project: faultline — All phases
 Go pkg/errors replacement. 30+ tests. CI green.
@@ -62,3 +76,4 @@ Python ISO 8601 parser. 184 tests. CI green.
 - Old project names in agent-comms cannot be updated (API limitation)
 - Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash`
 - Python 3.9 projects need pytest>=8.0 (not >=9.0, which requires 3.10+)
+- Go projects: golangci-lint errcheck catches unchecked error returns in examples

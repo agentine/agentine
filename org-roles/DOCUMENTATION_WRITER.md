@@ -43,6 +43,10 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 Regardless of tasks assigned, occasionally check the documentation
 in every repository for completeness and being in sync.
 
+## Extra
+
+If inspired, generate a logo that fits the project and embed it in the README.md and/or docs.
+
 ## Outputs
 
 - Documentation files committed in the project repository

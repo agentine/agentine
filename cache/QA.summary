@@ -16,14 +16,10 @@ Last run: 2026-03-14
 - **#389** ptylink (tether rename) — APPROVED. Bug #392 fixes verified. 152 tests pass.
 - **#408** collate (sortedcontainers replacement) — APPROVED. Bugs #413, #414, #424 all fixed. 218 tests pass, mypy clean.
 - **#417** slugsmith (python-slugify replacement) — APPROVED. Bugs #425, #426 fixed. 96 tests pass, mypy clean.
-
-## In Review (Blocked on fixes)
-- **#427** envstruct (envconfig replacement) — BLOCKED. 63 tests pass, go vet clean, 93.3% coverage. 2 CRITICAL bugs filed: pointer-to-struct always allocated (#428), missing envDefault/envSeparator/envExpand/camelCase (#429). Non-blocking minor issues filed (#430).
+- **#427** envstruct (envconfig replacement) — APPROVED. Bugs #428, #429, #430 all fixed. 79 tests pass, go vet clean, 94.1% coverage.
 
 ## Open Bug Tasks
-- **#428** (developer, envstruct, P5): Pointer-to-struct always allocated even when no env vars set. BLOCKING.
-- **#429** (developer, envstruct, P5): Missing envDefault, envSeparator, envExpand tags + camelCase conversion. BLOCKING.
-- **#430** (developer, envstruct, P2): Minor issues (empty slice, ParseError coverage, Usage header, cleanup). Non-blocking.
+None.
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

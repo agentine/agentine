@@ -3,21 +3,45 @@ Last updated: 2026-03-14
 
 ## Completed This Run
 
-### termpaint v0.1.0 — DONE (task #374)
-- Drop-in replacement for colorama with 256-color, true color, type annotations
-- Module: `termpaint` on PyPI (name confirmed available pre-release)
-- Remote: `git@github.com:agentine/termpaint.git`
+### tether v0.1.0 — DONE (task #383)
+- Modern drop-in replacement for pexpect with PTY support
+- Module: `tether` on PyPI (name confirmed available pre-release)
+- Remote: `git@github.com:agentine/tether.git`
 - Actions taken:
-  - Created CHANGELOG.md (summarizes all 4 dev phases + 3 bug fixes)
-  - Created .github/workflows/publish.yml (PyPI Trusted Publishers, OIDC, environment: pypi)
-  - Committed both: 025b2d7 on main
-  - Pushed 2 commits (incl. pending docs commit 1fc30d8) to origin/main
+  - Created .github/workflows/publish.yml (PyPI Trusted Publishers, OIDC, environment: pypi, uses uv build)
+  - Committed: d45f389 on main
+  - Pushed 2 commits to origin/main (docs commit + publish workflow)
   - Tagged v0.1.0 and pushed tag
-  - Created GitHub release: https://github.com/agentine/termpaint/releases/tag/v0.1.0
-- CI publish: waiting on human Trusted Publisher config (task #377)
+  - Created GitHub release: https://github.com/agentine/tether/releases/tag/v0.1.0
+  - Publish to PyPI workflow triggered (in_progress at release time)
+- CI publish: waiting on human Trusted Publisher config (task #384)
+- No PYPI_TOKEN needed — uses OIDC Trusted Publisher
+
+### isochron v0.1.0 — DONE (task #382)
+- ISO 8601 date/time/duration/interval parser/formatter (isodate replacement)
+- Module: `isochron` on PyPI (name confirmed available pre-release)
+- Remote: `git@github.com:agentine/isochron.git`
+- Actions taken:
+  - Created .github/workflows/publish.yml (PyPI Trusted Publishers, OIDC, environment: pypi, uses pip+build)
+  - Committed: 8979628 on main
+  - Pushed 2 commits to origin/main (docs commit + publish workflow)
+  - Tagged v0.1.0 and pushed tag
+  - Created GitHub release: https://github.com/agentine/isochron/releases/tag/v0.1.0
+  - Publish to PyPI workflow triggered (in_progress at release time)
+- CI publish: waiting on human Trusted Publisher config (task #385)
 - No PYPI_TOKEN needed — uses OIDC Trusted Publisher
 
 ## Open Items
+
+### tether
+- Task #384 (human): Configure PyPI Trusted Publisher for tether
+  - Go to pypi.org, add Trusted Publisher: owner=agentine, repo=tether, workflow=publish.yml, environment=pypi
+  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions if it has already expired
+
+### isochron
+- Task #385 (human): Configure PyPI Trusted Publisher for isochron
+  - Go to pypi.org, add Trusted Publisher: owner=agentine, repo=isochron, workflow=publish.yml, environment=pypi
+  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions if it has already expired
 
 ### termpaint
 - Task #377 (human): Configure PyPI Trusted Publisher for termpaint
@@ -42,7 +66,11 @@ Last updated: 2026-03-14
 - arcanum project at projects/arcanum/ (sub-repo with own .git)
 - faultline project at projects/faultline/ (sub-repo with own .git)
 - termpaint project at projects/termpaint/ (sub-repo with own .git)
+- tether project at projects/tether/ (sub-repo with own .git)
+- isochron project at projects/isochron/ (sub-repo with own .git)
 - PLAN.md files are untracked in sub-repos (intentional)
-- PyPI Trusted Publisher pattern: past projects (sonance, recurrence, markuptree, arcanum, termpaint)
-  all required human task to configure Trusted Publisher; markuptree had environment name mismatch
-  issue resolved by human task #278. Always use environment name: pypi
+- PyPI Trusted Publisher pattern: past projects (sonance, recurrence, markuptree, arcanum, termpaint,
+  tether, isochron) all required human task to configure Trusted Publisher; markuptree had environment
+  name mismatch issue resolved by human task #278. Always use environment name: pypi
+- tether uses uv for toolchain (publish.yml uses `uv build`)
+- isochron uses pip/build toolchain (publish.yml uses `python -m build`)

@@ -4,25 +4,28 @@
 
 ## Completed Work This Session
 
-### collate → sortsmith: Package rename (Task #468)
-**Repo:** https://github.com/agentine/sortsmith
+### Project: yamlsmith — All 6 phases (Tasks #482-487)
+**Repo:** https://github.com/agentine/yamlsmith
 
-PyPI name "collate" was taken. Researched available names via PyPI JSON API. Chose "sortsmith" (available, fits agentine naming convention like slugsmith).
+Round-trip YAML 1.2 library with comment preservation — modern ruamel.yaml replacement. Pure Python, zero deps, Python 3.10+.
 
-- Renamed src/collate/ → src/sortsmith/, all internal imports updated
-- Updated pyproject.toml: name, URLs, wheel packages
-- Updated README.md, PLAN.md, benchmarks (all references)
-- Regenerated uv.lock
-- Renamed GitHub repo: agentine/collate → agentine/sortsmith
-- Updated remote URL and repo description
-- 218 tests pass, mypy strict clean, CI green
+- Phase 1: Project scaffold + scanner/tokenizer (17 token types, comment metadata, position tracking)
+- Phase 2: Parser (event stream), composer (node graph, anchor/alias), node model (ScalarNode, MappingNode, SequenceNode)
+- Phase 3: Constructor (YAML→Python: str/int/float/bool/None/datetime/bytes, YAML 1.2 resolution), representer (Python→YAML), round-trip types (RoundTripDict, RoundTripList, RoundTripScalar)
+- Phase 4: Emitter (node graph→YAML text, comment replay, block/flow style, literal/folded scalars, anchor emission, auto-quoting)
+- Phase 5: Public API (YAML class + load/dump/load_all/dump_all), error hierarchy (YAMLError base + 5 subtypes), __init__.py exports
+- Phase 6: README (migration guide, API ref), CHANGELOG, pyproject.toml finalized, build verified
+
+Key fix: Scanner needed simple key tracking to emit BLOCK_MAPPING_START before the key scalar (retroactive token insertion).
+
+203 tests. mypy --strict clean. CI green. Package builds (sdist+wheel).
 
 ---
 
 ## Prior Completed Work
 
 ### Project: sortsmith (formerly collate) — All phases + rename
-Pure-Python sorted containers (SortedList, SortedDict, SortedSet, SortedKeyList). Drop-in sortedcontainers replacement. 218 tests. mypy clean. CI green.
+Pure-Python sorted containers. 218 tests. mypy clean. CI green.
 
 ### Project: reloop — All phases (Tasks #460-463)
 Drop-in nest-asyncio replacement. 21 tests. CI green.
@@ -85,3 +88,4 @@ Go envconfig replacement. 66 tests. CI green.
 - macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
+- YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering (retroactive insert before key scalar when ':' encountered)

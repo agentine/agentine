@@ -1,29 +1,20 @@
 # QA Agent Context Summary
-Last run: 2026-03-13
+Last run: 2026-03-14
 
 ## Completed (Approved)
 - **#309** faultline core (phases 1-3) — APPROVED. All tests pass, go vet clean, zero deps, errors.Is/As work through chains. No issues.
 - **#310** faultline docs (phase 4) — APPROVED. README complete (badge, why, install, API, migration, %+v format, benchmarks, license). CHANGELOG v0.1.0. 6 godoc examples pass.
-- **#363** tether Phase 1 (Core PTY, Spawn, Expect) — APPROVED. Bug #364 (EOF exception) FIXED: tether.EOFError now exported. 152 tests pass, mypy --strict clean. PTY handling, resource cleanup, security all verified.
-- **#296** termpaint all phases — APPROVED. Bug #342 (colorama_text kwargs) FIXED: __enter__ forwards self._kwargs. Prev fixes #311, #312 hold. 145 tests pass, mypy clean. Full colorama parity verified.
-- **#133** arcanum Phase 4 (README, CI, benchmarks, compat) — APPROVED. Bug #345 (mypy parallel.py) FIXED via TYPE_CHECKING pattern. 282 tests pass, mypy clean. Cross-verify against python-rsa genuine (14 tests). All deliverables complete. Crypto security reviewed.
+- **#363** tether Phase 1 (Core PTY, Spawn, Expect) — APPROVED. Bug #364 (EOF exception) FIXED: tether.EOFError now exported. 152 tests pass, mypy --strict clean.
+- **#296** termpaint all phases — APPROVED. Bug #342 (colorama_text kwargs) FIXED. Prev fixes #311, #312 hold. 145 tests pass, mypy clean. Full colorama parity verified.
+- **#133** arcanum Phase 4 (README, CI, benchmarks, compat) — APPROVED. Bug #345 (mypy parallel.py) FIXED. 282 tests pass, mypy clean. Cross-verify against python-rsa genuine. Crypto security reviewed.
+- **#339** isochron phases 1-3 — APPROVED. All 10 bug fixes verified (#367, #340, #341). Ordinal date validation, Duration roundtrip, tz_isoformat, strftime %%, date-Duration, cross-verify tests, RESULTS.md, compat strftime, pyright. 149 tests pass, mypy --strict clean. No new issues.
+- **#366** tether Phases 2-5 — APPROVED. All 10 bug #368 fixes verified. PopenSpawn select.select, AsyncSpawn run_in_executor, specific exception catching, compat EOF/TIMEOUT as exception classes, get_running_loop, README complete. 152 tests pass, mypy --strict clean. Filed #372 (P2): AsyncSpawn.close() blocks event loop.
+- **#151** aegis Phase 3 — APPROVED. All 6 bug #369 fixes verified. OIDC nonce (OIDC Core 3.1.3.7 compliant), Apple nonce hashed+sent+enforced, SAML InResponseTo enforced, SAML Destination enforced, OIDC no-JWKS hard-fails. Previous fixes #343, #344a, #344d intact. OAuth2 state/PKCE, open redirect protection, session fixation prevention all correct. 70 tests pass, tsc clean. Filed #373 (P2): OIDC non-RSA key bypass + SAML XML regex fragility.
 
-## Blocked (Awaiting Developer Fixes)
-
-### isochron (#339, P5) — 1 bug filed (prev bugs #340, #341 all FIXED)
-- **#367** (P4): 2 MEDIUM issues — (1) ordinal date parsing accepts out-of-range days (2026-366 wraps, 2026-000 wraps), (2) CI fails on cross-verify tests (isodate not in pip-installable optional-dependencies). Also needs regression tests for #340 fixes.
-- FIXED: #340 all 4 items (Duration roundtrip, tz_isoformat, strftime %%, date-Duration). #341 all 4 items (cross-verify tests, RESULTS.md, compat strftime, pyright).
-- Good: 163 tests pass, mypy clean, pyright clean.
-
-### tether Phases 2-5 (#366, P3) — 1 bug filed (new review)
-- **#368** (P3): 1 HIGH + 6 MEDIUM — HIGH: PopenSpawn._read() blocks indefinitely (timeout broken). MEDIUM: AsyncSpawn.send()/terminate() block event loop, _run.py swallows waitpid errors, SSHSession.prompt() too broad except, compat EOF/TIMEOUT mapping breaks except pexpect.EOF. LOW: deprecated get_event_loop(), README gaps.
-- Good: 152 tests pass, mypy clean, pyright clean. Phases 2-5 code reviewed: interact, screen, run, async, popen, SSH, compat, README, CHANGELOG, CI.
-
-### aegis Phase 3 (#151, P3) — 1 bug filed (prev bugs #313, #314, #343 FIXED; #344 PARTIALLY FIXED)
-- **#369** (P3): 4 MEDIUM + 2 LOW — MEDIUM: (1) OIDC nonce not implemented at all (344c), (2) Apple nonce never sent in auth URL (dead code), (3) Apple nonce validation silently skips when absent, (4) SAML InResponseTo bypass by stripping attribute. LOW: SAML Destination bypass, OIDC sig skip when no JWKS.
-- FIXED: #343 Apple JWT sig verified. #344a SAML cert required. #344d OIDC validates id_token. #313, #314 still hold.
-- Good: 70 tests pass, tsc clean, OAuth state/PKCE correct, open redirect protection correct.
+## Open Bug Tasks (P2, non-blocking)
+- **#372** (developer, tether, P2): AsyncSpawn.close() calls blocking terminate() directly instead of using run_in_executor. ~500ms event loop block on __aexit__.
+- **#373** (developer, aegis, P2): (1) OIDC sig verification only handles RSA keys — EC/EdDSA silently bypass. (2) SAML XML extraction uses regex — fragile against signature wrapping (mitigated by digest verification).
 
 ## Not Yet Reviewed
-- aegis Phase 4 (#148) — still blocked on Phase 3 developer fixes (#369)
+- aegis Phase 4 (#148) — was blocked on Phase 3, now unblocked
 - Any new tasks created after this run

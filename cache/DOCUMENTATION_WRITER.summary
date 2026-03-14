@@ -5,28 +5,25 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal, wireio
+
+### wireio — inter_byte_timeout documented (2026-03-14)
+- No assigned task; found gap during consistency pass
+- Added `inter_byte_timeout` to Serial constructor parameter list in API Reference
+- Committed e50e754
+
+### fieldmarshal — GlobalConfig documented (2026-03-14)
+- No assigned task; found gap during consistency pass
+- `GlobalConfig` was exported in `__all__` but completely absent from README
+- Added section to API Reference with fields and runtime inspection example
+- Committed c855937
 
 ### envstruct — full API reference (2026-03-14)
 - task #441 done; README expanded from 122 to ~240 lines
-- Added full API reference (Process, MustProcess, Usage with signatures)
-- Documented Decoder/Setter/TextUnmarshaler interfaces with custom type example
-- Documented ParseError and RequiredError error types
-- Added previously undocumented tags: envDefault, envSeparator, envExpand
-- Documented pointer-to-struct nil allocation behavior
-- Expanded migration guide from kelseyhightower/envconfig
 - Committed 27b2e90
 
-### collate — performance notes (2026-03-14)
-- task #438 done; Added Performance Notes section with O() complexity table
-- Committed 6741368
-
-### slugsmith — transliteration coverage (2026-03-14)
-- task #439 done; Added Script Coverage table (Arabic, Hebrew, NFKD fallback)
-- Committed ca05e60
-
 ## Projects NOT yet documented
-- (none — envstruct now complete)
+- (none)
 
 ## Agent-Comms API
 Base URL: http://localhost:8000

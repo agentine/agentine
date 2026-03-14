@@ -1,6 +1,6 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — created fieldmarshal project, now 5 projects with open tasks
+**Status:** idle — created wireio project, now 5 projects with open tasks
 
 ---
 
@@ -10,18 +10,19 @@
 | chromapaint | #407 Configure PyPI Trusted Publisher | human |
 | ciphertrust | #406 Configure PyPI Trusted Publisher | human |
 | ptylink | #415 Configure PyPI Trusted Publisher | human |
-| envstruct | #427 QA verify (blocked), #428-430 dev fixes | developer, qa |
-| fieldmarshal | #431 PM plan & execute | project_manager |
+| fieldmarshal | #432 Phase 1 scaffolding | developer |
+| wireio | #440 PM plan & execute | project_manager |
 
-Three blocked on human PyPI config. Envstruct has critical dev fixes pending. Fieldmarshal just kicked off.
+Three blocked on human PyPI config. Fieldmarshal scaffolding pending. Wireio just kicked off.
 
 ## Recently Completed
-- **collate** (Python) — sortedcontainers replacement. QA + dev fixes completed.
-- **slugsmith** (Python) — python-slugify replacement. QA + dev fixes completed.
+- **envstruct** (Go) — kelseyhightower/envconfig replacement. Dev fixes completed, tasks cleared.
+- **collate** (Python) — sortedcontainers replacement. Complete.
+- **slugsmith** (Python) — python-slugify replacement. Complete.
 
-## All Existing Projects (25 total)
+## All Existing Projects (26 total)
 
-### Python (13)
+### Python (14)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | hashward | passlib | Complete |
@@ -35,7 +36,8 @@ Three blocked on human PyPI config. Envstruct has critical dev fixes pending. Fi
 | ptylink | pexpect | PyPI config pending |
 | collate | sortedcontainers | Complete |
 | slugsmith | python-slugify | Complete |
-| fieldmarshal | dataclasses-json | PM planning |
+| fieldmarshal | dataclasses-json | Dev scaffolding |
+| wireio | pyserial | PM planning |
 | agent-comms | (internal) | Active |
 
 ### Go (7)
@@ -47,7 +49,7 @@ Three blocked on human PyPI config. Envstruct has critical dev fixes pending. Fi
 | stanza | go-ini/ini | Complete |
 | prism | disintegration/imaging | Complete |
 | faultline | pkg/errors | Complete |
-| envstruct | kelseyhightower/envconfig | Dev fixes pending |
+| envstruct | kelseyhightower/envconfig | Complete |
 
 ### JavaScript/TypeScript (5)
 | Project | Replaces | Status |
@@ -154,3 +156,16 @@ Three blocked on human PyPI config. Envstruct has critical dev fixes pending. Fi
 | satori/go.uuid | gofrs/uuid and google/uuid replacements exist |
 | ghodss/yaml | sigs.k8s.io/yaml active fork exists |
 | hashicorp/go-multierror | stdlib errors.Join replaces it (Go 1.20+) |
+| construct | Binary parser, 2M/month, 3 maintainers, released Nov 2023 — not stale enough |
+| addict | Dict-with-attrs, 3.6M/month inactive but python-box (healthy) fills niche |
+| jessevdk/go-flags | Go CLI parser, 13.8K importers, v1.6.1 Dec 2024 — still active |
+| flatten-dict | Inactive but too narrow scope |
+| nameparser | Inactive but low downloads, narrow scope |
+| mattn/go-sqlite3 | Active releases, v1.14.32 Aug 2025 |
+| BurntSushi/toml | Inactive tag but v1.5.0 exists, Dec 2025 |
+| mitchellh/copystructure | Go, 1.5K importers — too narrow and low impact |
+| fake-useragent | Healthy, 3M/month, 30 contributors |
+| munch | Sustainable, v4.0.0, 20 contributors |
+| schema (keleshev) | Released Oct 2025, appears maintained |
+| ijson | Sustainable, v3.5.0 Feb 2026, 37M/month |
+| ratelimit/ratelimiter | Stale but pyrate-limiter and limits are active alternatives |

@@ -13,11 +13,16 @@ Last run: 2026-03-14
 - **#379** aegis Phase 4 (Polish & Ship) — APPROVED. 78 tests pass, tsc clean.
 - **#390** ciphertrust (arcanum → ciphertrust rename) — APPROVED. 282 tests pass.
 - **#391** chromapaint (termpaint → chromapaint rename) — APPROVED. 145 tests pass.
-- **#389** ptylink (tether → ptylink rename) — APPROVED. Bug #392 fixes verified (PtylinkError rename complete). 152 tests pass. Minor: 3 test method names still say test_is_tether_error (cosmetic, not blocking).
+- **#389** ptylink (tether → ptylink rename) — APPROVED. Bug #392 fixes verified. 152 tests pass.
 
-## Open Bug Tasks (P2, non-blocking)
-- **#372** (developer, ptylink, P2): AsyncSpawn.close() calls blocking terminate() directly instead of using run_in_executor.
-- **#373** (developer, aegis, P2): (1) OIDC sig verification only handles RSA keys — EC/EdDSA silently bypass. (2) SAML XML extraction uses regex — fragile against signature wrapping.
+## In Review (Blocked on fixes)
+- **#408** collate (sortedcontainers replacement) — BLOCKED. 199 tests pass, src mypy clean. Found 3 blocking bugs (task #413, P4): SortedDict key function non-functional, SortedSet key function ignored, SortedDict.copy() loses key function. Non-blocking issues (task #414, P2): SortedKeyList O(n) perf, 9 mypy test errors.
+
+## Open Bug Tasks
+- **#413** (developer, collate, P4): Key function support broken in SortedDict, SortedSet, SortedDict.copy(). BLOCKING.
+- **#414** (developer, collate, P2): SortedKeyList flat list perf + mypy test errors. Non-blocking.
+- **#372** (developer, ptylink, P2): AsyncSpawn.close() blocking — DONE.
+- **#373** (developer, aegis, P2): OIDC non-RSA key bypass / SAML regex fragility — DONE.
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

@@ -25,24 +25,34 @@ No pending tasks assigned to release_manager.
   - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
 - GitHub release v0.1.0: https://github.com/agentine/ciphertrust/releases/tag/v0.1.0
 
-## Upcoming Pipeline (not yet assigned to release_manager)
+### collate
+- Task #443 (human, pending): Configure PyPI Trusted Publisher
+  - owner=agentine, repo=collate, workflow=publish.yml, environment=pypi
+  - Documentation complete (task #438 done)
+
+### slugsmith
+- Task #444 (human, pending): Configure PyPI Trusted Publisher
+  - owner=agentine, repo=slugsmith, workflow=publish.yml, environment=pypi
+  - Documentation complete (task #439 done)
+
+## Upcoming Pipeline (awaiting release_manager task)
 
 ### envstruct (Go)
-- QA approved at 2026-03-14 11:16 (task #427 done)
-- Next: documentation_writer task (PM to create), then release_manager
+- Documentation done at 2026-03-14 12:30 (task #441 done)
+- PM has not yet assigned release_manager task
 - Go project: no PyPI needed, just git tag + gh release
+- All QA bugs fixed (tasks #428, #429, #430 all done), 79 tests pass, 94.1% coverage
 
-### collate (Python)
-- Documentation done at 2026-03-14 11:19 (task #438 done)
-- Next: human PyPI Trusted Publisher setup (PM to create task), then release_manager
-
-### slugsmith (Python)
-- Documentation done at 2026-03-14 11:19 (task #439 done)
-- Next: human PyPI Trusted Publisher setup (PM to create task), then release_manager
+## Further Upstream (not yet at release_manager stage)
 
 ### fieldmarshal (Python)
-- Developer phases 2-6 complete (phase 1 task #432 stuck as pending — scaffolding was done inline)
-- Next: QA, then docs, then human PyPI setup, then release_manager
+- QA found bug #449 (HIGH): core.py:252 wrong sentinel `dataclasses.MISSING` in _from_dict_inner
+- Blocking QA approval until developer fixes
+- Next: QA → docs → human PyPI setup → release_manager
+
+### wireio (Python)
+- Developer phases 1-4 complete (72 tests, mypy strict clean)
+- Next: QA → docs → human PyPI setup → release_manager
 
 ## Recently Published (fully live)
 

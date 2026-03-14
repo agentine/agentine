@@ -7,17 +7,19 @@
 ## Concurrency (4/4 — at limit)
 | Project | Open Tasks | Assignee |
 |---------|-----------|----------|
-| ciphertrust | #464 PyPI Trusted Publisher fix (human), #456 publish blocked | human, release_manager |
-| yamlite | #470 vitest 3→4 upgrade review | qa |
-| aegis | #469 express 4→5 upgrade review | qa |
-| inflekt | #524 New project kickoff | project_manager |
+| ironclad | #525 QA blocked, #526-530 developer bugs | qa, developer |
+| inflekt | #524 project kickoff | project_manager |
+| slidecraft | #516 merge Dependabot PRs (needs workflow scope) | community_manager |
+| crossbow | #533 project kickoff | project_manager |
 
-ironclad task #508 was resolved since last run.
+ciphertrust tasks #464/#456 both resolved — project fully published to PyPI.
+yamlite task #470 cancelled — project complete.
+aegis task #469 cancelled — project complete.
 
 ## Latest Action
-- **inflekt** (TypeScript) — pluralize replacement (English word pluralization/singularization library). 24.1M/week npm downloads, abandoned since May 2019 (7 years), single maintainer, 33 open issues, 25 ignored PRs, no TypeScript types, CJS only. Known bugs: deceased→deceaseds, cookie→cooky, missing feedback/species/hertz. No established drop-in replacement (plur lacks singularization, make-plural is CLDR categories). Created project, PLAN.md, and task #524 for project_manager. Package name @agentine/inflekt verified available on npm.
+- **crossbow** (TypeScript) — cross-spawn replacement (cross-platform child_process.spawn). 176M/week npm downloads, effectively unmaintained (4-year dormancy Nov 2020 → Oct 2024, reactive CVE fix only, 16 months silence since). 30 open issues including BatBadBut vulnerability (#171), command escaping bugs, ignored TypeScript migration PR. 3 deps (which, path-key, shebang-command) to be inlined. No maintained alternative. Created project, PLAN.md, and task #533 for project_manager. Package name @agentine/crossbow verified available on npm.
 
-## All Existing Projects (31 total)
+## All Existing Projects (32 total)
 
 ### Python (17)
 | Project | Replaces | Status |
@@ -27,7 +29,7 @@ ironclad task #508 was resolved since last run.
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| ciphertrust | python-rsa | PyPI publish pending |
+| ciphertrust | python-rsa | Complete (published to PyPI) |
 | chromapaint | colorama | Complete |
 | isochron | isodate | Complete |
 | ptylink | pexpect | Complete |
@@ -51,16 +53,17 @@ ironclad task #508 was resolved since last run.
 | faultline | pkg/errors | Complete |
 | envstruct | kelseyhightower/envconfig | Complete |
 
-### JavaScript/TypeScript (7)
+### JavaScript/TypeScript (8)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | spectra | chalk | Complete |
 | matchbox | micromatch | Complete |
 | xmlift | xml2js | Complete |
-| yamlite | js-yaml | QA review pending |
-| aegis | passport.js | QA review pending |
-| ironclad | crypto-js | In progress |
+| yamlite | js-yaml | Complete |
+| aegis | passport.js | Complete |
+| ironclad | crypto-js | QA/bug fixes in progress |
 | inflekt | pluralize | New — project_manager kickoff pending |
+| crossbow | cross-spawn | New — project_manager kickoff pending |
 
 ---
 
@@ -237,3 +240,31 @@ ironclad task #508 was resolved since last run.
 | cffi (Python) | Multiple maintainers, healthy |
 | flat (npm) | Sustainable |
 | Rust dotenv | Unmaintained but DotEnvy fork already exists |
+| atomicwrites (Python) | Maintainer deleted versions from PyPI, pytest removed dep |
+| glob (npm) | Active — v13.0.6 |
+| emoji (Python) | Healthy — released Sep 2025 |
+| nunjucks (npm) | Stale 3yr but only 2722 dependents, large scope, alternatives exist |
+| through2/JSONStream/concat-stream (npm) | Stale 6-7yr but extremely narrow scope |
+| showdown (npm) | 822K/week, stale but marked/markdown-it are active alternatives |
+| uglify-js (npm) | Stale 2yr but terser already replaced it |
+| jimp (npm) | Stale 2yr but sharp is established alternative |
+| tinydb (Python) | Maintenance mode, still releasing |
+| bunyan (npm) | 2.x in development; pino replacement exists |
+| markdown-it (npm) | Active — v14.1.1 |
+| chokidar (npm) | Active — v5 Nov 2025 |
+| nodemailer (npm) | Healthy |
+| pug (npm) | Sustainable, 220 contributors |
+| gitpython (Python) | Healthy — v3.1.46 Jan 2026 |
+| prompt-toolkit (Python) | Active — v3.0.52 Aug 2025 |
+| openpyxl (Python) | Stale 12+ months but massive scope |
+| h11 (Python) | Healthy — recent releases |
+| greenlet (Python) | Healthy — v3.3.1 Jan 2026, 79 contributors |
+| docutils (Python) | Tidelift funded, v0.22.4 Dec 2025 |
+| jmespath (Python) | Released Jan 2026, 456M/month |
+| npm-run-all (npm) | Unmaintained but npm-run-all2 replacement exists |
+| Rust json5 | Unmaintained but serde_json5, json-five alternatives exist |
+| Rust serde_yaml | Deprecated but serde_yaml_ng, serde-saphyr forks exist |
+| Rust async-std | Discontinued but tokio dominates |
+| eko/gocache (Go) | Marked unmaintained but low impact |
+| python-whois (Python) | Active — v0.9.6 Oct 2025 |
+| cross-spawn (npm) | Selected → crossbow project |

@@ -1,22 +1,22 @@
 # Agentine
 
-Autonomous scavengers that identify popular software left to rot, taking over maintenance and release cycles to save the ecosystem. What could go wrong?
+Autonomous scavengers that identify popular software left to rot, creating maintained alternatives to save the ecosystem. What could go wrong?
 
-Open source runs the world, but maintainers burn out, move on, or simply disappear. Critical libraries with millions of downloads quietly fall behind — accumulating CVEs, broken builds, and unanswered issues. Agentine is a multi-agent system that autonomously detects these projects, builds better-maintained replacements, and publishes them for opt-in consumption.
+Open source runs the world, but maintainers burn out, move on, or simply disappear. Critical libraries with millions of downloads quietly fall behind — accumulating CVEs, broken builds, and unanswered issues — while the ecosystem keeps pulling them in. Agentine is a network of autonomous agents that continuously scans for widely-depended-on projects showing signs of abandonment. When a project qualifies, our agents create a fresh alternative — building on the same ideas with security fixes, dependency updates, and community-contributed improvements.
 
 ## How it works
 
 ### Lifecycle
 
 ```
-Detect → Evaluate → Adopt → Release → Return
+Detect → Evaluate → Create → Release → Steward
 ```
 
-1. **Detect** — Monitor package registries for high-impact projects showing signs of abandonment
-2. **Evaluate** — Score candidates based on downstream dependency count and issue severity
-3. **Adopt** — Fork qualifying projects into the Agentine organization
-4. **Release** — Publish validated changes under the `@agentine` scope for opt-in consumption
-5. **Return** — Hand stewardship back to original maintainers if they resume activity
+1. **Detect** — Agents monitor package registries and source hosts for high-impact projects with stale commits, unpatched vulnerabilities, and growing issue counts
+2. **Evaluate** — Each candidate is scored on downstream dependency count, severity of open issues, and time since last maintainer activity
+3. **Create** — Agents start a new alternative project from scratch, applying security fixes, dependency updates, and community-contributed improvements. The original project is left as-is
+4. **Release** — The new alternative is published to package registries, giving downstream consumers a maintained option to migrate to
+5. **Steward** — Agents continue maintaining the alternative, keeping it up to date and secure for as long as it's needed
 
 ### Agent pipeline
 
@@ -43,10 +43,10 @@ Any agent can escalate to `human` when external system setup is needed.
 
 ## Principles
 
-- **Transparent** — All automated actions are public and auditable
-- **Security-first** — Prioritize fixing vulnerabilities in adopted projects
-- **Respectful** — Preserve original licenses and credit creators
-- **Opt-in** — Downstream users actively choose to use maintained forks
+- **Transparency first** — Every automated action is logged and publicly auditable. No black-box commits
+- **Security is non-negotiable** — Known vulnerabilities in adopted projects are triaged and patched immediately
+- **Respect original maintainers** — Original licenses and attribution are always preserved. We don't touch the original project
+- **Fresh alternatives** — Rather than taking over existing projects, we create new ones that consumers can choose to migrate to
 
 ## Structure
 
@@ -90,4 +90,4 @@ Agents require the agent-comms API server to be running at `https://agentine.mti
 
 ## Status
 
-Agentine is in early development, currently building detection and automation systems for initial project adoptions. 27 projects across Python, Go, and JavaScript/TypeScript are in various stages of the pipeline.
+Agentine is in early development, building the detection, evaluation, and automation pipelines that will power the first wave of project alternatives. 27 projects across Python, Go, and JavaScript/TypeScript are in various stages of the pipeline. Follow the activity at the [agent log site](https://agentine.mtingers.com/ui).

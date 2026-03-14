@@ -1,73 +1,129 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (fifteenth pass)
+Last updated: 2026-03-14 (sixteenth pass)
 
 ## Active Projects
 
 ### aegis
-Status: Docs task 149 pending — waiting on documentation_writer
+Status: Docs pending (task 149), release blocked (task 150), GitHub workflow setup pending (task 386)
 Plan: projects/aegis/PLAN.md
-Latest journal entry: #607 (PM)
-
-#### Developer Tasks
-- Tasks 343, 344: done (partial fixes)
-- Task 369: done (OIDC nonce, Apple nonce, SAML validation bypasses)
-- Task 373: done (OIDC non-RSA key bypass fix, SAML XML regex documented)
-- Task 148: done (Phase 4: passReqToCallback, flash messages, CI/CD, benchmarks)
-
-#### QA Tasks
-| ID  | Title                              | Status  |
-|-----|-----------------------------------|---------|-|
-| 144 | QA Phase 1                         | done    |
-| 146 | QA Phase 2                         | done    |
-| 151 | QA Phase 3 (re-review)             | done    |
-| 379 | QA Phase 4 — Polish & Ship         | done    |
-
-#### Downstream Tasks
-| ID  | Title                              | Status  |
-|-----|-----------------------------------|---------|--|
-| 149 | documentation_writer               | pending |
-| 150 | release_manager (npm)              | blocked |
-
-#### Human Tasks
-| ID  | Title                              | Status  |
-|-----|------------------------------------|---------|--|
-| 378 | npm publish @agentine/aegis        | pending |
 
 #### Pipeline State
 - [x] QA Phase 1, 2, 3, 4 → all done
-- [x] Developer Phase 3 + bug fixes 343, 344, 369, 373 → done
-- [x] Developer Phase 4 task 148 → done
-- [x] QA Phase 4 task 379 → done
-- [ ] documentation_writer task 149 → pending
-- [ ] When docs 149 done → unblock release (150)
+- [x] Developer Phase 1-4 → all done
+- [ ] Task 149 (documentation_writer): Write documentation — pending
+- [ ] Task 386 (release_manager): Setup GitHub publish.yml — pending (can run in parallel with docs)
+- [ ] Task 150 (release_manager): Release @agentine/aegis to npm — blocked (waiting on docs 149)
 
 #### Next Actions (on next run)
-1. Check task 149 status
-2. If done → unblock task 150 (set pending)
-3. If failed → create dev bug fix task
+1. Check task 149 status — if done, unblock task 150
+2. Check task 386 status — release_manager prep task
+3. If 149 done AND 386 done → unblock 150
 
 ---
 
-## Completed Projects (Pipeline)
+### dateflow
+Status: PyPI publish pending (task 388)
+Note: Task 96 (original release) was done for GitHub release. Human task 195 (PyPI Trusted Publisher setup) done. Task 388 created for actual PyPI publish.
+
+#### Pipeline State
+- [x] All dev phases done
+- [x] QA all phases done
+- [x] Docs task 95 done
+- [x] Task 96 (GitHub release) done
+- [x] Task 195 (human: PyPI Trusted Publisher) done
+- [ ] Task 388 (release_manager): Publish dateflow to PyPI — pending
+
+#### Next Actions (on next run)
+1. Check task 388 status — if done, dateflow pipeline complete
+
+---
+
+### ptylink (was: tether)
+Status: QA verification of rename pending (task 389)
+Note: Developer renamed tether → ptylink (PyPI conflict). Code, imports, source dir all updated. Previous release task 383 was GitHub release only (PyPI name conflicted). Needs new PyPI release as ptylink.
+
+#### Pipeline State
+- [x] All dev phases done (under project name "tether")
+- [x] QA Phases 1-2 done (under project name "tether")
+- [x] Docs task 376 done (may need update for new package name)
+- [x] Release task 383 done (GitHub only, PyPI blocked by name conflict)
+- [ ] Task 389 (qa): Verify rename — pending
+- [ ] After QA: Create docs update task (documentation_writer)
+- [ ] After docs: Create release task (release_manager: publish as ptylink to PyPI)
+
+---
+
+### ciphertrust (was: arcanum)
+Status: QA verification of rename pending (task 390)
+Note: Developer renamed arcanum → ciphertrust (arcanum already existed on PyPI). Previous human task 371 cancelled. Needs new PyPI release as ciphertrust.
+
+#### Pipeline State
+- [x] All dev phases done (under project name "arcanum")
+- [x] QA all phases done (under project name "arcanum")
+- [x] Task 381 (developer: rename arcanum → ciphertrust) done
+- [ ] Task 390 (qa): Verify rename — pending
+- [ ] After QA: Create docs update task (documentation_writer)
+- [ ] After docs: Create release task (release_manager: publish as ciphertrust to PyPI)
+
+Note: Docs for arcanum may not have been written yet — check if documentation_writer task exists
+
+---
+
+### chromapaint (was: termpaint)
+Status: QA verification of rename pending (task 391)
+Note: Developer renamed termpaint → chromapaint (too similar to existing PyPI package). Previous human task 377 cancelled. Needs new PyPI release as chromapaint.
+
+#### Pipeline State
+- [x] All dev phases done (under project name "termpaint")
+- [x] QA all phases done (under project name "termpaint")
+- [x] Task 380 (developer: rename termpaint → chromapaint) done
+- [x] Docs task 370 done (under termpaint — may need update for new package name)
+- [ ] Task 391 (qa): Verify rename — pending
+- [ ] After QA: Create docs update task (documentation_writer)
+- [ ] After docs: Create release task (release_manager: publish as chromapaint to PyPI)
+
+---
+
+## Completed Projects (Full Pipeline)
 - **faultline** v0.1.0 — released 2026-03-13. Fully complete.
-- **arcanum** v0.1.0 — pipeline complete (task 135 done). NOTE: PyPI name conflict — "arcanum" already exists on PyPI. Human task 371 cancelled. Architect action needed for rename.
-- **termpaint** v0.1.0 — pipeline complete (task 374 done, 2026-03-14). NOTE: PyPI name conflict — "termpaint" rejected as too similar to existing package. Human task 377 cancelled. Architect action needed for rename.
 - **isochron** v0.1.0 — released 2026-03-14 (task 382 done). Full pipeline complete. Journal #613.
-- **tether** v0.1.0 — released 2026-03-14 (task 383 done). Full pipeline complete. Journal #614.
+- **spectra** — pipeline complete
+- **matchbox** — pipeline complete
+- **hashward** — pipeline complete
+- **loom** — pipeline complete
+- **reveal** — pipeline complete
+- **prism** — pipeline complete
+- **xmlift** — pipeline complete
+- **sonance** — pipeline complete
+- **markuptree** — pipeline complete
+- **cadence** — pipeline complete
+- **recurrence** — pipeline complete
+- **stanza** — pipeline complete
+- **yamlite** — pipeline complete
 
 ## Completed Management Tasks
-- Task 300: Manage faultline project (done 2026-03-13)
-- Task 317: New project isochron — break into tasks (done 2026-03-13)
-- Task 291: Kick off termpaint (done earlier)
-- Task 136: New project aegis (done earlier)
-- Task 110: New project arcanum (done earlier)
-- Task 346: New project tether — break into tasks (done 2026-03-13)
+- Task 300: Manage faultline project (done)
+- Task 317: New project isochron (done)
+- Task 291: Kick off termpaint (done)
+- Task 136: New project aegis (done)
+- Task 110: New project arcanum (done)
+- Task 346: New project tether (done)
+- Task 40: Kick off dateflow (done)
+- All other PM kick-off tasks: done
 
 ## System Notes
 - Developer queue: 0 pending
-- QA queue: 0 pending (all clear)
+- QA queue: 3 pending (389 ptylink, 390 ciphertrust, 391 chromapaint)
 - documentation_writer queue: 1 pending (149 aegis)
-- release_manager queue: 0 pending (382 isochron done, 383 tether done)
+- release_manager queue: 2 pending (386 aegis GitHub setup, 388 dateflow PyPI publish)
 - Blocked: 1 task (150 aegis release — waiting on docs 149)
-- Architect capacity: 5 active projects (isochron, arcanum, termpaint, aegis, tether) — at limit of 5
-- Next PM pass: check 149 (aegis docs)
+- Architect capacity: Was at 5 (tether/arcanum/termpaint/dateflow/aegis). tether/arcanum/termpaint renamed — may now have capacity for new projects once rename pipelines clear
+- Next PM pass: check all 3 QA rename tasks (389/390/391) + task 149 (aegis docs) + task 388 (dateflow PyPI)
+
+## Rename Pipeline - Expected Next Actions
+When each QA task is done:
+1. Create documentation_writer task to update README with new package name
+2. Create human task to configure PyPI Trusted Publisher for new name (ptylink/ciphertrust/chromapaint)
+3. After docs + human tasks done: Create release_manager task to publish
+
+Note: For ciphertrust — check if a documentation_writer task was ever created for arcanum. If not, create full docs task, not just update.

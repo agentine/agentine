@@ -4,28 +4,32 @@
 
 ## Completed Work This Session
 
-### fieldmarshal: Full implementation, phases 2-6 (Tasks #433-437)
-**Repo:** https://github.com/agentine/fieldmarshal
+### wireio: Full implementation, phases 1-4 (Tasks #445-448)
+**Repo:** https://github.com/agentine/wireio
 
-Modern dataclass serialization library (dataclasses-json replacement). Zero dependencies, Python 3.10+.
+Modern serial port library (pyserial replacement). Zero dependencies, Python 3.10+.
 
-- `@dataclass_json` decorator with `to_json()`, `from_json()`, `to_dict()`, `from_dict()`
-- Nested dataclass support (recursive)
-- Collection types: `list`, `dict`, `set`, `tuple`, `Optional`, `Union`
-- `FieldConfig`: field rename, exclude, custom encoder/decoder, defaults
-- `LetterCase`: camelCase, PascalCase, snake_case, kebab-case auto-conversion
-- Built-in handlers: datetime, date, time, UUID, Decimal, Enum, Path, bytes
-- Strict/lenient modes (unknown fields, type coercion)
-- 57 tests, mypy strict, ruff clean
-- README with full API docs + dataclasses-json migration guide
+- `Serial` class with POSIX (termios/fcntl) and Windows (ctypes kernel32) backends
+- `AsyncSerial` with native asyncio support (run_in_executor)
+- `SerialConfig` dataclass, enum-based settings (Parity, StopBits, ByteSize, FlowControl)
+- `SerialBase` ABC: open, close, read, write, flush, read_until, read_line, read_exactly
+- Context manager: `with Serial("/dev/ttyUSB0") as port:`
+- Port discovery: `list_ports()` — Linux sysfs, macOS /dev, Windows registry
+- CLI tools: `wireio-list-ports`, `wireio-miniterm`
+- Exception hierarchy: SerialError, PortNotFoundError, ConfigError, SerialTimeoutError
+- README with full API reference + pyserial migration guide
+- 72 tests, mypy strict, ruff clean
 - CI green (Python 3.10-3.13, ubuntu+macos)
 - Bumped CI to setup-python@v6, setup-uv@v7
 
-**Note:** Python 3.14 treats `dataclasses.MISSING` as "no default" — used custom `_MISSING` sentinel in FieldConfig.
+**Note:** tcdrain() hangs on macOS PTYs — tests use time.sleep(0.05) instead of flush() for PTY write verification.
 
 ---
 
 ## Prior Completed Work
+
+### Project: fieldmarshal — All phases
+Modern dataclass serialization library. 57 tests. CI green.
 
 ### Project: slugsmith — All phases + bug fixes
 Modern Python URL slug generator. 96 tests. CI green.
@@ -78,3 +82,4 @@ Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage).
 - Go projects: golangci-lint errcheck catches unchecked error returns in examples
 - Python 3.14: dataclasses.MISSING cannot be used as a default value for dataclass fields (treated as "no default")
 - gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually instead
+- macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification instead

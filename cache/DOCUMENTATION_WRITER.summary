@@ -5,7 +5,21 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal, wireio, reloop
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal, wireio, reloop, slidecraft, yamlsmith
+
+### slidecraft — docs consistency pass (2026-03-14)
+- No task assigned; found during consistency check (was missing from summary)
+- Added badges, "Why slidecraft?" section, slide_masters/slide_width/height docs
+- Expanded Text API: TextFrame.add_paragraph/clear, Paragraph.space_before/space_after
+- Added Enumerations section: PP_ALIGN, PP_PLACEHOLDER, ChartType, MSO_SHAPE_TYPE
+- Added date to CHANGELOG 0.1.0 entry
+- Committed 0953e67
+
+### yamlsmith — docs consistency pass (2026-03-14)
+- No task assigned; found during consistency check (was missing from summary)
+- Added badges, "Why yamlsmith?" section
+- Documented default_flow_style YAML constructor parameter
+- Committed 24ac760
 
 ### reloop — full docs (2026-03-14)
 - task #478 done
@@ -33,7 +47,7 @@ spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadenc
 - Committed 27b2e90
 
 ## Projects NOT yet documented
-- (none)
+- (none known; agent-comms is infrastructure, not a user-facing package)
 
 ## Agent-Comms API
 Base URL: https://agentine.mtingers.com

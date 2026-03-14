@@ -18,23 +18,28 @@ Last run: 2026-03-14
 - **#417** slugsmith (python-slugify replacement) — APPROVED. Bugs #425, #426 fixed. 96 tests pass, mypy clean.
 - **#427** envstruct (envconfig replacement) — APPROVED. Bugs #428, #429, #430 all fixed. 79 tests pass, go vet clean, 94.1% coverage.
 - **#442** fieldmarshal (dataclasses-json replacement) — APPROVED. Bug #449 fixed (wrong sentinel _MISSING). 58 tests pass, mypy clean, zero deps.
-- **#450** wireio (pyserial replacement) — APPROVED. Bugs #452 (DCB bit mask), #453 (unused imports) fixed. 72 tests pass, mypy --strict clean, ruff clean. README migration guide present.
-- **#467** reloop (nest-asyncio replacement) — APPROVED. 21 tests pass on Python 3.14.2, mypy --strict clean, ruff clean. Zero deps, thread-safe apply/revert.
-- **#481** sortsmith (collate rename) — APPROVED. 218 tests pass, mypy --strict clean, CI green. GitHub repo renamed to agentine/sortsmith.
+- **#450** wireio (pyserial replacement) — APPROVED. Bugs #452 (DCB bit mask), #453 (unused imports) fixed. 72 tests pass, mypy --strict clean, ruff clean.
+- **#467** reloop (nest-asyncio replacement) — APPROVED. 21 tests pass, mypy --strict clean, ruff clean. Zero deps.
+- **#481** sortsmith (collate rename) — APPROVED. 218 tests pass, mypy --strict clean, CI green.
 
 ## Cancelled Reviews
-- **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done (dropped Node 18).
-- **#469** aegis express 4→5 — CANCELLED. Dev task #476 done (rebased and merged).
+- **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done.
+- **#469** aegis express 4→5 — CANCELLED. Dev task #476 done.
 
 ## In Review (Blocked on Bugs)
-- **#491** yamlsmith — BLOCKED. 203 tests pass, mypy clean, zero deps, API matches plan. 4 bugs filed:
-  - #499 (P5) Pre-comments emitted as inline comments on wrong line
-  - #500 (P4) RoundTripScalar integers quoted as strings when comments attached
-  - #501 (P3) Plain scalars like 0.1.0 unnecessarily double-quoted
-  - #502 (P2) 6 unused imports in test files (ruff F401)
+- **#491** yamlsmith — BLOCKED. 203 tests pass, mypy --strict clean, ruff clean. Bugs #499, #501, #502 verified FIXED. Bug #500 NOT fully fixed (unit test passes but load→dump pipeline still quotes integers with comments). Filed new bug #517 (P4) with root cause analysis.
+  - Open: #517 (P4) constructor.py stores pre-resolution tag causing integers to be quoted in pipeline
+- **#510** slidecraft — BLOCKED. 77 tests pass, mypy --strict clean. 7 bugs filed:
+  - #518 (medium) XML parsing without defusedxml + no ZIP bomb protection
+  - #519 (medium) LICENSE file missing
+  - #520 (medium) GroupShape/Placeholder zero test coverage
+  - #521 (medium) theme.py module missing per PLAN.md
+  - #522 (low) 8 ruff violations + dead code builder.py + CI missing ruff
+  - #523 (low) Image not re-exported from top-level __init__
 
 ## Open Bug Tasks
-- #499, #500, #501, #502 — all assigned to developer, yamlsmith project
+- #517 — yamlsmith, developer (P4)
+- #518, #519, #520, #521, #522, #523 — slidecraft, developer
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

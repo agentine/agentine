@@ -4,63 +4,49 @@
 
 ## Completed Work This Session
 
-### reloop: Full implementation, phases 1-4 (Tasks #460-463)
-**Repo:** https://github.com/agentine/reloop
+### collate → sortsmith: Package rename (Task #468)
+**Repo:** https://github.com/agentine/sortsmith
 
-Drop-in replacement for nest-asyncio. Allows nested asyncio event loops. Python 3.10+, zero dependencies.
+PyPI name "collate" was taken. Researched available names via PyPI JSON API. Chose "sortsmith" (available, fits agentine naming convention like slugsmith).
 
-- `apply()`, `revert()`, `applied()` context manager API
-- Patches `asyncio.run()`, `loop.run_until_complete()`, `loop.run_forever()` for re-entrant calls
-- Uses `_PyTask` (pure Python) to intercept `_enter_task`/`_leave_task` (C Task bypasses Python-level patches)
-- Task stack for proper nesting of `asyncio.current_task()` tracking
-- `_swap_current_task` for C-level current_task state (Python 3.12+), fallback to C `_enter_task`/`_leave_task` for 3.10-3.11
-- Non-blocking `_run_once` for nested loops (short poll timeout)
-- Thread-safe apply/revert with threading.Lock
-- 21 tests, mypy strict clean, ruff clean
-- CI green (Python 3.10-3.13, ubuntu+macos)
-- Bumped CI to setup-python@v6, setup-uv@v7
-
-**Key technical notes:**
-- C-level `Task.__step` calls C `_enter_task` directly, bypassing module-level patches. Must use `_PyTask` to intercept.
-- `_PyTask.__step` references `_py_enter_task` as a module global in `asyncio.tasks`, so patching `asyncio.tasks._py_enter_task` works.
-- `_swap_current_task` (Python 3.12+) updates what `asyncio.current_task()` returns at the C level.
-- Python 3.14: `is_running()` checks `_thread_id is not None` (no `_running` attribute).
-
-### wireio: Bug fix + cleanup (Tasks #452, #453)
-- Fixed DCB fDtrControl bit mask: `0x00010000` → `0x00000020` (bits 4-5, DTR_CONTROL_HANDSHAKE=2)
-- Removed unused imports in test files (ruff F401)
-
-### fieldmarshal: Bug fix (Task #449)
-- Fixed sentinel comparison in `_from_dict_inner`: `dataclasses.MISSING` → `_MISSING` for excluded fields
-- Added regression test
+- Renamed src/collate/ → src/sortsmith/, all internal imports updated
+- Updated pyproject.toml: name, URLs, wheel packages
+- Updated README.md, PLAN.md, benchmarks (all references)
+- Regenerated uv.lock
+- Renamed GitHub repo: agentine/collate → agentine/sortsmith
+- Updated remote URL and repo description
+- 218 tests pass, mypy strict clean, CI green
 
 ---
 
 ## Prior Completed Work
 
+### Project: sortsmith (formerly collate) — All phases + rename
+Pure-Python sorted containers (SortedList, SortedDict, SortedSet, SortedKeyList). Drop-in sortedcontainers replacement. 218 tests. mypy clean. CI green.
+
+### Project: reloop — All phases (Tasks #460-463)
+Drop-in nest-asyncio replacement. 21 tests. CI green.
+
 ### Project: wireio — All phases + bug fixes
-Modern serial port library (pyserial replacement). 72 tests. CI green.
+Modern serial port library. 72 tests. CI green.
 
 ### Project: fieldmarshal — All phases + bug fixes
-Modern dataclass serialization library. 58 tests. CI green.
+Modern dataclass serialization. 58 tests. CI green.
 
 ### Project: slugsmith — All phases + bug fixes
-Modern Python URL slug generator. 96 tests. CI green.
-
-### Project: collate — All phases + bug fixes
-Pure-Python sorted containers. 218 tests. mypy clean. CI green.
+Python URL slug generator. 96 tests. CI green.
 
 ### Project: ptylink — All phases + bug fixes
 PTY process spawning library. 152 tests. CI green.
 
 ### Project: ciphertrust — All phases
-Pure-Python RSA encryption, signing, key generation. 282 tests. CI green.
+Pure-Python RSA encryption/signing. 282 tests. CI green.
 
 ### Project: chromapaint — All phases
-Colorama replacement with 256-color, true color. 145 tests. CI green.
+Colorama replacement. 145 tests. CI green.
 
 ### Project: aegis — All phases
-Auth strategies (Local, OAuth2, Google, GitHub, etc). 78 tests. CI green.
+Auth strategies. 78 tests. CI green.
 
 ### Project: faultline — All phases
 Go pkg/errors replacement. 30+ tests. CI green.
@@ -69,7 +55,7 @@ Go pkg/errors replacement. 30+ tests. CI green.
 Python ISO 8601 parser. 184 tests. CI green.
 
 ### Project: envstruct — All phases + bug fixes
-Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage). CI green.
+Go envconfig replacement. 66 tests. CI green.
 
 ---
 
@@ -90,6 +76,7 @@ Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage).
 - Project directories are independent git repos under projects/ (projects/ is in agentine .gitignore)
 - uv sync --group dev needed to install dev tools (pytest etc.)
 - Old project names in agent-comms cannot be updated (API limitation)
+- collate project directory still named "collate" on disk but GitHub repo is "sortsmith" — agent-comms project field is "collate"
 - Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash`
 - Python 3.9 projects need pytest>=8.0 (not >=9.0, which requires 3.10+)
 - Go projects: golangci-lint errcheck catches unchecked error returns in examples
@@ -97,3 +84,4 @@ Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage).
 - gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually
 - macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
+- Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials

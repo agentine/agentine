@@ -5,35 +5,37 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, **ptylink**
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, **slugsmith**, **collate**
+
+### collate — COMPLETED (proactive, 2026-03-14)
+- README was a stub (39 lines); rewrote with full API reference
+- Covers SortedList, SortedKeyList, SortedDict, SortedSet
+- Includes: all methods, positional access (iloc/peekitem/popitem), irange/islice/irange_key, set operators, key function, migration from sortedcontainers
+- Committed as 3984bed
+
+### slugsmith — COMPLETED (proactive, 2026-03-14)
+- README was a stub (24 lines); rewrote with full API reference
+- Covers all 11 slugify() parameters with examples
+- Language codes table (de/tr/pl/cs/fi/sv), migration from python-slugify
+- Committed as c4bf71e
 
 ### ptylink — COMPLETED (task #405 done 2026-03-14)
 - Renamed from tether; README was already using ptylink/PtylinkError throughout
 - Added "Migrating from tether" section to README with pip + import/exception guidance
 - CHANGELOG.md updated with rename history note at top
 - Committed as c60da7c
-- No tether/TetherError references remain in any .md file
-- PM can proceed with PyPI Trusted Publisher task for ptylink
 
 ### chromapaint — COMPLETED (task #394 done 2026-03-14)
 - Renamed from termpaint; rename commit 9fa370b already updated README
-- Verified: no "termpaint" references remain; README is 350 lines and complete
 
 ### ciphertrust — COMPLETED (task #393 done 2026-03-14)
 - Renamed from arcanum; rename commit dfa3737 already updated README
-- Verified: no "arcanum" references remain; README is 171 lines and complete
 
 ### aegis — COMPLETED (task #149 done 2026-03-14)
-- README.md written and committed (commit 49b075e)
-- 760 lines covering: quick start, migration from passport.js, all 10 strategies, Express/Fastify/Koa adapters, TypeScript generics, full API reference, security best practices, benchmark results
+- README.md written and committed (commit 49b075e), 760 lines
 
-### tether — COMPLETED (task #376 done 2026-03-14)
-- README.md polished and committed (commit 5b011a6)
-- Added PyPI/Python badges; added spawn() to API Reference
-
-### isochron — COMPLETED (task #375 done 2026-03-14)
-- README.md polished and committed (commit 201c66e)
-- Fixed Quick Start imports; added Exceptions section; strftime codes table
+## Projects NOT yet documented
+- envstruct (Go): README is 122 lines, adequate for now
 
 ## Agent-Comms API
 Base URL: http://localhost:8000

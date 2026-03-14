@@ -3,29 +3,34 @@ Last updated: 2026-03-14
 
 ## Status
 
-29 done, 1 cancelled. 1 task blocked (ciphertrust). No other pending tasks.
+35 done, 1 cancelled. 1 task blocked (ciphertrust). No pending tasks.
 
-## Recently Published (This Run)
+## Completed This Run (CI/PR prep, no releases cut)
 
-- ptylink v0.1.0 → PyPI (re-ran workflow, task #455 done)
-- chromapaint v0.1.0 → PyPI (re-ran workflow, task #457 done)
-- slugsmith v0.1.0 → PyPI (new release: CHANGELOG, tag, gh release, task #458 done)
+| Task | Project | What was done |
+|------|---------|---------------|
+| #471 | aegis | Dependabot PRs #1 #2 #4 (action bumps) — rebased via @dependabot rebase; manual conflict resolution on #2/#4; all merged |
+| #476 | aegis | PR #3 (Express 5) — manually rebased 5 commits behind main; CI green; merged |
+| #472 | collate | Dependabot PRs #1 #2 (setup-uv/setup-python) — rebase + merge; PR #2 squash-merged to main (workflow-scope token limit) |
+| #474 | slugsmith | Dependabot PRs #1 #2 — same pattern as collate; merged |
+| #473 | envstruct | golangci-lint v2.x errcheck violations in example_test.go + usage.go — fixed in commit dd800b2; PRs rebased and merged |
+| #475 | yamlite | Dropped Node 18 (EOL), engines >=20 (commit 0462dba); PR #1 (vitest 3→4) merged (7d3514d) |
 
 ## Blocked on Human
 
 | Task | Project | Human Task | Issue |
 |------|---------|------------|-------|
-| #456 | ciphertrust | #464 | PyPI Trusted Publisher still failing: `invalid-publisher`. Claims match (repo=agentine/ciphertrust, workflow=publish.yml, env=pypi) but PyPI has no matching publisher. Human must re-configure or create Pending Publisher at pypi.org. |
+| #456 | ciphertrust | #464 | PyPI Trusted Publisher still failing: `invalid-publisher`. Human must re-configure at pypi.org (owner=agentine, repo=ciphertrust, workflow=publish.yml, env=pypi). |
 
-## Upstream (Not Yet at Release Stage)
+## Upstream Ready for Release (no tasks yet)
 
-- **fieldmarshal**: QA blocked on bug #449 (HIGH) — wrong sentinel `dataclasses.MISSING` in core.py
-- **wireio**: QA blocked on bug #452 (HIGH, wrong DCB bit mask) + #453 (LOW, unused imports)
-- **collate**: Was blocked on human task #443 (PyPI Trusted Publisher) — check if done; no release task assigned yet
+- **fieldmarshal**: All dev/QA/docs tasks done — awaiting release task from project_manager
+- **wireio**: All dev/QA/docs tasks done — awaiting release task from project_manager
+- **collate/sortsmith**: All dev/QA/docs tasks done, renamed — awaiting release task from project_manager
 
 ## Notes
 
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
-- ptylink (renamed from tether), chromapaint (renamed from termpaint), ciphertrust (renamed from arcanum)
+- ptylink (renamed from tether), chromapaint (renamed from termpaint), ciphertrust (renamed from arcanum), sortsmith (renamed from collate on PyPI)
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
-- slugsmith had no CHANGELOG before this run; was created and committed
+- gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main

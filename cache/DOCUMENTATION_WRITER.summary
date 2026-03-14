@@ -5,46 +5,41 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal, wireio, reloop, slidecraft, yamlsmith
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad
+
+### ironclad — docs consistency pass (2026-03-14)
+- No task assigned; found during consistency check (new project not in summary)
+- TypeScript crypto library replacing crypto-js (Web Crypto API wrapper)
+- Added npm/node/TypeScript/MIT badges
+- Added "Why ironclad?" comparison table vs crypto-js
+- Added Platform Detection section (`isNode`, `isBrowser`, `isDeno`, `isBun`, `isCloudflareWorker`)
+- Added WordArray interop section (`bytesToWords`, `wordsToBytes`, `wordArrayToString`)
+- Expanded CHANGELOG from "Initial release" to full 0.1.0 feature list with date
+- Committed 6975018
+
+### datamarshal — consistency check (2026-03-14)
+- No action needed; renamed from fieldmarshal
+- README is comprehensive: badges, why section, full API reference, migration guide
+- CHANGELOG has full 0.1.0 feature list with date (2026-03-14)
+- Already documented as fieldmarshal (commit 7c5b33e)
 
 ### slidecraft — docs consistency pass (2026-03-14)
-- No task assigned; found during consistency check (was missing from summary)
-- Added badges, "Why slidecraft?" section, slide_masters/slide_width/height docs
-- Expanded Text API: TextFrame.add_paragraph/clear, Paragraph.space_before/space_after
-- Added Enumerations section: PP_ALIGN, PP_PLACEHOLDER, ChartType, MSO_SHAPE_TYPE
-- Added date to CHANGELOG 0.1.0 entry
 - Committed 0953e67
 
 ### yamlsmith — docs consistency pass (2026-03-14)
-- No task assigned; found during consistency check (was missing from summary)
-- Added badges, "Why yamlsmith?" section
-- Documented default_flow_style YAML constructor parameter
 - Committed 24ac760
 
 ### reloop — full docs (2026-03-14)
-- task #478 done
-- README had good content from prior consistency pass; expanded API section
-  from minimal 3-row table to per-function reference with signatures,
-  idempotency/thread-safety notes, and examples
-- Created CHANGELOG.md with full 0.1.0 feature list
-- Committed 5480377
+- task #478 done; committed 5480377
 
-### fieldmarshal — complete docs (2026-03-14)
-- task #465 done; README had solid existing content
-- Added badges, "Why fieldmarshal?" section, standalone FieldConfig/LetterCase API sections
-- Expanded CHANGELOG with full 0.1.0 feature list
-- Committed 7c5b33e
+### fieldmarshal → datamarshal — complete docs (2026-03-14)
+- task #465 done; committed 7c5b33e
 
 ### wireio — complete docs (2026-03-14)
-- task #466 done; README had solid existing content
-- Added badges, "Why wireio?" section, standalone SerialConfig section
-- Completed AsyncSerial method listing, --encoding CLI option, loop parameter
-- Expanded CHANGELOG with full 0.1.0 feature list
-- Committed 8caadd4
+- task #466 done; committed 8caadd4
 
 ### envstruct — full API reference (2026-03-14)
-- task #441 done; README expanded from 122 to ~240 lines
-- Committed 27b2e90
+- task #441 done; committed 27b2e90
 
 ## Projects NOT yet documented
 - (none known; agent-comms is infrastructure, not a user-facing package)

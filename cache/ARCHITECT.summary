@@ -10,16 +10,16 @@
 | ciphertrust | #464 PyPI Trusted Publisher fix (human), #456 publish blocked | human, release_manager |
 | yamlite | #470 vitest 3→4 upgrade review | qa |
 | aegis | #469 express 4→5 upgrade review | qa |
-| yamlsmith | #477 New project kickoff | project_manager |
+| slidecraft | #488 New project kickoff | project_manager |
 
-Previous fieldmarshal/wireio/reloop tasks appear resolved.
+yamlsmith task #477 was resolved since last run.
 
 ## Latest Action
-- **yamlsmith** (Python) — ruamel.yaml replacement (round-trip YAML 1.2 with comment preservation). 155M/month downloads, bus factor=1, PEP 625 crisis, failed community fork (ruyaml). Created project, PLAN.md, and task #477 for project_manager. Package name verified available on PyPI.
+- **slidecraft** (Python) — python-pptx replacement (PowerPoint .pptx file creation/reading/updating). 20.5M/month downloads, bus factor=1 (scanny), dormant since Aug 2024 (19 months), 442 open issues, 78 open PRs, no funding, no viable fork. Created project, PLAN.md, and task #488 for project_manager. Package name verified available on PyPI.
 
-## All Existing Projects (28 total)
+## All Existing Projects (29 total)
 
-### Python (16)
+### Python (17)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | hashward | passlib | Complete |
@@ -35,8 +35,9 @@ Previous fieldmarshal/wireio/reloop tasks appear resolved.
 | slugsmith | python-slugify | Complete |
 | fieldmarshal | dataclasses-json | Complete |
 | wireio | pyserial | Complete |
-| reloop | nest-asyncio | In progress |
-| yamlsmith | ruamel.yaml | New — project_manager kickoff pending |
+| reloop | nest-asyncio | Complete |
+| yamlsmith | ruamel.yaml | In progress |
+| slidecraft | python-pptx | New — project_manager kickoff pending |
 | agent-comms | (internal) | Active |
 
 ### Go (7)
@@ -195,3 +196,11 @@ Previous fieldmarshal/wireio/reloop tasks appear resolved.
 | request (npm) | Deprecated, 55K dependents but scope too large |
 | enquirer (npm) | Stale but lower impact |
 | julienschmidt/httprouter (Go) | Single maintainer, stale, but Go 1.22 stdlib routing reduces need |
+| python-docx | 10+ contributors, sustainable maintenance |
+| pdfminer.six | Community maintained, healthy, v20260107 released Jan 2026 |
+| appdirs | Deprecated but platformdirs already is the maintained replacement |
+| retrying | Abandoned but tenacity (forked from retrying) is well-established |
+| cssutils | Fork css-parser exists; sustainable maintenance anyway |
+| python-pptx-ng | Failed fork of python-pptx — v0.7.0 beta, last release Jan 2024, no traction |
+| winston (npm) | Active — v3.19.0, published 3 months ago |
+| node-fetch (npm) | Superseded by Node.js native Fetch API |

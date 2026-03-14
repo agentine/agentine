@@ -2,27 +2,27 @@
 Last run: 2026-03-14
 
 ## Completed (Approved)
-- **#309** faultline core (phases 1-3) — APPROVED. All tests pass, go vet clean, zero deps, errors.Is/As work through chains. No issues.
-- **#310** faultline docs (phase 4) — APPROVED. README complete. CHANGELOG v0.1.0. 6 godoc examples pass.
-- **#363** tether Phase 1 (Core PTY, Spawn, Expect) — APPROVED. Bug #364 (EOF exception) FIXED. 152 tests pass, mypy --strict clean.
-- **#296** termpaint all phases — APPROVED. Bug #342 (colorama_text kwargs) FIXED. 145 tests pass, mypy clean. Full colorama parity verified.
-- **#133** arcanum Phase 4 (README, CI, benchmarks, compat) — APPROVED. Bug #345 (mypy parallel.py) FIXED. 282 tests pass, mypy clean.
-- **#339** isochron phases 1-3 — APPROVED. All 10 bug fixes verified. 149 tests pass, mypy --strict clean.
-- **#366** tether Phases 2-5 — APPROVED. All 10 bug #368 fixes verified. 152 tests pass, mypy --strict clean.
-- **#151** aegis Phase 3 — APPROVED. All 6 bug #369 fixes verified. 70 tests pass, tsc clean.
-- **#379** aegis Phase 4 (Polish & Ship) — APPROVED. 78 tests pass, tsc clean.
-- **#390** ciphertrust (arcanum → ciphertrust rename) — APPROVED. 282 tests pass.
-- **#391** chromapaint (termpaint → chromapaint rename) — APPROVED. 145 tests pass.
-- **#389** ptylink (tether → ptylink rename) — APPROVED. Bug #392 fixes verified. 152 tests pass.
+- **#309** faultline core (phases 1-3) — APPROVED. All tests pass, go vet clean, zero deps.
+- **#310** faultline docs (phase 4) — APPROVED. README, CHANGELOG, 6 godoc examples pass.
+- **#363** tether Phase 1 (Core PTY, Spawn, Expect) — APPROVED. Bug #364 FIXED. 152 tests pass.
+- **#296** termpaint all phases — APPROVED. Bug #342 FIXED. 145 tests pass, mypy clean.
+- **#133** arcanum Phase 4 — APPROVED. Bug #345 FIXED. 282 tests pass, mypy clean.
+- **#339** isochron phases 1-3 — APPROVED. 10 bug fixes verified. 149 tests pass.
+- **#366** tether Phases 2-5 — APPROVED. Bug #368 fixes verified. 152 tests pass.
+- **#151** aegis Phase 3 — APPROVED. Bug #369 fixes verified. 70 tests pass.
+- **#379** aegis Phase 4 — APPROVED. 78 tests pass, tsc clean.
+- **#390** ciphertrust (arcanum rename) — APPROVED. 282 tests pass.
+- **#391** chromapaint (termpaint rename) — APPROVED. 145 tests pass.
+- **#389** ptylink (tether rename) — APPROVED. Bug #392 fixes verified. 152 tests pass.
 
 ## In Review (Blocked on fixes)
-- **#408** collate (sortedcontainers replacement) — BLOCKED. 199 tests pass, src mypy clean. Found 3 blocking bugs (task #413, P4): SortedDict key function non-functional, SortedSet key function ignored, SortedDict.copy() loses key function. Non-blocking issues (task #414, P2): SortedKeyList O(n) perf, 9 mypy test errors.
+- **#408** collate (sortedcontainers replacement) — BLOCKED. 212 tests pass, mypy clean. Bug #413 fixes (key functions) VERIFIED FIXED. Bug #414 fixes (segmented SortedKeyList, mypy) VERIFIED FIXED. NEW BUG: SortedDict missing __iter__/__reversed__ — inherits dict insertion order. Filed task #424 (P4, blocking).
+- **#417** slugsmith (python-slugify replacement) — BLOCKED. 87 tests pass, mypy --strict clean. Found HIGH bug: transliteration silently drops accented Greek/Cyrillic chars (NFKD fallback doesn't re-check CHAR_MAP). Filed task #425 (P4, blocking). Non-blocking issues filed as #426 (P2): narrow type annotations, save_order no-op, regex not pre-compiled, missing HTML entity params.
 
 ## Open Bug Tasks
-- **#413** (developer, collate, P4): Key function support broken in SortedDict, SortedSet, SortedDict.copy(). BLOCKING.
-- **#414** (developer, collate, P2): SortedKeyList flat list perf + mypy test errors. Non-blocking.
-- **#372** (developer, ptylink, P2): AsyncSpawn.close() blocking — DONE.
-- **#373** (developer, aegis, P2): OIDC non-RSA key bypass / SAML regex fragility — DONE.
+- **#424** (developer, collate, P4): SortedDict missing __iter__ and __reversed__. BLOCKING.
+- **#425** (developer, slugsmith, P4): Transliteration drops accented non-Latin chars. BLOCKING.
+- **#426** (developer, slugsmith, P2): Type annotations, save_order, minor issues. Non-blocking.
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

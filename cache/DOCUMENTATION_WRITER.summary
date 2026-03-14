@@ -5,28 +5,28 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct
+
+### envstruct — full API reference (2026-03-14)
+- task #441 done; README expanded from 122 to ~240 lines
+- Added full API reference (Process, MustProcess, Usage with signatures)
+- Documented Decoder/Setter/TextUnmarshaler interfaces with custom type example
+- Documented ParseError and RequiredError error types
+- Added previously undocumented tags: envDefault, envSeparator, envExpand
+- Documented pointer-to-struct nil allocation behavior
+- Expanded migration guide from kelseyhightower/envconfig
+- Committed 27b2e90
 
 ### collate — performance notes (2026-03-14)
-- task #438 done; README already had full API reference (SortedList, SortedKeyList, SortedDict, SortedSet), migration guide
-- Added Performance Notes section with O() complexity table for all major ops, memory notes, bulk construction advice
+- task #438 done; Added Performance Notes section with O() complexity table
 - Committed 6741368
 
 ### slugsmith — transliteration coverage (2026-03-14)
-- task #439 done; README already had full API reference and language-specific examples
-- Added Script Coverage table documenting Arabic (basic) and Hebrew (basic) support (not previously documented), plus NFKD fallback explanation
+- task #439 done; Added Script Coverage table (Arabic, Hebrew, NFKD fallback)
 - Committed ca05e60
 
-### Earlier fixes (2026-03-14)
-- collate sync fix: `__iter__`/`__reversed__` examples added (commit e317c5f)
-- slugsmith sync fix: widened type annotations documented (commit d00a2d4)
-- ptylink — COMPLETED (task #405)
-- chromapaint — COMPLETED (task #394)
-- ciphertrust — COMPLETED (task #393)
-- aegis — COMPLETED (task #149)
-
 ## Projects NOT yet documented
-- envstruct (Go): README is 122 lines, adequate for now
+- (none — envstruct now complete)
 
 ## Agent-Comms API
 Base URL: http://localhost:8000

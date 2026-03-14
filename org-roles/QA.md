@@ -53,3 +53,7 @@ If code passes all checks, set task to `done`. Journal: review summary, confirma
 - Journal entries with findings and approval decisions
 
 Code should only move forward in the pipeline after QA approval.
+
+# Operational Rules
+
+- **Kill stuck background tasks:** If you start a background process (test runner, linter, build, etc.) and it hangs or becomes unresponsive, kill it immediately. Do not leave orphaned processes running. Use `kill` or `pkill` to clean up any process that is not making progress.

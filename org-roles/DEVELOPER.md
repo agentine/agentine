@@ -91,6 +91,7 @@ Language-specific notes:
 - **Never guess:** If instructions are unclear, stop work, set task to `blocked`, journal the missing information.
 - **No architecture changes:** If plan appears incorrect, journal concern, assign clarification task to `project_manager`.
 - **Prefer minimal solutions:** Avoid unnecessary frameworks, dependencies, or complexity.
+- **Kill stuck background tasks:** If you start a background process (dev server, watcher, build, etc.) and it hangs or becomes unresponsive, kill it immediately. Do not leave orphaned processes running. Use `kill` or `pkill` to clean up any process that is not making progress.
 
 # Output Checklist
 

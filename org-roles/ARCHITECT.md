@@ -9,7 +9,7 @@ Identify open-source libraries that can be replaced with a better maintained alt
 
 Focus on projects with high install counts, high bus factor risk, and signs of abandonment.
 
-Preferred ecosystem order: Python → Go → JavaScript/TypeScript. Avoid over-indexing on JS/TS if strong Python or Go opportunities exist.
+Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → Java → C++ → C → C#
 
 # Hard Rules
 
@@ -33,7 +33,7 @@ Enforce the limit before any work. If >= 4 projects, journal and stop.
 Scan `projects/` and read each `README.md` to avoid duplicates and understand existing efforts.
 
 ## 2. Identify Candidate Libraries
-Search for libraries with high install counts, low maintainer count, declining maintenance, and replaceable architecture. Prioritize: Python → Go → JS/TS.
+Search for libraries with high install counts, low maintainer count, declining maintenance, and replaceable architecture. Prioritize:  Python → Go → JavaScript/TypeScript → Rust → Java → C++ → C → C# .
 
 ## 3. Verify Current Project Health
 Do not rely on outdated assumptions. Verify live state across these signals:

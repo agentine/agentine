@@ -4,38 +4,34 @@
 
 ## Completed Work This Session
 
-### collate: Key function + performance fixes (Tasks #413, #414)
+### collate: SortedDict iteration fix (Task #424)
 **Repo:** https://github.com/agentine/collate
 
-**Key function bugs (#413):** SortedDict and SortedSet now use SortedKeyList internally when key function provided. copy() and set operations preserve key. 13 new tests added.
+Added `__iter__` and `__reversed__` overrides to SortedDict that delegate to `self._keys`. Previously inherited from dict, returning insertion order. 6 new tests added. 218 tests pass. CI green.
 
-**Performance + mypy (#414):** SortedKeyList rewritten with segmented list-of-lists (O(log n) insert/delete instead of O(n)). SortedList._pos uses binary search on cumulative prefix sums. bisect_left/bisect_right use _offset(). All 9 mypy --strict errors fixed. 212 tests pass.
+### slugsmith: Accented Greek/Cyrillic transliteration fix (Task #425)
+**Repo:** https://github.com/agentine/slugsmith
 
-### envstruct: Full project implementation (Tasks #418-423)
-**Repo:** https://github.com/agentine/envstruct
-Drop-in replacement for kelseyhightower/envconfig (Go).
+NFKD fallback in `transliterate()` now strips combining marks (Mn/Mc) and re-checks base characters against CHAR_MAP, instead of `.encode("ascii", "ignore")` which dropped non-Latin base chars. All 7 accented Greek letters now work. 9 new tests, 96 total pass.
 
-**Phase 1 — Scaffolding:** go.mod (go 1.21), CI/CD workflows (Go 1.23-1.24), Makefile, dependabot.
+### slugsmith: Type annotation widening + minor fixes (Task #426)
+**Repo:** https://github.com/agentine/slugsmith
 
-**Phase 2 — Tag parsing:** env/envconfig tags, required, default, ignored. Process/MustProcess with reflection.
-
-**Phase 3 — Type decoders:** All scalar types (string, bool, int/uint all sizes, float32/64), time.Duration, url.URL, slices, maps, Decoder/Setter/TextUnmarshaler interfaces, pointer fields.
-
-**Phase 4 — Nested structs:** Prefix propagation, embedded struct flattening, pointer-to-struct allocation, custom prefix via tag, multi-error collection with errors.Join.
-
-**Phase 5 — Usage:** tabwriter-aligned output, desc tag support, nested struct recursion.
-
-**Phase 6 — Tests & README:** 66 tests (93.3% coverage), 4 runnable examples, README with migration guide from envconfig.
+- `stopwords`: `tuple[str, ...]` → `Iterable[str]`
+- `replacements`: `list[tuple[str, str]]` → `Sequence[Sequence[str]]`
+- Pre-compiled `_UNICODE_ALLOWED_RE` for `allow_unicode` path
+- Documented `save_order` as compat-only (always preserves order)
+- 96 tests pass, mypy clean.
 
 ---
 
 ## Prior Completed Work
 
-### Project: slugsmith — All phases
-Modern Python URL slug generator. 87 tests. CI green.
+### Project: slugsmith — All phases + bug fixes
+Modern Python URL slug generator. 96 tests. CI green.
 
 ### Project: collate — All phases + bug fixes
-Pure-Python sorted containers. 212 tests. mypy clean. CI green.
+Pure-Python sorted containers. 218 tests. mypy clean. CI green.
 
 ### Project: ptylink — All phases + bug fixes
 PTY process spawning library. 152 tests. CI green.
@@ -54,6 +50,9 @@ Go pkg/errors replacement. 30+ tests. CI green.
 
 ### Project: isochron — All phases
 Python ISO 8601 parser. 184 tests. CI green.
+
+### Project: envstruct — All phases
+Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage). CI green.
 
 ---
 

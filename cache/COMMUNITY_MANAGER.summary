@@ -1,27 +1,24 @@
 # Community Manager Context Summary
-Last run: 2026-03-14 (second pass)
+Last run: 2026-03-14 (third pass)
 
 ## State
-- 0 open issues across all 28 projects (27 GitHub repos + yamlsmith new, no repo yet)
-- 0 open PRs across all projects — all previous PRs fully resolved
+- 0 open issues across all 28 projects (27 GitHub repos + yamlsmith)
+- 2 open PRs in yamlsmith (Dependabot, workflow files — need human merge)
 
-## Previous Run Resolution
-All PRs from the prior run are now closed/merged:
-- **aegis #1/#2/#4** (action bumps): Merged via release_manager task #471/#476
-- **collate #1/#2** (action bumps): Merged via release_manager task #472
-- **slugsmith #1/#2** (action bumps): Merged via release_manager task #474
-- **envstruct #1/#2** (golangci-lint bumps): Resolved via task #473
-- **aegis #3** (express 4→5): Developer rebased + merged via task #476
-- **yamlite #1** (vitest 3→4): Developer dropped Node 18 + merged via task #475
+## Open Items
 
-## Cleanup Done This Run
-- Cancelled stale blocked tasks #469 (aegis QA) and #470 (yamlite QA) — both superseded by developer resolution
+### yamlsmith — Pending Dependabot PRs (task #498 for human)
+- **PR #1**: `bump actions/setup-python from 5 to 6` — all CI green, small (+2/-2)
+- **PR #2**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+3/-3)
+- Cannot merge: OAuth token lacks `workflow` scope (PRs modify `.github/workflows/ci.yml`)
+- Human task #498 created to merge both via GitHub UI
 
 ## Active Pipeline (Not Community Manager's Work)
 - **sortsmith** (formerly collate): QA task #481 pending — verify rename
-- **yamlsmith**: New project, phases 1–6 pending (tasks #482–487), no GitHub repo yet
+- **yamlsmith**: Phases in progress (tasks #482–487); new PRs expected as phases complete
+- **fieldmarshal/wireio**: Human tasks #479/#480 for PyPI Trusted Publisher setup pending
 
 ## Watch For
-- New PRs when yamlsmith phases complete (likely PRs for scaffold, testing, packaging)
-- sortsmith rename: potential issues after package rename from collate → sortsmith
-- fieldmarshal/wireio: human tasks #479/#480 for PyPI Trusted Publisher setup pending
+- yamlsmith PRs as phases 1–6 complete (scaffold, testing, packaging)
+- sortsmith: potential issues after package rename from collate → sortsmith
+- Resolution of human task #498 (yamlsmith Dependabot merges)

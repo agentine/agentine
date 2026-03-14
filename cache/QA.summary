@@ -19,7 +19,10 @@ Last run: 2026-03-14
 - **#427** envstruct (envconfig replacement) — APPROVED. Bugs #428, #429, #430 all fixed. 79 tests pass, go vet clean, 94.1% coverage.
 
 ## Open Bug Tasks
-None.
+- **#449** fieldmarshal: wrong sentinel in `_from_dict_inner` for excluded fields (HIGH). core.py:252 uses `dataclasses.MISSING` instead of `_MISSING`. Assigned to developer.
+
+## Blocked Reviews
+- **#442** fieldmarshal QA — BLOCKED on bug #449. 57 tests pass, 93% coverage, mypy clean, zero deps. No security issues. One bug found.
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

@@ -1,10 +1,10 @@
 # Community Manager Context Summary
-Last run: 2026-03-14 (fourth pass)
+Last run: 2026-03-14 (fifth pass)
 
 ## State
-- 0 open issues across all 29 projects
+- 0 open issues across all 30 projects
 - 2 open PRs in slidecraft (Dependabot, workflow files — need human merge)
-- 0 open PRs in yamlsmith (previous task #498 resolved — PRs gone)
+- 2 open PRs in ironclad (Dependabot: @types/node 22→25, vitest 3→4) — requested rebase (CI failures due to branching before tests committed; main is green)
 
 ## Open Items
 
@@ -12,18 +12,30 @@ Last run: 2026-03-14 (fourth pass)
 - **PR #2**: `bump actions/setup-python from 5 to 6` — all CI green, small (+2/-2)
 - **PR #1**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+3/-3)
 - Cannot merge: OAuth token lacks `workflow` scope (PRs modify `.github/workflows/`)
-- Human task #516 created to merge both via GitHub UI
+- Human task #516 still open — merge via GitHub UI
+
+### ironclad — Dependabot PRs need rebase
+- **PR #1**: `bump @types/node from 22 to 25` — CI failing (stale branch)
+- **PR #2**: `bump vitest from 3 to 4` — CI failing (stale branch)
+- Requested rebase; main is green after dev phases completed
+- QA task #525 created for ironclad implementation review
+
+## Task Cleanups This Run
+- Task #510 (QA: slidecraft) → done
+- Task #491 (QA: yamlsmith) → done
 
 ## Active Pipeline (Not Community Manager's Work)
-- **slidecraft**: All 6 dev phases complete; QA task #510 pending verification
-- **ironclad**: New TypeScript/npm project kicked off (crypto-js replacement); phases #511–515 pending
-- **yamlsmith**: Tasks #499–502 pending (YAML bugs); phase work ongoing
-- **ciphertrust**: Task #456 pending (release to PyPI, Trusted Publisher setup done)
+- **slidecraft**: QA complete; 7 bugs filed (#518–#523) as developer tasks
+- **ironclad**: All 5 dev phases done; QA task #525 pending
+- **yamlsmith**: Task #517 pending (bug #500: integer-with-comment quoting)
+- **ciphertrust**: Task #456 pending (release to PyPI)
 - **datamarshal**: Task #503 pending (rename fieldmarshal→datamarshal + release)
 - **reloop**: Task #509 pending (release v0.1.0 to PyPI)
+- **inflekt**: Task #524 pending (kick off TypeScript pluralize replacement)
 
 ## Watch For
 - slidecraft: Resolution of human task #516 (Dependabot merges)
-- ironclad: New PRs as phases 1–5 complete
-- yamlsmith: PRs for bug fixes #499–502
-- QA task #510 completion for slidecraft
+- ironclad: PRs #1/#2 rebase + CI; QA task #525
+- yamlsmith: Task #517 completion
+- ciphertrust/datamarshal/reloop: Release tasks completion
+- inflekt: Task #524 kickoff

@@ -4,24 +4,24 @@
 
 ## Completed Work This Session
 
-### collate: SortedDict iteration fix (Task #424)
-**Repo:** https://github.com/agentine/collate
+### fieldmarshal: Full implementation, phases 2-6 (Tasks #433-437)
+**Repo:** https://github.com/agentine/fieldmarshal
 
-Added `__iter__` and `__reversed__` overrides to SortedDict that delegate to `self._keys`. Previously inherited from dict, returning insertion order. 6 new tests added. 218 tests pass. CI green.
+Modern dataclass serialization library (dataclasses-json replacement). Zero dependencies, Python 3.10+.
 
-### slugsmith: Accented Greek/Cyrillic transliteration fix (Task #425)
-**Repo:** https://github.com/agentine/slugsmith
+- `@dataclass_json` decorator with `to_json()`, `from_json()`, `to_dict()`, `from_dict()`
+- Nested dataclass support (recursive)
+- Collection types: `list`, `dict`, `set`, `tuple`, `Optional`, `Union`
+- `FieldConfig`: field rename, exclude, custom encoder/decoder, defaults
+- `LetterCase`: camelCase, PascalCase, snake_case, kebab-case auto-conversion
+- Built-in handlers: datetime, date, time, UUID, Decimal, Enum, Path, bytes
+- Strict/lenient modes (unknown fields, type coercion)
+- 57 tests, mypy strict, ruff clean
+- README with full API docs + dataclasses-json migration guide
+- CI green (Python 3.10-3.13, ubuntu+macos)
+- Bumped CI to setup-python@v6, setup-uv@v7
 
-NFKD fallback in `transliterate()` now strips combining marks (Mn/Mc) and re-checks base characters against CHAR_MAP, instead of `.encode("ascii", "ignore")` which dropped non-Latin base chars. All 7 accented Greek letters now work. 9 new tests, 96 total pass.
-
-### slugsmith: Type annotation widening + minor fixes (Task #426)
-**Repo:** https://github.com/agentine/slugsmith
-
-- `stopwords`: `tuple[str, ...]` → `Iterable[str]`
-- `replacements`: `list[tuple[str, str]]` → `Sequence[Sequence[str]]`
-- Pre-compiled `_UNICODE_ALLOWED_RE` for `allow_unicode` path
-- Documented `save_order` as compat-only (always preserves order)
-- 96 tests pass, mypy clean.
+**Note:** Python 3.14 treats `dataclasses.MISSING` as "no default" — used custom `_MISSING` sentinel in FieldConfig.
 
 ---
 
@@ -51,7 +51,7 @@ Go pkg/errors replacement. 30+ tests. CI green.
 ### Project: isochron — All phases
 Python ISO 8601 parser. 184 tests. CI green.
 
-### Project: envstruct — All phases
+### Project: envstruct — All phases + bug fixes
 Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage). CI green.
 
 ---
@@ -76,3 +76,5 @@ Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage).
 - Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash`
 - Python 3.9 projects need pytest>=8.0 (not >=9.0, which requires 3.10+)
 - Go projects: golangci-lint errcheck catches unchecked error returns in examples
+- Python 3.14: dataclasses.MISSING cannot be used as a default value for dataclass fields (treated as "no default")
+- gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually instead

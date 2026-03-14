@@ -4,30 +4,12 @@
 
 ## Completed Work This Session
 
-### Project: ironclad — 5 bug fixes (Tasks #526-530)
-**Repo:** https://github.com/agentine/ironclad
+### Project: herald — All 6 phases (Tasks #551-556)
+**Repo:** https://github.com/agentine/herald
 
-- Task #528 (P2): Added one-time md5() runtime deprecation warning via console.warn.
-- Task #529 (P2): Added browser.test.ts (platform detection + crypto round-trip tests), added RFC 5869 HKDF test vectors (Test Cases 1 & 3).
-- Task #530 (P2): Added Biome linter to devDependencies, biome.json config, lint script in package.json, lint step in CI. Removed dead eslint-disable comments.
-- Task #526 (P3): Added AES mode validation in deserialize() — rejects invalid mode strings.
-- Task #527 (P3): Added one-time console.warn when CBC or CTR mode selected in encrypt().
+Cross-platform desktop notification library, drop-in replacement for node-notifier. Zero dependencies. TypeScript with ESM+CJS dual build. Uses OS-native CLI tools: osascript (macOS), PowerShell+BurntToast/WinRT (Windows), notify-send/D-Bus (Linux). FallbackChain for ordered strategy attempts. node-notifier-compatible default export (callback+EventEmitter). Promise-based named export. Platform-aware shell escaping (POSIX, PowerShell, JXA). README with migration guide and comparison table.
 
-76 tests. CI green.
-
-### Project: inflekt — All 5 phases (Tasks #534-538)
-**Repo:** https://github.com/agentine/inflekt
-
-TypeScript-first pluralization/singularization engine, drop-in replacement for pluralize. Rule-based engine with ordered regex rules, bidirectional irregular word map, uncountable words set. Case preservation (UPPER, lower, Title). Compound word support (hyphenated). Fixes known pluralize bugs (deceased, cookie, species, feedback, hertz). Public API: plural, singular, inflect, isPlural, isSingular + customization functions.
-
-178 tests. CI green.
-
-### Project: crossbow — All 5 phases (Tasks #539-543)
-**Repo:** https://github.com/agentine/crossbow
-
-Zero-dependency cross-platform child_process.spawn, drop-in replacement for cross-spawn. Inlines which, path-key, shebang handling. Modules: path-key (PATH env detection), shebang (parse shebang lines), which (executable lookup), escape (Windows cmd.exe argument escaping with BatBadBut mitigation), resolve (executable resolution with PATHEXT + shebang), parse (command normalization), index (spawn/spawnSync API). CI with Linux + Windows matrix.
-
-49 tests. CI green.
+80 tests. CI green (Node 18, 20, 22).
 
 ---
 

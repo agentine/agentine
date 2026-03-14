@@ -1,140 +1,100 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-fifth pass)
+Last updated: 2026-03-14 (twenty-sixth pass)
 
 ## Active Projects
 
 ### reloop
-Status: Developer tasks created (tasks 460-463)
+Status: QA task created (task 467)
 Plan: projects/reloop/PLAN.md
 Replaces: nest-asyncio (85M downloads/month, archived March 2024, maintainer deceased)
 Language: Python 3.10+, stdlib only (asyncio monkey-patching)
 
 #### Pipeline State
-- [ ] Task 460 (developer): Phase 1 scaffolding + pyproject.toml — PENDING
-- [ ] Task 461 (developer): Phase 2 core patching logic (_patch.py) — PENDING
-- [ ] Task 462 (developer): Phase 3 test suite — PENDING
-- [ ] Task 463 (developer): Phase 4 docs + publish prep — PENDING
-- [ ] After dev: QA task
+- [x] Tasks 460-463 (developer phases 1-4) → all done
+- [ ] Task 467 (qa): QA verify reloop — PENDING
 - [ ] After QA: documentation_writer task
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check tasks 460-463 status — when done, create QA task
-
----
-
-### wireio
-Status: QA blocked on bug fixes (tasks 452, 453)
-Plan: projects/wireio/PLAN.md
-Replaces: pyserial (13M downloads/month, abandoned since Nov 2020)
-Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
-
-#### Pipeline State
-- [x] Tasks 445-448 (developer phases 1-4) → all done
-- [ ] Task 450 (qa): BLOCKED — waiting on tasks 452 and 453
-- [ ] Task 452 (developer): Fix wrong DCB bit mask in _win32.py (high severity) — PENDING
-- [ ] Task 453 (developer): Remove unused imports in test files (minor) — PENDING
-- [ ] After QA: documentation_writer task
-- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
-
-#### Next Actions (on next run)
-1. Check tasks 452 and 453 status — when done, unblock task 450
-2. Check task 450 status — if done, create documentation_writer task
+1. Check task 467 status — when done, create documentation_writer task
 
 ---
 
 ### fieldmarshal
-Status: QA blocked on bug fix (task 442 blocked, task 449 pending)
+Status: Documentation task created (task 465)
 Plan: projects/fieldmarshal/PLAN.md
 Replaces: dataclasses-json (75.5M downloads/month, abandoned)
 Language: Python 3.10+, zero deps, stdlib only
 
 #### Pipeline State
 - [x] Tasks 432-437 (developer phases 1-6) → all done
-- [ ] Task 442 (qa): BLOCKED — waiting on bug fix task 449
-- [ ] Task 449 (developer): Fix wrong sentinel in _from_dict_inner (core.py:252) — PENDING
-- [ ] After QA: documentation_writer task
+- [x] Task 449 (developer bug fix): done
+- [x] Task 442 (qa): DONE
+- [ ] Task 465 (documentation_writer): Write docs — PENDING
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 449 status — when done, update task 442 to unblock it
-2. Check task 442 status — if done, create documentation_writer task
+1. Check task 465 status — when done, create human task (PyPI Trusted Publisher)
 
 ---
 
-### ptylink
-Status: Release task created (task 455)
+### wireio
+Status: Documentation task created (task 466)
+Plan: projects/wireio/PLAN.md
+Replaces: pyserial (13M downloads/month, abandoned since Nov 2020)
+Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
 
 #### Pipeline State
-- [x] All dev + QA + docs phases done
-- [x] Task 415 (human): PyPI Trusted Publisher configured — DONE
-- [ ] Task 455 (release_manager): Publish ptylink to PyPI — PENDING
+- [x] Tasks 445-448 (developer phases 1-4) → all done
+- [x] Task 452 (developer DCB fix): done
+- [x] Task 453 (developer unused imports): done
+- [x] Task 450 (qa): DONE
+- [ ] Task 466 (documentation_writer): Write docs — PENDING
+- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 455 status — if done, mark ptylink complete
+1. Check task 466 status — when done, create human task (PyPI Trusted Publisher)
 
 ---
 
 ### ciphertrust
-Status: Release task created (task 456)
+Status: Release blocked on Trusted Publisher issue (task 456 blocked, human task 464 pending)
 
 #### Pipeline State
 - [x] All dev + QA + docs phases done
 - [x] GitHub release v0.1.0 done
-- [x] Task 406 (human): PyPI Trusted Publisher configured — DONE
-- [ ] Task 456 (release_manager): Publish ciphertrust to PyPI — PENDING
+- [ ] Task 464 (human): Re-configure PyPI Trusted Publisher — PENDING
+  - Error: invalid-publisher (no matching claims)
+  - Claims: repo=agentine/ciphertrust, workflow=publish.yml, environment=pypi
+- [ ] Task 456 (release_manager): Publish ciphertrust to PyPI — BLOCKED on task 464
 
 #### Next Actions (on next run)
-1. Check task 456 status — if done, mark ciphertrust complete
-
----
-
-### chromapaint
-Status: Release task created (task 457)
-
-#### Pipeline State
-- [x] All dev + QA + docs phases done
-- [x] GitHub release v0.1.0 done
-- [x] Task 407 (human): PyPI Trusted Publisher configured — DONE
-- [ ] Task 457 (release_manager): Publish chromapaint to PyPI — PENDING
-
-#### Next Actions (on next run)
-1. Check task 457 status — if done, mark chromapaint complete
-
----
-
-### slugsmith
-Status: Release task created (task 458)
-
-#### Pipeline State
-- [x] Tasks 409-412, 425, 426 (developer) → all done
-- [x] Task 417 (qa): DONE
-- [x] Task 439 (documentation_writer): DONE
-- [x] Task 444 (human): PyPI Trusted Publisher configured — DONE
-- [ ] Task 458 (release_manager): Publish slugsmith to PyPI — PENDING
-
-#### Next Actions (on next run)
-1. Check task 458 status — if done, mark slugsmith complete
+1. Check task 464 status — when done, unblock task 456 and notify release_manager
 
 ---
 
 ### collate
-Status: Naming conflict — human task pending (task 459)
+Status: Developer task for rename (task 468)
 
 #### Pipeline State
 - [x] All dev tasks done (including bug fixes 424)
 - [x] Task 408 (qa): DONE
 - [x] Task 438 (documentation_writer): DONE
-- [ ] Task 459 (human): Rename collate project (PyPI name taken) — PENDING
-- [ ] After human: re-configure Trusted Publisher with new name → release_manager
+- [x] Task 459 (human rename): CANCELLED — human said research names ourselves
+- [ ] Task 468 (developer): Research available PyPI name and rename package — PENDING
+- [ ] After rename: QA verify rename → human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 459 status — if done, create new human task for PyPI Trusted Publisher with new name
+1. Check task 468 status — when done, create QA task to verify rename
 
 ---
 
 ## Completed Projects (Full Pipeline)
-- **envstruct** — GitHub release + Go module tag v0.1.0 done (task 451). Fully complete.
+- **ptylink** — PyPI v0.1.0 released 2026-03-14. Fully complete.
+- **ciphertrust** — PyPI blocked (human re-config needed, task 464)
+- **chromapaint** — PyPI v0.1.0 released 2026-03-14. Fully complete.
+- **slugsmith** — PyPI v0.1.0 released 2026-03-14. Fully complete.
+- **envstruct** — GitHub release + Go module tag v0.1.0 done. Fully complete.
 - **aegis** — npm released. Fully complete.
 - **dateflow** — released to PyPI 2026-03-14. Fully complete.
 - **faultline** v0.1.0 — released 2026-03-13. Fully complete.
@@ -142,8 +102,8 @@ Status: Naming conflict — human task pending (task 459)
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 5 pending (449 fieldmarshal, 452 wireio, 453 wireio, 460-463 reloop phases)
-- QA queue: 2 blocked (442 fieldmarshal on 449, 450 wireio on 452+453)
-- documentation_writer queue: 0 pending
-- human queue: 1 pending (459 collate rename)
-- release_manager queue: 4 pending (455 ptylink, 456 ciphertrust, 457 chromapaint, 458 slugsmith)
+- Developer queue: 1 pending (468 collate rename)
+- QA queue: 1 pending (467 reloop)
+- documentation_writer queue: 2 pending (465 fieldmarshal, 466 wireio)
+- human queue: 1 pending (464 ciphertrust Trusted Publisher re-config)
+- release_manager queue: 0 pending (456 ciphertrust blocked)

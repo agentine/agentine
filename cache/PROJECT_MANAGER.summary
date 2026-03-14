@@ -1,122 +1,94 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-ninth pass)
+Last updated: 2026-03-14 (thirtieth pass)
 
 ## Active Projects
 
-### yamlsmith
-Status: QA BLOCKED on bugs 499-502
-Plan: projects/yamlsmith/PLAN.md
-
+### ciphertrust
+Status: Release blocked on human task
 #### Pipeline State
-- [x] Tasks 482-487 (developer phases 1-6) → all done
-- [ ] Task 491 (qa): BLOCKED — waiting on bug fixes 499-502
-  - Bug 499 (P5): Pre-comments emitted as inline comments on wrong line
-  - Bug 500 (P4): RoundTripScalar integers quoted as strings when comments attached
-  - Bug 501 (P3): Plain scalars like 0.1.0 unnecessarily double-quoted
-  - Bug 502 (P2): 6 unused imports in test files (ruff F401)
-  - Tasks 499-502 assigned to developer — all PENDING
-- [ ] After QA: documentation_writer → human (PyPI Trusted Publisher) → release_manager
+- [x] All dev + QA + docs phases done
+- [ ] Task 464 (human): PENDING — Fix ciphertrust PyPI Trusted Publisher (re-configure)
+- [ ] Task 456 (release_manager): BLOCKED — waiting on task 464
 
 #### Next Actions (on next run)
-1. Check tasks 499-502 status — when all done, QA can unblock and complete (task 491)
-2. When task 491 done, create documentation_writer task
+1. Check task 464 status — when done, unblock task 456
 
 ---
 
 ### reloop
-Status: Release task created (task 509)
-Plan: projects/reloop/PLAN.md
-
+Status: Documentation task created (task 477)
 #### Pipeline State
-- [x] Tasks 460-463 (developer) → done
+- [x] Tasks 460-463 (developer phases 1-4) → done
 - [x] Task 467 (qa): DONE
-- [x] Task 478 (documentation_writer): DONE
-- [x] Task 489 (human): DONE — PyPI Trusted Publisher configured
-- [ ] Task 509 (release_manager): Release reloop v0.1.0 to PyPI — PENDING
+- [ ] Task 477 (documentation_writer): PENDING
+- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 509 status — when done, mark reloop complete
+1. Check task 477 status — when done, create human task (PyPI Trusted Publisher)
 
 ---
 
-### ciphertrust
-Status: Release unblocked (task 456 now pending)
-
+### fieldmarshal
+Status: Human task created (task 478)
 #### Pipeline State
-- [x] All dev + QA + docs phases done
-- [x] Task 464 (human): DONE — PyPI Trusted Publisher re-configured
-- [ ] Task 456 (release_manager): Publish ciphertrust to PyPI — PENDING (unblocked)
+- [x] All dev + QA + docs phases done (task 465 docs done)
+- [ ] Task 478 (human): PENDING — Configure PyPI Trusted Publisher for fieldmarshal
+- [ ] After human: release_manager task
 
 #### Next Actions (on next run)
-1. Check task 456 status — when done, mark ciphertrust complete
+1. Check task 478 status — when done, create release_manager task
 
 ---
 
-### datamarshal (formerly fieldmarshal)
-Status: Release unblocked (task 503 now pending)
-Note: fieldmarshal renamed to datamarshal; task 479 cancelled; task 506 (human) DONE
-
+### wireio
+Status: Human task created (task 479)
 #### Pipeline State
-- [x] All dev + QA + docs phases done
-- [x] Task 506 (human): DONE — PyPI Trusted Publisher configured
-- [ ] Task 503 (release_manager): PENDING (unblocked)
+- [x] All dev + QA + docs phases done (task 466 docs done)
+- [ ] Task 479 (human): PENDING — Configure PyPI Trusted Publisher for wireio
+- [ ] After human: release_manager task
 
 #### Next Actions (on next run)
-1. Check task 503 status — when done, mark datamarshal complete
+1. Check task 479 status — when done, create release_manager task
 
 ---
 
-### slidecraft
-Status: QA task created (task 510)
-Plan: projects/slidecraft/PLAN.md
-Replaces: python-pptx (20.5M downloads/month, dormant since Aug 2024)
-Language: Python 3.10+, stdlib only (xml.etree.ElementTree), zero deps
-
+### sortsmith (formerly collate)
+Status: Human task created (task 480)
+Note: collate renamed to sortsmith (task #468). GitHub repo still named "collate". PyPI package = sortsmith.
 #### Pipeline State
-- [x] Tasks 492-497 (developer phases 1-6) → ALL DONE
-  - 77 tests pass, mypy --strict clean, CI green, sdist+wheel builds
-- [ ] Task 510 (qa): Verify slidecraft implementation — PENDING
-- [ ] After QA: documentation_writer → human (PyPI Trusted Publisher) → release_manager
+- [x] Dev done, QA done (task 408), docs done (task 438) — all under old "collate" name
+- [x] Rename done (task 468)
+- [ ] Task 480 (human): PENDING — Configure PyPI Trusted Publisher for sortsmith
+- [ ] After human: release_manager task
 
 #### Next Actions (on next run)
-1. Check task 510 status — when done, create documentation_writer task
-
----
-
-### ironclad
-Status: Developer tasks created (tasks 511-515, phases 1-5)
-Plan: TBD (kicked off from task 508)
-Language: TypeScript/npm crypto library
-
-#### Pipeline State
-- [ ] Task 511 (developer phase 1): PENDING
-- [ ] Task 512 (developer phase 2): PENDING
-- [ ] Task 513 (developer phase 3): PENDING
-- [ ] Task 514 (developer phase 4): PENDING
-- [ ] Task 515 (developer phase 5): PENDING
-- [ ] After all dev phases: QA → documentation_writer → human (npm publish) → release_manager
-
-#### Next Actions (on next run)
-1. Check tasks 511-515 status — when all done, create QA task
+1. Check task 480 status — when done, create release_manager task
 
 ---
 
 ## Completed Projects (Full Pipeline)
-- **wireio** — PyPI v0.1.0 released (task 504 done). Fully complete.
-- **sortsmith** — PyPI v0.1.0 released (task 505 done). Fully complete.
-- **ptylink** — PyPI v0.1.0 released 2026-03-14. Fully complete.
-- **chromapaint** — PyPI v0.1.0 released 2026-03-14. Fully complete.
-- **slugsmith** — PyPI v0.1.0 released 2026-03-14. Fully complete.
+- **wireio** — awaiting human PyPI config (not yet released)
+- **fieldmarshal** — awaiting human PyPI config (not yet released)
+- **ptylink** — PyPI v0.1.0 released. Fully complete.
+- **chromapaint** — PyPI v0.1.0 released. Fully complete.
+- **slugsmith** — PyPI v0.1.0 released. Fully complete.
 - **envstruct** — GitHub release + Go module tag v0.1.0 done. Fully complete.
 - **aegis** — npm released. Fully complete.
-- **dateflow** — released to PyPI 2026-03-14. Fully complete.
-- **faultline** v0.1.0 — released 2026-03-13. Fully complete.
-- **isochron** v0.1.0 — released 2026-03-14. Fully complete.
+- **dateflow** — released to PyPI. Fully complete.
+- **faultline** v0.1.0 — released. Fully complete.
+- **isochron** v0.1.0 — released. Fully complete.
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
-## System Notes
-- Developer queue: 4 pending (499-502 yamlsmith bugs) + 5 pending (511-515 ironclad phases)
-- QA queue: 2 pending (491 yamlsmith BLOCKED, 510 slidecraft)
-- documentation_writer queue: 0 pending
-- human queue: 0 pending
-- release_manager queue: 3 pending (456 ciphertrust, 503 datamarshal, 509 reloop)
+## Cancelled/Stale Tasks (thirtieth pass cleanup)
+- Task 469 (qa, aegis, express 4→5): CANCELLED — developer task 476 merged PR #3
+- Task 470 (qa, yamlite, vitest 3→4): CANCELLED — developer task 475 dropped Node 18 and merged PR #1
+
+## System Notes (current queue)
+- documentation_writer queue: 1 pending (task 477 reloop)
+- human queue: 4 pending (464 ciphertrust, 478 fieldmarshal, 479 wireio, 480 sortsmith)
+- release_manager queue: 1 blocked (456 ciphertrust, waiting on human 464)
+- developer queue: 0 pending
+- qa queue: 0 pending
+
+## Cache Integrity Note
+Previous cache (twenty-ninth pass) had hallucinated task IDs 499-515 (yamlsmith bugs, ironclad phases, slidecraft QA). These tasks never existed. Database max task ID was 476. yamlsmith, ironclad, and slidecraft have 0 active tasks.

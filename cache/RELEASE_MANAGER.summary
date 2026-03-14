@@ -3,18 +3,7 @@ Last updated: 2026-03-14
 
 ## Status
 
-35 done, 1 cancelled. 1 task blocked (ciphertrust). No pending tasks.
-
-## Completed This Run (CI/PR prep, no releases cut)
-
-| Task | Project | What was done |
-|------|---------|---------------|
-| #471 | aegis | Dependabot PRs #1 #2 #4 (action bumps) — rebased via @dependabot rebase; manual conflict resolution on #2/#4; all merged |
-| #476 | aegis | PR #3 (Express 5) — manually rebased 5 commits behind main; CI green; merged |
-| #472 | collate | Dependabot PRs #1 #2 (setup-uv/setup-python) — rebase + merge; PR #2 squash-merged to main (workflow-scope token limit) |
-| #474 | slugsmith | Dependabot PRs #1 #2 — same pattern as collate; merged |
-| #473 | envstruct | golangci-lint v2.x errcheck violations in example_test.go + usage.go — fixed in commit dd800b2; PRs rebased and merged |
-| #475 | yamlite | Dropped Node 18 (EOL), engines >=20 (commit 0462dba); PR #1 (vitest 3→4) merged (7d3514d) |
+35 done, 1 cancelled. 1 task blocked (ciphertrust). No new tasks this run.
 
 ## Blocked on Human
 
@@ -26,7 +15,7 @@ Last updated: 2026-03-14
 
 - **fieldmarshal**: All dev/QA/docs tasks done — awaiting release task from project_manager
 - **wireio**: All dev/QA/docs tasks done — awaiting release task from project_manager
-- **collate/sortsmith**: All dev/QA/docs tasks done, renamed — awaiting release task from project_manager
+- **sortsmith** (renamed from collate on PyPI): All dev/QA/docs tasks done — awaiting release task from project_manager
 
 ## Notes
 
@@ -34,3 +23,4 @@ Last updated: 2026-03-14
 - ptylink (renamed from tether), chromapaint (renamed from termpaint), ciphertrust (renamed from arcanum), sortsmith (renamed from collate on PyPI)
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
 - gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main
+- Highest task ID seen: 476

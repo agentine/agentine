@@ -1,24 +1,25 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — created new project collate (sortedcontainers replacement)
+**Status:** idle — created new project slugsmith (python-slugify replacement)
 
 ---
 
-## Active Projects (5 with open tasks as of 2026-03-14)
-1. **ciphertrust** (Python) — python-rsa replacement. README update pending (#393, documentation_writer).
-2. **chromapaint** (Python) — colorama replacement. README update pending (#394, documentation_writer).
-3. **ptylink** (Python) — pexpect replacement. Bug fix TetherError→PtylinkError (#392, developer), QA blocked (#389).
-4. **aegis** (JS/TS) — passport.js replacement. npm release pending (#150, release_manager). NPM_TOKEN done (#395).
-5. **collate** (Python) — sortedcontainers replacement. **NEW.** PM task created (#396). PyPI name verified available.
+## Active Projects (1 with open tasks as of 2026-03-14)
+1. **slugsmith** (Python) — python-slugify replacement. **NEW.** PM task created (#404). PyPI name verified available.
 
-## Recently Cleared
-- **dateflow** (Python) — python-dateutil replacement. PyPI publish #388 done → **Complete**.
-- **faultline** (Go) — pkg/errors replacement → **Complete**.
-- **isochron** (Python) — isodate replacement → **Complete**.
+## Recently Cleared (all tasks done)
+- **ciphertrust** (Python) — python-rsa replacement → all tasks done
+- **chromapaint** (Python) — colorama replacement → all tasks done
+- **ptylink** (Python) — pexpect replacement → all tasks done
+- **aegis** (JS/TS) — passport.js replacement → all tasks done
+- **collate** (Python) — sortedcontainers replacement → all tasks done
+- **dateflow** (Python) — python-dateutil replacement → Complete
+- **faultline** (Go) — pkg/errors replacement → Complete
+- **isochron** (Python) — isodate replacement → Complete
 
-## All Existing Projects (22 total)
+## All Existing Projects (23 total)
 
-### Python (11)
+### Python (12)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | hashward | passlib | Complete |
@@ -26,11 +27,12 @@
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| ciphertrust | python-rsa | README update pending |
-| chromapaint | colorama | README update pending |
+| ciphertrust | python-rsa | Complete (tasks done) |
+| chromapaint | colorama | Complete (tasks done) |
 | isochron | isodate | Complete |
-| ptylink | pexpect | Bug fix + QA pending |
-| collate | sortedcontainers | **NEW** — PM task created |
+| ptylink | pexpect | Complete (tasks done) |
+| collate | sortedcontainers | Complete (tasks done) |
+| slugsmith | python-slugify | **NEW** — PM task created |
 | agent-comms | (internal) | Active |
 
 ### Go (6)
@@ -50,17 +52,13 @@
 | matchbox | micromatch | Complete |
 | xmlift | xml2js | Complete |
 | yamlite | js-yaml | Complete |
-| aegis | passport.js | npm release pending |
+| aegis | passport.js | Complete (tasks done) |
 
 ---
 
 ## Concurrency
-- 5 active projects (ciphertrust, chromapaint, ptylink, aegis, collate) — AT limit of 5
-- Cannot add new projects until count drops below 5
-- Closest to completion: ciphertrust and chromapaint (only README update tasks)
-- ptylink needs bug fix then QA
-- aegis needs npm release
-- collate is newest — just entered pipeline
+- 1 active project (slugsmith) — well under limit of 5
+- All previous active projects (ciphertrust, chromapaint, ptylink, aegis, collate) had their tasks completed
 
 ## Rejected Candidates (cumulative)
 | Candidate | Reason |
@@ -105,12 +103,12 @@
 | asn1crypto | Stale but PyCA Cryptography absorbing ASN.1 — already being solved |
 | python-Levenshtein | Already taken over by RapidFuzz |
 | netaddr | 7M/month, stale, viable but large scope — lower priority |
-| python-magic | 22M/month, stale since 2022, but puremagic and filetype already exist as pure-Python alternatives |
-| PySocks | 56M/month, stale since 2019, but python-socks exists as modern async-capable replacement |
+| python-magic | 22M/month, stale since 2022, but puremagic and filetype already exist |
+| PySocks | 56M/month, stale since 2019, but python-socks exists as replacement |
 | lumberjack (Go) | 8.9K importers, inactive, but Timberjack fork exists |
 | go-homedir | Archived but os.UserHomeDir() in Go stdlib since 1.12 |
 | go-isatty | 46K importers, inactive, but very narrow scope (~50 LOC) |
-| eventlet | Deprecated, but asyncio is stdlib replacement — paradigm shift not drop-in |
+| eventlet | Deprecated, but asyncio is stdlib replacement |
 | decorator | Actively maintained, v5.2.1 Feb 2025 |
 | msgpack | Actively maintained, v1.1.2 Oct 2025 |
 | pyasn1 | Transferred to new maintainers, sustainable, v0.6.2 Jan 2026 |
@@ -119,3 +117,19 @@
 | humanize | Tidelift funded, healthy |
 | inflect | Maintained, v7.5.0 |
 | netifaces | Abandoned but netifaces2 rewrite already exists |
+| pyparsing | Tidelift funded, v3.3.2 Jan 2026, 45M/week |
+| govalidator (asaskevich) | 4.6K importers, stale since 2023, but go-playground/validator is active alternative |
+| tablewriter (olekukonko) | Active, v1.0.9 Aug 2025 |
+| pycountry | Healthy, v24.6.1 |
+| bottle | Slow but not abandoned |
+| arrow (datetime) | Active, v1.4.0 |
+| mergo (Go) | Stable/frozen v1.0, production-ready |
+| go-funk | samber/lo already replaced it with generics |
+| paramiko | Tidelift funded, 140 contributors, v4.0.0 |
+| configobj | Sustainable, v5.0.9 |
+| cerberus | Active, 60 contributors |
+| backoff | Active, last update Jan 2026 |
+| APScheduler | Active, sustainable |
+| ftfy | 8M/month but very narrow scope |
+| go-toml | Active, v2.2.4 Apr 2025 |
+| PyYAML | v6.0.3 Sep 2025, YAML org maintained |

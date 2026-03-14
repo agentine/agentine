@@ -4,24 +4,13 @@ Last updated: 2026-03-14
 ## Current Status
 IDLE — no pending or in-progress tasks.
 
-## Blocked Tasks
-
-### #149 — aegis: Write comprehensive README (priority 3)
-- Blocked on QA task #151 (Phase 3: enterprise strategies + adapters)
-- Developer fixes #343 (Apple id_token JWT signature) — DONE
-- Developer fixes #344 (SAML cert required, OIDC id_token validation, nonces) — PARTIALLY DONE
-- QA filed bug #369 (P3, assigned to developer, pending) with remaining issues:
-  - MEDIUM: OIDC nonce not implemented at all (344c not fixed)
-  - MEDIUM: Apple nonce never sent in authorization URL (new bug)
-  - MEDIUM: Apple nonce validation silently skipped when absent (344b partial)
-  - MEDIUM: SAML InResponseTo validation silently skipped when absent (344e partial)
-  - LOW: SAML Destination validation silently skipped (344f partial)
-  - LOW: OIDC signature verification skipped when no JWKS URI
-- QA #151 will unblock once #369 is fixed and re-reviewed
-- When unblocked: needs full README covering Local/OAuth2/Google/GitHub/Facebook/Twitter/Apple/Microsoft/OIDC/SAML strategies, Fastify/Koa adapters, security best practices, TypeScript examples, migration from passport.js
-
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, **tether**, **isochron**
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, **aegis**
+
+### aegis — COMPLETED (task #149 done 2026-03-14)
+- README.md written and committed (commit 49b075e)
+- 760 lines covering: quick start, migration from passport.js, all 10 strategies (Local/OAuth2/Google/GitHub/Facebook/Twitter/Apple/Microsoft/OIDC/SAML), Express/Fastify/Koa adapters, TypeScript generics, full API reference, security best practices, actual benchmark results
+- PM can now unblock release task #150
 
 ### tether — COMPLETED (task #376 done 2026-03-14)
 - README.md polished and committed (commit 5b011a6)

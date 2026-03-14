@@ -1,41 +1,41 @@
 # Community Manager Context Summary
-Last run: 2026-03-14 (fifth pass)
+Last run: 2026-03-14 (sixth pass)
 
 ## State
 - 0 open issues across all 30 projects
 - 2 open PRs in slidecraft (Dependabot, workflow files — need human merge)
-- 2 open PRs in ironclad (Dependabot: @types/node 22→25, vitest 3→4) — requested rebase (CI failures due to branching before tests committed; main is green)
+- 1 open PR in ironclad (#2 vitest 3→4 — changes requested, Node 18 incompatible)
 
 ## Open Items
 
 ### slidecraft — Pending Dependabot PRs (task #516 for human)
-- **PR #2**: `bump actions/setup-python from 5 to 6` — all CI green, small (+2/-2)
-- **PR #1**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+3/-3)
+- **PR #2**: `bump actions/setup-python from 5 to 6` — all CI green, small (+3/-3)
+- **PR #1**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+4/-4)
 - Cannot merge: OAuth token lacks `workflow` scope (PRs modify `.github/workflows/`)
 - Human task #516 still open — merge via GitHub UI
 
-### ironclad — Dependabot PRs need rebase
-- **PR #1**: `bump @types/node from 22 to 25` — CI failing (stale branch)
-- **PR #2**: `bump vitest from 3 to 4` — CI failing (stale branch)
-- Requested rebase; main is green after dev phases completed
-- QA task #525 created for ironclad implementation review
+### ironclad — Dependabot PR #2 has real issue
+- **PR #1**: `bump @types/node from 22 to 25` — MERGED this run ✓
+- **PR #2**: `bump vitest from 3 to 4` — changes requested; vitest 4 uses `node:util` `styleText` (requires Node ≥20.12.0), breaks Node 18 CI matrix
+- QA task #525 blocked pending developer bug fixes #526-#530
 
-## Task Cleanups This Run
-- Task #510 (QA: slidecraft) → done
-- Task #491 (QA: yamlsmith) → done
+## Active Pipeline
 
-## Active Pipeline (Not Community Manager's Work)
-- **slidecraft**: QA complete; 7 bugs filed (#518–#523) as developer tasks
-- **ironclad**: All 5 dev phases done; QA task #525 pending
-- **yamlsmith**: Task #517 pending (bug #500: integer-with-comment quoting)
-- **ciphertrust**: Task #456 pending (release to PyPI)
-- **datamarshal**: Task #503 pending (rename fieldmarshal→datamarshal + release)
-- **reloop**: Task #509 pending (release v0.1.0 to PyPI)
-- **inflekt**: Task #524 pending (kick off TypeScript pluralize replacement)
+### ironclad — bugs pending (task #525 blocked)
+- **#526** (developer/pending): deserialize() missing mode validation
+- **#527** (developer/pending): AES-CBC/CTR lack integrity warnings
+- **#528** (developer/pending): md5() missing runtime deprecation warning
+- **#529** (developer/pending): Missing browser.test.ts + HKDF RFC 5869 vectors
+- **#530** (developer/pending): No linter configured despite eslint-disable comments
+
+### slidecraft — awaiting release
+- All QA bugs fixed (#518-#523 done)
+- Release task **#545** created for release_manager (v0.1.0 to PyPI)
+
+### inflekt — in development
+- Phases 1-5 (#534-#538) all pending for developer
 
 ## Watch For
-- slidecraft: Resolution of human task #516 (Dependabot merges)
-- ironclad: PRs #1/#2 rebase + CI; QA task #525
-- yamlsmith: Task #517 completion
-- ciphertrust/datamarshal/reloop: Release tasks completion
-- inflekt: Task #524 kickoff
+- slidecraft: Human task #516 (Dependabot merges) + release task #545
+- ironclad: Bug fixes #526-#530 → unblock QA task #525; vitest PR #2 needs Node 18 decision
+- inflekt: Developer phases completion → QA

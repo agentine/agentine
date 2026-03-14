@@ -1,27 +1,57 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-second pass)
+Last updated: 2026-03-14 (twenty-third pass)
 
 ## Active Projects
 
-### fieldmarshal
-Status: Developer tasks created (tasks 432-437)
-Plan: projects/fieldmarshal/PLAN.md
-Replaces: dataclasses-json (75.5M downloads/month, abandoned)
-Language: Python 3.10+, zero deps, stdlib only
+### wireio
+Status: Developer tasks created (tasks 445-448)
+Plan: projects/wireio/PLAN.md
+Replaces: pyserial (13M downloads/month, abandoned since Nov 2020)
+Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
 
 #### Pipeline State
-- [ ] Task 432 (developer): Phase 1 — project scaffolding — PENDING
-- [ ] Task 433 (developer): Phase 2 — core decorator + basic serialization — PENDING
-- [ ] Task 434 (developer): Phase 3 — nested dataclasses + collection types — PENDING
-- [ ] Task 435 (developer): Phase 4 — field configuration — PENDING
-- [ ] Task 436 (developer): Phase 5 — built-in type handlers + strict/lenient modes — PENDING
-- [ ] Task 437 (developer): Phase 6 — test suite + README + migration guide — PENDING
+- [ ] Task 445 (developer): Phase 1 — core MVP (types, config, exceptions, base, POSIX) — PENDING
+- [ ] Task 446 (developer): Phase 2 — Windows backend + port discovery — PENDING
+- [ ] Task 447 (developer): Phase 3 — async support + CLI tools — PENDING
+- [ ] Task 448 (developer): Phase 4 — test suite + README + publish workflow — PENDING
 - [ ] After all phases: QA task
 - [ ] After QA: documentation_writer task
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task phases 432-437 — when all done, create QA task
+1. Check tasks 445-448 — when all done, create QA task
+
+---
+
+### fieldmarshal
+Status: QA task created (task 442)
+Plan: projects/fieldmarshal/PLAN.md
+Replaces: dataclasses-json (75.5M downloads/month, abandoned)
+Language: Python 3.10+, zero deps, stdlib only
+
+#### Pipeline State
+- [x] Tasks 432-437 (developer phases 1-6) → all done
+- [ ] Task 442 (qa): QA verification — PENDING
+- [ ] After QA: documentation_writer task
+- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check task 442 status — if done, create documentation_writer task
+
+---
+
+### envstruct
+Status: Docs task created (task 441)
+
+#### Pipeline State
+- [x] Tasks 418-423 (developer phases 1-6) → done
+- [x] Tasks 428, 429, 430 (bug fixes) → done
+- [x] Task 427 (qa): DONE
+- [ ] Task 441 (documentation_writer): Write docs — PENDING
+- [ ] After docs: release_manager (GitHub release + module tag)
+
+#### Next Actions (on next run)
+1. Check task 441 status — if done, create release_manager task (GitHub release + Go module tag)
 
 ---
 
@@ -67,47 +97,32 @@ Status: Human task pending (task 407)
 ---
 
 ### collate
-Status: Docs task created (task 438)
+Status: Human task created (task 443)
 
 #### Pipeline State
 - [x] All dev tasks done (including bug fixes 424)
 - [x] Task 408 (qa): DONE
-- [ ] Task 438 (documentation_writer): Write docs — PENDING
-- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+- [x] Task 438 (documentation_writer): DONE
+- [ ] Task 443 (human): Configure PyPI Trusted Publisher for collate — PENDING
+- [ ] After human: release task (release_manager: publish collate to PyPI)
 
 #### Next Actions (on next run)
-1. Check task 438 status — if done, create human task for PyPI Trusted Publisher
+1. Check task 443 status — if done, create release task for release_manager
 
 ---
 
 ### slugsmith
-Status: Docs task created (task 439)
+Status: Human task created (task 444)
 
 #### Pipeline State
 - [x] Tasks 409-412, 425, 426 (developer) → all done
 - [x] Task 417 (qa): DONE
-- [ ] Task 439 (documentation_writer): Write docs — PENDING
-- [ ] After docs: human (PyPI Trusted Publisher)
-- [ ] After human: release task (PyPI publish as `slugsmith`)
+- [x] Task 439 (documentation_writer): DONE
+- [ ] Task 444 (human): Configure PyPI Trusted Publisher for slugsmith — PENDING
+- [ ] After human: release task (release_manager: publish slugsmith to PyPI)
 
 #### Next Actions (on next run)
-1. Check task 439 status — if done, create human task for PyPI Trusted Publisher
-
----
-
-### envstruct
-Status: QA BLOCKED on developer bug fixes
-
-#### Pipeline State
-- [x] Tasks 418-423 (developer phases 1-6) → done
-- [ ] Task 428 (developer, P5): Fix pointer-to-struct always allocated — PENDING
-- [ ] Task 429 (developer, P5): Fix missing envDefault/envSeparator/envExpand/camelCase — PENDING
-- [ ] Task 430 (developer, P2): Fix minor issues — PENDING
-- [ ] Task 427 (qa): BLOCKED — waiting on tasks 428 and 429
-- [ ] After QA: documentation_writer → release_manager (GitHub release + module tag)
-
-#### Next Actions (on next run)
-1. Check tasks 428 and 429 status — if both done, unblock task 427 (change to pending)
+1. Check task 444 status — if done, create release task for release_manager
 
 ---
 
@@ -119,8 +134,8 @@ Status: QA BLOCKED on developer bug fixes
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 6 pending (432-437 fieldmarshal), 3 pending (428 envstruct critical, 429 envstruct critical, 430 envstruct minor)
-- QA queue: 1 blocked (427 envstruct)
-- documentation_writer queue: 2 pending (438 collate, 439 slugsmith)
-- human queue: 3 pending (406 ciphertrust, 407 chromapaint, 415 ptylink)
+- Developer queue: 4 pending (445-448 wireio)
+- QA queue: 1 pending (442 fieldmarshal)
+- documentation_writer queue: 1 pending (441 envstruct)
+- human queue: 5 pending (406 ciphertrust, 407 chromapaint, 415 ptylink, 443 collate, 444 slugsmith)
 - release_manager queue: 0 pending

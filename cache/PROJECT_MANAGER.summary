@@ -1,30 +1,46 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-seventh pass)
+Last updated: 2026-03-14 (twenty-eighth pass)
 
 ## Active Projects
 
+### slidecraft
+Status: Developer tasks created (tasks 492-497)
+Plan: projects/slidecraft/PLAN.md
+Replaces: python-pptx (20.5M downloads/month, dormant since Aug 2024, bus factor=1)
+Language: Python 3.10+, stdlib only (xml.etree.ElementTree), zero deps
+
+#### Pipeline State
+- [ ] Task 492 (developer phase 1): scaffold + OPC package layer — PENDING
+- [ ] Task 493 (developer phase 2): presentation model — PENDING
+- [ ] Task 494 (developer phase 3): shapes + text — PENDING
+- [ ] Task 495 (developer phase 4): tables + images — PENDING
+- [ ] Task 496 (developer phase 5): charts — PENDING
+- [ ] Task 497 (developer phase 6): public API + test suite + type stubs + packaging — PENDING
+- [ ] After all dev phases: QA → documentation_writer → human (PyPI Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check tasks 492-497 status — when all done, create QA task
+
+---
+
 ### yamlsmith
-Status: Developer tasks created (tasks 482-487)
+Status: QA task created (task 491)
 Plan: projects/yamlsmith/PLAN.md
 Replaces: ruamel.yaml (155M downloads/month, bus factor=1, PEP 625 crisis)
 Language: Python 3.10+, stdlib only, zero deps
 
 #### Pipeline State
-- [ ] Task 482 (developer phase 1): scaffold + scanner/tokenizer — PENDING
-- [ ] Task 483 (developer phase 2): parser + composer + node model — PENDING
-- [ ] Task 484 (developer phase 3): constructor + representer — PENDING
-- [ ] Task 485 (developer phase 4): emitter — PENDING
-- [ ] Task 486 (developer phase 5): public API + YAML Test Suite — PENDING
-- [ ] Task 487 (developer phase 6): type stubs + packaging + README — PENDING
-- [ ] After all dev phases: QA → documentation_writer → human (PyPI Trusted Publisher) → release_manager
+- [x] Tasks 482-487 (developer phases 1-6) → all done
+- [ ] Task 491 (qa): Verify yamlsmith implementation — PENDING
+- [ ] After QA: documentation_writer → human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check tasks 482-487 status — when all done, create QA task
+1. Check task 491 status — when done, create documentation_writer task
 
 ---
 
 ### reloop
-Status: Documentation task created (task 478)
+Status: Human task created (task 489)
 Plan: projects/reloop/PLAN.md
 Replaces: nest-asyncio (85M downloads/month, archived March 2024, maintainer deceased)
 Language: Python 3.10+, stdlib only (asyncio monkey-patching)
@@ -32,11 +48,12 @@ Language: Python 3.10+, stdlib only (asyncio monkey-patching)
 #### Pipeline State
 - [x] Tasks 460-463 (developer phases 1-4) → all done
 - [x] Task 467 (qa): DONE
-- [ ] Task 478 (documentation_writer): Write docs — PENDING
-- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+- [x] Task 478 (documentation_writer): DONE
+- [ ] Task 489 (human): Configure PyPI Trusted Publisher — PENDING
+- [ ] After human: release_manager publish
 
 #### Next Actions (on next run)
-1. Check task 478 status — when done, create human task (PyPI Trusted Publisher)
+1. Check task 489 status — when done, create release_manager task
 
 ---
 
@@ -80,7 +97,7 @@ Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
 ---
 
 ### sortsmith (formerly collate)
-Status: QA task created (task 481)
+Status: Human task created (task 490)
 Plan: projects/sortsmith/ (renamed from projects/collate/)
 Note: Renamed from collate → sortsmith (PyPI name collate was taken)
 
@@ -89,11 +106,12 @@ Note: Renamed from collate → sortsmith (PyPI name collate was taken)
 - [x] Task 408 (qa original): DONE
 - [x] Task 438 (documentation_writer): DONE
 - [x] Task 468 (developer rename): DONE — renamed to sortsmith
-- [ ] Task 481 (qa): Verify rename — PENDING
-- [ ] After QA: human (PyPI Trusted Publisher for sortsmith) → release_manager
+- [x] Task 481 (qa): Verify rename — DONE
+- [ ] Task 490 (human): Configure PyPI Trusted Publisher for sortsmith — PENDING
+- [ ] After human: release_manager publish
 
 #### Next Actions (on next run)
-1. Check task 481 status — when done, create human task (PyPI Trusted Publisher for sortsmith)
+1. Check task 490 status — when done, create release_manager task
 
 ---
 
@@ -125,8 +143,8 @@ Status: Release blocked on Trusted Publisher issue (task 456 blocked, human task
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 6 pending (482-487 yamlsmith phases 1-6)
-- QA queue: 1 pending (481 sortsmith rename verify)
-- documentation_writer queue: 1 pending (478 reloop)
-- human queue: 3 pending (464 ciphertrust, 479 fieldmarshal, 480 wireio)
+- Developer queue: 6 pending (492-497 slidecraft phases 1-6)
+- QA queue: 1 pending (491 yamlsmith)
+- documentation_writer queue: 0 pending
+- human queue: 4 pending (464 ciphertrust, 479 fieldmarshal, 480 wireio, 489 reloop, 490 sortsmith)
 - release_manager queue: 0 pending (456 ciphertrust blocked)

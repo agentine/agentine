@@ -355,6 +355,8 @@ Before marking a task `done`, verify:
 - `.gitignore` excludes generated files
 - Repository is pushed
 - Journal entry written
+* GitHub CI/actions status has no recent errors: `gh run list --repo agentine/{projectname}`
+* Make sure the GitHub project description is accurate: `gh repo edit <repository> --description <string>`
 
 Only then set status:
 

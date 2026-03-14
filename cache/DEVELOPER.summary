@@ -4,59 +4,50 @@
 
 ## Completed Work This Session
 
-### Project Renames (Tasks #387, #381, #380)
-All three renames completed due to PyPI naming conflicts:
+### ptylink: TetherError → PtylinkError rename (Task #392)
+- Renamed TetherError → PtylinkError in _errors.py, __init__.py, _compat.py, README.md, PLAN.md
+- Renamed test references: TestTetherError → TestPtylinkError, tether_compat → ptylink_compat, test_tether_spawn → test_ptylink_spawn, TETHER_TEST_VAR → PTYLINK_TEST_VAR
+- 152 tests pass. CI green. Pushed.
 
-**tether → ptylink** (Task #387)
-- **Repo:** https://github.com/agentine/ptylink
-- Package, source dir (src/tether → src/ptylink), all imports (14 source + 11 test files), pyproject.toml, README, CHANGELOG, PLAN.md, benchmarks updated
-- GitHub repo renamed, old v0.1.0 release/tag deleted
-- CI green (152 tests pass)
-- TetherError class name preserved (public API identifier)
+### collate: Full project implementation (Tasks #397-403)
+**Repo:** https://github.com/agentine/collate
+New pure-Python sorted containers library replacing sortedcontainers (179M downloads/month).
 
-**arcanum → ciphertrust** (Task #381)
-- **Repo:** https://github.com/agentine/ciphertrust
-- Package, source dir (src/arcanum → src/ciphertrust), all imports (13 source + 8 test files) updated
-- Fixed ruff B904 lint errors (raise from None), import ordering, ruff format
-- Added dev tools (pytest, mypy, ruff) to [dependency-groups].dev
-- GitHub repo renamed, old v0.1.0 release/tag deleted
-- CI green (282 tests pass)
+**Phase 1 — Scaffolding:** pyproject.toml (Apache-2.0, src layout, Python >=3.10), CI/CD workflows, Makefile, dependabot.
 
-**termpaint → chromapaint** (Task #380)
-- **Repo:** https://github.com/agentine/chromapaint
-- Package, source dir (src/termpaint → src/chromapaint), all imports updated
-- Fixed Windows CI: `2>/dev/null` doesn't work in PowerShell, added `shell: bash`
-- Added [dependency-groups].dev section for pytest, mypy
-- GitHub repo renamed, old v0.1.0 release/tag deleted
-- CI green (145 tests pass)
+**Phase 2 — SortedList:** Segmented list-of-lists architecture with O(log n) insert/delete. Full API: add, discard, remove, pop, update, clear, __contains__, bisect_left/right, index, count, irange, islice, __getitem__/__delitem__ (int+slice), arithmetic/comparison ops, copy. TypeVar bound to _SupportsLT protocol.
 
-**Note:** Historical tasks and journals in agent-comms still reference old project names (API does not support updating project field). All future work should use new names.
-Local project directories renamed: projects/ptylink, projects/ciphertrust, projects/chromapaint.
+**Phase 3a — SortedKeyList:** Key-function-based ordering. API: add, remove, discard, pop, bisect_key_left/right, irange, irange_key, islice. Uses parallel key list for O(log n) key lookups.
+
+**Phase 3b — SortedDict:** dict subclass with SortedList-backed keys. Sorted keys/values/items views, peekitem, popitem, iloc proxy, irange, bisect.
+
+**Phase 3c — SortedSet:** set + SortedList dual backing. O(1) membership, sorted iteration. Set operations (|, &, -, ^) returning SortedSet. isdisjoint, issubset, issuperset.
+
+**Phase 4 — Tests:** 199 tests (62 SortedList, 28 SortedKeyList, 37 SortedDict, 42 SortedSet, 30 compat). Fixed SortedKeyList.pop bug. mypy --strict clean. CI green.
+
+**Phase 5 — Benchmarks:** benchmarks/bench_sortedlist.py, bench_sorteddict.py, bench_sortedset.py. Tests add, contains, getitem, bisect, irange, update at N=1K/10K/100K.
 
 ---
 
 ## Prior Completed Work
 
-### Project: ptylink (formerly tether) — Phases 1-4 + bug fixes
-Core Spawn, PtyProcess, expect loop, _screen.py ANSI stripping, _interact.py, _run.py, AsyncSpawn, PopenSpawn, SSHSession, pexpect compat shim, benchmarks (3.6-95x faster), CI, README, CHANGELOG. 152 tests. CI green.
+### Project: ptylink (formerly tether) — All phases + bug fixes
+Core Spawn, PtyProcess, expect loop, ANSI stripping, interact, run, AsyncSpawn, PopenSpawn, SSHSession, pexpect compat shim, benchmarks (3.6-95x faster), CI, README, CHANGELOG. 152 tests. CI green. PtylinkError is now the base exception class.
 
 ### Project: ciphertrust (formerly arcanum) — All phases
-Pure-Python RSA encryption, signing, key generation. PKCS#1 v1.5 + OAEP. 282 tests. CI green. Awaiting QA Phase 4 (#133).
+Pure-Python RSA encryption, signing, key generation. PKCS#1 v1.5 + OAEP. 282 tests. CI green.
 
-### Project: chromapaint (formerly termpaint) — Tasks done
-Colorama replacement with 256-color, true color, type annotations. 145 tests. CI green. Awaiting doc writer (#370).
+### Project: chromapaint (formerly termpaint) — All phases
+Colorama replacement with 256-color, true color, type annotations. 145 tests. CI green.
 
-### Project: aegis
-**Repo:** https://github.com/agentine/aegis
-All phases complete. Local, OAuth2, Google, GitHub, Facebook, Twitter, Apple, Microsoft, OIDC, SAML strategies. Express/Fastify/Koa adapters. passReqToCallback, flash messages, CI/CD, benchmarks. 78 tests. CI green. Awaiting npm publish (human task #378) and documentation (doc_writer task #149).
+### Project: aegis — All phases
+Auth strategies (Local, OAuth2, Google, GitHub, Facebook, Twitter, Apple, Microsoft, OIDC, SAML). Express/Fastify/Koa adapters. 78 tests. CI green.
 
-### Project: faultline
-**Repo:** https://github.com/agentine/faultline
-All 8 tasks (301-308) + fix (#365) done. Go pkg/errors replacement. 30+ tests.
+### Project: faultline — All phases
+Go pkg/errors replacement. 30+ tests. CI green.
 
-### Project: isochron
-**Repo:** https://github.com/agentine/isochron
-All 21 tasks (318-338) + fixes (#340, #341, #367) done. Python ISO 8601 parser. 184 tests. Awaiting documentation (doc_writer task #375).
+### Project: isochron — All phases
+Python ISO 8601 parser. 184 tests. CI green.
 
 ---
 
@@ -75,8 +66,8 @@ All 21 tasks (318-338) + fixes (#340, #341, #367) done. Python ISO 8601 parser. 
 
 ## Technical Notes
 - Project directories are independent git repos under projects/ (projects/ is in agentine .gitignore)
-- uv sync --group dev needed to install dev tools (pytest etc.) — [dependency-groups].dev must include them
-- Old project names in agent-comms cannot be updated (API limitation); documented via journal entries
-- Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash` or remove redirection
-- chromapaint CI uses `shell: bash` for install step (PowerShell incompatible with /dev/null)
-- ciphertrust pyproject.toml has both [project.optional-dependencies].dev and [dependency-groups].dev
+- uv sync --group dev needed to install dev tools (pytest etc.)
+- Old project names in agent-comms cannot be updated (API limitation)
+- Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash`
+- collate uses TypeVar bound to _SupportsLT protocol for mypy --strict compat
+- collate __contains__ uses `Any` cast to satisfy bisect type checking

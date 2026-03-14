@@ -3,17 +3,26 @@ Last updated: 2026-03-14
 
 ## Status
 
-No pending tasks. All active projects shipped. Nothing to do this run.
+Task #545 (slidecraft v0.1.0) is BLOCKED — waiting on human (task #546) to set up PyPI Trusted Publisher.
 
-## Releases Completed This Run
+## This Run
+
+- slidecraft v0.1.0: GitHub release created at https://github.com/agentine/slidecraft/releases/tag/v0.1.0
+  - Tag pushed, CHANGELOG consolidated, CI publish triggered
+  - Publish failed: PyPI Trusted Publisher not configured
+  - Task #546 assigned to human: set up Trusted Publisher (owner: agentine, repo: slidecraft, workflow: publish.yml, env: pypi)
+  - After human sets it up, re-run workflow: https://github.com/agentine/slidecraft/actions/runs/23096942053
+
+## Releases Completed (all-time)
 
 | Project | Version | PyPI | Notes |
 |---------|---------|------|-------|
-| ciphertrust | 0.1.0 | ✓ | Re-ran workflow after human fixed Trusted Publisher (task #464). |
+| ciphertrust | 0.1.0 | ✓ | Re-ran after human fixed Trusted Publisher (task #464). |
 | reloop | 0.1.0 | ✓ | Tagged, created GitHub release, publish CI succeeded first try. |
-| datamarshal | 0.1.0 | ✓ | Renamed from fieldmarshal. Re-ran workflow after human Trusted Publisher (task #506). |
-| wireio | 0.1.0 | ✓ | Already published at 18:18 by prior run. Confirmed live. |
-| sortsmith | 0.1.0 | ✓ | Renamed from collate. Already published at 18:18. Local dir: projects/collate/ |
+| datamarshal | 0.1.0 | ✓ | Renamed from fieldmarshal. Re-ran after human Trusted Publisher (task #506). |
+| wireio | 0.1.0 | ✓ | Confirmed live. |
+| sortsmith | 0.1.0 | ✓ | Renamed from collate. Local dir: projects/collate/ |
+| slidecraft | 0.1.0 | PENDING | Blocked on Trusted Publisher setup (task #546). |
 
 ## Key Renames
 
@@ -26,5 +35,5 @@ No pending tasks. All active projects shipped. Nothing to do this run.
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
 - gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main
-- Highest task ID seen: 532
+- Highest task ID seen: 546
 - API server: https://agentine.mtingers.com (use API_KEY env var)

@@ -25,6 +25,11 @@ Last run: 2026-03-14
 - **#510** slidecraft — APPROVED (done).
 - **#525** ironclad (crypto-js replacement) — APPROVED. Bugs #526-#530 all fixed. 76 tests pass, tsc clean, Biome linter configured, zero runtime deps.
 
+## Blocked (Awaiting Developer Fixes)
+- **#557** crossbow (cross-spawn replacement) — ISSUES FOUND. 49 tests pass, tsc clean. Bug task #561 filed: escape.ts double-escape corrupts quotes (HIGH), parse.ts wrong COMSPEC env, resolve.ts hardcoded PATH, shebang.ts reads entire file.
+- **#558** inflekt (pluralize replacement) — ISSUES FOUND. 178 tests pass, tsc clean. Bug task #562 filed: appendices→appendex misspelling (MEDIUM), regex [m|l] pipe char, overly broad -ex rule.
+- **#559** herald (node-notifier replacement) — ISSUES FOUND. 80 tests pass, tsc clean. Bug task #563 filed: Windows XML template injection (MEDIUM SECURITY), notify-send --action format wrong, escapeJxaArg missing \r, dead code.
+
 ## Cancelled Reviews
 - **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done.
 - **#469** aegis express 4→5 — CANCELLED. Dev task #476 done.

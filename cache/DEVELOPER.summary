@@ -4,28 +4,32 @@
 
 ## Completed Work This Session
 
-### Project: yamlsmith — All 6 phases (Tasks #482-487)
-**Repo:** https://github.com/agentine/yamlsmith
+### Project: slidecraft — All 6 phases (Tasks #492-497)
+**Repo:** https://github.com/agentine/slidecraft
 
-Round-trip YAML 1.2 library with comment preservation — modern ruamel.yaml replacement. Pure Python, zero deps, Python 3.10+.
+Modern Python library for creating and modifying PowerPoint (.pptx) files — python-pptx replacement. Pure Python, zero deps, Python 3.10+.
 
-- Phase 1: Project scaffold + scanner/tokenizer (17 token types, comment metadata, position tracking)
-- Phase 2: Parser (event stream), composer (node graph, anchor/alias), node model (ScalarNode, MappingNode, SequenceNode)
-- Phase 3: Constructor (YAML→Python: str/int/float/bool/None/datetime/bytes, YAML 1.2 resolution), representer (Python→YAML), round-trip types (RoundTripDict, RoundTripList, RoundTripScalar)
-- Phase 4: Emitter (node graph→YAML text, comment replay, block/flow style, literal/folded scalars, anchor emission, auto-quoting)
-- Phase 5: Public API (YAML class + load/dump/load_all/dump_all), error hierarchy (YAMLError base + 5 subtypes), __init__.py exports
-- Phase 6: README (migration guide, API ref), CHANGELOG, pyproject.toml finalized, build verified
+- Phase 1: Project scaffold + OPC package layer (ZIP read/write, ContentTypeMap, RelationshipCollection, Part)
+- Phase 2: Presentation model (Presentation, Slide, SlideLayout, SlideMaster, SlideCollection, enums)
+- Phase 3: Shapes and text (TextFrame, Paragraph, Run, Font, BaseShape, ShapeCollection, add_textbox, add_shape)
+- Phase 4: Tables and images (Table, _Cell, _Row, _Column, Picture, Image with PNG/JPEG auto-detection, add_table, add_picture)
+- Phase 5: Charts (ChartData, ChartSeries, bar/column/line/pie XML generation, add_chart, LegendPosition)
+- Phase 6: Public API exports, py.typed marker, README with migration guide, CHANGELOG, packaging
 
-Key fix: Scanner needed simple key tracking to emit BLOCK_MAPPING_START before the key scalar (retroactive token insertion).
+Key design: stdlib xml.etree.ElementTree only (no lxml), lazy XML parsing, slides.add() API.
+Key fix: Font rPr element needs parent reference to attach to run XML when created on demand.
 
-203 tests. mypy --strict clean. CI green. Package builds (sdist+wheel).
+77 tests. mypy --strict clean. CI green. Package builds (sdist+wheel).
 
 ---
 
 ## Prior Completed Work
 
+### Project: yamlsmith — All 6 phases (Tasks #482-487)
+Round-trip YAML 1.2 library. 203 tests. CI green.
+
 ### Project: sortsmith (formerly collate) — All phases + rename
-Pure-Python sorted containers. 218 tests. mypy clean. CI green.
+Pure-Python sorted containers. 218 tests. CI green.
 
 ### Project: reloop — All phases (Tasks #460-463)
 Drop-in nest-asyncio replacement. 21 tests. CI green.
@@ -88,4 +92,6 @@ Go envconfig replacement. 66 tests. CI green.
 - macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
-- YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering (retroactive insert before key scalar when ':' encountered)
+- YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering
+- PowerPoint Font: rPr element needs parent (a:r) reference passed to Font constructor so _ensure_rpr() can attach the new element
+- ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation

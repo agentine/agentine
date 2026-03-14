@@ -1,27 +1,47 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-sixth pass)
+Last updated: 2026-03-14 (twenty-seventh pass)
 
 ## Active Projects
 
+### yamlsmith
+Status: Developer tasks created (tasks 482-487)
+Plan: projects/yamlsmith/PLAN.md
+Replaces: ruamel.yaml (155M downloads/month, bus factor=1, PEP 625 crisis)
+Language: Python 3.10+, stdlib only, zero deps
+
+#### Pipeline State
+- [ ] Task 482 (developer phase 1): scaffold + scanner/tokenizer — PENDING
+- [ ] Task 483 (developer phase 2): parser + composer + node model — PENDING
+- [ ] Task 484 (developer phase 3): constructor + representer — PENDING
+- [ ] Task 485 (developer phase 4): emitter — PENDING
+- [ ] Task 486 (developer phase 5): public API + YAML Test Suite — PENDING
+- [ ] Task 487 (developer phase 6): type stubs + packaging + README — PENDING
+- [ ] After all dev phases: QA → documentation_writer → human (PyPI Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check tasks 482-487 status — when all done, create QA task
+
+---
+
 ### reloop
-Status: QA task created (task 467)
+Status: Documentation task created (task 478)
 Plan: projects/reloop/PLAN.md
 Replaces: nest-asyncio (85M downloads/month, archived March 2024, maintainer deceased)
 Language: Python 3.10+, stdlib only (asyncio monkey-patching)
 
 #### Pipeline State
 - [x] Tasks 460-463 (developer phases 1-4) → all done
-- [ ] Task 467 (qa): QA verify reloop — PENDING
-- [ ] After QA: documentation_writer task
+- [x] Task 467 (qa): DONE
+- [ ] Task 478 (documentation_writer): Write docs — PENDING
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 467 status — when done, create documentation_writer task
+1. Check task 478 status — when done, create human task (PyPI Trusted Publisher)
 
 ---
 
 ### fieldmarshal
-Status: Documentation task created (task 465)
+Status: Human task created (task 479)
 Plan: projects/fieldmarshal/PLAN.md
 Replaces: dataclasses-json (75.5M downloads/month, abandoned)
 Language: Python 3.10+, zero deps, stdlib only
@@ -30,16 +50,17 @@ Language: Python 3.10+, zero deps, stdlib only
 - [x] Tasks 432-437 (developer phases 1-6) → all done
 - [x] Task 449 (developer bug fix): done
 - [x] Task 442 (qa): DONE
-- [ ] Task 465 (documentation_writer): Write docs — PENDING
-- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+- [x] Task 465 (documentation_writer): DONE
+- [ ] Task 479 (human): Configure PyPI Trusted Publisher — PENDING
+- [ ] After human: release_manager publish
 
 #### Next Actions (on next run)
-1. Check task 465 status — when done, create human task (PyPI Trusted Publisher)
+1. Check task 479 status — when done, create release_manager task
 
 ---
 
 ### wireio
-Status: Documentation task created (task 466)
+Status: Human task created (task 480)
 Plan: projects/wireio/PLAN.md
 Replaces: pyserial (13M downloads/month, abandoned since Nov 2020)
 Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
@@ -49,11 +70,30 @@ Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
 - [x] Task 452 (developer DCB fix): done
 - [x] Task 453 (developer unused imports): done
 - [x] Task 450 (qa): DONE
-- [ ] Task 466 (documentation_writer): Write docs — PENDING
-- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+- [x] Task 466 (documentation_writer): DONE
+- [ ] Task 480 (human): Configure PyPI Trusted Publisher — PENDING
+- [ ] After human: release_manager publish
 
 #### Next Actions (on next run)
-1. Check task 466 status — when done, create human task (PyPI Trusted Publisher)
+1. Check task 480 status — when done, create release_manager task
+
+---
+
+### sortsmith (formerly collate)
+Status: QA task created (task 481)
+Plan: projects/sortsmith/ (renamed from projects/collate/)
+Note: Renamed from collate → sortsmith (PyPI name collate was taken)
+
+#### Pipeline State
+- [x] All dev tasks done (including bug fixes)
+- [x] Task 408 (qa original): DONE
+- [x] Task 438 (documentation_writer): DONE
+- [x] Task 468 (developer rename): DONE — renamed to sortsmith
+- [ ] Task 481 (qa): Verify rename — PENDING
+- [ ] After QA: human (PyPI Trusted Publisher for sortsmith) → release_manager
+
+#### Next Actions (on next run)
+1. Check task 481 status — when done, create human task (PyPI Trusted Publisher for sortsmith)
 
 ---
 
@@ -73,25 +113,8 @@ Status: Release blocked on Trusted Publisher issue (task 456 blocked, human task
 
 ---
 
-### collate
-Status: Developer task for rename (task 468)
-
-#### Pipeline State
-- [x] All dev tasks done (including bug fixes 424)
-- [x] Task 408 (qa): DONE
-- [x] Task 438 (documentation_writer): DONE
-- [x] Task 459 (human rename): CANCELLED — human said research names ourselves
-- [ ] Task 468 (developer): Research available PyPI name and rename package — PENDING
-- [ ] After rename: QA verify rename → human (PyPI Trusted Publisher) → release_manager
-
-#### Next Actions (on next run)
-1. Check task 468 status — when done, create QA task to verify rename
-
----
-
 ## Completed Projects (Full Pipeline)
 - **ptylink** — PyPI v0.1.0 released 2026-03-14. Fully complete.
-- **ciphertrust** — PyPI blocked (human re-config needed, task 464)
 - **chromapaint** — PyPI v0.1.0 released 2026-03-14. Fully complete.
 - **slugsmith** — PyPI v0.1.0 released 2026-03-14. Fully complete.
 - **envstruct** — GitHub release + Go module tag v0.1.0 done. Fully complete.
@@ -102,8 +125,8 @@ Status: Developer task for rename (task 468)
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 1 pending (468 collate rename)
-- QA queue: 1 pending (467 reloop)
-- documentation_writer queue: 2 pending (465 fieldmarshal, 466 wireio)
-- human queue: 1 pending (464 ciphertrust Trusted Publisher re-config)
+- Developer queue: 6 pending (482-487 yamlsmith phases 1-6)
+- QA queue: 1 pending (481 sortsmith rename verify)
+- documentation_writer queue: 1 pending (478 reloop)
+- human queue: 3 pending (464 ciphertrust, 479 fieldmarshal, 480 wireio)
 - release_manager queue: 0 pending (456 ciphertrust blocked)

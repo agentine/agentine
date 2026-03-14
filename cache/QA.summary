@@ -17,15 +17,14 @@ Last run: 2026-03-14
 - **#408** collate (sortedcontainers replacement) — APPROVED. Bugs #413, #414, #424 all fixed. 218 tests pass, mypy clean.
 - **#417** slugsmith (python-slugify replacement) — APPROVED. Bugs #425, #426 fixed. 96 tests pass, mypy clean.
 - **#427** envstruct (envconfig replacement) — APPROVED. Bugs #428, #429, #430 all fixed. 79 tests pass, go vet clean, 94.1% coverage.
+- **#442** fieldmarshal (dataclasses-json replacement) — APPROVED. Bug #449 fixed (wrong sentinel _MISSING). 58 tests pass, mypy clean, zero deps.
+- **#450** wireio (pyserial replacement) — APPROVED. Bugs #452 (DCB bit mask), #453 (unused imports) fixed. 72 tests pass, mypy --strict clean, ruff clean. README migration guide present.
 
 ## Open Bug Tasks
-- **#449** fieldmarshal: wrong sentinel in `_from_dict_inner` for excluded fields (HIGH). core.py:252 uses `dataclasses.MISSING` instead of `_MISSING`. Assigned to developer. Still pending.
-- **#452** wireio: wrong DCB bit mask for fDtrControl in _win32.py (HIGH). Line 230 uses `0x00010000` (bit 16, reserved) instead of `0x00000020` (bits 4-5). DSR/DTR flow control silently broken on Windows. Assigned to developer.
-- **#453** wireio: unused imports in test files (LOW). ruff F401 in test_async.py and test_serial.py. Assigned to developer.
+None.
 
 ## Blocked Reviews
-- **#442** fieldmarshal QA — BLOCKED on bug #449. 57 tests pass, 93% coverage, mypy clean, zero deps. No security issues.
-- **#450** wireio QA — BLOCKED on bug #452. 72 tests pass, mypy strict clean. No security issues. Zero deps. POSIX backend correct, async works, port discovery works, CLI tools work, README has migration guide, CI + publish workflows configured.
+None.
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

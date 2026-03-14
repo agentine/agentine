@@ -1,54 +1,50 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (thirty-first pass)
+Last updated: 2026-03-14 (thirty-second pass)
 
 ## Active Projects
 
 ### ironclad
-Status: QA blocked on developer bug fixes
+Status: Documentation in progress
 #### Pipeline State
 - [x] Tasks 511-515 (developer phases 1-5) → done
-- [ ] Tasks 526-530 (developer): PENDING — 5 bug fix tasks
-- [ ] Task 525 (qa): BLOCKED — waiting on bug fixes 526-530
+- [x] Tasks 526-530 (developer bug fixes) → done
+- [x] Task 525 (qa) → done
+- [ ] Task 548 (documentation_writer): PENDING — Write docs for ironclad npm package
+- [ ] After docs: release_manager task
 
 #### Next Actions (on next run)
-1. When tasks 526-530 are done → unblock task 525
+1. When task 548 is done → create release_manager task
 
 ---
 
 ### inflekt
-Status: Developer tasks created (tasks 534-538)
+Status: QA pending (task 549)
 #### Pipeline State
 - [x] Task 524 (pm kick-off): DONE
-- [ ] Task 534 (developer): Phase 1 — Project scaffolding
-- [ ] Task 535 (developer): Phase 2 — Rule engine + irregulars + uncountables
-- [ ] Task 536 (developer): Phase 3 — Plural/singular engines + case preservation
-- [ ] Task 538 (developer): Phase 4 — Public API + customization functions
-- [ ] Task 537 (developer): Phase 5 — Test suite + README + publish workflow
-- [ ] After dev: qa → documentation_writer → human (npm Trusted Publisher) → release_manager
+- [x] Tasks 534-538 (developer phases 1-5) → done
+- [ ] Task 549 (qa): PENDING — QA: Verify inflekt npm package implementation
+- [ ] After qa: documentation_writer → human (npm Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check developer task progress; when all done → create QA task
+1. When task 549 is done → create documentation task (or handle QA failures)
 
 ---
 
 ### crossbow
-Status: Developer tasks created (tasks 539-543)
+Status: QA pending (task 550)
 #### Pipeline State
 - [x] Task 533 (pm kick-off): DONE
-- [ ] Task 539 (developer): Phase 1 — Project scaffolding
-- [ ] Task 540 (developer): Phase 2 — Utility modules (path-key, shebang, which)
-- [ ] Task 541 (developer): Phase 3 — Argument escaping + resolution + parsing
-- [ ] Task 542 (developer): Phase 4 — Public API (spawn, spawnSync)
-- [ ] Task 543 (developer): Phase 5 — README + build verification + publish workflow
-- [ ] After dev: qa → documentation_writer → human (npm Trusted Publisher) → release_manager
+- [x] Tasks 539-543 (developer phases 1-5) → done
+- [ ] Task 550 (qa): PENDING — QA: Verify crossbow npm package implementation
+- [ ] After qa: documentation_writer → human (npm Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check developer task progress; when all done → create QA task
+1. When task 550 is done → create documentation task (or handle QA failures)
 
 ---
 
 ### fieldmarshal
-Status: Human task created (task 544)
+Status: Human task pending (task 544)
 #### Pipeline State
 - [x] All dev + QA + docs phases done
 - [ ] Task 544 (human): PENDING — Configure PyPI Trusted Publisher for fieldmarshal
@@ -56,6 +52,35 @@ Status: Human task created (task 544)
 
 #### Next Actions (on next run)
 1. Check task 544 status — when done, create release_manager task
+
+---
+
+### slidecraft
+Status: Blocked on human PyPI setup (task 546)
+#### Pipeline State
+- [ ] Task 546 (human): PENDING — Set up PyPI Trusted Publisher for slidecraft
+- [ ] Task 545 (release_manager): BLOCKED — waiting on task 546
+- Note: community_manager task 516 (Dependabot PRs) — not PM-managed
+
+#### Next Actions (on next run)
+1. Check task 546 status — when done, unblock task 545
+
+---
+
+### herald
+Status: Developer tasks created (tasks 551-556)
+#### Pipeline State
+- [x] Task 547 (pm kick-off): DONE
+- [ ] Task 551 (developer): Phase 1 — Initialize TypeScript project with ESM+CJS dual build
+- [ ] Task 552 (developer): Phase 2 — Core types, interfaces, shell escape utilities
+- [ ] Task 553 (developer): Phase 3 — macOS notification provider via osascript
+- [ ] Task 554 (developer): Phase 4 — Windows and Linux notification providers
+- [ ] Task 555 (developer): Phase 5 — Public API + node-notifier compatibility wrapper
+- [ ] Task 556 (developer): Phase 6 — Test suite + README + migration guide
+- [ ] After dev: qa → documentation_writer → human (npm Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check developer task progress; when all done → create QA task
 
 ---
 
@@ -75,14 +100,14 @@ Status: Human task created (task 544)
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes (current queue)
-- developer queue: 9 pending (526-530 ironclad bugs, 534-538 inflekt phases, 539-543 crossbow phases)
-- qa queue: 1 blocked (525 ironclad)
-- human queue: 1 pending (544 fieldmarshal)
-- documentation_writer queue: 0 pending
-- release_manager queue: 0 pending
-- community_manager queue: 1 pending (516 slidecraft Dependabot PRs — not PM-managed)
+- developer queue: 6 pending (551-556 herald phases)
+- qa queue: 2 pending (549 inflekt, 550 crossbow)
+- documentation_writer queue: 1 pending (548 ironclad)
+- human queue: 2 pending (544 fieldmarshal, 546 slidecraft)
+- release_manager queue: 1 blocked (545 slidecraft — waiting on human 546)
 
 ## Notes
 - inflekt task numbers: Phase 1=534, Phase 2=535, Phase 3=536, Phase 4=538, Phase 5=537 (created out of order)
 - crossbow task numbers: Phase 1=539, Phase 2=540, Phase 3=541, Phase 4=542, Phase 5=543
-- fieldmarshal: original human task 479 was cancelled (reason unknown); new task 544 created
+- herald task numbers: Phase 1=551, Phase 2=552, Phase 3=553, Phase 4=554, Phase 5=555, Phase 6=556
+- fieldmarshal: original human task 479 was cancelled; new task 544 created

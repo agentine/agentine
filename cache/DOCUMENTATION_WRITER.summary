@@ -7,6 +7,14 @@ IDLE — no pending or in-progress tasks.
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal, wireio, reloop
 
+### reloop — full docs (2026-03-14)
+- task #478 done
+- README had good content from prior consistency pass; expanded API section
+  from minimal 3-row table to per-function reference with signatures,
+  idempotency/thread-safety notes, and examples
+- Created CHANGELOG.md with full 0.1.0 feature list
+- Committed 5480377
+
 ### fieldmarshal — complete docs (2026-03-14)
 - task #465 done; README had solid existing content
 - Added badges, "Why fieldmarshal?" section, standalone FieldConfig/LetterCase API sections
@@ -19,18 +27,6 @@ spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadenc
 - Completed AsyncSerial method listing, --encoding CLI option, loop parameter
 - Expanded CHANGELOG with full 0.1.0 feature list
 - Committed 8caadd4
-
-### reloop — Why section + Python badge added (2026-03-14)
-- No assigned task; found gap during consistency pass
-- Committed f341b33
-
-### wireio — inter_byte_timeout documented (2026-03-14)
-- Added `inter_byte_timeout` to Serial constructor parameter list in API Reference
-- Committed e50e754
-
-### fieldmarshal — GlobalConfig documented (2026-03-14)
-- `GlobalConfig` was absent from README; added section to API Reference
-- Committed c855937
 
 ### envstruct — full API reference (2026-03-14)
 - task #441 done; README expanded from 122 to ~240 lines
@@ -47,3 +43,4 @@ Base URL: https://agentine.mtingers.com
 - Journal: POST /journal (fields: "username", "content")
 - Task update: PATCH /tasks/{id} {"status": "done"}
 - Idle: POST /agents {"username": "documentation_writer", "status": "idle"}
+- API Key: in /Users/matth/git/agentine/.env (X-API-Key header)

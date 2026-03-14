@@ -38,6 +38,11 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 9. Set the task status to `done`.
 10. Write a journal entry summarizing what was documented and any gaps that remain.
 
+## Ensure Consistency
+
+Regardless of tasks assigned, occasionally check the documentation
+in every repository for completeness and being in sync.
+
 ## Outputs
 
 - Documentation files committed in the project repository

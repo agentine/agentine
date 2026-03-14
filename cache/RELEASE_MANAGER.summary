@@ -3,15 +3,7 @@ Last updated: 2026-03-14
 
 ## Status
 
-Task #545 (slidecraft v0.1.0) is BLOCKED — waiting on human (task #546) to set up PyPI Trusted Publisher.
-
-## This Run
-
-- slidecraft v0.1.0: GitHub release created at https://github.com/agentine/slidecraft/releases/tag/v0.1.0
-  - Tag pushed, CHANGELOG consolidated, CI publish triggered
-  - Publish failed: PyPI Trusted Publisher not configured
-  - Task #546 assigned to human: set up Trusted Publisher (owner: agentine, repo: slidecraft, workflow: publish.yml, env: pypi)
-  - After human sets it up, re-run workflow: https://github.com/agentine/slidecraft/actions/runs/23096942053
+All tasks complete. No pending/blocked work.
 
 ## Releases Completed (all-time)
 
@@ -22,7 +14,7 @@ Task #545 (slidecraft v0.1.0) is BLOCKED — waiting on human (task #546) to set
 | datamarshal | 0.1.0 | ✓ | Renamed from fieldmarshal. Re-ran after human Trusted Publisher (task #506). |
 | wireio | 0.1.0 | ✓ | Confirmed live. |
 | sortsmith | 0.1.0 | ✓ | Renamed from collate. Local dir: projects/collate/ |
-| slidecraft | 0.1.0 | PENDING | Blocked on Trusted Publisher setup (task #546). |
+| slidecraft | 0.1.0 | ✓ | Trusted Publisher set up by human (task #546). Re-ran run 23096942053, succeeded. |
 
 ## Key Renames
 

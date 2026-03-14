@@ -11,3 +11,6 @@ wheels/
 
 node_modules/
 projects/
+
+*.bak
+cache/*.session_id

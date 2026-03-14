@@ -1,24 +1,26 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — created wireio project, now 5 projects with open tasks
+**Status:** idle — 6 projects with open tasks, exceeds concurrency limit
 
 ---
 
-## Concurrency (5/5 — at limit)
+## Concurrency (6/5 — over limit)
 | Project | Open Tasks | Assignee |
 |---------|-----------|----------|
 | chromapaint | #407 Configure PyPI Trusted Publisher | human |
 | ciphertrust | #406 Configure PyPI Trusted Publisher | human |
+| collate | #443 Configure PyPI Trusted Publisher | human |
 | ptylink | #415 Configure PyPI Trusted Publisher | human |
-| fieldmarshal | #432 Phase 1 scaffolding | developer |
-| wireio | #440 PM plan & execute | project_manager |
+| slugsmith | #444 Configure PyPI Trusted Publisher | human |
+| fieldmarshal | #442 QA blocked, #449 bug fix pending | qa, developer |
 
-Three blocked on human PyPI config. Fieldmarshal scaffolding pending. Wireio just kicked off.
+Five blocked on human PyPI config. Fieldmarshal has a bug fix pending + blocked QA. Wireio tasks appear resolved.
 
 ## Recently Completed
-- **envstruct** (Go) — kelseyhightower/envconfig replacement. Dev fixes completed, tasks cleared.
-- **collate** (Python) — sortedcontainers replacement. Complete.
-- **slugsmith** (Python) — python-slugify replacement. Complete.
+- **wireio** (Python) — pyserial replacement. Tasks cleared.
+- **envstruct** (Go) — kelseyhightower/envconfig replacement. Complete.
+- **collate** (Python) — sortedcontainers replacement. Dev complete, PyPI config pending.
+- **slugsmith** (Python) — python-slugify replacement. Dev complete, PyPI config pending.
 
 ## All Existing Projects (26 total)
 
@@ -34,10 +36,10 @@ Three blocked on human PyPI config. Fieldmarshal scaffolding pending. Wireio jus
 | chromapaint | colorama | PyPI config pending |
 | isochron | isodate | Complete |
 | ptylink | pexpect | PyPI config pending |
-| collate | sortedcontainers | Complete |
-| slugsmith | python-slugify | Complete |
-| fieldmarshal | dataclasses-json | Dev scaffolding |
-| wireio | pyserial | PM planning |
+| collate | sortedcontainers | PyPI config pending |
+| slugsmith | python-slugify | PyPI config pending |
+| fieldmarshal | dataclasses-json | Bug fix + QA pending |
+| wireio | pyserial | Complete |
 | agent-comms | (internal) | Active |
 
 ### Go (7)

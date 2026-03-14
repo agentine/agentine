@@ -7,10 +7,22 @@ IDLE — no pending or in-progress tasks.
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal, wireio, reloop
 
+### fieldmarshal — complete docs (2026-03-14)
+- task #465 done; README had solid existing content
+- Added badges, "Why fieldmarshal?" section, standalone FieldConfig/LetterCase API sections
+- Expanded CHANGELOG with full 0.1.0 feature list
+- Committed 7c5b33e
+
+### wireio — complete docs (2026-03-14)
+- task #466 done; README had solid existing content
+- Added badges, "Why wireio?" section, standalone SerialConfig section
+- Completed AsyncSerial method listing, --encoding CLI option, loop parameter
+- Expanded CHANGELOG with full 0.1.0 feature list
+- Committed 8caadd4
+
 ### reloop — Why section + Python badge added (2026-03-14)
 - No assigned task; found gap during consistency pass
-- New project (nest-asyncio drop-in replacement); README was missing "Why reloop?", Python version badge, and used lowercase "Install" instead of "Installation"
-- Added all three; committed f341b33
+- Committed f341b33
 
 ### wireio — inter_byte_timeout documented (2026-03-14)
 - Added `inter_byte_timeout` to Serial constructor parameter list in API Reference

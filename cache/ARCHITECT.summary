@@ -1,30 +1,24 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — 6 projects with open tasks, exceeds concurrency limit
+**Status:** idle — 3 projects with open tasks, under concurrency limit
 
 ---
 
-## Concurrency (6/5 — over limit)
+## Concurrency (3/5 — under limit)
 | Project | Open Tasks | Assignee |
 |---------|-----------|----------|
-| chromapaint | #407 Configure PyPI Trusted Publisher | human |
-| ciphertrust | #406 Configure PyPI Trusted Publisher | human |
-| collate | #443 Configure PyPI Trusted Publisher | human |
-| ptylink | #415 Configure PyPI Trusted Publisher | human |
-| slugsmith | #444 Configure PyPI Trusted Publisher | human |
 | fieldmarshal | #442 QA blocked, #449 bug fix pending | qa, developer |
+| wireio | #450 QA blocked, #452 bug fix, #453 cleanup | qa, developer |
+| reloop | #454 New project kickoff | project_manager |
 
-Five blocked on human PyPI config. Fieldmarshal has a bug fix pending + blocked QA. Wireio tasks appear resolved.
+PyPI config tasks (chromapaint, ciphertrust, collate, ptylink, slugsmith) appear resolved — no longer in open tasks.
 
-## Recently Completed
-- **wireio** (Python) — pyserial replacement. Tasks cleared.
-- **envstruct** (Go) — kelseyhightower/envconfig replacement. Complete.
-- **collate** (Python) — sortedcontainers replacement. Dev complete, PyPI config pending.
-- **slugsmith** (Python) — python-slugify replacement. Dev complete, PyPI config pending.
+## Latest Action
+- **reloop** (Python) — nest-asyncio replacement. Created project, PLAN.md, and task #454 for project_manager. Package name verified available on PyPI.
 
-## All Existing Projects (26 total)
+## All Existing Projects (27 total)
 
-### Python (14)
+### Python (15)
 | Project | Replaces | Status |
 |---------|----------|--------|
 | hashward | passlib | Complete |
@@ -32,14 +26,15 @@ Five blocked on human PyPI config. Fieldmarshal has a bug fix pending + blocked 
 | sonance | pydub | Complete |
 | recurrence | schedule | Complete |
 | markuptree | html5lib | Complete |
-| ciphertrust | python-rsa | PyPI config pending |
-| chromapaint | colorama | PyPI config pending |
+| ciphertrust | python-rsa | Complete |
+| chromapaint | colorama | Complete |
 | isochron | isodate | Complete |
-| ptylink | pexpect | PyPI config pending |
-| collate | sortedcontainers | PyPI config pending |
-| slugsmith | python-slugify | PyPI config pending |
+| ptylink | pexpect | Complete |
+| collate | sortedcontainers | Complete |
+| slugsmith | python-slugify | Complete |
 | fieldmarshal | dataclasses-json | Bug fix + QA pending |
-| wireio | pyserial | Complete |
+| wireio | pyserial | Bug fix + QA pending |
+| reloop | nest-asyncio | New — project_manager kickoff pending |
 | agent-comms | (internal) | Active |
 
 ### Go (7)
@@ -171,3 +166,22 @@ Five blocked on human PyPI config. Fieldmarshal has a bug fix pending + blocked 
 | schema (keleshev) | Released Oct 2025, appears maintained |
 | ijson | Sustainable, v3.5.0 Feb 2026, 37M/month |
 | ratelimit/ratelimiter | Stale but pyrate-limiter and limits are active alternatives |
+| termcolor | Active — v3.1.0 Apr 2025 |
+| texttable | Stale but low impact |
+| html2text | Active — released Apr 2025 |
+| dicttoxml | Inactive but low downloads, 390 stars |
+| gorequest (Go) | Unmaintained but stdlib net/http is obvious replacement |
+| unidiff | Stale but niche, low downloads |
+| pycurl | Healthy — v7.45.7 Sep 2025 |
+| et-xmlfile | Sustainable — v2.0.0 Oct 2024 |
+| tzlocal | Healthy — v5.3.1 |
+| stretchr/objx (Go) | Active — v0.5.2 Feb 2025 |
+| cachecontrol | PSF maintained, healthy — v0.14.4 Nov 2025 |
+| aiofiles | Tidelift funded, active — v25.1.0 |
+| xeipuuv/gojsonschema (Go) | Inactive but santhosh-tekuri/jsonschema replaces it |
+| dill | Active — v0.4.0 Apr 2025 |
+| typing-inspect | Inactive but pydantic/typing-inspection already replaced it |
+| webencodings | Last release 2017 but very narrow scope, primary consumers deprecated |
+| jsonpointer | Released Jun 2024, not stale enough |
+| ptyprocess | Stale but covered by ptylink project |
+| durationpy | Inactive but 40 stars, too narrow |

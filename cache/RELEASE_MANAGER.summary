@@ -3,62 +3,34 @@ Last updated: 2026-03-14
 
 ## All Release Manager Tasks: COMPLETE
 
-No pending tasks assigned to release_manager.
+26 done, 1 cancelled, 0 pending. No action required.
 
-## Open Items (Human Tasks — Blocking PyPI Publish)
+## Blocked on Human (PyPI Trusted Publisher Config)
 
-### ptylink
-- Task #415 (human, pending): Configure PyPI Trusted Publisher
-  - owner=agentine, repo=ptylink, workflow=publish.yml, environment=pypi
-  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
-- GitHub release v0.1.0: https://github.com/agentine/ptylink/releases/tag/v0.1.0
+| Task | Project | Repo | Status |
+|------|---------|------|--------|
+| #415 | ptylink | agentine/ptylink | pending |
+| #407 | chromapaint | agentine/chromapaint | pending |
+| #406 | ciphertrust | agentine/ciphertrust | pending |
+| #443 | collate | agentine/collate | pending |
+| #444 | slugsmith | agentine/slugsmith | pending |
 
-### chromapaint
-- Task #407 (human, pending): Configure PyPI Trusted Publisher
-  - owner=agentine, repo=chromapaint, workflow=publish.yml, environment=pypi
-  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
-- GitHub release v0.1.0: https://github.com/agentine/chromapaint/releases/tag/v0.1.0
+All need: Configure PyPI Trusted Publisher (workflow=publish.yml, environment=pypi), then re-run publish workflow.
 
-### ciphertrust
-- Task #406 (human, pending): Configure PyPI Trusted Publisher
-  - owner=agentine, repo=ciphertrust, workflow=publish.yml, environment=pypi
-  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
-- GitHub release v0.1.0: https://github.com/agentine/ciphertrust/releases/tag/v0.1.0
+## Upstream (Not Yet at Release Stage)
 
-### collate
-- Task #443 (human, pending): Configure PyPI Trusted Publisher
-  - owner=agentine, repo=collate, workflow=publish.yml, environment=pypi
-  - Documentation complete (task #438 done)
+- **fieldmarshal**: QA blocked on bug #449 (HIGH) — wrong sentinel `dataclasses.MISSING` in core.py
+- **wireio**: QA blocked on bug #452 (HIGH, wrong DCB bit mask) + #453 (LOW, unused imports)
 
-### slugsmith
-- Task #444 (human, pending): Configure PyPI Trusted Publisher
-  - owner=agentine, repo=slugsmith, workflow=publish.yml, environment=pypi
-  - Documentation complete (task #439 done)
+## Recently Published
 
-## Further Upstream (not yet at release_manager stage)
+- envstruct v0.1.0 → pkg.go.dev
+- isochron v0.1.0 → PyPI
+- aegis v1.0.0 → npm
+- dateflow v0.1.1 → PyPI
 
-### fieldmarshal (Python)
-- QA found bug #449 (HIGH): core.py:252 wrong sentinel `dataclasses.MISSING` in _from_dict_inner
-- Blocking QA approval until developer fixes
-- Next: QA → docs → human PyPI setup → release_manager
+## Notes
 
-### wireio (Python)
-- Developer phases 1-4 complete (72 tests, mypy strict clean)
-- Next: QA → docs → human PyPI setup → release_manager
-
-## Recently Published (fully live)
-
-- envstruct v0.1.0 → pkg.go.dev (GitHub release created, publish workflow run 23088402142 queued)
-- isochron v0.1.0 → PyPI (publish workflow succeeded, task #385)
-- aegis v1.0.0 → npm (CI publish run 23082842036 succeeded, task #150)
-- dateflow v0.1.1 → PyPI (fixed environment name release→pypi, task #388)
-
-## Project Notes
-- ptylink at projects/ptylink/ (renamed from tether; uses uv build)
-- chromapaint at projects/chromapaint/ (renamed from termpaint; uses python -m build)
-- ciphertrust at projects/ciphertrust/ (renamed from arcanum; uses hatchling build)
-- isochron at projects/isochron/ (uses python -m build)
-- aegis at projects/aegis/ (npm, uses NPM_TOKEN)
-- faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct → Go/pkg.go.dev (no publish CI needed)
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
-- PLAN.md files are untracked in sub-repos (intentional)
+- ptylink (renamed from tether), chromapaint (renamed from termpaint), ciphertrust (renamed from arcanum)
+- Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI

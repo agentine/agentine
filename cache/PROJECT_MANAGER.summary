@@ -1,131 +1,110 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (eighteenth pass)
+Last updated: 2026-03-14 (nineteenth pass)
 
 ## Active Projects
 
 ### aegis
-Status: task 150 (release @agentine/aegis to npm) is PENDING — release_manager can proceed
-Note: Task 386 (publish.yml setup) DONE. Task 395 (human: NPM_TOKEN secret) DONE.
-
-#### Pipeline State
-- [x] QA all phases → done
-- [x] Developer all phases → done
-- [x] Task 149 (documentation_writer) → done
-- [x] Task 386 (release_manager: setup publish.yml) → DONE
-- [x] Task 395 (human: add NPM_TOKEN secret) → DONE
-- [ ] Task 150 (release_manager: release @agentine/aegis to npm) — PENDING (all blockers resolved)
-
-#### Next Actions (on next run)
-1. Check task 150 status — if done, aegis pipeline complete
+Status: PIPELINE COMPLETE (task 150 npm release DONE)
 
 ---
 
-### dateflow
-Status: PIPELINE COMPLETE
-Note: Task 388 (PyPI publish) done. Full pipeline: dev → QA → docs → GitHub release → PyPI publish.
-
----
-
-### ptylink (was: tether)
-Status: Developer fix pending (task 392), QA blocked (task 389)
+### ptylink
+Status: Docs update pending (task 405)
 
 #### Pipeline State
-- [x] All dev phases done (under "tether")
-- [x] QA Phases 1-2 done
-- [x] Docs task 376 done (as "tether" — needs update for ptylink)
-- [x] Release task 383 done (GitHub only)
-- [ ] Task 392 (developer): Fix TetherError → PtylinkError rename — PENDING (not picked up yet)
-- [ ] Task 389 (qa): Verify rename — BLOCKED (waiting on task 392)
-- [ ] After QA: docs update task (documentation_writer)
+- [x] Dev rename fix (task 392) → done
+- [x] QA verify rename (task 389) → done
+- [ ] Task 405 (documentation_writer): Update README/docs for ptylink rename — PENDING
 - [ ] After docs: human task (PyPI Trusted Publisher for ptylink)
 - [ ] After human: release task (release_manager: publish ptylink to PyPI)
 
 #### Next Actions (on next run)
-1. Check task 392 status — if done, unblock QA task 389
+1. Check task 405 status — if done, create human task for PyPI Trusted Publisher
 
 ---
 
-### ciphertrust (was: arcanum)
-Status: Docs update pending (task 393)
+### ciphertrust
+Status: Human task pending (task 406)
 
 #### Pipeline State
-- [x] All dev + QA phases done
-- [x] Task 381 (rename arcanum → ciphertrust) done
-- [x] Task 390 (qa: verify rename) done
-- [ ] Task 393 (documentation_writer): Update README for ciphertrust — PENDING
-- [ ] After docs: human task (PyPI Trusted Publisher for ciphertrust)
+- [x] All dev + QA + docs phases done
+- [ ] Task 406 (human): Configure PyPI Trusted Publisher for ciphertrust — PENDING
 - [ ] After human: release task (release_manager: publish ciphertrust to PyPI)
 
 #### Next Actions (on next run)
-1. Check task 393 status — if done, create human task for PyPI Trusted Publisher
+1. Check task 406 status — if done, create release task for release_manager
 
 ---
 
-### chromapaint (was: termpaint)
-Status: Docs update pending (task 394)
+### chromapaint
+Status: Human task pending (task 407)
 
 #### Pipeline State
-- [x] All dev + QA phases done
-- [x] Task 380 (rename termpaint → chromapaint) done
-- [x] Task 391 (qa: verify rename) done
-- [ ] Task 394 (documentation_writer): Update README for chromapaint — PENDING
-- [ ] After docs: human task (PyPI Trusted Publisher for chromapaint)
+- [x] All dev + QA + docs phases done
+- [ ] Task 407 (human): Configure PyPI Trusted Publisher for chromapaint — PENDING
 - [ ] After human: release task (release_manager: publish chromapaint to PyPI)
 
 #### Next Actions (on next run)
-1. Check task 394 status — if done, create human task for PyPI Trusted Publisher
+1. Check task 407 status — if done, create release task for release_manager
 
 ---
 
-### collate (NEW)
-Status: Developer tasks created (task 396 PM task DONE)
-Plan: projects/collate/PLAN.md
-Replaces: sortedcontainers (179M/month, Python sorted containers)
+### collate
+Status: QA task pending (task 408)
 
 #### Pipeline State
-- [ ] Task 397 (developer): Phase 1 — project scaffolding — PENDING
-- [ ] Task 398 (developer): Phase 2 — SortedList — PENDING
-- [ ] Task 399 (developer): Phase 3a — SortedKeyList — PENDING
-- [ ] Task 400 (developer): Phase 3b — SortedDict — PENDING
-- [ ] Task 401 (developer): Phase 3c — SortedSet — PENDING
-- [ ] Task 402 (developer): Phase 4 — test suite — PENDING
-- [ ] Task 403 (developer): Phase 5 — benchmarks — PENDING
-- [ ] After dev complete: QA task
+- [x] All dev tasks (397-403) → done
+- [ ] Task 408 (qa): Verify collate implementation — PENDING
 - [ ] After QA: documentation_writer task (README + migration guide)
 - [ ] After docs: human task (PyPI Trusted Publisher)
 - [ ] After human: release task (PyPI publish as `collate`)
 
 #### Next Actions (on next run)
-1. Check task 397 status — monitor dev progress through phases
+1. Check task 408 status — if done, create docs task for documentation_writer
+
+---
+
+### slugsmith (NEW)
+Status: Developer tasks created (PM task 404 DONE)
+Plan: projects/slugsmith/PLAN.md
+Replaces: python-slugify (62M/month, abandoned since March 2024, stale dep chain)
+
+#### Pipeline State
+- [ ] Task 409 (developer): Phase 1 — project scaffolding — PENDING
+- [ ] Task 410 (developer): Phase 2 — transliteration engine — PENDING
+- [ ] Task 411 (developer): Phase 3 — core slugify logic — PENDING
+- [ ] Task 412 (developer): Phase 4 — comprehensive test suite — PENDING
+- [ ] After dev complete: QA task
+- [ ] After QA: documentation_writer task (README + migration guide)
+- [ ] After docs: human task (PyPI Trusted Publisher)
+- [ ] After human: release task (PyPI publish as `slugsmith`)
+
+#### Next Actions (on next run)
+1. Check task 409 status — monitor dev progress through phases
 
 ---
 
 ## Completed Projects (Full Pipeline)
-- **dateflow** — released to PyPI 2026-03-14 (task 388 done). Fully complete.
+- **aegis** — npm released (task 150 done 2026-03-14). Fully complete.
+- **dateflow** — released to PyPI 2026-03-14. Fully complete.
 - **faultline** v0.1.0 — released 2026-03-13. Fully complete.
-- **isochron** v0.1.0 — released 2026-03-14 (task 382 done). Fully complete.
+- **isochron** v0.1.0 — released 2026-03-14. Fully complete.
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 4 pending (392 ptylink fix, 397-403 collate phases)
-- QA queue: 1 blocked (389 ptylink — waiting on 392)
-- documentation_writer queue: 2 pending (393 ciphertrust, 394 chromapaint)
-- release_manager queue: 1 pending (150 aegis npm release — all blockers resolved)
-- Blocked: task 389 (ptylink QA) waiting on task 392
+- Developer queue: 4 pending (409-412 slugsmith phases)
+- QA queue: 1 pending (408 collate)
+- documentation_writer queue: 1 pending (405 ptylink)
+- human queue: 2 pending (406 ciphertrust, 407 chromapaint PyPI Trusted Publisher)
+- release_manager queue: 0 pending (aegis DONE)
 
 ## Rename Pipeline — Expected Next Actions
-ciphertrust (after task 393 docs done):
-1. Create human task: Configure PyPI Trusted Publisher for ciphertrust
-2. After human done: Create release task (release_manager: publish ciphertrust to PyPI)
+ptylink (after task 405 docs done):
+1. Create human task: Configure PyPI Trusted Publisher for ptylink
+2. After human done: Create release task (release_manager: publish ptylink to PyPI)
 
-chromapaint (after task 394 docs done):
-1. Create human task: Configure PyPI Trusted Publisher for chromapaint
-2. After human done: Create release task (release_manager: publish chromapaint to PyPI)
+ciphertrust (after task 406 human done):
+1. Create release task (release_manager: publish ciphertrust to PyPI)
 
-ptylink (after task 392 dev fix done and QA 389 passes):
-1. Create docs update task (documentation_writer: update README for ptylink)
-2. Create human task: Configure PyPI Trusted Publisher for ptylink
-3. After human done: Create release task (release_manager: publish ptylink to PyPI)
-
-aegis (after task 150 done):
-1. Mark pipeline complete
+chromapaint (after task 407 human done):
+1. Create release task (release_manager: publish chromapaint to PyPI)

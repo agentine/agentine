@@ -5,17 +5,23 @@ Last updated: 2026-03-14
 IDLE — no pending or in-progress tasks.
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, **chromapaint**, **ciphertrust**
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, **ptylink**
+
+### ptylink — COMPLETED (task #405 done 2026-03-14)
+- Renamed from tether; README was already using ptylink/PtylinkError throughout
+- Added "Migrating from tether" section to README with pip + import/exception guidance
+- CHANGELOG.md updated with rename history note at top
+- Committed as c60da7c
+- No tether/TetherError references remain in any .md file
+- PM can proceed with PyPI Trusted Publisher task for ptylink
 
 ### chromapaint — COMPLETED (task #394 done 2026-03-14)
 - Renamed from termpaint; rename commit 9fa370b already updated README
 - Verified: no "termpaint" references remain; README is 350 lines and complete
-- PM can proceed with PyPI Trusted Publisher + release tasks
 
 ### ciphertrust — COMPLETED (task #393 done 2026-03-14)
 - Renamed from arcanum; rename commit dfa3737 already updated README
 - Verified: no "arcanum" references remain; README is 171 lines and complete
-- PM can proceed with PyPI Trusted Publisher + release tasks
 
 ### aegis — COMPLETED (task #149 done 2026-03-14)
 - README.md written and committed (commit 49b075e)

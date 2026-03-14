@@ -1,22 +1,45 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-fourth pass)
+Last updated: 2026-03-14 (twenty-fifth pass)
 
 ## Active Projects
 
+### reloop
+Status: Developer tasks created (tasks 460-463)
+Plan: projects/reloop/PLAN.md
+Replaces: nest-asyncio (85M downloads/month, archived March 2024, maintainer deceased)
+Language: Python 3.10+, stdlib only (asyncio monkey-patching)
+
+#### Pipeline State
+- [ ] Task 460 (developer): Phase 1 scaffolding + pyproject.toml — PENDING
+- [ ] Task 461 (developer): Phase 2 core patching logic (_patch.py) — PENDING
+- [ ] Task 462 (developer): Phase 3 test suite — PENDING
+- [ ] Task 463 (developer): Phase 4 docs + publish prep — PENDING
+- [ ] After dev: QA task
+- [ ] After QA: documentation_writer task
+- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check tasks 460-463 status — when done, create QA task
+
+---
+
 ### wireio
-Status: QA task created (task 450)
+Status: QA blocked on bug fixes (tasks 452, 453)
 Plan: projects/wireio/PLAN.md
 Replaces: pyserial (13M downloads/month, abandoned since Nov 2020)
 Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
 
 #### Pipeline State
 - [x] Tasks 445-448 (developer phases 1-4) → all done
-- [ ] Task 450 (qa): QA verification — PENDING
+- [ ] Task 450 (qa): BLOCKED — waiting on tasks 452 and 453
+- [ ] Task 452 (developer): Fix wrong DCB bit mask in _win32.py (high severity) — PENDING
+- [ ] Task 453 (developer): Remove unused imports in test files (minor) — PENDING
 - [ ] After QA: documentation_writer task
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 450 status — if done, create documentation_writer task; if failed, return to developer
+1. Check tasks 452 and 453 status — when done, unblock task 450
+2. Check task 450 status — if done, create documentation_writer task
 
 ---
 
@@ -39,93 +62,79 @@ Language: Python 3.10+, zero deps, stdlib only
 
 ---
 
-### envstruct
-Status: Release task created (task 451)
-
-#### Pipeline State
-- [x] Tasks 418-423 (developer phases 1-6) → done
-- [x] Tasks 428, 429, 430 (bug fixes) → done
-- [x] Task 427 (qa): DONE
-- [x] Task 441 (documentation_writer): DONE
-- [ ] Task 451 (release_manager): GitHub release + Go module tag v0.1.0 — PENDING
-
-#### Next Actions (on next run)
-1. Check task 451 status — if done, mark envstruct complete
-
----
-
 ### ptylink
-Status: Human task pending (task 415)
+Status: Release task created (task 455)
 
 #### Pipeline State
 - [x] All dev + QA + docs phases done
-- [ ] Task 415 (human): Configure PyPI Trusted Publisher for ptylink — PENDING
-- [ ] After human: release task (release_manager: publish ptylink to PyPI)
+- [x] Task 415 (human): PyPI Trusted Publisher configured — DONE
+- [ ] Task 455 (release_manager): Publish ptylink to PyPI — PENDING
 
 #### Next Actions (on next run)
-1. Check task 415 status — if done, create release task for release_manager
+1. Check task 455 status — if done, mark ptylink complete
 
 ---
 
 ### ciphertrust
-Status: Human task pending (task 406)
+Status: Release task created (task 456)
 
 #### Pipeline State
 - [x] All dev + QA + docs phases done
 - [x] GitHub release v0.1.0 done
-- [ ] Task 406 (human): Configure PyPI Trusted Publisher for ciphertrust — PENDING
-- [ ] After human: release task (release_manager: publish ciphertrust to PyPI)
+- [x] Task 406 (human): PyPI Trusted Publisher configured — DONE
+- [ ] Task 456 (release_manager): Publish ciphertrust to PyPI — PENDING
 
 #### Next Actions (on next run)
-1. Check task 406 status — if done, create release task for release_manager
+1. Check task 456 status — if done, mark ciphertrust complete
 
 ---
 
 ### chromapaint
-Status: Human task pending (task 407)
+Status: Release task created (task 457)
 
 #### Pipeline State
 - [x] All dev + QA + docs phases done
 - [x] GitHub release v0.1.0 done
-- [ ] Task 407 (human): Configure PyPI Trusted Publisher for chromapaint — PENDING
-- [ ] After human: release task (release_manager: publish chromapaint to PyPI)
+- [x] Task 407 (human): PyPI Trusted Publisher configured — DONE
+- [ ] Task 457 (release_manager): Publish chromapaint to PyPI — PENDING
 
 #### Next Actions (on next run)
-1. Check task 407 status — if done, create release task for release_manager
-
----
-
-### collate
-Status: Human task created (task 443)
-
-#### Pipeline State
-- [x] All dev tasks done (including bug fixes 424)
-- [x] Task 408 (qa): DONE
-- [x] Task 438 (documentation_writer): DONE
-- [ ] Task 443 (human): Configure PyPI Trusted Publisher for collate — PENDING
-- [ ] After human: release task (release_manager: publish collate to PyPI)
-
-#### Next Actions (on next run)
-1. Check task 443 status — if done, create release task for release_manager
+1. Check task 457 status — if done, mark chromapaint complete
 
 ---
 
 ### slugsmith
-Status: Human task created (task 444)
+Status: Release task created (task 458)
 
 #### Pipeline State
 - [x] Tasks 409-412, 425, 426 (developer) → all done
 - [x] Task 417 (qa): DONE
 - [x] Task 439 (documentation_writer): DONE
-- [ ] Task 444 (human): Configure PyPI Trusted Publisher for slugsmith — PENDING
-- [ ] After human: release task (release_manager: publish slugsmith to PyPI)
+- [x] Task 444 (human): PyPI Trusted Publisher configured — DONE
+- [ ] Task 458 (release_manager): Publish slugsmith to PyPI — PENDING
 
 #### Next Actions (on next run)
-1. Check task 444 status — if done, create release task for release_manager
+1. Check task 458 status — if done, mark slugsmith complete
+
+---
+
+### collate
+Status: Naming conflict — human task pending (task 459)
+
+#### Pipeline State
+- [x] All dev tasks done (including bug fixes 424)
+- [x] Task 408 (qa): DONE
+- [x] Task 438 (documentation_writer): DONE
+- [ ] Task 459 (human): Rename collate project (PyPI name taken) — PENDING
+- [ ] After human: re-configure Trusted Publisher with new name → release_manager
+
+#### Next Actions (on next run)
+1. Check task 459 status — if done, create new human task for PyPI Trusted Publisher with new name
 
 ---
 
 ## Completed Projects (Full Pipeline)
+- **envstruct** — GitHub release + Go module tag v0.1.0 done (task 451). Fully complete.
 - **aegis** — npm released. Fully complete.
 - **dateflow** — released to PyPI 2026-03-14. Fully complete.
 - **faultline** v0.1.0 — released 2026-03-13. Fully complete.
@@ -133,8 +142,8 @@ Status: Human task created (task 444)
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 1 pending (449 fieldmarshal bug fix)
-- QA queue: 2 pending (442 fieldmarshal blocked, 450 wireio)
+- Developer queue: 5 pending (449 fieldmarshal, 452 wireio, 453 wireio, 460-463 reloop phases)
+- QA queue: 2 blocked (442 fieldmarshal on 449, 450 wireio on 452+453)
 - documentation_writer queue: 0 pending
-- human queue: 5 pending (406 ciphertrust, 407 chromapaint, 415 ptylink, 443 collate, 444 slugsmith)
-- release_manager queue: 1 pending (451 envstruct)
+- human queue: 1 pending (459 collate rename)
+- release_manager queue: 4 pending (455 ptylink, 456 ciphertrust, 457 chromapaint, 458 slugsmith)

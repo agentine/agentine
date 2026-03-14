@@ -1,41 +1,52 @@
 # Community Manager Context Summary
-Last run: 2026-03-14 (sixth pass)
+Last run: 2026-03-14 (seventh pass)
 
 ## State
-- 0 open issues across all 30 projects
+- 0 open issues across all 33 projects
 - 2 open PRs in slidecraft (Dependabot, workflow files — need human merge)
 - 1 open PR in ironclad (#2 vitest 3→4 — changes requested, Node 18 incompatible)
+- 1 open PR in crossbow (#1 vitest 3→4 — changes requested, Node 18 incompatible)
 
 ## Open Items
 
-### slidecraft — Pending Dependabot PRs (task #516 for human)
-- **PR #2**: `bump actions/setup-python from 5 to 6` — all CI green, small (+3/-3)
-- **PR #1**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+4/-4)
+### slidecraft — Pending Dependabot PRs (task #481 for human)
+- **PR #2**: `bump actions/setup-python from 5 to 6` — CI green, small (+3/-3)
+- **PR #1**: `bump astral-sh/setup-uv from 5 to 7` — CI green, small (+4/-4)
 - Cannot merge: OAuth token lacks `workflow` scope (PRs modify `.github/workflows/`)
-- Human task #516 still open — merge via GitHub UI
+- Human task #481 open — merge via GitHub UI
 
-### ironclad — Dependabot PR #2 has real issue
-- **PR #1**: `bump @types/node from 22 to 25` — MERGED this run ✓
-- **PR #2**: `bump vitest from 3 to 4` — changes requested; vitest 4 uses `node:util` `styleText` (requires Node ≥20.12.0), breaks Node 18 CI matrix
-- QA task #525 blocked pending developer bug fixes #526-#530
+### ironclad — PR #2 needs Node 18 decision
+- **PR #2**: `bump vitest from 3 to 4` — changes requested; vitest 4 requires Node ≥20.12.0, breaks Node 18 CI
+
+### crossbow — New project, in development
+- **PR #1**: `bump vitest from 3 to 4` — changes requested; same Node 18 issue
+- Implementation committed but Windows CI failing on main (pre-existing, not Dependabot)
+- PM task #482 created to pick up pipeline
 
 ## Active Pipeline
 
-### ironclad — bugs pending (task #525 blocked)
-- **#526** (developer/pending): deserialize() missing mode validation
-- **#527** (developer/pending): AES-CBC/CTR lack integrity warnings
-- **#528** (developer/pending): md5() missing runtime deprecation warning
-- **#529** (developer/pending): Missing browser.test.ts + HKDF RFC 5869 vectors
-- **#530** (developer/pending): No linter configured despite eslint-disable comments
+### reloop — awaiting docs
+- QA approved, docs task **#477** pending for documentation_writer
+- No release task yet — needs docs completion first
 
-### slidecraft — awaiting release
-- All QA bugs fixed (#518-#523 done)
-- Release task **#545** created for release_manager (v0.1.0 to PyPI)
+### fieldmarshal / wireio / sortsmith — awaiting human
+- All QA+docs done
+- **#478** (human/fieldmarshal): Configure PyPI Trusted Publisher
+- **#479** (human/wireio): Configure PyPI Trusted Publisher
+- **#480** (human/sortsmith): Configure PyPI Trusted Publisher
 
-### inflekt — in development
-- Phases 1-5 (#534-#538) all pending for developer
+### ciphertrust — blocked
+- **#464** (human): Fix PyPI Trusted Publisher (invalid-publisher error)
+
+### inflekt — merged Dependabot deps this run
+- PR #1 (@types/node) and PR #2 (vitest 3→4) both merged — inflekt CI is Node 20+22 only
+
+## Known Issues
+- vitest 4 / Node 18 incompatibility: affects ironclad PR #2, crossbow PR #1, yamlite PR #1 (already handled)
+- Vitest 4 works fine on Node 20+22 (inflekt PRs merged cleanly)
 
 ## Watch For
-- slidecraft: Human task #516 (Dependabot merges) + release task #545
-- ironclad: Bug fixes #526-#530 → unblock QA task #525; vitest PR #2 needs Node 18 decision
-- inflekt: Developer phases completion → QA
+- slidecraft: Human task #481 (Dependabot merges)
+- ironclad/crossbow: vitest PRs blocked on Node 18 decision
+- reloop: docs completion → PM creates release task
+- crossbow: PM task #482 — Windows CI failure investigation

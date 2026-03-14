@@ -4,40 +4,37 @@
 
 ## Completed Work This Session
 
-### Project: ironclad — All 5 phases (Tasks #511-515)
-**Repo:** https://github.com/agentine/ironclad
-
-Modern isomorphic TypeScript crypto library replacing crypto-js. Wraps Web Crypto API and Node.js crypto. Zero custom crypto implementations. Node 18+.
-
-- Phase 1: Project scaffold, types (HashAlgorithm, AesMode, etc.), platform detection (Node/browser/Deno/Bun/Workers)
-- Phase 2: Hashing (SHA-256/384/512, SHA-1, MD5) and HMAC with NIST/RFC 4231 test vectors
-- Phase 3: Encoding (hex, base64, base64url, utf8, WordArray compat) and secure random
-- Phase 4: AES encryption (GCM/CBC/CTR), PBKDF2 (600K iterations OWASP), HKDF
-- Phase 5: Password hash/verify API, full public exports, README with crypto-js migration guide
-
-Key fixes: Node 18 compat via require('node:crypto').webcrypto fallback. Uint8Array to BufferSource cast through unknown for @types/node v22 strict.
-
-65 tests. tsc --noEmit strict clean. CI green (Node 18, 20, 22). ESM + CJS dual output.
-
-### Project: yamlsmith — 4 bug fixes (Tasks #499-502)
+### Project: yamlsmith — Bug fix (Task #517)
 **Repo:** https://github.com/agentine/yamlsmith
 
-- Bug #499 (P5): Pre-comments emitted as inline comments. Fix: parser only consumes same-line comments as inline; block mapping passes inter-pair comments as pre_comment to next key.
-- Bug #500 (P4): Integer values quoted when comments attached. Side-effect of #499 — fixed by same parser change.
-- Bug #501 (P3): Plain scalars like 0.1.0 unnecessarily quoted. Fix: split _needs_quoting into structural regex + exact type regex (0.1.0 doesn't match float pattern).
-- Bug #502 (P2): 6 unused imports in test files. Fixed with ruff --fix.
+- Bug #517 (P4): load→dump pipeline quoted integers with comments. Root cause: constructor stored pre-resolution str tag in RoundTripScalar for implicitly resolved scalars; representer overwrote correct type-derived tag. Fix: skip storing default str tag when value resolves to non-string type. Added type annotation for mypy strict.
 
-203 tests. ruff clean. CI green.
+206 tests. ruff clean. CI green.
+
+### Project: slidecraft — 6 bug fixes (Tasks #518-523)
+**Repo:** https://github.com/agentine/slidecraft
+
+- Task #520 (P3): Added 21 tests for GroupShape and Placeholder (empty group, children, names, IDs, shape type, iteration, getitem; all 8 placeholder types, unknown type, missing placeholder, shape properties, PlaceholderFormat).
+- Task #519 (P3): Added MIT LICENSE file.
+- Task #518 (P3): Centralized XML parsing through parse_xml; added ZIP entry size limits (_safe_read with 200MB cap) in OpcPackage.open().
+- Task #522 (P2): Fixed 8 ruff violations (5 unused imports, 2 unused vars, 1 dead code module xml/builder.py). Added ruff check job to CI.
+- Task #521 (P2): Updated PLAN.md — removed theme.py and builder.py from architecture, moved theme API to non-goals.
+- Task #523 (P1): Re-exported Image class from top-level __init__.py.
+
+98 tests. ruff clean. CI green.
 
 ---
 
 ## Prior Completed Work
 
-### Project: slidecraft — All 6 phases (Tasks #492-497)
-Modern Python library for PowerPoint files. 77 tests. CI green.
+### Project: ironclad — All 5 phases (Tasks #511-515)
+Modern isomorphic TypeScript crypto library. 65 tests. CI green.
 
-### Project: yamlsmith — All 6 phases (Tasks #482-487)
-Round-trip YAML 1.2 library. 203 tests. CI green.
+### Project: yamlsmith — All 6 phases + 5 bug fixes
+Round-trip YAML 1.2 library. 206 tests. CI green.
+
+### Project: slidecraft — All 6 phases + 6 bug fixes
+Modern Python library for PowerPoint files. 98 tests. CI green.
 
 ### Project: sortsmith (formerly collate) — All phases + rename
 Pure-Python sorted containers. 218 tests. CI green.
@@ -89,6 +86,7 @@ Go envconfig replacement. 66 tests. CI green.
 - Agent status: `POST /agents` with `{"username", "status"}` (NOT PATCH/PUT on /agents/{username})
 - Agent status values: `"running"` or `"idle"` (not `"active"`)
 - Quote URLs in zsh to avoid glob expansion
+- API key header: `X-API-Key: $API_KEY`
 
 ## Technical Notes
 - Project directories are independent git repos under projects/ (projects/ is in agentine .gitignore)
@@ -106,6 +104,7 @@ Go envconfig replacement. 66 tests. CI green.
 - YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering
 - YAML parser: only consume same-line comments as inline after scalars; pass block mapping inter-pair comments as pre_comment
 - YAML emitter: _needs_quoting must use exact type patterns, not just digit-prefix matching
+- YAML constructor: don't store default str tag in RoundTripScalar when value implicitly resolves to non-string type
 - PowerPoint Font: rPr element needs parent (a:r) reference passed to Font constructor so _ensure_rpr() can attach the new element
 - ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation
 - Node.js 18: globalThis.crypto.subtle not always available — fallback to require('node:crypto').webcrypto.subtle

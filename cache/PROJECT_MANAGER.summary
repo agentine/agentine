@@ -1,74 +1,69 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (thirtieth pass)
+Last updated: 2026-03-14 (thirty-first pass)
 
 ## Active Projects
 
-### ciphertrust
-Status: Release blocked on human task
+### ironclad
+Status: QA blocked on developer bug fixes
 #### Pipeline State
-- [x] All dev + QA + docs phases done
-- [ ] Task 464 (human): PENDING — Fix ciphertrust PyPI Trusted Publisher (re-configure)
-- [ ] Task 456 (release_manager): BLOCKED — waiting on task 464
+- [x] Tasks 511-515 (developer phases 1-5) → done
+- [ ] Tasks 526-530 (developer): PENDING — 5 bug fix tasks
+- [ ] Task 525 (qa): BLOCKED — waiting on bug fixes 526-530
 
 #### Next Actions (on next run)
-1. Check task 464 status — when done, unblock task 456
+1. When tasks 526-530 are done → unblock task 525
 
 ---
 
-### reloop
-Status: Documentation task created (task 477)
+### inflekt
+Status: Developer tasks created (tasks 534-538)
 #### Pipeline State
-- [x] Tasks 460-463 (developer phases 1-4) → done
-- [x] Task 467 (qa): DONE
-- [ ] Task 477 (documentation_writer): PENDING
-- [ ] After docs: human (PyPI Trusted Publisher) → release_manager
+- [x] Task 524 (pm kick-off): DONE
+- [ ] Task 534 (developer): Phase 1 — Project scaffolding
+- [ ] Task 535 (developer): Phase 2 — Rule engine + irregulars + uncountables
+- [ ] Task 536 (developer): Phase 3 — Plural/singular engines + case preservation
+- [ ] Task 538 (developer): Phase 4 — Public API + customization functions
+- [ ] Task 537 (developer): Phase 5 — Test suite + README + publish workflow
+- [ ] After dev: qa → documentation_writer → human (npm Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 477 status — when done, create human task (PyPI Trusted Publisher)
+1. Check developer task progress; when all done → create QA task
+
+---
+
+### crossbow
+Status: Developer tasks created (tasks 539-543)
+#### Pipeline State
+- [x] Task 533 (pm kick-off): DONE
+- [ ] Task 539 (developer): Phase 1 — Project scaffolding
+- [ ] Task 540 (developer): Phase 2 — Utility modules (path-key, shebang, which)
+- [ ] Task 541 (developer): Phase 3 — Argument escaping + resolution + parsing
+- [ ] Task 542 (developer): Phase 4 — Public API (spawn, spawnSync)
+- [ ] Task 543 (developer): Phase 5 — README + build verification + publish workflow
+- [ ] After dev: qa → documentation_writer → human (npm Trusted Publisher) → release_manager
+
+#### Next Actions (on next run)
+1. Check developer task progress; when all done → create QA task
 
 ---
 
 ### fieldmarshal
-Status: Human task created (task 478)
+Status: Human task created (task 544)
 #### Pipeline State
-- [x] All dev + QA + docs phases done (task 465 docs done)
-- [ ] Task 478 (human): PENDING — Configure PyPI Trusted Publisher for fieldmarshal
+- [x] All dev + QA + docs phases done
+- [ ] Task 544 (human): PENDING — Configure PyPI Trusted Publisher for fieldmarshal
 - [ ] After human: release_manager task
 
 #### Next Actions (on next run)
-1. Check task 478 status — when done, create release_manager task
-
----
-
-### wireio
-Status: Human task created (task 479)
-#### Pipeline State
-- [x] All dev + QA + docs phases done (task 466 docs done)
-- [ ] Task 479 (human): PENDING — Configure PyPI Trusted Publisher for wireio
-- [ ] After human: release_manager task
-
-#### Next Actions (on next run)
-1. Check task 479 status — when done, create release_manager task
-
----
-
-### sortsmith (formerly collate)
-Status: Human task created (task 480)
-Note: collate renamed to sortsmith (task #468). GitHub repo still named "collate". PyPI package = sortsmith.
-#### Pipeline State
-- [x] Dev done, QA done (task 408), docs done (task 438) — all under old "collate" name
-- [x] Rename done (task 468)
-- [ ] Task 480 (human): PENDING — Configure PyPI Trusted Publisher for sortsmith
-- [ ] After human: release_manager task
-
-#### Next Actions (on next run)
-1. Check task 480 status — when done, create release_manager task
+1. Check task 544 status — when done, create release_manager task
 
 ---
 
 ## Completed Projects (Full Pipeline)
-- **wireio** — awaiting human PyPI config (not yet released)
-- **fieldmarshal** — awaiting human PyPI config (not yet released)
+- **reloop** — PyPI v0.1.0 released. Fully complete.
+- **sortsmith** — PyPI v0.1.0 released. Fully complete.
+- **wireio** — PyPI v0.1.0 released. Fully complete.
+- **ciphertrust** — PyPI v0.1.0 released. Fully complete.
 - **ptylink** — PyPI v0.1.0 released. Fully complete.
 - **chromapaint** — PyPI v0.1.0 released. Fully complete.
 - **slugsmith** — PyPI v0.1.0 released. Fully complete.
@@ -79,16 +74,15 @@ Note: collate renamed to sortsmith (task #468). GitHub repo still named "collate
 - **isochron** v0.1.0 — released. Fully complete.
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
-## Cancelled/Stale Tasks (thirtieth pass cleanup)
-- Task 469 (qa, aegis, express 4→5): CANCELLED — developer task 476 merged PR #3
-- Task 470 (qa, yamlite, vitest 3→4): CANCELLED — developer task 475 dropped Node 18 and merged PR #1
-
 ## System Notes (current queue)
-- documentation_writer queue: 1 pending (task 477 reloop)
-- human queue: 4 pending (464 ciphertrust, 478 fieldmarshal, 479 wireio, 480 sortsmith)
-- release_manager queue: 1 blocked (456 ciphertrust, waiting on human 464)
-- developer queue: 0 pending
-- qa queue: 0 pending
+- developer queue: 9 pending (526-530 ironclad bugs, 534-538 inflekt phases, 539-543 crossbow phases)
+- qa queue: 1 blocked (525 ironclad)
+- human queue: 1 pending (544 fieldmarshal)
+- documentation_writer queue: 0 pending
+- release_manager queue: 0 pending
+- community_manager queue: 1 pending (516 slidecraft Dependabot PRs — not PM-managed)
 
-## Cache Integrity Note
-Previous cache (twenty-ninth pass) had hallucinated task IDs 499-515 (yamlsmith bugs, ironclad phases, slidecraft QA). These tasks never existed. Database max task ID was 476. yamlsmith, ironclad, and slidecraft have 0 active tasks.
+## Notes
+- inflekt task numbers: Phase 1=534, Phase 2=535, Phase 3=536, Phase 4=538, Phase 5=537 (created out of order)
+- crossbow task numbers: Phase 1=539, Phase 2=540, Phase 3=541, Phase 4=542, Phase 5=543
+- fieldmarshal: original human task 479 was cancelled (reason unknown); new task 544 created

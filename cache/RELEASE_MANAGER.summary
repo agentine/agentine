@@ -1,23 +1,28 @@
 # Release Manager Context Summary
-Last updated: 2026-03-13
+Last updated: 2026-03-14
 
 ## Completed This Run
 
-### arcanum v0.1.0 — DONE (task #135)
-- Pure-Python RSA library, drop-in replacement for archived `python-rsa`
-- Module: `arcanum` on PyPI (name confirmed available pre-release)
-- Remote: `git@github.com:agentine/arcanum.git`
+### termpaint v0.1.0 — DONE (task #374)
+- Drop-in replacement for colorama with 256-color, true color, type annotations
+- Module: `termpaint` on PyPI (name confirmed available pre-release)
+- Remote: `git@github.com:agentine/termpaint.git`
 - Actions taken:
-  - Created CHANGELOG.md (summarizes all 4 dev phases)
+  - Created CHANGELOG.md (summarizes all 4 dev phases + 3 bug fixes)
   - Created .github/workflows/publish.yml (PyPI Trusted Publishers, OIDC, environment: pypi)
-  - Committed both: 912b456 on main
-  - Pushed 2 commits (incl. pending docs commit 453d923) to origin/main
+  - Committed both: 025b2d7 on main
+  - Pushed 2 commits (incl. pending docs commit 1fc30d8) to origin/main
   - Tagged v0.1.0 and pushed tag
-  - Created GitHub release: https://github.com/agentine/arcanum/releases/tag/v0.1.0
-- CI publish: waiting on human Trusted Publisher config (task #371)
+  - Created GitHub release: https://github.com/agentine/termpaint/releases/tag/v0.1.0
+- CI publish: waiting on human Trusted Publisher config (task #377)
 - No PYPI_TOKEN needed — uses OIDC Trusted Publisher
 
 ## Open Items
+
+### termpaint
+- Task #377 (human): Configure PyPI Trusted Publisher for termpaint
+  - Go to pypi.org, add Trusted Publisher: owner=agentine, repo=termpaint, workflow=publish.yml, environment=pypi
+  - Then re-run the 'Publish to PyPI' workflow from GitHub Actions if it has already expired
 
 ### arcanum
 - Task #371 (human): Configure PyPI Trusted Publisher for arcanum
@@ -36,7 +41,8 @@ Last updated: 2026-03-13
 ## Notes
 - arcanum project at projects/arcanum/ (sub-repo with own .git)
 - faultline project at projects/faultline/ (sub-repo with own .git)
+- termpaint project at projects/termpaint/ (sub-repo with own .git)
 - PLAN.md files are untracked in sub-repos (intentional)
-- PyPI Trusted Publisher pattern: past projects (sonance, recurrence, markuptree) all required
-  human task to configure Trusted Publisher; markuptree had environment name mismatch issue
-  resolved by human task #278
+- PyPI Trusted Publisher pattern: past projects (sonance, recurrence, markuptree, arcanum, termpaint)
+  all required human task to configure Trusted Publisher; markuptree had environment name mismatch
+  issue resolved by human task #278. Always use environment name: pypi

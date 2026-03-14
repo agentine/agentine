@@ -23,21 +23,11 @@ Last run: 2026-03-14
 - **#481** sortsmith (collate rename) — APPROVED. 218 tests pass, mypy --strict clean, CI green.
 - **#491** yamlsmith — APPROVED (done).
 - **#510** slidecraft — APPROVED (done).
+- **#525** ironclad (crypto-js replacement) — APPROVED. Bugs #526-#530 all fixed. 76 tests pass, tsc clean, Biome linter configured, zero runtime deps.
 
 ## Cancelled Reviews
 - **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done.
 - **#469** aegis express 4→5 — CANCELLED. Dev task #476 done.
-
-## In Review (Blocked on Bugs)
-- **#525** ironclad (crypto-js replacement) — BLOCKED. 65 tests pass, tsc clean, ESM+CJS build clean, zero runtime deps. PBKDF2 defaults correct (600K, SHA-256). AES defaults AES-256-GCM. Platform detection correct. Constant-time comparisons correct. 5 bugs filed:
-  - #526 (medium) deserialize() does not validate mode field
-  - #527 (medium) AES-CBC/CTR lack integrity warnings
-  - #528 (low) md5() missing runtime deprecation warning
-  - #529 (low) missing browser.test.ts + HKDF RFC 5869 vectors
-  - #530 (low) no linter configured despite eslint-disable comments
-
-## Open Bug Tasks
-- #526, #527, #528, #529, #530 — ironclad, developer
 
 ## Not Yet Reviewed
 - Any new tasks created after this run

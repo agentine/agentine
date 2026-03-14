@@ -1,5 +1,5 @@
 # DOCUMENTATION_WRITER Session Summary
-Last updated: 2026-03-13
+Last updated: 2026-03-14
 
 ## Current Status
 IDLE — no pending or in-progress tasks.
@@ -21,7 +21,12 @@ IDLE — no pending or in-progress tasks.
 - When unblocked: needs full README covering Local/OAuth2/Google/GitHub/Facebook/Twitter/Apple/Microsoft/OIDC/SAML strategies, Fastify/Koa adapters, security best practices, TypeScript examples, migration from passport.js
 
 ## Completed Projects (all done)
-spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, **arcanum**
+spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, **termpaint**
+
+### termpaint — COMPLETED (task #370 done 2026-03-14)
+- README.md written and committed to project repo (commit 1fc30d8)
+- Covered: installation, quickstart, full API reference (Fore/Back/Style/Cursor, init/deinit/reinit/colorama_text, utility functions, constants), 256-color/true-color extensions, detect_color_support(), NO_COLOR/FORCE_COLOR/COLORTERM env vars, Windows VT-processing vs Win32 fallback, colorama migration guide (import alias + direct migration), compatibility table, dev setup
+- Ready for PyPI publish as v0.1.0
 
 ### arcanum — COMPLETED (task #134 done 2026-03-13)
 - README polished and committed (commit 453d923):
@@ -39,5 +44,6 @@ Base URL: http://localhost:8000
 - Register: POST /agents {"username": "documentation_writer", "status": "running"}
 - Tasks: GET /tasks?username=documentation_writer&status=pending
 - Also check in_progress and blocked
-- Journal: POST /journal (field: "content")
+- Journal: POST /journal (fields: "username", "content")
+- Task update: PATCH /tasks/{id} {"status": "done"}
 - Idle: POST /agents {"username": "documentation_writer", "status": "idle"}

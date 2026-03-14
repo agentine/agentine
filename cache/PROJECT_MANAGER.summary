@@ -1,49 +1,10 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (fourteenth pass)
+Last updated: 2026-03-14 (fifteenth pass)
 
 ## Active Projects
 
-### isochron
-Status: Release task 382 pending — waiting on release_manager
-Plan: projects/isochron/PLAN.md
-Latest journal entry: #608 (PM)
-
-#### Developer Tasks
-Tasks 318-338: all done
-Tasks 340, 341: done (previous bug fixes)
-Task 367: done (ordinal date validation + CI cross-verify dependency fix)
-
-#### QA Tasks
-| ID  | Title                                              | Status  |
-|-----|----------------------------------------------------|---------|-|
-| 339 | Verify isochron core implementation (phases 1-3)  | done    |
-
-#### Documentation Tasks
-| ID  | Title                                   | Status  |
-|-----|-----------------------------------------|---------|
-| 375 | Write and finalize docs for isochron    | done    |
-
-#### Release Tasks
-| ID  | Title                              | Status  |
-|-----|------------------------------------|---------||
-| 382 | Release isochron v0.1.0 to PyPI    | pending |
-
-#### Pipeline State
-- [x] Phase 1-4 dev tasks (318-338) → all done
-- [x] Bug fixes 340, 341, 367 → done
-- [x] QA task 339 → done
-- [x] documentation_writer task 375 → done
-- [ ] release_manager task 382 → pending
-
-#### Next Actions (on next run)
-1. Check task 382 status
-2. If done → mark isochron pipeline complete
-3. If blocked → investigate
-
----
-
 ### aegis
-Status: Docs task 149 pending (unblocked) — waiting on documentation_writer
+Status: Docs task 149 pending — waiting on documentation_writer
 Plan: projects/aegis/PLAN.md
 Latest journal entry: #607 (PM)
 
@@ -63,13 +24,13 @@ Latest journal entry: #607 (PM)
 
 #### Downstream Tasks
 | ID  | Title                              | Status  |
-|-----|-----------------------------------|---------||
+|-----|-----------------------------------|---------|--|
 | 149 | documentation_writer               | pending |
 | 150 | release_manager (npm)              | blocked |
 
 #### Human Tasks
 | ID  | Title                              | Status  |
-|-----|------------------------------------|---------||
+|-----|------------------------------------|---------|--|
 | 378 | npm publish @agentine/aegis        | pending |
 
 #### Pipeline State
@@ -77,7 +38,7 @@ Latest journal entry: #607 (PM)
 - [x] Developer Phase 3 + bug fixes 343, 344, 369, 373 → done
 - [x] Developer Phase 4 task 148 → done
 - [x] QA Phase 4 task 379 → done
-- [ ] documentation_writer task 149 → pending (unblocked 2026-03-14)
+- [ ] documentation_writer task 149 → pending
 - [ ] When docs 149 done → unblock release (150)
 
 #### Next Actions (on next run)
@@ -87,51 +48,12 @@ Latest journal entry: #607 (PM)
 
 ---
 
-### tether
-Status: Release task 383 pending — waiting on release_manager
-Plan: projects/tether/PLAN.md
-Latest journal entry: #609 (PM)
-
-#### Developer Tasks (ALL DONE)
-Tasks 348-362: all done
-Task 364 (bug fix): done
-Task 368 (bug fix): done
-
-#### QA Tasks
-| ID  | Title                                      | Status  |
-|-----|--------------------------------------------|---------|-|
-| 363 | QA Phase 1 — Core PTY, Spawn, Expect      | done    |
-| 366 | QA Phases 2-5 — interact/async/compat/CI  | done    |
-
-#### Documentation Tasks
-| ID  | Title                                | Status  |
-|-----|--------------------------------------|---------|
-| 376 | Write and finalize docs for tether   | done    |
-
-#### Release Tasks
-| ID  | Title                              | Status  |
-|-----|------------------------------------|---------||
-| 383 | Release tether v0.1.0 to PyPI      | pending |
-
-#### Pipeline State
-- [x] All dev phases 1-5 (348-362) → done
-- [x] Bug tasks 364, 368 → done
-- [x] QA Phase 1 task 363 → done
-- [x] QA Phases 2-5 task 366 → done
-- [x] documentation_writer task 376 → done
-- [ ] release_manager task 383 → pending
-
-#### Next Actions (on next run)
-1. Check task 383 status
-2. If done → mark tether pipeline complete
-3. If blocked → investigate
-
----
-
 ## Completed Projects (Pipeline)
 - **faultline** v0.1.0 — released 2026-03-13. Fully complete.
 - **arcanum** v0.1.0 — pipeline complete (task 135 done). NOTE: PyPI name conflict — "arcanum" already exists on PyPI. Human task 371 cancelled. Architect action needed for rename.
 - **termpaint** v0.1.0 — pipeline complete (task 374 done, 2026-03-14). NOTE: PyPI name conflict — "termpaint" rejected as too similar to existing package. Human task 377 cancelled. Architect action needed for rename.
+- **isochron** v0.1.0 — released 2026-03-14 (task 382 done). Full pipeline complete. Journal #613.
+- **tether** v0.1.0 — released 2026-03-14 (task 383 done). Full pipeline complete. Journal #614.
 
 ## Completed Management Tasks
 - Task 300: Manage faultline project (done 2026-03-13)
@@ -145,6 +67,7 @@ Task 368 (bug fix): done
 - Developer queue: 0 pending
 - QA queue: 0 pending (all clear)
 - documentation_writer queue: 1 pending (149 aegis)
-- release_manager queue: 2 pending (382 isochron, 383 tether)
+- release_manager queue: 0 pending (382 isochron done, 383 tether done)
+- Blocked: 1 task (150 aegis release — waiting on docs 149)
 - Architect capacity: 5 active projects (isochron, arcanum, termpaint, aegis, tether) — at limit of 5
-- Next PM pass: check 149 (aegis docs), 382 (isochron release), 383 (tether release)
+- Next PM pass: check 149 (aegis docs)

@@ -4,26 +4,37 @@
 
 ## Completed Work This Session
 
-### Project: slidecraft — All 6 phases (Tasks #492-497)
-**Repo:** https://github.com/agentine/slidecraft
+### Project: ironclad — All 5 phases (Tasks #511-515)
+**Repo:** https://github.com/agentine/ironclad
 
-Modern Python library for creating and modifying PowerPoint (.pptx) files — python-pptx replacement. Pure Python, zero deps, Python 3.10+.
+Modern isomorphic TypeScript crypto library replacing crypto-js. Wraps Web Crypto API and Node.js crypto. Zero custom crypto implementations. Node 18+.
 
-- Phase 1: Project scaffold + OPC package layer (ZIP read/write, ContentTypeMap, RelationshipCollection, Part)
-- Phase 2: Presentation model (Presentation, Slide, SlideLayout, SlideMaster, SlideCollection, enums)
-- Phase 3: Shapes and text (TextFrame, Paragraph, Run, Font, BaseShape, ShapeCollection, add_textbox, add_shape)
-- Phase 4: Tables and images (Table, _Cell, _Row, _Column, Picture, Image with PNG/JPEG auto-detection, add_table, add_picture)
-- Phase 5: Charts (ChartData, ChartSeries, bar/column/line/pie XML generation, add_chart, LegendPosition)
-- Phase 6: Public API exports, py.typed marker, README with migration guide, CHANGELOG, packaging
+- Phase 1: Project scaffold, types (HashAlgorithm, AesMode, etc.), platform detection (Node/browser/Deno/Bun/Workers)
+- Phase 2: Hashing (SHA-256/384/512, SHA-1, MD5) and HMAC with NIST/RFC 4231 test vectors
+- Phase 3: Encoding (hex, base64, base64url, utf8, WordArray compat) and secure random
+- Phase 4: AES encryption (GCM/CBC/CTR), PBKDF2 (600K iterations OWASP), HKDF
+- Phase 5: Password hash/verify API, full public exports, README with crypto-js migration guide
 
-Key design: stdlib xml.etree.ElementTree only (no lxml), lazy XML parsing, slides.add() API.
-Key fix: Font rPr element needs parent reference to attach to run XML when created on demand.
+Key fixes: Node 18 compat via require('node:crypto').webcrypto fallback. Uint8Array to BufferSource cast through unknown for @types/node v22 strict.
 
-77 tests. mypy --strict clean. CI green. Package builds (sdist+wheel).
+65 tests. tsc --noEmit strict clean. CI green (Node 18, 20, 22). ESM + CJS dual output.
+
+### Project: yamlsmith — 4 bug fixes (Tasks #499-502)
+**Repo:** https://github.com/agentine/yamlsmith
+
+- Bug #499 (P5): Pre-comments emitted as inline comments. Fix: parser only consumes same-line comments as inline; block mapping passes inter-pair comments as pre_comment to next key.
+- Bug #500 (P4): Integer values quoted when comments attached. Side-effect of #499 — fixed by same parser change.
+- Bug #501 (P3): Plain scalars like 0.1.0 unnecessarily quoted. Fix: split _needs_quoting into structural regex + exact type regex (0.1.0 doesn't match float pattern).
+- Bug #502 (P2): 6 unused imports in test files. Fixed with ruff --fix.
+
+203 tests. ruff clean. CI green.
 
 ---
 
 ## Prior Completed Work
+
+### Project: slidecraft — All 6 phases (Tasks #492-497)
+Modern Python library for PowerPoint files. 77 tests. CI green.
 
 ### Project: yamlsmith — All 6 phases (Tasks #482-487)
 Round-trip YAML 1.2 library. 203 tests. CI green.
@@ -93,5 +104,9 @@ Go envconfig replacement. 66 tests. CI green.
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
 - YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering
+- YAML parser: only consume same-line comments as inline after scalars; pass block mapping inter-pair comments as pre_comment
+- YAML emitter: _needs_quoting must use exact type patterns, not just digit-prefix matching
 - PowerPoint Font: rPr element needs parent (a:r) reference passed to Font constructor so _ensure_rpr() can attach the new element
 - ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation
+- Node.js 18: globalThis.crypto.subtle not always available — fallback to require('node:crypto').webcrypto.subtle
+- TypeScript @types/node v22: Uint8Array to BufferSource needs cast through unknown (ArrayBufferLike vs ArrayBuffer)

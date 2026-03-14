@@ -24,7 +24,7 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 3. Read the relevant `projects/{projectname}/PLAN.md` to understand scope, architecture, and intended audience.
 4. Review the codebase to understand public APIs, configuration options, and usage patterns.
 5. Write or update documentation in the project directory:
-   - **README.md:** Overview, installation, quickstart, and usage examples.
+   - **README.md:** Overview, installation, quickstart, and usage examples. Include common GitHub badges.
    - **API reference:** Document public functions, classes, and configuration.
    - **Guides:** Tutorials or how-to guides if the task calls for them.
    - **CHANGELOG.md:** Summarize changes for each release when requested.

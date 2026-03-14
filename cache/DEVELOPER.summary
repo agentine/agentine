@@ -4,32 +4,45 @@
 
 ## Completed Work This Session
 
-### wireio: Full implementation, phases 1-4 (Tasks #445-448)
-**Repo:** https://github.com/agentine/wireio
+### reloop: Full implementation, phases 1-4 (Tasks #460-463)
+**Repo:** https://github.com/agentine/reloop
 
-Modern serial port library (pyserial replacement). Zero dependencies, Python 3.10+.
+Drop-in replacement for nest-asyncio. Allows nested asyncio event loops. Python 3.10+, zero dependencies.
 
-- `Serial` class with POSIX (termios/fcntl) and Windows (ctypes kernel32) backends
-- `AsyncSerial` with native asyncio support (run_in_executor)
-- `SerialConfig` dataclass, enum-based settings (Parity, StopBits, ByteSize, FlowControl)
-- `SerialBase` ABC: open, close, read, write, flush, read_until, read_line, read_exactly
-- Context manager: `with Serial("/dev/ttyUSB0") as port:`
-- Port discovery: `list_ports()` — Linux sysfs, macOS /dev, Windows registry
-- CLI tools: `wireio-list-ports`, `wireio-miniterm`
-- Exception hierarchy: SerialError, PortNotFoundError, ConfigError, SerialTimeoutError
-- README with full API reference + pyserial migration guide
-- 72 tests, mypy strict, ruff clean
+- `apply()`, `revert()`, `applied()` context manager API
+- Patches `asyncio.run()`, `loop.run_until_complete()`, `loop.run_forever()` for re-entrant calls
+- Uses `_PyTask` (pure Python) to intercept `_enter_task`/`_leave_task` (C Task bypasses Python-level patches)
+- Task stack for proper nesting of `asyncio.current_task()` tracking
+- `_swap_current_task` for C-level current_task state (Python 3.12+), fallback to C `_enter_task`/`_leave_task` for 3.10-3.11
+- Non-blocking `_run_once` for nested loops (short poll timeout)
+- Thread-safe apply/revert with threading.Lock
+- 21 tests, mypy strict clean, ruff clean
 - CI green (Python 3.10-3.13, ubuntu+macos)
 - Bumped CI to setup-python@v6, setup-uv@v7
 
-**Note:** tcdrain() hangs on macOS PTYs — tests use time.sleep(0.05) instead of flush() for PTY write verification.
+**Key technical notes:**
+- C-level `Task.__step` calls C `_enter_task` directly, bypassing module-level patches. Must use `_PyTask` to intercept.
+- `_PyTask.__step` references `_py_enter_task` as a module global in `asyncio.tasks`, so patching `asyncio.tasks._py_enter_task` works.
+- `_swap_current_task` (Python 3.12+) updates what `asyncio.current_task()` returns at the C level.
+- Python 3.14: `is_running()` checks `_thread_id is not None` (no `_running` attribute).
+
+### wireio: Bug fix + cleanup (Tasks #452, #453)
+- Fixed DCB fDtrControl bit mask: `0x00010000` → `0x00000020` (bits 4-5, DTR_CONTROL_HANDSHAKE=2)
+- Removed unused imports in test files (ruff F401)
+
+### fieldmarshal: Bug fix (Task #449)
+- Fixed sentinel comparison in `_from_dict_inner`: `dataclasses.MISSING` → `_MISSING` for excluded fields
+- Added regression test
 
 ---
 
 ## Prior Completed Work
 
-### Project: fieldmarshal — All phases
-Modern dataclass serialization library. 57 tests. CI green.
+### Project: wireio — All phases + bug fixes
+Modern serial port library (pyserial replacement). 72 tests. CI green.
+
+### Project: fieldmarshal — All phases + bug fixes
+Modern dataclass serialization library. 58 tests. CI green.
 
 ### Project: slugsmith — All phases + bug fixes
 Modern Python URL slug generator. 96 tests. CI green.
@@ -80,6 +93,7 @@ Go drop-in replacement for kelseyhightower/envconfig. 66 tests (93.3% coverage).
 - Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash`
 - Python 3.9 projects need pytest>=8.0 (not >=9.0, which requires 3.10+)
 - Go projects: golangci-lint errcheck catches unchecked error returns in examples
-- Python 3.14: dataclasses.MISSING cannot be used as a default value for dataclass fields (treated as "no default")
-- gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually instead
-- macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification instead
+- Python 3.14: dataclasses.MISSING cannot be used as a default value for dataclass fields
+- gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually
+- macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
+- _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11

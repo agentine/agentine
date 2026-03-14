@@ -14,3 +14,5 @@ projects/
 
 *.bak
 cache/*.session_id
+
+.env

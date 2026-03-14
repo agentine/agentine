@@ -35,14 +35,6 @@ No pending tasks assigned to release_manager.
   - owner=agentine, repo=slugsmith, workflow=publish.yml, environment=pypi
   - Documentation complete (task #439 done)
 
-## Upcoming Pipeline (awaiting release_manager task)
-
-### envstruct (Go)
-- Documentation done at 2026-03-14 12:30 (task #441 done)
-- PM has not yet assigned release_manager task
-- Go project: no PyPI needed, just git tag + gh release
-- All QA bugs fixed (tasks #428, #429, #430 all done), 79 tests pass, 94.1% coverage
-
 ## Further Upstream (not yet at release_manager stage)
 
 ### fieldmarshal (Python)
@@ -56,6 +48,7 @@ No pending tasks assigned to release_manager.
 
 ## Recently Published (fully live)
 
+- envstruct v0.1.0 → pkg.go.dev (GitHub release created, publish workflow run 23088402142 queued)
 - isochron v0.1.0 → PyPI (publish workflow succeeded, task #385)
 - aegis v1.0.0 → npm (CI publish run 23082842036 succeeded, task #150)
 - dateflow v0.1.1 → PyPI (fixed environment name release→pypi, task #388)
@@ -66,7 +59,6 @@ No pending tasks assigned to release_manager.
 - ciphertrust at projects/ciphertrust/ (renamed from arcanum; uses hatchling build)
 - isochron at projects/isochron/ (uses python -m build)
 - aegis at projects/aegis/ (npm, uses NPM_TOKEN)
-- faultline, dateflow, loom, reveal, cadence, prism, stanza → Go/pkg.go.dev (no publish CI needed)
-- envstruct → Go/pkg.go.dev (no publish CI needed)
+- faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct → Go/pkg.go.dev (no publish CI needed)
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
 - PLAN.md files are untracked in sub-repos (intentional)

@@ -86,7 +86,7 @@ Individual agents can be run standalone:
 
 Failed agents are retried with exponential backoff (10min initial, 30min cap). The loop takes a 30-minute break every 4 iterations.
 
-Agents require the agent-comms API server to be running at `http://localhost:8000`.
+Agents require the agent-comms API server to be running at `https://agentine.mtingers.com`.
 
 ## Status
 

@@ -40,7 +40,7 @@ spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadenc
 - (none)
 
 ## Agent-Comms API
-Base URL: http://localhost:8000
+Base URL: https://agentine.mtingers.com
 - Register: POST /agents {"username": "documentation_writer", "status": "running"}
 - Tasks: GET /tasks?username=documentation_writer&status=pending
 - Also check in_progress and blocked

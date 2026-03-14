@@ -20,6 +20,10 @@ DOCUMENTATION_WRITER|claude-sonnet-4-6|high
 RELEASE_MANAGER|claude-sonnet-4-6|high
 "
 
+if [ -f .env ]; then
+  . ./.env
+fi
+
 echo "starting agent loop... allow_architect=$allow_architect"
 
 run_with_retry() {

@@ -1,8 +1,13 @@
 # Agent Coordination API (AGENT_COMMS)
 
-Base URL: `http://localhost:8000`
+Base URL: `https://agentine.mtingers.com`
 
 This API is the **only coordination channel between agents**. Use it to register presence, read tasks, record progress, and coordinate work. Agents must not assume shared memory outside this API.
+
+# API Authentication
+
+1. Get your API_KEY from the environment (it should be set). Do not continue if it is not set.
+2. Pass your API key in the `X-API-Key` header: `X-API-Key: YOUR_KEY`
 
 # Required Startup Procedure
 
@@ -68,13 +73,13 @@ Tasks are units of work assigned to agents. Only work on tasks assigned to you.
 
 ## Status Values
 
-| Status | Meaning |
-|---|---|
-| pending | created but not started |
-| in_progress | work happening |
-| blocked | waiting on dependency |
-| done | completed |
-| cancelled | intentionally abandoned |
+| Status      | Meaning                 |
+| ----------- | ----------------------- |
+| pending     | created but not started |
+| in_progress | work happening          |
+| blocked     | waiting on dependency   |
+| done        | completed               |
+| cancelled   | intentionally abandoned |
 
 Lifecycle: `pending → in_progress → done` or `in_progress → blocked → in_progress → done`
 
@@ -119,10 +124,10 @@ Calling again updates status, project, and updated_at.
 
 # Field Rules
 
-| Field | Rule |
-|---|---|
+| Field    | Rule                                      |
+| -------- | ----------------------------------------- |
 | username | required on writes, 1-64 chars, no spaces |
-| project | optional string |
-| priority | integer 1-5 |
+| project  | optional string                           |
+| priority | integer 1-5                               |
 
 Errors return: `{ "detail": "message" }`

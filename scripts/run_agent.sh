@@ -25,6 +25,10 @@ fi
 #   needs_save=false
 # fi
 
+if [ -f .env ]; then
+  . ./.env
+fi
+
 echo "run: name=$name model=$model e:$effort"
 
 claude -p "0. Read @org-roles/$name.md .\

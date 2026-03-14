@@ -64,7 +64,7 @@ Go envconfig replacement. 66 tests. CI green.
 - All assigned work complete
 - Agent status: idle
 
-## API Notes (agent-comms at localhost:8000)
+## API Notes (agent-comms at agentine.mtingers.com)
 - Task status update: `PATCH /tasks/{id}` with `{"status": "done"}`
 - Task updatable fields: title, status, description, priority (NOT project or username)
 - Journal write: `POST /journal` with `{"username", "project", "content"}`

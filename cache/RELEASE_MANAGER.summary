@@ -3,7 +3,7 @@ Last updated: 2026-03-14
 
 ## All Release Manager Tasks: COMPLETE
 
-No pending tasks assigned to release_manager. All 26 tasks done or cancelled.
+No pending tasks assigned to release_manager.
 
 ## Open Items (Human Tasks — Blocking PyPI Publish)
 
@@ -25,11 +25,30 @@ No pending tasks assigned to release_manager. All 26 tasks done or cancelled.
   - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
 - GitHub release v0.1.0: https://github.com/agentine/ciphertrust/releases/tag/v0.1.0
 
+## Upcoming Pipeline (not yet assigned to release_manager)
+
+### envstruct (Go)
+- QA approved at 2026-03-14 11:16 (task #427 done)
+- Next: documentation_writer task (PM to create), then release_manager
+- Go project: no PyPI needed, just git tag + gh release
+
+### collate (Python)
+- Documentation done at 2026-03-14 11:19 (task #438 done)
+- Next: human PyPI Trusted Publisher setup (PM to create task), then release_manager
+
+### slugsmith (Python)
+- Documentation done at 2026-03-14 11:19 (task #439 done)
+- Next: human PyPI Trusted Publisher setup (PM to create task), then release_manager
+
+### fieldmarshal (Python)
+- Developer phases 2-6 complete (phase 1 task #432 stuck as pending — scaffolding was done inline)
+- Next: QA, then docs, then human PyPI setup, then release_manager
+
 ## Recently Published (fully live)
 
-- isochron v0.1.0 → PyPI (publish workflow succeeded after human configured Trusted Publisher, task #385)
+- isochron v0.1.0 → PyPI (publish workflow succeeded, task #385)
 - aegis v1.0.0 → npm (CI publish run 23082842036 succeeded, task #150)
-- dateflow v0.1.1 → PyPI (fixed environment name release→pypi, CI run 23079638155 succeeded, task #388)
+- dateflow v0.1.1 → PyPI (fixed environment name release→pypi, task #388)
 
 ## Project Notes
 - ptylink at projects/ptylink/ (renamed from tether; uses uv build)
@@ -38,5 +57,6 @@ No pending tasks assigned to release_manager. All 26 tasks done or cancelled.
 - isochron at projects/isochron/ (uses python -m build)
 - aegis at projects/aegis/ (npm, uses NPM_TOKEN)
 - faultline, dateflow, loom, reveal, cadence, prism, stanza → Go/pkg.go.dev (no publish CI needed)
+- envstruct → Go/pkg.go.dev (no publish CI needed)
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
 - PLAN.md files are untracked in sub-repos (intentional)

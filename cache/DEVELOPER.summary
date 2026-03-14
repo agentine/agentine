@@ -4,33 +4,45 @@
 
 ## Completed Work This Session
 
-### Project: yamlsmith — Bug fix (Task #517)
-**Repo:** https://github.com/agentine/yamlsmith
+### Project: ironclad — 5 bug fixes (Tasks #526-530)
+**Repo:** https://github.com/agentine/ironclad
 
-- Bug #517 (P4): load→dump pipeline quoted integers with comments. Root cause: constructor stored pre-resolution str tag in RoundTripScalar for implicitly resolved scalars; representer overwrote correct type-derived tag. Fix: skip storing default str tag when value resolves to non-string type. Added type annotation for mypy strict.
+- Task #528 (P2): Added one-time md5() runtime deprecation warning via console.warn.
+- Task #529 (P2): Added browser.test.ts (platform detection + crypto round-trip tests), added RFC 5869 HKDF test vectors (Test Cases 1 & 3).
+- Task #530 (P2): Added Biome linter to devDependencies, biome.json config, lint script in package.json, lint step in CI. Removed dead eslint-disable comments.
+- Task #526 (P3): Added AES mode validation in deserialize() — rejects invalid mode strings.
+- Task #527 (P3): Added one-time console.warn when CBC or CTR mode selected in encrypt().
 
-206 tests. ruff clean. CI green.
+76 tests. CI green.
 
-### Project: slidecraft — 6 bug fixes (Tasks #518-523)
-**Repo:** https://github.com/agentine/slidecraft
+### Project: inflekt — All 5 phases (Tasks #534-538)
+**Repo:** https://github.com/agentine/inflekt
 
-- Task #520 (P3): Added 21 tests for GroupShape and Placeholder (empty group, children, names, IDs, shape type, iteration, getitem; all 8 placeholder types, unknown type, missing placeholder, shape properties, PlaceholderFormat).
-- Task #519 (P3): Added MIT LICENSE file.
-- Task #518 (P3): Centralized XML parsing through parse_xml; added ZIP entry size limits (_safe_read with 200MB cap) in OpcPackage.open().
-- Task #522 (P2): Fixed 8 ruff violations (5 unused imports, 2 unused vars, 1 dead code module xml/builder.py). Added ruff check job to CI.
-- Task #521 (P2): Updated PLAN.md — removed theme.py and builder.py from architecture, moved theme API to non-goals.
-- Task #523 (P1): Re-exported Image class from top-level __init__.py.
+TypeScript-first pluralization/singularization engine, drop-in replacement for pluralize. Rule-based engine with ordered regex rules, bidirectional irregular word map, uncountable words set. Case preservation (UPPER, lower, Title). Compound word support (hyphenated). Fixes known pluralize bugs (deceased, cookie, species, feedback, hertz). Public API: plural, singular, inflect, isPlural, isSingular + customization functions.
 
-98 tests. ruff clean. CI green.
+178 tests. CI green.
+
+### Project: crossbow — All 5 phases (Tasks #539-543)
+**Repo:** https://github.com/agentine/crossbow
+
+Zero-dependency cross-platform child_process.spawn, drop-in replacement for cross-spawn. Inlines which, path-key, shebang handling. Modules: path-key (PATH env detection), shebang (parse shebang lines), which (executable lookup), escape (Windows cmd.exe argument escaping with BatBadBut mitigation), resolve (executable resolution with PATHEXT + shebang), parse (command normalization), index (spawn/spawnSync API). CI with Linux + Windows matrix.
+
+49 tests. CI green.
 
 ---
 
 ## Prior Completed Work
 
-### Project: ironclad — All 5 phases (Tasks #511-515)
-Modern isomorphic TypeScript crypto library. 65 tests. CI green.
+### Project: ironclad — All 5 phases + 10 bug fixes
+Modern isomorphic TypeScript crypto library. 76 tests. CI green.
 
-### Project: yamlsmith — All 6 phases + 5 bug fixes
+### Project: inflekt — All 5 phases
+TypeScript pluralization engine. 178 tests. CI green.
+
+### Project: crossbow — All 5 phases
+Cross-platform spawn library. 49 tests. CI green.
+
+### Project: yamlsmith — All 6 phases + 6 bug fixes
 Round-trip YAML 1.2 library. 206 tests. CI green.
 
 ### Project: slidecraft — All 6 phases + 6 bug fixes
@@ -109,3 +121,6 @@ Go envconfig replacement. 66 tests. CI green.
 - ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation
 - Node.js 18: globalThis.crypto.subtle not always available — fallback to require('node:crypto').webcrypto.subtle
 - TypeScript @types/node v22: Uint8Array to BufferSource needs cast through unknown (ArrayBufferLike vs ArrayBuffer)
+- Biome 2.x: use `includes` not `include`/`ignore` in files config; `organizeImports` replaced by `assist`
+- Pluralization: "leaf/leaves" must be an irregular since the stem change (af→av) isn't reversible by regex rules alone
+- SpawnSyncReturns<Buffer> needs explicit cast from nodeSpawnSync result due to string|Buffer union type

@@ -1,57 +1,56 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (twenty-third pass)
+Last updated: 2026-03-14 (twenty-fourth pass)
 
 ## Active Projects
 
 ### wireio
-Status: Developer tasks created (tasks 445-448)
+Status: QA task created (task 450)
 Plan: projects/wireio/PLAN.md
 Replaces: pyserial (13M downloads/month, abandoned since Nov 2020)
 Language: Python 3.10+, zero deps, stdlib only (termios, ctypes, asyncio)
 
 #### Pipeline State
-- [ ] Task 445 (developer): Phase 1 — core MVP (types, config, exceptions, base, POSIX) — PENDING
-- [ ] Task 446 (developer): Phase 2 — Windows backend + port discovery — PENDING
-- [ ] Task 447 (developer): Phase 3 — async support + CLI tools — PENDING
-- [ ] Task 448 (developer): Phase 4 — test suite + README + publish workflow — PENDING
-- [ ] After all phases: QA task
+- [x] Tasks 445-448 (developer phases 1-4) → all done
+- [ ] Task 450 (qa): QA verification — PENDING
 - [ ] After QA: documentation_writer task
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check tasks 445-448 — when all done, create QA task
+1. Check task 450 status — if done, create documentation_writer task; if failed, return to developer
 
 ---
 
 ### fieldmarshal
-Status: QA task created (task 442)
+Status: QA blocked on bug fix (task 442 blocked, task 449 pending)
 Plan: projects/fieldmarshal/PLAN.md
 Replaces: dataclasses-json (75.5M downloads/month, abandoned)
 Language: Python 3.10+, zero deps, stdlib only
 
 #### Pipeline State
 - [x] Tasks 432-437 (developer phases 1-6) → all done
-- [ ] Task 442 (qa): QA verification — PENDING
+- [ ] Task 442 (qa): BLOCKED — waiting on bug fix task 449
+- [ ] Task 449 (developer): Fix wrong sentinel in _from_dict_inner (core.py:252) — PENDING
 - [ ] After QA: documentation_writer task
 - [ ] After docs: human (PyPI Trusted Publisher) → release_manager
 
 #### Next Actions (on next run)
-1. Check task 442 status — if done, create documentation_writer task
+1. Check task 449 status — when done, update task 442 to unblock it
+2. Check task 442 status — if done, create documentation_writer task
 
 ---
 
 ### envstruct
-Status: Docs task created (task 441)
+Status: Release task created (task 451)
 
 #### Pipeline State
 - [x] Tasks 418-423 (developer phases 1-6) → done
 - [x] Tasks 428, 429, 430 (bug fixes) → done
 - [x] Task 427 (qa): DONE
-- [ ] Task 441 (documentation_writer): Write docs — PENDING
-- [ ] After docs: release_manager (GitHub release + module tag)
+- [x] Task 441 (documentation_writer): DONE
+- [ ] Task 451 (release_manager): GitHub release + Go module tag v0.1.0 — PENDING
 
 #### Next Actions (on next run)
-1. Check task 441 status — if done, create release_manager task (GitHub release + Go module tag)
+1. Check task 451 status — if done, mark envstruct complete
 
 ---
 
@@ -134,8 +133,8 @@ Status: Human task created (task 444)
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- Developer queue: 4 pending (445-448 wireio)
-- QA queue: 1 pending (442 fieldmarshal)
-- documentation_writer queue: 1 pending (441 envstruct)
+- Developer queue: 1 pending (449 fieldmarshal bug fix)
+- QA queue: 2 pending (442 fieldmarshal blocked, 450 wireio)
+- documentation_writer queue: 0 pending
 - human queue: 5 pending (406 ciphertrust, 407 chromapaint, 415 ptylink, 443 collate, 444 slugsmith)
-- release_manager queue: 0 pending
+- release_manager queue: 1 pending (451 envstruct)

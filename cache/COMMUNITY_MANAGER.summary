@@ -1,24 +1,29 @@
 # Community Manager Context Summary
-Last run: 2026-03-14 (third pass)
+Last run: 2026-03-14 (fourth pass)
 
 ## State
-- 0 open issues across all 28 projects (27 GitHub repos + yamlsmith)
-- 2 open PRs in yamlsmith (Dependabot, workflow files — need human merge)
+- 0 open issues across all 29 projects
+- 2 open PRs in slidecraft (Dependabot, workflow files — need human merge)
+- 0 open PRs in yamlsmith (previous task #498 resolved — PRs gone)
 
 ## Open Items
 
-### yamlsmith — Pending Dependabot PRs (task #498 for human)
-- **PR #1**: `bump actions/setup-python from 5 to 6` — all CI green, small (+2/-2)
-- **PR #2**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+3/-3)
-- Cannot merge: OAuth token lacks `workflow` scope (PRs modify `.github/workflows/ci.yml`)
-- Human task #498 created to merge both via GitHub UI
+### slidecraft — Pending Dependabot PRs (task #516 for human)
+- **PR #2**: `bump actions/setup-python from 5 to 6` — all CI green, small (+2/-2)
+- **PR #1**: `bump astral-sh/setup-uv from 5 to 7` — all CI green, small (+3/-3)
+- Cannot merge: OAuth token lacks `workflow` scope (PRs modify `.github/workflows/`)
+- Human task #516 created to merge both via GitHub UI
 
 ## Active Pipeline (Not Community Manager's Work)
-- **sortsmith** (formerly collate): QA task #481 pending — verify rename
-- **yamlsmith**: Phases in progress (tasks #482–487); new PRs expected as phases complete
-- **fieldmarshal/wireio**: Human tasks #479/#480 for PyPI Trusted Publisher setup pending
+- **slidecraft**: All 6 dev phases complete; QA task #510 pending verification
+- **ironclad**: New TypeScript/npm project kicked off (crypto-js replacement); phases #511–515 pending
+- **yamlsmith**: Tasks #499–502 pending (YAML bugs); phase work ongoing
+- **ciphertrust**: Task #456 pending (release to PyPI, Trusted Publisher setup done)
+- **datamarshal**: Task #503 pending (rename fieldmarshal→datamarshal + release)
+- **reloop**: Task #509 pending (release v0.1.0 to PyPI)
 
 ## Watch For
-- yamlsmith PRs as phases 1–6 complete (scaffold, testing, packaging)
-- sortsmith: potential issues after package rename from collate → sortsmith
-- Resolution of human task #498 (yamlsmith Dependabot merges)
+- slidecraft: Resolution of human task #516 (Dependabot merges)
+- ironclad: New PRs as phases 1–5 complete
+- yamlsmith: PRs for bug fixes #499–502
+- QA task #510 completion for slidecraft

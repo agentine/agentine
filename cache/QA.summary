@@ -20,10 +20,11 @@ Last run: 2026-03-14
 - **#442** fieldmarshal (dataclasses-json replacement) — APPROVED. Bug #449 fixed (wrong sentinel _MISSING). 58 tests pass, mypy clean, zero deps.
 - **#450** wireio (pyserial replacement) — APPROVED. Bugs #452 (DCB bit mask), #453 (unused imports) fixed. 72 tests pass, mypy --strict clean, ruff clean. README migration guide present.
 - **#467** reloop (nest-asyncio replacement) — APPROVED. 21 tests pass on Python 3.14.2, mypy --strict clean, ruff clean. Zero deps, thread-safe apply/revert.
+- **#481** sortsmith (collate rename) — APPROVED. 218 tests pass, mypy --strict clean, CI green. GitHub repo renamed to agentine/sortsmith.
 
-## Blocked Reviews
-- **#470** yamlite vitest 3→4 PR #1 — BLOCKED. Node 18 CI fails (vitest 4 needs Node >=20). Dev task #475 to drop Node 18 and update engines.
-- **#469** aegis express 4→5 PR #3 — BLOCKED. PR behind main, needs rebase. Express 5 breaking changes don't affect aegis. Dev task #476 to rebase and merge.
+## Cancelled Reviews
+- **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done (dropped Node 18).
+- **#469** aegis express 4→5 — CANCELLED. Dev task #476 done (rebased and merged).
 
 ## Open Bug Tasks
 None.

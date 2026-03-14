@@ -8,20 +8,32 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ] || [ -z "$1" ]; t
   exit 1
 fi
 
+# efforts: low, medium, high, max
+# POSIX-friendly
+agents_flow="
+ARCHITECT|claude-opus-4-6|high
+PROJECT_MANAGER|claude-sonnet-4-6|medium
+DEVELOPER|claude-opus-4-6|max
+QA|claude-opus-4-6|max
+DOCUMENTATION_WRITER|claude-sonnet-4-6|medium
+RELEASE_MANAGER|claude-sonnet-4-6|high
+"
+
 echo "starting agent loop... allow_architect=$allow_architect"
 
 run_with_retry() {
   _script_path="$1"
   _name="$2"
   _model="$3"
+  _effort="$4"
 
   attempt=1
   max_backoff=1800
   backoff=600
 
   while :; do
-    echo "running '$_script_path $_name $_model' (attempt $attempt)..."
-    "$_script_path" "$_name" "$_model"
+    echo "running '$_script_path $_name $_model $_effort' (attempt $attempt)..."
+    "$_script_path" "$_name" "$_model" "$_effort"
     status=$?
 
     if [ $status -eq 0 ]; then
@@ -47,18 +59,6 @@ run_with_retry() {
 mkdir -p cache/
 loop_counter=0
 
-# POSIX-friendly
-agents_flow="
-ARCHITECT|claude-opus-4-6
-PROJECT_MANAGER|claude-sonnet-4-6
-DEVELOPER|claude-opus-4-6
-PROJECT_MANAGER|claude-sonnet-4-6
-QA|claude-opus-4-6
-DOCUMENTATION_WRITER|claude-sonnet-4-6
-PROJECT_MANAGER|claude-sonnet-4-6
-RELEASE_MANAGER|claude-sonnet-4-6
-"
-
 while :; do
   echo "------------------------------------"
   echo "iteration: $loop_counter"
@@ -69,6 +69,7 @@ while :; do
     set -- $agent_spec
     agent="$1"
     model="$2"
+    effort="$3"
     IFS="$old_ifs"
 
     if [ "$agent" = "ARCHITECT" ] && [ "$allow_architect" != "yes" ]; then
@@ -76,8 +77,8 @@ while :; do
       continue
     fi
 
-    echo "summoning agent: $agent -> $model"
-    run_with_retry "scripts/run_agent.sh" "$agent" "$model"
+    echo "summoning agent: $agent -> $model -> $effort"
+    run_with_retry "scripts/run_agent.sh" "$agent" "$model" "$effort"
   done
 
   if [ "$((loop_counter % 4))" -eq 0 ] && [ "$loop_counter" -ne 0 ]; then

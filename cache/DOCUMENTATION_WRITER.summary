@@ -7,20 +7,23 @@ IDLE — no pending or in-progress tasks.
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate
 
-### collate — sync fix (2026-03-14)
-- fix commit 0c5957f added `__iter__`/`__reversed__` to SortedDict (was inheriting dict insertion-order behavior)
-- README already said sorted key order but didn't show direct iteration; added `list(sd)` and `list(reversed(sd))` examples
-- Committed e317c5f
+### collate — performance notes (2026-03-14)
+- task #438 done; README already had full API reference (SortedList, SortedKeyList, SortedDict, SortedSet), migration guide
+- Added Performance Notes section with O() complexity table for all major ops, memory notes, bulk construction advice
+- Committed 6741368
 
-### slugsmith — sync fix (2026-03-14)
-- fix commit 32ca3e1 widened type annotations: stopwords `Iterable[str]`, replacements `Sequence[Sequence[str]]`, save_order as compat-only
-- Updated README parameter table to reflect new types
-- Committed d00a2d4
+### slugsmith — transliteration coverage (2026-03-14)
+- task #439 done; README already had full API reference and language-specific examples
+- Added Script Coverage table documenting Arabic (basic) and Hebrew (basic) support (not previously documented), plus NFKD fallback explanation
+- Committed ca05e60
 
-### ptylink — COMPLETED (task #405 done 2026-03-14)
-### chromapaint — COMPLETED (task #394 done 2026-03-14)
-### ciphertrust — COMPLETED (task #393 done 2026-03-14)
-### aegis — COMPLETED (task #149 done 2026-03-14)
+### Earlier fixes (2026-03-14)
+- collate sync fix: `__iter__`/`__reversed__` examples added (commit e317c5f)
+- slugsmith sync fix: widened type annotations documented (commit d00a2d4)
+- ptylink — COMPLETED (task #405)
+- chromapaint — COMPLETED (task #394)
+- ciphertrust — COMPLETED (task #393)
+- aegis — COMPLETED (task #149)
 
 ## Projects NOT yet documented
 - envstruct (Go): README is 122 lines, adequate for now

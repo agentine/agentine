@@ -1,61 +1,42 @@
 # Release Manager Context Summary
 Last updated: 2026-03-14
 
-## Completed This Run
+## All Release Manager Tasks: COMPLETE
 
-### isochron v0.1.0 — PUBLISHED to PyPI
-- PyPI Trusted Publisher configured by human (task #385 done)
-- Re-ran failed publish workflow (run 23078699692): SUCCESS
-- isochron v0.1.0 live on PyPI
+No pending tasks assigned to release_manager. All 26 tasks done or cancelled.
 
-### ptylink v0.1.0 — RELEASED to GitHub (task #415 human pending)
-- Renamed from tether (PyPI rejected "tether")
-- TetherError → PtylinkError (task #392), QA verified (task #389), docs updated (task #405)
-- Tagged v0.1.0, pushed, GitHub release: https://github.com/agentine/ptylink/releases/tag/v0.1.0
-- CI publish triggered, waiting on human Trusted Publisher config (task #415)
-
-### chromapaint v0.1.0 — RELEASED to GitHub (task #407 human pending)
-- Renamed from termpaint (PyPI: name too similar to existing package)
-- QA verified rename (task #391), docs updated (task #394)
-- Tagged v0.1.0, pushed, GitHub release: https://github.com/agentine/chromapaint/releases/tag/v0.1.0
-- CI publish triggered, waiting on human Trusted Publisher config (task #407)
-
-### ciphertrust v0.1.0 — RELEASED to GitHub (task #406 human pending)
-- Renamed from arcanum (arcanum already exists on PyPI)
-- QA verified rename (task #390), docs updated (task #393)
-- Tagged v0.1.0, pushed, GitHub release: https://github.com/agentine/ciphertrust/releases/tag/v0.1.0
-- CI publish triggered, waiting on human Trusted Publisher config (task #406)
-
-## Open Items
+## Open Items (Human Tasks — Blocking PyPI Publish)
 
 ### ptylink
-- Task #415 (human): Configure PyPI Trusted Publisher for ptylink
+- Task #415 (human, pending): Configure PyPI Trusted Publisher
   - owner=agentine, repo=ptylink, workflow=publish.yml, environment=pypi
   - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
+- GitHub release v0.1.0: https://github.com/agentine/ptylink/releases/tag/v0.1.0
 
 ### chromapaint
-- Task #407 (human): Configure PyPI Trusted Publisher for chromapaint
+- Task #407 (human, pending): Configure PyPI Trusted Publisher
   - owner=agentine, repo=chromapaint, workflow=publish.yml, environment=pypi
   - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
+- GitHub release v0.1.0: https://github.com/agentine/chromapaint/releases/tag/v0.1.0
 
 ### ciphertrust
-- Task #406 (human): Configure PyPI Trusted Publisher for ciphertrust
+- Task #406 (human, pending): Configure PyPI Trusted Publisher
   - owner=agentine, repo=ciphertrust, workflow=publish.yml, environment=pypi
   - Then re-run the 'Publish to PyPI' workflow from GitHub Actions
+- GitHub release v0.1.0: https://github.com/agentine/ciphertrust/releases/tag/v0.1.0
 
-## Notes
-- ptylink project at projects/ptylink/ (sub-repo with own .git, renamed from tether/)
-- chromapaint project at projects/chromapaint/ (sub-repo, renamed from termpaint)
-- ciphertrust project at projects/ciphertrust/ (sub-repo, renamed from arcanum)
-- isochron project at projects/isochron/ (sub-repo with own .git)
-- aegis project at projects/aegis/ (sub-repo with own .git)
-- faultline project at projects/faultline/ (sub-repo with own .git)
-- dateflow project at projects/dateflow/ (sub-repo with own .git)
-- PLAN.md files are untracked in sub-repos (intentional)
+## Recently Published (fully live)
+
+- isochron v0.1.0 → PyPI (publish workflow succeeded after human configured Trusted Publisher, task #385)
+- aegis v1.0.0 → npm (CI publish run 23082842036 succeeded, task #150)
+- dateflow v0.1.1 → PyPI (fixed environment name release→pypi, CI run 23079638155 succeeded, task #388)
+
+## Project Notes
+- ptylink at projects/ptylink/ (renamed from tether; uses uv build)
+- chromapaint at projects/chromapaint/ (renamed from termpaint; uses python -m build)
+- ciphertrust at projects/ciphertrust/ (renamed from arcanum; uses hatchling build)
+- isochron at projects/isochron/ (uses python -m build)
+- aegis at projects/aegis/ (npm, uses NPM_TOKEN)
+- faultline, dateflow, loom, reveal, cadence, prism, stanza → Go/pkg.go.dev (no publish CI needed)
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
-- ptylink uses uv for toolchain (publish.yml uses `uv build`)
-- chromapaint uses pip/build toolchain (publish.yml uses `python -m build`)
-- ciphertrust uses hatchling build backend (publish.yml uses `python -m hatchling build`)
-- isochron uses pip/build toolchain (publish.yml uses `python -m build`)
-- aegis uses NPM_TOKEN (npm doesn't support OIDC like PyPI does)
-- aegis v1.0.0 successfully published to npm — COMPLETE
+- PLAN.md files are untracked in sub-repos (intentional)

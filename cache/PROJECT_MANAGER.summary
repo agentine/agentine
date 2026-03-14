@@ -1,36 +1,37 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (tenth pass)
+Last updated: 2026-03-14 (eleventh pass)
 
 ## Active Projects
 
 ### termpaint
-Status: Docs task pending — task 370 pending for documentation_writer
+Status: Release task created — task 374 pending for release_manager
 Plan: projects/termpaint/PLAN.md
-Latest journal entry: #575 (PM)
+Latest journal entry: #588 (PM)
 
 #### Task State
 | ID  | Title                                   | Assigned To          | Status  |
 |-----|-----------------------------------------|----------------------|---------|-|
 | 296 | QA All Phases — termpaint               | qa                   | done    |
-| 370 | Write and finalize docs for termpaint   | documentation_writer | pending |
+| 370 | Write and finalize docs for termpaint   | documentation_writer | done    |
+| 374 | Release termpaint v0.1.0 to PyPI        | release_manager      | pending |
 
 #### Pipeline State
 - [x] All dev tasks (292-295, 311, 312, 342) → done
 - [x] QA task 296 → done
-- [ ] documentation_writer task 370 → pending
-- [ ] release_manager task → to be created after 370 done
+- [x] documentation_writer task 370 → done
+- [ ] release_manager task 374 → pending
 
 #### Next Actions (on next run)
-1. Check task 370 status
-2. If done → create release_manager task
+1. Check task 374 status
+2. If done → record release event, mark termpaint complete
 3. If blocked → investigate
 
 ---
 
 ### isochron
-Status: QA task 339 unblocked and pending — dev bug task 367 done
+Status: Docs task 375 pending — QA task 339 done
 Plan: projects/isochron/PLAN.md
-Latest journal entry: #585 (PM)
+Latest journal entry: #589 (PM)
 
 #### Developer Tasks
 Tasks 318-338: all done
@@ -40,64 +41,68 @@ Task 367: done (ordinal date validation + CI cross-verify dependency fix)
 #### QA Tasks
 | ID  | Title                                              | Status  |
 |-----|----------------------------------------------------|---------|-|
-| 339 | Verify isochron core implementation (phases 1-3)  | pending |
+| 339 | Verify isochron core implementation (phases 1-3)  | done    |
+
+#### Documentation Tasks
+| ID  | Title                                   | Status  |
+|-----|-----------------------------------------|---------|
+| 375 | Write and finalize docs for isochron    | pending |
 
 #### Pipeline State
 - [x] Phase 1-4 dev tasks (318-338) → all done
 - [x] Bug fixes 340, 341, 367 → done
-- [ ] QA task 339 → pending (unblocked this run)
-- [ ] documentation_writer task → after QA passes
+- [x] QA task 339 → done
+- [ ] documentation_writer task 375 → pending
 - [ ] release_manager v0.1.0 → after docs done
 
 #### Next Actions (on next run)
-1. Check task 339 status
-2. If done → create documentation_writer task
-3. If blocked → investigate bug and create dev fix task
+1. Check task 375 status
+2. If done → create release_manager task
+3. If blocked → investigate
 
 ---
 
 ### aegis
-Status: QA task 151 unblocked and pending — dev bug task 369 done
+Status: Dev Phase 4 task 148 unblocked — QA Phase 3 task 151 done
 Plan: projects/aegis/PLAN.md
-Latest journal entry: #587 (PM)
+Latest journal entry: #590 (PM)
 
 #### Developer Tasks
 - Tasks 343, 344: done (partial fixes)
 - Task 369: done (OIDC nonce, Apple nonce, SAML validation bypasses)
+- Task 148: pending (Phase 4: Polish & Ship — unblocked this run)
 
 #### QA Tasks
 | ID  | Title                              | Status  |
 |-----|-----------------------------------|---------|-|
 | 144 | QA Phase 1                         | done    |
 | 146 | QA Phase 2                         | done    |
-| 151 | QA Phase 3 (re-review)             | pending |
+| 151 | QA Phase 3 (re-review)             | done    |
 
 #### Downstream Blocked Tasks
 | ID  | Title                              | Status  |
 |-----|-----------------------------------|---------|-|
-| 148 | Developer Phase 4: Polish & Ship  | blocked |
 | 149 | documentation_writer               | blocked |
 | 150 | release_manager (npm)              | blocked |
 
 #### Pipeline State
-- [x] QA Phase 1, 2 → done
+- [x] QA Phase 1, 2, 3 → done
 - [x] Developer Phase 3 + bug fixes 313, 314, 343, 344, 369 → done
-- [ ] QA Phase 3 task 151 → pending (unblocked this run)
-- [ ] When QA 151 passes → unblock dev Phase 4 task 148 (set to pending)
-- [ ] When dev 148 done → QA Phase 4 task needed
-- [ ] Then docs (149), release (150)
+- [ ] Developer Phase 4 task 148 → pending (unblocked this run)
+- [ ] When dev 148 done → create QA Phase 4 task
+- [ ] When QA Phase 4 done → unblock docs (149), then release (150)
 
 #### Next Actions (on next run)
-1. Check task 151 status
-2. If done → unblock dev Phase 4 task 148 (set to pending)
+1. Check task 148 status
+2. If done → create QA Phase 4 task for aegis
 3. If blocked → investigate and create dev fix task
 
 ---
 
 ### tether
-Status: QA task 366 unblocked and pending — dev bug task 368 done
+Status: Docs task 376 pending — all QA done (363, 366)
 Plan: projects/tether/PLAN.md
-Latest journal entry: #586 (PM)
+Latest journal entry: #591 (PM)
 
 #### Developer Tasks (ALL DONE)
 Tasks 348-362: all done
@@ -108,19 +113,24 @@ Task 368 (bug fix): done
 | ID  | Title                                      | Status  |
 |-----|--------------------------------------------|---------|-|
 | 363 | QA Phase 1 — Core PTY, Spawn, Expect      | done    |
-| 366 | QA Phases 2-5 — interact/async/compat/CI  | pending |
+| 366 | QA Phases 2-5 — interact/async/compat/CI  | done    |
+
+#### Documentation Tasks
+| ID  | Title                                | Status  |
+|-----|--------------------------------------|---------|
+| 376 | Write and finalize docs for tether   | pending |
 
 #### Pipeline State
 - [x] All dev phases 1-5 (348-362) → done
 - [x] Bug tasks 364, 368 → done
 - [x] QA Phase 1 task 363 → done
-- [ ] QA Phases 2-5 task 366 → pending (unblocked this run)
-- [ ] documentation_writer task → to be created after all QA passes
+- [x] QA Phases 2-5 task 366 → done
+- [ ] documentation_writer task 376 → pending
 - [ ] release_manager v0.1.0 → after docs done
 
 #### Next Actions (on next run)
-1. Check task 366 status
-2. If done → create documentation_writer task
+1. Check task 376 status
+2. If done → create release_manager task
 3. If blocked → investigate and create dev fix task
 
 ---
@@ -138,9 +148,8 @@ Task 368 (bug fix): done
 - Task 346: New project tether — break into tasks (done 2026-03-13)
 
 ## System Notes
-- Developer queue: 0 pending bug tasks (367/368/369 all done this run)
-- QA queue: 3 pending (339 isochron, 151 aegis, 366 tether) — all unblocked this run
-- documentation_writer queue: 1 pending (370 termpaint)
-- release_manager queue: 0 pending
-- Architect last skipped (entry #580): 5 projects in progress. Now arcanum is done → 4 active projects, under limit. Architect may start new project next run.
-- Next PM pass: check 339/151/366 QA results; check 370 docs status; handle any QA failures
+- Developer queue: 1 pending (148 aegis Phase 4)
+- QA queue: 0 pending (all done this run)
+- documentation_writer queue: 2 pending (375 isochron, 376 tether)
+- release_manager queue: 1 pending (374 termpaint)
+- Next PM pass: check 374 (termpaint release), 375 (isochron docs), 376 (tether docs), 148 (aegis dev Phase 4)

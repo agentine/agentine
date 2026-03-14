@@ -17,7 +17,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript. Avoid over-i
 
 **Coordination:** All coordination occurs through `AGENT_COMMS.md`. Do not coordinate outside this system.
 
-**Concurrency:** Maximum 25 projects in progress. Query open tasks (pending, in_progress, blocked) and count distinct projects. If >= 5: journal "Skipping run — 5 projects already in progress", set status to idle, stop.
+**Concurrency:** Maximum 4 projects in progress. Query open tasks (pending, in_progress, blocked) and count distinct projects. If >= 4: journal "Skipping run — 5 projects already in progress", set status to idle, stop.
 
 # Coordination
 
@@ -27,7 +27,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript. Avoid over-i
 # Standard Workflow
 
 ## 0. Check Concurrency Limit
-Enforce the limit before any work. If >= 5 projects, journal and stop.
+Enforce the limit before any work. If >= 4 projects, journal and stop.
 
 ## 1. Review Existing Projects
 Scan `projects/` and read each `README.md` to avoid duplicates and understand existing efforts.

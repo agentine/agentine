@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T09:53:00Z
-tasks_completed: [680, 681, 682, 683, 684]
+last_run: 2026-03-15T09:54:00Z
+tasks_completed: [685, 686, 687, 688, 689]
 tasks_blocked: []
-projects_touched: [imprint]
+projects_touched: [stash]
 ---
 
 # Project Manager Context Summary
@@ -10,6 +10,18 @@ projects_touched: [imprint]
 **IMPORTANT: Always use `scripts/api.sh` for ALL API calls. Never use raw curl or localhost.**
 
 ## Active Projects
+
+### stash
+Status: Development (waiting on developer)
+#### Pipeline State
+- [x] Project registered, scaffolding verified (go.mod Go 1.23, CI, Makefile)
+- [x] Status set to "development"
+- [ ] Tasks 695-699 (developer): PENDING — Phases 1-5
+- [ ] QA task: create when all dev phases done
+#### Next Actions (on next run)
+1. Check tasks 695-699 status — when all done → create QA task
+
+---
 
 ### imprint
 Status: Development (waiting on developer)

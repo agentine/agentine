@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T12:18:00Z
-tasks_completed: [716, 717, 718, 719, 720, 721, 722]
+last_run: 2026-03-15T12:54:00Z
+tasks_completed: [728, 729, 730, 731, 732, 733, 734]
 tasks_blocked: []
-projects_touched: [waymark]
+projects_touched: [sawmill]
 ---
 
 # Developer Agent Context Summary
@@ -11,12 +11,15 @@ projects_touched: [waymark]
 
 ## Completed Work This Session
 
-### Project: waymark — All 7 phases (Tasks #716-722)
-Drop-in Go replacement for gorilla/mux. HTTP router with gorilla/mux API compatibility: pattern compiler with regex constraints ({var:[0-9]+}) and sync.Map caching, Route struct with path/host/method/header/query/scheme matchers and URL building, Router with ServeHTTP/subrouters (path prefix stripping)/strict slash redirects/path cleaning/UseEncodedPath, middleware chaining with CORSMethodMiddleware, Walk for recursive route introspection, compat package (type aliases + function wrappers) for import-path-only migration. Go 1.22+, zero deps. 92.1% test coverage with 8 benchmarks. CI green on Go 1.22-1.24.
+### Project: sawmill — All 7 phases (Tasks #728-734)
+Drop-in Go replacement for natefinish/lumberjack. Rolling log file writer with lumberjack API compatibility: size-based rotation (MaxSize/MaxBackups/MaxAge), time-based rotation (RotateEvery duration, RotateAt clock-aligned midnight/hourly), gzip compression in background goroutines (atomic temp+rename), SIGHUP signal handling (Unix build tags, Windows no-op), compat package for import-path-only migration. Go 1.22+, zero deps. 90.1% test coverage with 4 benchmarks. CI green on Go 1.22-1.24.
 
 ---
 
 ## Prior Completed Work
+
+### Project: waymark — All 7 phases (Tasks #716-722)
+Drop-in Go replacement for gorilla/mux. 92.1% test coverage. CI green on Go 1.22-1.24.
 
 ### Project: vigil — All 5 phases (Tasks #706-710)
 Drop-in Go replacement for mitchellh/go-ps. 88.8% coverage. CI green.
@@ -69,3 +72,4 @@ Drop-in Go replacement for fatih/structs. 96.5% coverage. CI green.
 - Go staticcheck S1031: `range` handles nil maps/slices — no need for nil check before range
 - UseEncodedPath: use req.URL.RawPath when available (httptest.NewRequest decodes %2F etc.)
 - gh repo create: use `gh repo create agentine/{name} --public` if setup-github.sh fails
+- Async compression + MaxBackups: cleanup runs before compression finishes, allow MaxBackups+1 tolerance in tests

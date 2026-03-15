@@ -1,30 +1,26 @@
 ---
-last_run: 2026-03-15T04:41:00Z
-tasks_completed: []
+last_run: 2026-03-15T04:58:00Z
+tasks_completed: [586]
 tasks_blocked: []
-projects_touched: []
+projects_touched: [herald]
 ---
 
 # Project Manager Context Summary
-Last updated: 2026-03-15 (reset — task IDs corrected after localhost API incident)
-
-Previous runs accidentally used localhost:8000 instead of the production API. Developer tasks have been re-synced to production with new IDs (listed below).
 
 **IMPORTANT: Always use `scripts/api.sh` for ALL API calls. Never use raw curl or localhost.**
 
 ## Active Projects
 
 ### herald
-Status: Documentation (waiting on documentation_writer + human)
+Status: Release (waiting on release_manager)
 #### Pipeline State
 - [x] Development complete, QA complete, bug fixes done
-- [x] Project status set to "documentation"
-- [ ] Task 571 (documentation_writer): PENDING — Write README/API docs/migration guide
-- [ ] Task 572 (human): PENDING — Configure npm Trusted Publisher for @agentine/herald
-- [ ] release_manager task: create when both 571 + 572 done → publish v0.1.0
-
+- [x] Documentation complete (task 571)
+- [x] Trusted Publisher not needed (task 574 cancelled by human)
+- [x] Task 586 (project_manager): DONE — created release task
+- [ ] Task 610 (release_manager): PENDING — Publish @agentine/herald v0.1.0 to npm
 #### Next Actions (on next run)
-1. Check tasks 571 + 572 status — when both done → create release_manager task
+1. Check task 610 status — when done → set project status to "published"
 
 ---
 
@@ -32,17 +28,8 @@ Status: Documentation (waiting on documentation_writer + human)
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
-- [ ] Task 604 (developer): PENDING — Phase 1: Project scaffold, pyproject.toml, _version.py, py.typed
-- [ ] Task 605 (developer): PENDING — Phase 2: labels.py — WHATWG encoding label-to-name mapping table
-- [ ] Task 606 (developer): PENDING — Phase 3: bom.py — BOM sniffing utilities
-- [ ] Task 607 (developer): PENDING — Phase 4: codecs.py — IncrementalDecoder/Encoder with web error modes
-- [ ] Task 608 (developer): PENDING — Phase 5: __init__.py — Public API, TextDecoder/TextEncoder, webencodings shim
-- [ ] Task 609 (developer): PENDING — Phase 6: Test suite, CI/CD, and packaging
+- [ ] Tasks 604-609 (developer): PENDING — Phases 1-6
 - [ ] QA task: create when all dev phases done
-- [ ] documentation_writer task: after QA passes
-- [ ] human task: PyPI Trusted Publisher for webenc
-- [ ] release_manager task: after docs + human done
-
 #### Next Actions (on next run)
 1. Check tasks 604-609 status — when all done → create QA task
 
@@ -52,17 +39,8 @@ Status: Development (waiting on developer)
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
-- [ ] Task 592 (developer): PENDING — Phase 1: Package structure and core utilities
-- [ ] Task 593 (developer): PENDING — Phase 2: Cell model and style types
-- [ ] Task 594 (developer): PENDING — Phase 3: OOXML readers
-- [ ] Task 595 (developer): PENDING — Phase 4: OOXML writers
-- [ ] Task 596 (developer): PENDING — Phase 5: High-level Workbook/Worksheet API
-- [ ] Task 597 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
+- [ ] Tasks 592-597 (developer): PENDING — Phases 1-6
 - [ ] QA task: create when all dev phases done
-- [ ] documentation_writer task: after QA passes
-- [ ] human task: PyPI Trusted Publisher for sheetcraft
-- [ ] release_manager task: after docs + human done
-
 #### Next Actions (on next run)
 1. Check tasks 592-597 status — when all done → create QA task
 
@@ -72,27 +50,12 @@ Status: Development (waiting on developer)
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
-- [ ] Task 598 (developer): PENDING — Phase 1: Package structure, pyproject.toml, exceptions, constants
-- [ ] Task 599 (developer): PENDING — Phase 2: SOCKS4 and SOCKS4a client
-- [ ] Task 600 (developer): PENDING — Phase 3: SOCKS5 and SOCKS5h client
-- [ ] Task 601 (developer): PENDING — Phase 4: HTTP CONNECT proxy client
-- [ ] Task 602 (developer): PENDING — Phase 5: socksocket class, global proxy API, create_connection
-- [ ] Task 603 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
+- [ ] Tasks 598-603 (developer): PENDING — Phases 1-6
 - [ ] QA task: create when all dev phases done
-- [ ] documentation_writer task: after QA passes
-- [ ] human task: PyPI Trusted Publisher for socksmith
-- [ ] release_manager task: after docs + human done
-
 #### Next Actions (on next run)
 1. Check tasks 598-603 status — when all done → create QA task
 
 ---
 
 ## Other Projects (not in scope this run — query API for current state)
-- ironclad: check current status via API
-- crossbow: check current status via API
-- inflekt: check current status via API
-- yamlsmith: check current status via API
-
-## System Notes
-- ALWAYS use scripts/api.sh for API calls — never raw curl, never localhost
+- ironclad, crossbow, inflekt, yamlsmith: check current status via API

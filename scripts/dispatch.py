@@ -83,6 +83,14 @@ def api(method: str, path: str, **kwargs) -> requests.Response | None:
         return None
 
 
+def journal(content: str, project: str | None = None):
+    """Write a dispatcher journal entry."""
+    payload: dict = {"username": "dispatcher", "content": content}
+    if project:
+        payload["project"] = project
+    api("POST", "/journal", json=payload)
+
+
 def set_presence(username: str, status: str, project: str | None = None):
     payload: dict = {"username": username, "status": status}
     if project:
@@ -94,10 +102,12 @@ def clear_all_presence():
     """Reset all agents to idle on startup."""
     resp = api("GET", "/agents?status=running")
     if resp and resp.ok:
-        for agent in resp.json().get("items", []):
-            username = agent["username"]
-            print(f"  cleanup: {username} was stuck as 'running', setting idle")
-            set_presence(username, "idle")
+        stuck = [a["username"] for a in resp.json().get("items", [])]
+        if stuck:
+            for username in stuck:
+                print(f"  cleanup: {username} was stuck as 'running', setting idle")
+                set_presence(username, "idle")
+            journal(f"startup cleanup: reset {len(stuck)} stuck agent(s) to idle: {', '.join(stuck)}")
 
 
 def has_work(username: str) -> bool:
@@ -138,8 +148,11 @@ def check_stale_blocked_tasks():
         total = resp.json().get("total", 0)
         if total > 0:
             print(f"  WARNING: {total} task(s) blocked >6h")
+            lines = []
             for task in resp.json().get("items", []):
-                print(f"    - [{task['id']}] {task['title']} (assigned: {task['username']})")
+                lines.append(f"- [{task['id']}] {task['title']} (assigned: {task['username']})")
+                print(f"    {lines[-1]}")
+            journal(f"STALE BLOCKED: {total} task(s) blocked >6h:\n" + "\n".join(lines))
 
 
 def validate_summary(role: str, project: str | None = None):
@@ -250,6 +263,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
 
         if exit_code == 0:
             print(f"  DONE: {label} ({duration}s)")
+            journal(f"completed {label} in {duration}s", project)
             # Validate summary format
             validate_summary(config.role, project)
             # Commit cache summary
@@ -265,13 +279,17 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
 
         if strategy is None:
             if exit_code == 2:
+                msg = f"skipped {label} — bad input/config (exit 2), not retrying"
                 print(f"  SKIP: {label} — bad input/config (exit 2), not retrying")
             else:
+                msg = f"finished {label} (exit {exit_code})"
                 print(f"  DONE: {label} (exit {exit_code})")
+            journal(msg, project)
             return exit_code
 
         if attempt >= strategy["max_attempts"]:
             print(f"  GIVE UP: {label} — failed {attempt} attempts (last exit {exit_code})")
+            journal(f"gave up on {label} after {attempt} attempts (exit {exit_code})", project)
             return exit_code
 
         delay = strategy["delays"][min(attempt - 1, len(strategy["delays"]) - 1)]
@@ -329,6 +347,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
             if proj and project_locked(proj):
                 print(f"  SKIP: {label} (project locked)")
+                journal(f"skipped {label} — project locked by another agent", proj)
                 continue
 
             future = executor.submit(run_agent, config, proj)

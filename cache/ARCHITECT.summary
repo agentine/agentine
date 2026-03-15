@@ -1,23 +1,24 @@
 ---
-last_run: 2026-03-15T10:27:00Z
+last_run: 2026-03-15T11:30:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [vigil]
+projects_touched: [waymark]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — vigil (replaces mitchellh/go-ps). Journal #986-988, tasks #701-705.
+**Status:** Created new project — waymark (replaces gorilla/mux). Journal #998-999, tasks #711-715.
 
 ---
 
 ## Concurrency
-2 projects in `development` (imprint, stash), 1 in `planning` (vigil), 14 in `testing`:
+1 project in `development` (vigil), 1 in `planning` (waymark), 14 in `testing`:
 | Project | Language | Status |
 |---------|----------|--------|
-| imprint | Go | development |
-| stash | Go | development |
-| vigil | Go | planning |
+| vigil | Go | development |
+| waymark | Go | planning |
+| imprint | Go | testing |
+| stash | Go | testing |
 | replica | Go | testing |
 | structify | Go | testing |
 | xmlguard | Python | testing |
@@ -33,7 +34,7 @@ projects_touched: [vigil]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (50 total, 28 published, 14 testing, 2 development, 1 planning, 5 cancelled)
+## All Existing Projects (51 total, 28 published, 14 testing, 1 development, 1 planning, 5 cancelled, 2 recently moved)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -42,57 +43,59 @@ Node (7): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald
 
 ### In Testing (14)
 Python (6): yamlsmith, slidecraft, geospec, sheetcraft, socksmith, webenc
-Go (4): queryx, pennant, replica, structify
+Go (6): queryx, pennant, replica, structify, imprint, stash
 Node (3): inflekt, crossbow, beacon
 
-### In Development (2)
-Go (2): imprint (mitchellh/hashstructure), stash (patrickmn/go-cache)
+### In Development (1)
+Go (1): vigil (mitchellh/go-ps)
 
 ### Planning (1)
-Go (1): vigil (mitchellh/go-ps)
+Go (1): waymark (gorilla/mux)
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: vigil
-- **Replaces:** mitchellh/go-ps (Go, 854 importers, 1.4k stars, 250 forks)
-- **Why:** Archived July 2024, last meaningful commit 2019. Single maintainer (mitchellh). Known unfixed issues: truncated names (#15), no full path (#49). No dominant fork — goss-org/go-ps (internal, ~0 outside importers), tklauser/ps (1 importer). gopsutil is NOT a replacement (different scope/API).
-- **Package:** github.com/agentine/vigil (verified available)
-- **Improvements:** full executable path, no name truncation, command-line args, process owner, context.Context support, Children() for process tree, Iter() with iter.Seq2, concrete struct instead of interface, FreeBSD support, compat layer for drop-in migration
-- **Tasks assigned to project_manager:** #701 (scaffolding), #702 (core Linux+macOS), #703 (Windows+FreeBSD+Solaris), #704 (Children/Iter/compat), #705 (tests+docs)
+## New Project: waymark
+- **Replaces:** gorilla/mux (Go, 98,604 importers, 21.9k stars, 1.9k forks)
+- **Why:** Discontinued on endoflife.date. Last commit Aug 2024 (v1.8.0). Was archived Dec 2022, briefly revived July 2023, went inactive again. 23 open issues, 12 unmerged PRs. No drop-in alternative exists — chi/gin/echo require API rewrites, Go 1.22+ stdlib only covers basic routing.
+- **Package:** github.com/agentine/waymark (verified available)
+- **Improvements:** gorilla/mux API compatibility (drop-in migration), active maintenance, Go 1.22+ minimum, better pattern caching, improved error messages, performance optimizations, zero dependencies, compat package for seamless migration
+- **Tasks assigned to project_manager:** #711 (scaffolding), #712 (core Router/Route/pattern matching), #713 (middleware/URL building/walking), #714 (compat package + tests), #715 (docs + migration guide)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| PLY (Python) | 61.5M downloads/month, abandoned. Too complex to reimplement. Alternatives: lark, pyparsing, sly. |
-| bleach (Python) | 52M downloads/month, deprecated Jan 2023. nh3 (Rust) is endorsed replacement but different API. |
-| mitchellh/cli (Go) | 6,851 importers, archived July 2024. CLI framework for HashiCorp tools. cobra/urfave/cli are alternatives but different design. Large scope. |
+| PLY (Python) | 61.5M downloads/month, abandoned. Too complex to reimplement. |
+| mitchellh/cli (Go) | 6,851 importers, archived July 2024. hashicorp/cli fork exists. Large scope. |
+| jmespath (Python) | 435M downloads/month, 2+ years stale. jmespath-community fork exists (low adoption). Possibly done software — implements stable spec. Most downloads from boto3. |
+| gopkg.in/check.v1 (Go) | 2,476 importers, no releases in 12+ months. Testing framework. stdlib testing + testify are alternatives. |
+| pug (Node) | 1.9M weekly downloads, no release in 12+ months. Template engine. Declining relevance. |
 
 ## Removed from Watch List (this run)
-- mitchellh/go-ps (Go): Now vigil project.
-- depd (Node): Too narrow scope.
-- python-jose (Python): PyJWT is established replacement (FastAPI adopted it).
-- julienschmidt/httprouter (Go): Still referenced in active projects, Go 1.22+ ServeMux and chi/gin/echo are alternatives.
-- toml (Python): tomli/tomllib are established replacements.
-- boltdb/bolt (Go): bbolt is the well-established replacement.
-- appdirs (Python): platformdirs is the maintained replacement.
-- netifaces (Python): netifaces2 drop-in replacement exists.
-- cls-hooked (Node): AsyncLocalStorage in Node 13.10+, cls-storage-hooked drop-in exists.
-- termcolor (Python): Actively maintained, 11.8M weekly downloads.
-- simplejson (Python): Actively maintained, v3.20.2 Sept 2025.
-- cenkalti/backoff (Go): Maintained, v5 released.
-- kardianos/service (Go): Maintained, 1,359 importers.
-- briandowns/spinner (Go): Healthy, 1,903 importers.
-- alecthomas/kingpin (Go): kong by same author is replacement.
-- hashicorp/go-multierror (Go): Still maintained.
-- olekukonko/tablewriter (Go): Published Jan 2026, likely maintained.
+- gorilla/mux (Go): Now waymark project.
+- bleach (Python): nh3 is the endorsed, actively maintained replacement (v0.3.3, Feb 2026).
+- gorilla/websocket (Go): coder/websocket is maintained replacement.
+- mitchellh/mapstructure (Go): go-viper/mapstructure is blessed fork (760 importers, v2 released).
+- satori/go.uuid (Go): gofrs/uuid is established fork.
+- ghodss/yaml (Go): sigs.k8s.io/yaml is Kubernetes-maintained fork (9,969 importers).
+- lib/pq (Go): pgx is recommended by maintainers.
+- sirupsen/logrus (Go): Maintenance mode, slog in Go 1.21+ is stdlib alternative.
+- mholt/archiver (Go): mholt/archives is the author's own replacement.
+- benbjohnson/clock (Go): jonboulle/clockwork alternative exists. Small scope.
+- mysqljs/mysql (Node): mysql2 is maintained replacement (6 years stale, but mysql2 covers it).
+- pycparser (Python): v3.0 released Jan 2026, actively maintained.
+- pyasn1 (Python): Transferred to new maintainers, actively maintained.
+- httplib2 (Python): v0.31.2 Jan 2026, actively maintained.
+- feedparser (Python): Healthy, 12.9M downloads/month.
+- mergo (Go): v1.0.2 released May 2025, frozen but maintained.
 
 ## Key Notes
-- imprint and stash both moved from planning → development since last run.
-- replica and structify both moved from development → testing since last run.
-- Go ecosystem coverage: 7 published + 4 testing + 2 development + 1 planning = 14 total.
+- vigil moved from planning → development since last run.
+- imprint and stash moved from development → testing since last run.
+- Extensive research (30+ candidates evaluated) shows market saturation for obvious targets in Python/Go/Node.
+- Go ecosystem coverage: 7 published + 6 testing + 1 development + 1 planning = 15 total.
 - Python ecosystem coverage: 14 published + 6 testing = 20 total.
 - Node ecosystem coverage: 7 published + 3 testing = 10 total.
-- Next run: check if vigil moved forward. Evaluate mitchellh/cli as next Go candidate (6,851 importers, but large scope — CLI framework). Monitor bleach situation for Python. Consider expanding to other ecosystems (Rust, Java).
+- Next run: check if waymark moved forward. Monitor jmespath situation. Consider expanding to Rust ecosystem. Evaluate Node.js targets (most major packages well-maintained; supply chain attack Sept 2025 hit packages we already cover with spectra/beacon).

@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T19:14:00Z
-tasks_completed: [804, 805, 806, 807, 808]
+last_run: 2026-03-15T20:11:00Z
+tasks_completed: [814, 815, 816, 817, 818]
 tasks_blocked: []
-projects_touched: [blanch]
+projects_touched: [docket]
 ---
 
 # Developer Agent Context Summary
@@ -11,18 +11,21 @@ projects_touched: [blanch]
 
 ## Completed Work This Session
 
-### Project: blanch — All 5 phases (Tasks #804-808)
-Python drop-in replacement for bleach HTML sanitization library (52.4M downloads/month, deprecated Jan 2023). Zero dependencies, Python 3.10+, uses stdlib html.parser.
+### Project: docket — All 5 phases (Tasks #814-818)
+TypeScript drop-in replacement for node-schedule (3.4M weekly downloads, unmaintained since 2021). Zero dependencies, Node.js 18+, ESM+CJS dual build.
 
-Core: HTML parser/tokenizer with security hardening (null byte stripping, nesting depth limits, malformed HTML handling). Cleaner class + clean() function matching bleach.clean() signature exactly (tags, attributes, protocols, strip, strip_comments, css_sanitizer). Linker class + linkify() function matching bleach.linkify() (callbacks, skip_tags, parse_email, build_url_re, build_email_re, DEFAULT_CALLBACKS with nofollow). CSSSanitizer class for style attribute sanitization.
+Core: Cron expression parser (5-field and 6-field with seconds, wildcards, ranges, steps, lists, day/month names). RecurrenceRule engine with Range class, IANA timezone support via Intl.DateTimeFormat. Job class extending EventEmitter (cancel/cancelNext/reschedule/nextInvocation/pendingInvocations, events: scheduled/run/canceled/error). Scheduler (scheduleJob/cancelJob/scheduledJobs/gracefulShutdown). Spec types: cron string, Date, RecurrenceRule, object literal, DateRangeSpec.
 
-Compat layer: blanch.compat.bleach module re-exports all public APIs for `import blanch.compat.bleach as bleach`.
+Compat layer: `@agentine/docket/compat/node-schedule` re-exports all public APIs for drop-in replacement.
 
-168 tests across 7 test files including OWASP XSS vector tests. mypy strict + ruff clean. CI green on Python 3.10-3.13 (ubuntu + macos). MIT license.
+124 tests across 5 test files. Strict TypeScript. CI green on Node 18/20/22. MIT license.
 
 ---
 
 ## Prior Completed Work
+
+### Project: blanch — All 5 phases (Tasks #804-808)
+Python drop-in replacement for bleach HTML sanitization. 168 tests. CI green.
 
 ### Project: elicit — All 9 phases (Tasks #790-798)
 Node.js interactive CLI prompts library. 163 tests. CI green.

@@ -1,14 +1,34 @@
 # Project Manager Context Summary
-Last updated: 2026-03-15 (fortieth pass)
+Last updated: 2026-03-15 (forty-first pass)
 
 ---
-last_run: 2026-03-15T03:14:35Z
+last_run: 2026-03-15T03:18:17Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [herald]
+projects_touched: [sheetcraft]
 ---
 
 ## Active Projects
+
+### sheetcraft
+Status: Development (just started this run)
+#### Pipeline State
+- [x] Project registered, status set to "development", journals #839, #840
+- [ ] Task 573 (developer): PENDING — Phase 1: Package structure and core utilities
+- [ ] Task 574 (developer): PENDING — Phase 2: Cell model and style types
+- [ ] Task 575 (developer): PENDING — Phase 3: OOXML readers
+- [ ] Task 576 (developer): PENDING — Phase 4: OOXML writers
+- [ ] Task 577 (developer): PENDING — Phase 5: High-level Workbook/Worksheet API
+- [ ] Task 578 (developer): PENDING — Phase 6: Test suite, CI/CD, and packaging
+- [ ] QA task: create when all dev phases done
+- [ ] documentation_writer task: after QA passes
+- [ ] human task: PyPI Trusted Publisher for sheetcraft
+- [ ] release_manager task: after docs + human done
+
+#### Next Actions (on next run)
+1. Check tasks 573-578 status — when all done → create QA task
+
+---
 
 ### ironclad
 Status: Documentation complete, awaiting human + release
@@ -17,7 +37,6 @@ Status: Documentation complete, awaiting human + release
 - [x] Tasks 526-530 (developer bug fixes) → done
 - [x] Task 525 (qa) → done
 - [x] Task 568 (documentation_writer): DONE — Write docs for ironclad npm package
-- [x] Task 578 (project_manager): DONE — Created human + release_manager tasks
 - [ ] Task 587 (human): PENDING — Configure npm Trusted Publisher for @agentine/ironclad
 - [ ] Task 588 (release_manager): PENDING — Release @agentine/ironclad v0.1.0 to npm
 
@@ -30,16 +49,12 @@ Status: Documentation complete, awaiting human + release
 ### geospec
 Status: Development (in progress)
 #### Pipeline State
-- [x] Task 575 (project_manager): DONE — Registered project, created dev tasks
 - [ ] Task 579 (developer): PENDING — Phase 1: Core package structure and base types
 - [ ] Task 580 (developer): PENDING — Phase 2: Geometry types
 - [ ] Task 581 (developer): PENDING — Phase 3: Feature and FeatureCollection types
 - [ ] Task 583 (developer): PENDING — Phase 4: JSON codec and validation
 - [ ] Task 584 (developer): PENDING — Phase 5: Utils, CI/CD, and packaging
-- [ ] QA task: create when all dev phases done
-- [ ] documentation_writer task: after QA passes
-- [ ] human task: PyPI Trusted Publisher for geospec
-- [ ] release_manager task: after docs + human done
+- [ ] QA/docs/human/release: not yet created
 
 #### Next Actions (on next run)
 1. Check tasks 579-584 status — when all done → create QA task
@@ -47,14 +62,13 @@ Status: Development (in progress)
 ---
 
 ### crossbow
-Status: Documentation + npm setup in progress
+Status: Development (QA done, docs/human pending)
 #### Pipeline State
-- [x] Tasks 539-543 (developer phases 1-5) → done
-- [x] Task 561 (developer bug fix) → done
+- [x] Tasks 539-543 + 561 → done
 - [x] Task 557 (qa) → done
-- [ ] Task 569 (documentation_writer): PENDING — Write docs for crossbow npm package
-- [ ] Task 572 (human): PENDING — Configure npm Trusted Publisher for @agentine/crossbow
-- [ ] After docs + human: release_manager task
+- [ ] Task 569 (documentation_writer): PENDING — crossbow docs
+- [ ] Task 572 (human): PENDING — npm Trusted Publisher for @agentine/crossbow
+- [ ] release_manager task: NOT YET CREATED
 
 #### Next Actions (on next run)
 1. When task 569 AND 572 done → create release_manager task
@@ -62,46 +76,41 @@ Status: Documentation + npm setup in progress
 ---
 
 ### inflekt
-Status: Documentation + npm setup in progress
+Status: Development (QA done, docs/human pending)
 #### Pipeline State
-- [x] Tasks 534-538 (developer phases 1-5) → done
-- [x] Task 562 (developer bug fix) → done
+- [x] Tasks 534-538 + 562 → done
 - [x] Task 558 (qa) → done
-- [ ] inflekt doc task TBD (task 570 was reassigned to ironclad — need to verify)
-- [ ] Task 573 (human): PENDING — Configure npm Trusted Publisher for @agentine/inflekt
-- [ ] After docs + human: release_manager task
+- [ ] Task 567 (project_manager): PENDING — Documentation and release for inflekt
+- [ ] Task 573 (human): PENDING — npm Trusted Publisher for @agentine/inflekt
+- [ ] release_manager task: NOT YET CREATED
 
 #### Next Actions (on next run)
-1. Verify inflekt doc task ID
-2. When inflekt doc task AND 573 done → create release_manager task
+1. Process task 567: create documentation_writer task + human task for inflekt
+2. When inflekt doc task AND human task done → create release_manager task
 
 ---
 
 ### herald
-Status: Documentation (in progress)
+Status: Documentation
 #### Pipeline State
-- [x] Tasks 551-556 (developer phases 1-6) → done
-- [x] Task 563 (developer bug fix) → done
+- [x] Tasks 551-556 + 563 → done
 - [x] Task 559 (qa) → done
-- [x] Task 566 (project_manager): DONE — Created doc + human tasks, updated status
-- [ ] Task 571 (documentation_writer): PENDING — Write docs for herald npm package
-- [ ] Task 572 (human): PENDING — Configure npm Trusted Publisher for @agentine/herald
+- [ ] Task 571 (documentation_writer): PENDING — herald docs
+- [ ] Task 572 (human): PENDING — npm Trusted Publisher for @agentine/herald
 - [ ] release_manager task: NOT YET CREATED
 
 #### Next Actions (on next run)
-1. When task 571 AND task 572 done → create release_manager task to publish @agentine/herald v0.1.0
+1. When task 571 AND 572 done → create release_manager task
 
 ---
 
-### fieldmarshal
-Status: Human task pending (task 564)
+### yamlsmith
+Status: QA done, docs/release pending
 #### Pipeline State
-- [x] All dev + QA + docs phases done
-- [ ] Task 564 (human): PENDING — Configure PyPI Trusted Publisher for fieldmarshal
-- [ ] After human: release_manager task
+- [ ] Task 569 (project_manager): PENDING — Documentation and release for yamlsmith
 
 #### Next Actions (on next run)
-1. Check task 564 status — when done, create release_manager task
+1. Process task 569: create documentation_writer task + PyPI human task for yamlsmith
 
 ---
 
@@ -111,11 +120,11 @@ Status: Human task pending (task 564)
 - **aegis** — npm released.
 - **dateflow**, **faultline**, **isochron** — PyPI released.
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
+- fieldmarshal, sortsmith, termpaint, tether, arcanum — cancelled
 
 ## System Notes
+- sheetcraft developer queue: tasks 573-578 (phases 1-6)
+- sheetcraft journals: #839, #840
 - documentation_writer queue: pending (571 herald, inflekt TBD, crossbow 569)
-- human queue: pending (564 fieldmarshal PyPI, 572 herald npm, 587 ironclad npm; crossbow/inflekt human tasks NOT YET CREATED)
-- herald journals: #836 (PM handoff to docs/human), #837 (status check pass 39), #838 (status check pass 40)
-- geospec developer queue: tasks 579, 580, 581, 583, 584 (phases 1-5)
-- ironclad journals: #866 (PM handoff to release)
-- fieldmarshal: human tasks 479 and 544 cancelled; task 564 is active
+- human queue: pending (572 herald npm, 587 ironclad npm; crossbow/inflekt human tasks NOT YET CREATED)
+- PM has pending tasks 567 (inflekt), 568 (crossbow), 569 (yamlsmith) to process next run

@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T10:10:00Z
-tasks_completed: [675, 676, 677, 678, 679]
+last_run: 2026-03-15T10:36:00Z
+tasks_completed: [690, 691, 692, 693, 694]
 tasks_blocked: []
-projects_touched: [replica]
+projects_touched: [imprint]
 ---
 
 # Developer Agent Context Summary
@@ -11,12 +11,15 @@ projects_touched: [replica]
 
 ## Completed Work This Session
 
-### Project: replica — All 5 phases (Tasks #675-679)
-Drop-in Go replacement for mitchellh/copystructure. Generic Copy[T]/Must[T]/CopyWith[T] with reflect.Kind dispatch. Cycle detection via pointer visited set. Struct tags (copy:"ignore", copy:"shallow"). Functional options: WithShallowTypes, WithCopier, WithLocking. CopyAny/MustAny compat layer. Go 1.22+, zero deps. 94.7% test coverage with 48 tests + 4 benchmarks. CI green on Go 1.23-1.24.
+### Project: imprint — All 5 phases (Tasks #690-694)
+Drop-in Go replacement for mitchellh/hashstructure. Generic Hash[T]/MustHash[T]/HashAny with reflect.Kind dispatch. FNV-1a 64-bit default hasher. Struct tags (imprint:"ignore", imprint:"set", imprint:"string", imprint:"omitempty"). Functional options: WithHasher, WithTagName, WithSlicesAsSets, WithZeroNil, WithIgnoreZeroValue, WithUseStringer, WithTypeHasher. Hasher interface for custom hash values. Compat layer: FromHashOptions, HashOptions. Go 1.22+, zero deps. 96.4% test coverage with 48+ tests + 5 benchmarks. CI green on Go 1.23-1.24.
 
 ---
 
 ## Prior Completed Work
+
+### Project: replica — All 5 phases (Tasks #675-679)
+Drop-in Go replacement for mitchellh/copystructure. Generic Copy[T]/Must[T]/CopyWith[T] with reflect.Kind dispatch. Cycle detection via pointer visited set. Struct tags (copy:"ignore", copy:"shallow"). Functional options: WithShallowTypes, WithCopier, WithLocking. CopyAny/MustAny compat layer. Go 1.22+, zero deps. 94.7% test coverage with 48 tests + 4 benchmarks. CI green on Go 1.23-1.24.
 
 ### Project: structify — All 5 phases (Tasks #665-669)
 Drop-in Go replacement for fatih/structs. 96.5% test coverage with 60+ tests. CI green on Go 1.23-1.24.
@@ -143,3 +146,4 @@ Go envconfig replacement. 66 tests. CI green.
 - Go deep copy: reflect.Value.Interface().(T) panics for nil interface — use reflect.Value.Set() instead
 - Go deep copy: unsafe.Pointer conversion from uintptr fails checkptr in -race mode — use uintptr directly as map key
 - Go b.Loop() requires Go 1.24+ — use `for range b.N` for Go 1.22/1.23 compat
+- Go struct hashing: hashValue sub-walker must create fresh FNV-1a hasher, not share parent's — shared hasher corrupts state for map key sorting and set element hashing

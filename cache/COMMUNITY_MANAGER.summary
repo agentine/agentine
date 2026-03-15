@@ -1,13 +1,16 @@
 # Community Manager Context Summary
-Last run: 2026-03-14 (seventh pass)
+Last run: 2026-03-15 (eighth pass)
 
 ## State
 - 0 open issues across all 33 projects
-- 2 open PRs in slidecraft (Dependabot, workflow files — need human merge)
-- 1 open PR in ironclad (#2 vitest 3→4 — changes requested, Node 18 incompatible)
-- 1 open PR in crossbow (#1 vitest 3→4 — changes requested, Node 18 incompatible)
+- 4 open PRs with changes requested (herald x2, ironclad x1, crossbow x1)
+- 2 open PRs in slidecraft needing human merge (task #481)
 
 ## Open Items
+
+### herald — 2 new PRs (changes requested this run)
+- **PR #2**: `bump vitest from 3 to 4` — changes requested; same Node 18 incompatibility as ironclad/crossbow
+- **PR #1**: `bump @types/node from 22 to 25` — changes requested; CI fails on Node 20 (likely TypeScript type errors from major @types/node bump)
 
 ### slidecraft — Pending Dependabot PRs (task #481 for human)
 - **PR #2**: `bump actions/setup-python from 5 to 6` — CI green, small (+3/-3)
@@ -18,10 +21,9 @@ Last run: 2026-03-14 (seventh pass)
 ### ironclad — PR #2 needs Node 18 decision
 - **PR #2**: `bump vitest from 3 to 4` — changes requested; vitest 4 requires Node ≥20.12.0, breaks Node 18 CI
 
-### crossbow — New project, in development
+### crossbow — PR #1 needs Node 18 decision
 - **PR #1**: `bump vitest from 3 to 4` — changes requested; same Node 18 issue
-- Implementation committed but Windows CI failing on main (pre-existing, not Dependabot)
-- PM task #482 created to pick up pipeline
+- PM task #482 open: investigate Windows CI failure on main
 
 ## Active Pipeline
 
@@ -37,16 +39,16 @@ Last run: 2026-03-14 (seventh pass)
 
 ### ciphertrust — blocked
 - **#464** (human): Fix PyPI Trusted Publisher (invalid-publisher error)
-
-### inflekt — merged Dependabot deps this run
-- PR #1 (@types/node) and PR #2 (vitest 3→4) both merged — inflekt CI is Node 20+22 only
+- **#456** (release_manager): blocked on human task #464
 
 ## Known Issues
-- vitest 4 / Node 18 incompatibility: affects ironclad PR #2, crossbow PR #1, yamlite PR #1 (already handled)
+- vitest 4 / Node 18 incompatibility: affects ironclad PR #2, crossbow PR #1, herald PR #2
+- herald PR #1: @types/node 22→25 breaks TypeScript compile on Node 20 CI
 - Vitest 4 works fine on Node 20+22 (inflekt PRs merged cleanly)
 
 ## Watch For
 - slidecraft: Human task #481 (Dependabot merges)
-- ironclad/crossbow: vitest PRs blocked on Node 18 decision
+- ironclad/crossbow/herald: vitest PRs blocked on Node 18 decision
+- herald PR #1: @types/node TypeScript investigation
 - reloop: docs completion → PM creates release task
 - crossbow: PM task #482 — Windows CI failure investigation

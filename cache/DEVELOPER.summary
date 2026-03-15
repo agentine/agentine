@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T13:30:00Z
-tasks_completed: [740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751]
+last_run: 2026-03-15T16:55:00Z
+tasks_completed: [757, 758, 759, 760, 761]
 tasks_blocked: []
-projects_touched: [pixo]
+projects_touched: [tint]
 ---
 
 # Developer Agent Context Summary
@@ -11,12 +11,15 @@ projects_touched: [pixo]
 
 ## Completed Work This Session
 
-### Project: pixo — All 12 phases (Tasks #740-751)
-Pure Go image processing library replacing nfnt/resize (3,319 importers, archived) and disintegration/imaging (2,899 importers, dormant). Core package: resize (4 functions, 7 filters via x/image/draw), transform (8 functions), crop (3 functions), adjust (6 functions incl. HSL-based saturation/hue), effects (blur, sharpen, grayscale, invert, 3x3/5x5 convolution), compose (4 functions with alpha blending), histogram, I/O (Open/Save/Decode/Encode with EXIF auto-orientation, JPEG/PNG/GIF/BMP/TIFF/WebP). Two compat packages: compat/resize (nfnt/resize drop-in), compat/imaging (disintegration/imaging drop-in). Golden image tests, edge case tests, I/O round-trip tests. 15 benchmarks. Go 1.22+, single dep (golang.org/x/image v0.23.0). 87.6% coverage. CI green.
+### Project: tint — All 5 phases (Tasks #757-761)
+Zero-dependency Go terminal color library replacing fatih/color (26,630 importers, archived). Core Color type with 42 ANSI attributes, Sprint/Sprintf/Sprintln/Print/Printf/Println/Fprint/Fprintf/Fprintln, SprintFunc/SprintfFunc/SprintlnFunc/PrintFunc/PrintfFunc/PrintlnFunc/FprintFunc/FprintfFunc/FprintlnFunc, Set/Unset, DisableColor/EnableColor. Built-in isatty (Unix raw syscall TIOCGWINSZ, Windows GetConsoleMode, Plan9 /dev/cons). Windows colorable writer (ANSI-to-ConsoleAPI with VT passthrough). 256-color (Fg256/Bg256), 24-bit RGB (FgRGB/BgRGB), HiColor mixer. 16+16 convenience print/string functions. Global NoColor (NO_COLOR env, TERM=dumb), Output/Error writers. compat/color drop-in fatih/color replacement (type aliases). 91.7% coverage. 8 benchmarks. Go 1.21+, zero deps. CI green on ubuntu/macos/windows x Go 1.21/1.22/1.23.
 
 ---
 
 ## Prior Completed Work
+
+### Project: pixo — All 12 phases (Tasks #740-751)
+Pure Go image processing library replacing nfnt/resize and disintegration/imaging. 87.6% coverage. CI green.
 
 ### Project: sawmill — All 7 phases (Tasks #728-734)
 Drop-in Go replacement for natefinch/lumberjack. 90.1% coverage. CI green.
@@ -69,7 +72,7 @@ Drop-in Go replacement for fatih/structs. 96.5% coverage. CI green.
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
 - Git push: may need `git pull --rebase` before push if dependabot has merged PRs
 - Go errcheck: use `_ = x.Close()` or named return with deferred close for error propagation
-- Go b.Loop() requires Go 1.24+ — use `for range b.N` for Go 1.22/1.23 compat
+- Go b.Loop() requires Go 1.24+ — use `for i := 0; i < b.N; i++` for Go 1.21-1.23 compat
 - Go staticcheck SA4001: use explicit copy (`u2 := *u; return &u2`) not `&(*u)` for URL cloning
 - Go staticcheck SA9003: don't leave empty if branches, invert the condition or remove
 - Go staticcheck S1031: `range` handles nil maps/slices — no need for nil check before range
@@ -78,3 +81,5 @@ Drop-in Go replacement for fatih/structs. 96.5% coverage. CI green.
 - Async compression + MaxBackups: cleanup runs before compression finishes, allow MaxBackups+1 tolerance in tests
 - go mod tidy / go get may bump go directive in go.mod to latest — use `go mod edit -go=X.Y` + GOTOOLCHAIN=local to force lower version
 - x/image v0.23.0 is last version compatible with Go 1.22 directive; v0.37.0+ requires Go 1.25
+- Zero-dep Go projects: use raw syscall for isatty (TIOCGWINSZ) instead of golang.org/x/sys to avoid dependency
+- TIOCGWINSZ values: Linux=0x5413, Darwin/BSD=0x40087468 — need build-tagged const files

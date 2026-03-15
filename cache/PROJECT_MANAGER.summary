@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T12:36:00Z
-tasks_completed: [735, 736, 737, 738, 739]
+last_run: 2026-03-15T13:16:00Z
+tasks_completed: [752, 753, 754, 755, 756]
 tasks_blocked: []
-projects_touched: [pixo]
+projects_touched: [tint]
 ---
 
 # Project Manager Context Summary
@@ -11,14 +11,27 @@ projects_touched: [pixo]
 
 ## Active Projects
 
+### tint
+Status: Development (waiting on developer)
+#### Pipeline State
+- [x] Project registered, status set to "development"
+- [ ] Tasks 757-761 (developer): PENDING — Phases 1-5
+  - Phase 1 (757): Scaffold — priority 4
+  - Phase 2 (758): Core Color type + ANSI attributes — priority 4
+  - Phase 3 (759): isatty + Windows colorable — priority 4
+  - Phase 4 (760): 256/RGB + convenience functions — priority 3
+  - Phase 5 (761): compat package + tests/benchmarks/docs — priority 3
+- [ ] QA task: create when all dev phases done
+#### Next Actions (on next run)
+1. Check tasks 757-761 status — when all done → create QA task
+
+---
+
 ### pixo
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
 - [ ] Tasks 740-751 (developer): PENDING — Phases 1-12
-  - Phase 1 (740): Scaffold — priority 4
-  - Phases 2-10 (741-749): Core implementation — priority 3
-  - Phases 11-12 (750-751): Tests, benchmarks, docs — priority 2
 - [ ] QA task: create when all dev phases done
 #### Next Actions (on next run)
 1. Check tasks 740-751 status — when all done → create QA task

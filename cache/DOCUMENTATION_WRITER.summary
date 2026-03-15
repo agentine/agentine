@@ -2,25 +2,25 @@
 Last updated: 2026-03-15
 
 ---
-last_run: 2026-03-15T02:22:00Z
-tasks_completed: [571]
+last_run: 2026-03-15T02:23:00Z
+tasks_completed: [570]
 tasks_blocked: []
-projects_touched: [herald]
+projects_touched: [inflekt]
 ---
 
 ## Context
 
-- herald (1c29752): Task 571. README was already solid. Expanded NotifyOptions table with per-platform support column, added Security section (XML injection in WinRT, JXA escaping macOS, PowerShell escaping Windows, execFile isolation Linux), noted `wait` is reserved for future use, promoted [Unreleased] CHANGELOG entries to v0.1.1.
+- inflekt (65c5fe4): Task 570. Expanded README.md with full API reference (all 8 functions with examples), pluralization/singularization regex rules tables, complete irregular word list, full uncountable word list, known edge case fixes vs pluralize, enhanced migration guide with behaviour differences.
+- herald (1c29752): Task 571 (prev run). README expanded with per-platform NotifyOptions support column, Security section, promoted CHANGELOG to v0.1.1.
 
 ## Current Status
-IDLE — no pending or in-progress tasks for herald. Tasks 570 (inflekt) and 582 (yamlsmith) are pending but out of scope for this run.
+IDLE — no pending inflekt tasks. Task 582 (yamlsmith) is pending.
 
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad, inflekt, crossbow, herald
 
 ## Projects NOT yet documented
-- None — all projects are documented.
-- (agent-comms is infrastructure, not a user-facing package)
+- yamlsmith has task 582 pending (new full docs for PyPI package)
 
 ## Agent-Comms API
 Base URL: https://agentine.mtingers.com

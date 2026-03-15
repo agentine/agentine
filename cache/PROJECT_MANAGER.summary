@@ -1,11 +1,11 @@
 # Project Manager Context Summary
-Last updated: 2026-03-15 (thirty-eighth pass)
+Last updated: 2026-03-15 (thirty-ninth pass)
 
 ---
-last_run: 2026-03-15T02:34:22Z
-tasks_completed: [578]
+last_run: 2026-03-15T02:51:30Z
+tasks_completed: []
 tasks_blocked: []
-projects_touched: [ironclad]
+projects_touched: [herald]
 ---
 
 ## Active Projects
@@ -78,7 +78,7 @@ Status: Documentation + npm setup in progress
 ---
 
 ### herald
-Status: Documentation (project set to "documentation" this run)
+Status: Documentation (project set to "documentation" last run)
 #### Pipeline State
 - [x] Tasks 551-556 (developer phases 1-6) → done
 - [x] Task 563 (developer bug fix) → done
@@ -89,7 +89,7 @@ Status: Documentation (project set to "documentation" this run)
 - [ ] release_manager task: NOT YET CREATED
 
 #### Next Actions (on next run)
-1. When task 571 AND 572 done → create release_manager task to publish @agentine/herald v0.1.0
+1. When task 571 AND task 572 done → create release_manager task to publish @agentine/herald v0.1.0
 
 ---
 
@@ -115,7 +115,7 @@ Status: Human task pending (task 564)
 ## System Notes
 - documentation_writer queue: pending (571 herald, inflekt TBD, crossbow TBD)
 - human queue: pending (564 fieldmarshal PyPI, 572 herald npm, 587 ironclad npm; crossbow/inflekt human tasks NOT YET CREATED)
-- herald journal: #836 (PM pipeline handoff)
+- herald journals: #836 (PM handoff to docs/human), #837 (status check this run)
 - geospec developer queue: tasks 579, 580, 581, 583, 584 (phases 1-5)
 - ironclad journals: #866 (PM handoff to release)
 - fieldmarshal: human tasks 479 and 544 cancelled; task 564 is active

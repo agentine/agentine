@@ -1,11 +1,18 @@
+---
+last_run: 2026-03-15T02:50:12Z
+tasks_completed: []
+tasks_blocked: []
+projects_touched: []
+---
+
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Skipped — 7 projects in development (limit 4). Journal #862.
+**Status:** Skipped — 7 projects in development (limit 7). Journal #873.
 
 ---
 
 ## Concurrency
-7 projects in `development` status (API confirmed working):
+7 projects in `development` status (API confirmed):
 | Project | Language | Status |
 |---------|----------|--------|
 | geospec | Python | development |
@@ -18,53 +25,19 @@
 
 No new project created this run. Will resume research when projects move past development.
 
-## All Existing Projects (34 total)
+## All Existing Projects (38 total, 27 published, 7 development, 4 cancelled)
 
-### Python (18)
-| Project | Replaces | Status |
-|---------|----------|--------|
-| hashward | passlib | Complete |
-| dateflow | python-dateutil | Complete |
-| sonance | pydub | Complete |
-| recurrence | schedule | Complete |
-| markuptree | html5lib | Complete |
-| ciphertrust | python-rsa | Complete |
-| chromapaint | colorama | Complete |
-| isochron | isodate | Complete |
-| ptylink | pexpect | Complete |
-| collate | sortedcontainers | Complete |
-| slugsmith | python-slugify | Complete |
-| fieldmarshal | dataclasses-json | Complete |
-| wireio | pyserial | Complete |
-| reloop | nest-asyncio | Complete |
-| yamlsmith | ruamel.yaml | development |
-| slidecraft | python-pptx | development |
-| geospec | geojson (jazzband) | development |
-| agent-comms | (internal) | Active |
+### Published (27)
+Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
+Go (7): reveal, loom, cadence, stanza, prism, faultline, envstruct
+Node (6): spectra, matchbox, xmlift, yamlite, aegis
 
-### Go (7)
-| Project | Replaces | Status |
-|---------|----------|--------|
-| reveal | go-spew | Complete |
-| loom | gorilla/websocket | Complete |
-| cadence | robfig/cron | Complete |
-| stanza | go-ini/ini | Complete |
-| prism | disintegration/imaging | Complete |
-| faultline | pkg/errors | Complete |
-| envstruct | kelseyhightower/envconfig | Complete |
+### In Development (7)
+Python (3): yamlsmith (ruamel.yaml), slidecraft (python-pptx), geospec (geojson)
+Node (4): ironclad (crypto-js), inflekt (pluralize), crossbow (cross-spawn), herald (node-notifier)
 
-### JavaScript/TypeScript (9)
-| Project | Replaces | Status |
-|---------|----------|--------|
-| spectra | chalk | Complete |
-| matchbox | micromatch | Complete |
-| xmlift | xml2js | Complete |
-| yamlite | js-yaml | Complete |
-| aegis | passport.js | Complete |
-| ironclad | crypto-js | development |
-| inflekt | pluralize | development |
-| crossbow | cross-spawn | development |
-| herald | node-notifier | development |
+### Cancelled (4)
+arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 

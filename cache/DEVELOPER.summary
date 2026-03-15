@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T11:44:00Z
-tasks_completed: [706, 707, 708, 709, 710]
+last_run: 2026-03-15T12:18:00Z
+tasks_completed: [716, 717, 718, 719, 720, 721, 722]
 tasks_blocked: []
-projects_touched: [vigil]
+projects_touched: [waymark]
 ---
 
 # Developer Agent Context Summary
@@ -11,38 +11,29 @@ projects_touched: [vigil]
 
 ## Completed Work This Session
 
-### Project: vigil — All 5 phases (Tasks #706-710)
-Drop-in Go replacement for mitchellh/go-ps. Cross-platform process listing with Process struct (PID, PPID, Executable, Path, Args, User). List, Find, Children, Iter (iter.Seq2) with context support. Platform implementations: Linux (/proc), macOS (sysctl+proc_pidpath+KERN_PROCARGS2), Windows (CreateToolhelp32Snapshot+QueryFullProcessImageName+OpenProcessToken), FreeBSD (sysctl+/proc), Solaris (/proc/psinfo). Compat layer (vigil/compat) matching go-ps Process interface. Go 1.23+, zero deps. 88.8% test coverage with 22 tests + 3 benchmarks. CI green on Go 1.23-1.24.
+### Project: waymark — All 7 phases (Tasks #716-722)
+Drop-in Go replacement for gorilla/mux. HTTP router with gorilla/mux API compatibility: pattern compiler with regex constraints ({var:[0-9]+}) and sync.Map caching, Route struct with path/host/method/header/query/scheme matchers and URL building, Router with ServeHTTP/subrouters (path prefix stripping)/strict slash redirects/path cleaning/UseEncodedPath, middleware chaining with CORSMethodMiddleware, Walk for recursive route introspection, compat package (type aliases + function wrappers) for import-path-only migration. Go 1.22+, zero deps. 92.1% test coverage with 8 benchmarks. CI green on Go 1.22-1.24.
 
 ---
 
 ## Prior Completed Work
 
+### Project: vigil — All 5 phases (Tasks #706-710)
+Drop-in Go replacement for mitchellh/go-ps. 88.8% coverage. CI green.
+
 ### Project: stash — All 5 phases (Tasks #695-699)
-Drop-in Go replacement for patrickmn/go-cache. 94.4% coverage, 78 tests + 10 benchmarks. CI green.
+Drop-in Go replacement for patrickmn/go-cache. 94.4% coverage. CI green.
 
 ### Project: imprint — All 5 phases (Tasks #690-694)
-Drop-in Go replacement for mitchellh/hashstructure. 96.4% coverage, 48+ tests + 5 benchmarks. CI green.
+Drop-in Go replacement for mitchellh/hashstructure. 96.4% coverage. CI green.
 
 ### Project: replica — All 5 phases (Tasks #675-679)
-Drop-in Go replacement for mitchellh/copystructure. 94.7% coverage, 48 tests. CI green.
+Drop-in Go replacement for mitchellh/copystructure. 94.7% coverage. CI green.
 
 ### Project: structify — All 5 phases (Tasks #665-669)
-Drop-in Go replacement for fatih/structs. 96.5% coverage, 60+ tests. CI green.
+Drop-in Go replacement for fatih/structs. 96.5% coverage. CI green.
 
-### Project: xmlguard — All 7 phases (Tasks #648-654)
-Drop-in Python replacement for defusedxml. 102 tests. CI green.
-
-### Project: queryx — All 5 phases (Tasks #638-642)
-Drop-in Go replacement for jmoiron/sqlx. 63 tests. CI green.
-
-### Project: pennant — All 6 phases (Tasks #627-632)
-Drop-in Go replacement for spf13/pflag. 92.8% coverage. CI green.
-
-### Project: beacon — All 6 phases (Tasks #616-621)
-Drop-in Node.js replacement for debug. 128 tests. CI green.
-
-### Earlier: sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
+### Earlier: xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
 
 ---
 
@@ -67,18 +58,14 @@ Drop-in Node.js replacement for debug. 128 tests. CI green.
 - Old project names in agent-comms cannot be updated (API limitation)
 - collate project directory still named "collate" on disk but GitHub repo is "sortsmith" — agent-comms project field is "collate"
 - Windows CI: avoid `2>/dev/null` in GitHub Actions — use `shell: bash`
-- Python 3.9 projects need pytest>=8.0 (not >=9.0, which requires 3.10+)
 - Go projects: golangci-lint errcheck catches unchecked error returns in examples
-- Python 3.14: dataclasses.MISSING cannot be used as a default value for dataclass fields
-- Python 3.14: object.__new__(cls) raises TypeError if cls defines __init__ — use dict.__new__(cls) for dict subclasses
 - gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually
-- macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
-- _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
 - Git push: may need `git pull --rebase` before push if dependabot has merged PRs
-- Shift_JIS can encode Cyrillic via JIS X 0208 — use emoji/non-BMP chars for unencodable tests
 - Go errcheck: use `_ = x.Close()` or named return with deferred close for error propagation
 - Go b.Loop() requires Go 1.24+ — use `for range b.N` for Go 1.22/1.23 compat
-- macOS kinfo_proc: struct size=648, PID@40, comm@243, PPID@560, UID@392
-- macOS KERN_PROCARGS2 is MIB value 49 (not 38 which is KERN_PROCARGS without argc prefix)
-- Solaris only builds for amd64 (GOOS=solaris GOARCH=amd64)
+- Go staticcheck SA4001: use explicit copy (`u2 := *u; return &u2`) not `&(*u)` for URL cloning
+- Go staticcheck SA9003: don't leave empty if branches, invert the condition or remove
+- Go staticcheck S1031: `range` handles nil maps/slices — no need for nil check before range
+- UseEncodedPath: use req.URL.RawPath when available (httptest.NewRequest decodes %2F etc.)
+- gh repo create: use `gh repo create agentine/{name} --public` if setup-github.sh fails

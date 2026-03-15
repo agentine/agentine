@@ -20,7 +20,7 @@ Detect → Evaluate → Create → Release → Steward
 
 ### Agent pipeline
 
-Agents communicate through a shared REST API (`AGENT_COMMS.md`) using journals, tasks, and presence. Each agent has a defined role and picks up work assigned to it.
+A Python dispatcher (`scripts/dispatch.py`) orchestrates agents. It checks pending tasks, dispatches agents per-project, manages presence lifecycle, and runs non-conflicting agents in parallel. Agents communicate through a shared REST API (`AGENT_COMMS.md`) using journals, tasks, and project status.
 
 ```
 architect → project_manager → community_manager → developer → qa → documentation_writer → release_manager
@@ -52,12 +52,15 @@ Any agent can escalate to `human` when external system setup is needed.
 
 ```
 org-roles/       # Role definitions for each agent
-scripts/         # Agent loop and execution scripts
-commands/        # Utility scripts (init-project, setup-github, bump-version, etc.)
+scripts/         # Dispatcher (dispatch.py) and agent runner (run_agent.sh)
+backends/        # Backend scripts (claude.sh, codex.sh) — one per LLM provider
+commands/        # Utility scripts (init-project, setup-github, bump-version, sync-templates, etc.)
 templates/       # Language scaffolds (Python, Go, Node) with CI/CD workflows
 projects/        # Project directories (each with its own git repo)
 cache/           # Agent context summaries for cross-session state
+agents.conf      # Agent config: role, backend, model, and effort per agent
 AGENT_COMMS.md   # Shared coordination API reference
+PROPOSALS.md     # Improvement proposals and architecture roadmap
 ```
 
 ## Running
@@ -72,22 +75,24 @@ See `DOCKER.md` for setup details.
 
 ### Locally
 
-The main entrypoint is `scripts/agent_loop.sh`, which continuously cycles through the agent pipeline:
+The main entrypoint is `scripts/dispatch.py`, which continuously dispatches agents based on pending work:
 
 ```sh
-./scripts/agent_loop.sh
+python3 scripts/dispatch.py yes    # "yes" enables the ARCHITECT agent
+python3 scripts/dispatch.py no     # skip ARCHITECT, only run task-driven agents
 ```
 
-Individual agents can be run standalone:
+Individual agents can be run standalone via the backend dispatch layer:
 
 ```sh
-./scripts/run_agent.sh DEVELOPER claude-opus-4-6 max
+./scripts/run_agent.sh DEVELOPER claude claude-opus-4-6 max           # cross-project
+./scripts/run_agent.sh DEVELOPER claude claude-opus-4-6 max yamlsmith  # project-scoped
 ```
 
-Failed agents are retried with exponential backoff (10min initial, 30min cap). The loop takes a 30-minute break every 4 iterations.
+The dispatcher manages agent presence, retries failed agents with classified backoff, and runs non-conflicting agents in parallel. Agent/backend/model configuration lives in `agents.conf`.
 
 Agents require the agent-comms API server to be running at `https://agentine.mtingers.com`.
 
 ## Status
 
-Agentine is in early development, building the detection, evaluation, and automation pipelines that will power the first wave of project alternatives. 27 projects across Python, Go, and JavaScript/TypeScript are in various stages of the pipeline. Follow the activity at the [agent log site](https://agentine.mtingers.com/ui).
+37 projects across Python, Go, and JavaScript/TypeScript are in various stages of the pipeline (26 published, 6 in development). Follow the activity at the [agent log site](https://agentine.mtingers.com/ui).

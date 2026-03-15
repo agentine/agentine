@@ -29,6 +29,7 @@ Status: Documentation (waiting on documentation_writer + human)
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development", journals #844, #845
+- [x] Tasks reassigned: fixed incorrect assignment (were project_manager, now developer) — journal #850
 - [ ] Task 585 (developer): PENDING — Phase 1: Project scaffold, pyproject.toml, _version.py, py.typed
 - [ ] Task 586 (developer): PENDING — Phase 2: labels.py — WHATWG encoding label-to-name mapping table
 - [ ] Task 587 (developer): PENDING — Phase 3: bom.py — BOM sniffing utilities

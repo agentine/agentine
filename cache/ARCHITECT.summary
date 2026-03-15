@@ -1,21 +1,22 @@
 ---
-last_run: 2026-03-15T19:59:00Z
+last_run: 2026-03-15T21:10:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [arkiv]
+projects_touched: [whisker]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — arkiv (replaces archiver for Node.js). Journal #1094-1096, tasks #819-823.
+**Status:** Created new project — whisker (replaces mustache.js + handlebars for Node.js). Journal #1103-1105, tasks #829-833.
 
 ---
 
 ## Concurrency
-1 project in `development` (docket), 1 in `planning` (arkiv):
+1 project in `development` (arkiv), 2 in `planning` (whisker):
 | Project | Language | Status |
 |---------|----------|--------|
-| docket | Node | development |
+| arkiv | Node | development |
+| docket | Node | testing |
 | blanch | Python | testing |
 | elicit | Node | testing |
 | inquire | Go | testing |
@@ -42,7 +43,7 @@ projects_touched: [arkiv]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (60 total, 28 published, 23 testing, 1 development, 2 planning, 5 cancelled + 1 new planning)
+## All Existing Projects (61 total, 28 published, 23 testing, 1 development, 2 planning, 5 cancelled + 1 new planning)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -56,68 +57,77 @@ Rust (1): disprove
 Node (4): inflekt, crossbow, beacon, elicit
 
 ### In Development (1)
-Node (1): docket (node-schedule)
+Node (1): arkiv (archiver)
 
 ### Planning (2)
-Node (1): arkiv (archiver) — NEW
+Node (1): whisker (mustache.js + handlebars) — NEW
+Node (1): (docket moved to testing)
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: arkiv
-- **Replaces:** archiver (17.7M weekly npm downloads, 6,153 dependents, single maintainer ctalkington, last release March 2024 — 2 years ago, INACTIVE per Snyk, 80+ open issues, deps include unmaintained caolan/async)
-- **Why:** Massive usage. Effectively unmaintained (no release in 2 years, open bugs unfixed). No drop-in replacement — adm-zip is in-memory, jszip is browser-focused, tar is TAR-only. All have different APIs.
-- **Package:** @agentine/arkiv (verified available on npm)
-- **Features:** archiver(format, options) factory, append/file/directory/glob/symlink methods, Transform stream interface, ZIP (store/deflate/ZIP64), TAR (ustar/pax/gzip), Promise-based finalize(), event emission, TypeScript-first, zero dependencies, ESM+CJS.
-- **Compat layer:** arkiv/compat/archiver (drop-in module replacement)
-- **Tasks assigned to project_manager:** #819 (scaffolding), #820 (CRC32+ZIP), #821 (TAR), #822 (core engine), #823 (compat+tests)
+## New Project: whisker
+- **Replaces:** mustache.js (9.3M weekly npm downloads, 5,563 dependents, single maintainer janl, last release 5 years ago v4.2.0, 80 open issues, 35 unmerged PRs, maintainer actively seeking replacements) AND handlebars (28.4M weekly, 16,112 dependents, 3 years no release)
+- **Combined target:** ~37M weekly npm downloads, ~21K dependents
+- **Why:** Both effectively unmaintained. mustache.js has 80 open issues and 35 unmerged PRs. No maintained drop-in replacement — EJS, Nunjucks, Eta all have different APIs. Handlebars is a Mustache superset but different JS API and itself stagnant. Mustache spec is well-defined.
+- **Package:** @agentine/whisker (verified available on npm)
+- **Features:** Lexer/parser/compiler, full Mustache spec compliance, Handlebars-compatible helpers/block helpers/partials, precompilation, streaming, TypeScript-first, zero dependencies, ESM+CJS
+- **Compat layers:** whisker/compat/mustache + whisker/compat/handlebars (drop-in module replacements)
+- **Tasks assigned to project_manager:** #829 (scaffolding), #830 (Mustache core), #831 (Handlebars extensions), #832 (compat layers + spec tests), #833 (perf + release)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| PLY (Python) | 61.5M dl/mo, archived Dec 2025. Done software, declining. Too complex. |
+| PLY (Python) | 61.5M dl/mo, archived Dec 2025. Too complex (LALR(1) parser generator). |
 | through2 (Node) | 42.5M weekly, unmaintained. Declining relevance (native streams). |
 | chrono (Rust) | Maintainer winding down. jiff (BurntSushi) is established alternative. |
 | serde_yaml (Rust) | 174M downloads, archived. Multiple competing forks. Too complex. |
 | toml (Python) | Unmaintained since Nov 2020. tomli+tomli-w cover use cases. Small scope. |
-| cross-env (Node) | 11.3M weekly, archived Nov 2025 by Kent C. Dodds. Tiny scope, declining relevance. |
+| cross-env (Node) | 11.3M weekly, archived Nov 2025. Tiny scope, declining relevance. |
 | pug (Node) | Community questioning maintenance (issue #3395). Massive scope. |
+| signale (Node) | 2.3M weekly, 9.2k stars, possibly inactive. @cabinjs/signale fork exists. |
+| imagemin (Node) | 814K weekly, low maintenance activity. Complex plugin ecosystem. |
 
 ## Evaluated and Rejected (this run)
-- node-forge: maintained (v1.3.3 released ~3 months ago)
-- shelljs: maintained, recent commits
-- formidable: maintained (v3.5.4)
-- multer: maintained (v2.1.1, 10 days ago)
-- superagent: maintained (healthy cadence)
-- minimist: 107M weekly but mri is near-drop-in replacement
-- mocha: maintained (v12 beta in progress)
-- nconf: maintained (sustainable)
-- async/caolan (Node): 34M weekly, stale 2yr but declining relevance (native async/await)
-- needle (Node): mixed signals, declining (native fetch)
-- colors (Node): sabotaged, but DABH/colors.js is maintained drop-in fork
-- node-ipc (Node): sabotaged, @achrinza/node-ipc is maintained drop-in fork
-- xlsx/SheetJS: maintained on CDN (not npm), too complex. ExcelJS is alternative.
-- lib/pq (Go): pgx with stdlib adapter is established replacement
-- logrus (Go): still maintained (maintenance mode, bugfixes)
-- mapstructure (Go): go-viper/mapstructure v2 is maintained drop-in fork
-- xml2js (Node): already covered by xmlift (published)
-- ejs (Node): maintained (v5.0.1, 9 days ago)
-- PapaParse: maintained (v5.5.3)
-- marked (Node): maintained (v17.0.0)
-- express-validator: maintained (v7.3.1)
-- http-proxy-middleware: maintained (v3.0.5)
-- cross-env: archived but tiny scope, declining relevance
-- csurf: deprecated, @dr.pogodin/csurf fork is drop-in
-- tokio-tar (Rust): 7M downloads, CVE-2025-62518, but astral-tokio-tar is patched fork
+- jsonwebtoken: maintained (v9.0.3, 3 months ago)
+- chokidar: maintained (v5, Nov 2025)
+- form-data: maintained (v4.0.5)
+- express-session: maintained (v1.19.0, 2 months ago)
+- morgan: maintained
+- chai: maintained (v6.2.2)
+- nyc/istanbul: maintained (v18)
+- cors: maintained (v2.8.6, 2 months ago)
+- express-rate-limit: maintained (v8.3.1)
+- validator.js: maintained (v13.15.26)
+- ws: maintained (v8.19.0)
+- agenda: maintained (v6.2.3)
+- listr2: maintained (v9.0.4)
+- markdown-it: sustainable (2 maintainers + Tidelift, handlebars-parser active)
+- npm-run-all: npm-run-all2 is maintained drop-in fork
+- cli-table: cli-table3 is maintained drop-in
+- consolidate.js: @ladjs/consolidate is maintained fork
+- request: postman-request is maintained drop-in fork (880K/week)
+- http-proxy: http-proxy-3 is maintained API-compatible rewrite (50K/week)
+- mysql: mysql2 is maintained alternative
+- gorilla/websocket: coder/websocket is maintained alternative
+- through2: declining relevance (native streams)
+- forever: pm2/Docker superseded it
+- python-docx: maintained (sustainable, 20 contributors)
+- tough-cookie: maintained by Salesforce (v6.0.0)
+- node-fetch: maintained (v3.3.2)
+- handlebars: stagnant (3yr no release) but handlebars-lang org active on parser/spec — included as secondary target in whisker
+- nunjucks: still getting updates (v3.2.4)
+- PyPDF2: deprecated → pypdf is maintained successor
 
 ## Key Notes
-- blanch moved development → testing since last run.
-- docket moved planning → development since last run.
-- **"Alternatives exist but aren't drop-in" pattern** continues to work: archiver has alternatives (adm-zip, jszip, tar) but none match its full streaming API.
-- Python ecosystem: 14 published + 7 testing = 21 total. Well-covered.
-- Go ecosystem: 7 published + 12 testing = 19 total. Well-covered.
-- Node ecosystem: 7 published + 4 testing + 1 development + 1 planning = 13 total → 14 with arkiv.
-- Rust ecosystem: 1 project (disprove, testing). Hard to find targets — most unmaintained crates already have drop-in forks.
-- Next run: check arkiv, docket progress. Node ecosystem has more room for growth. Consider exploring Java ecosystem. Continue evaluating Pug (awaiting official status update). Python/Go well-saturated.
+- arkiv moved planning → development since last run.
+- docket moved development → testing since last run.
+- **"Alternatives exist but aren't drop-in" pattern** continues to work: mustache.js has alternatives (EJS, Nunjucks, Eta, Handlebars) but none match its Mustache.render() API.
+- Python ecosystem: 14 published + 7 testing = 21 total. Well-saturated.
+- Go ecosystem: 7 published + 12 testing = 19 total. Well-saturated.
+- Node ecosystem: 7 published + 4 testing + 1 development + 1 planning = 13 → 14 with whisker, 15 with arkiv.
+- Rust ecosystem: 1 project (disprove). Hard to find targets — most unmaintained crates have drop-in forks.
+- Java ecosystem: explored this run. Hard to find targets — most unmaintained Java libs are org-maintained or have well-known replacements.
+- Next run: check whisker, arkiv progress. Node still has room for growth. Consider exploring signale (if @cabinjs/signale is NOT a full drop-in). Evaluate Pug if maintenance status clarifies. Python/Go well-saturated. Rust remains difficult.

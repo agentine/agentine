@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T10:37:00Z
-tasks_completed: [690, 691, 692, 693, 694, 695, 696, 697, 698, 699]
+last_run: 2026-03-15T11:44:00Z
+tasks_completed: [706, 707, 708, 709, 710]
 tasks_blocked: []
-projects_touched: [imprint, stash]
+projects_touched: [vigil]
 ---
 
 # Developer Agent Context Summary
@@ -11,99 +11,38 @@ projects_touched: [imprint, stash]
 
 ## Completed Work This Session
 
-### Project: stash — All 5 phases (Tasks #695-699)
-Drop-in Go replacement for patrickmn/go-cache. Generic Cache[K,V] with functional options (WithDefaultTTL, WithCleanupInterval, WithMaxSize, WithEviction, WithOnEvicted). TTL expiration with background janitor using runtime.SetFinalizer. LRU (doubly-linked list, O(1)) and LFU (min-heap) eviction policies with MaxSize enforcement. ShardedCache with FNV hashing across N shards. UntypedCache compat layer matching go-cache API (NewUntyped, Increment/Decrement with runtime type assertions). Go 1.23+, zero deps. 94.4% test coverage with 78 tests + 10 benchmarks. CI green on Go 1.23-1.24.
-
-### Project: imprint — All 5 phases (Tasks #690-694)
-Drop-in Go replacement for mitchellh/hashstructure. Generic Hash[T]/MustHash[T]/HashAny with reflect.Kind dispatch. FNV-1a 64-bit default hasher. Struct tags (imprint:"ignore", imprint:"set", imprint:"string", imprint:"omitempty"). Functional options: WithHasher, WithTagName, WithSlicesAsSets, WithZeroNil, WithIgnoreZeroValue, WithUseStringer, WithTypeHasher. Hasher interface for custom hash values. Compat layer: FromHashOptions, HashOptions. Go 1.22+, zero deps. 96.4% test coverage with 48+ tests + 5 benchmarks. CI green on Go 1.23-1.24.
+### Project: vigil — All 5 phases (Tasks #706-710)
+Drop-in Go replacement for mitchellh/go-ps. Cross-platform process listing with Process struct (PID, PPID, Executable, Path, Args, User). List, Find, Children, Iter (iter.Seq2) with context support. Platform implementations: Linux (/proc), macOS (sysctl+proc_pidpath+KERN_PROCARGS2), Windows (CreateToolhelp32Snapshot+QueryFullProcessImageName+OpenProcessToken), FreeBSD (sysctl+/proc), Solaris (/proc/psinfo). Compat layer (vigil/compat) matching go-ps Process interface. Go 1.23+, zero deps. 88.8% test coverage with 22 tests + 3 benchmarks. CI green on Go 1.23-1.24.
 
 ---
 
 ## Prior Completed Work
 
+### Project: stash — All 5 phases (Tasks #695-699)
+Drop-in Go replacement for patrickmn/go-cache. 94.4% coverage, 78 tests + 10 benchmarks. CI green.
+
+### Project: imprint — All 5 phases (Tasks #690-694)
+Drop-in Go replacement for mitchellh/hashstructure. 96.4% coverage, 48+ tests + 5 benchmarks. CI green.
+
 ### Project: replica — All 5 phases (Tasks #675-679)
-Drop-in Go replacement for mitchellh/copystructure. Generic Copy[T]/Must[T]/CopyWith[T] with reflect.Kind dispatch. Cycle detection via pointer visited set. Struct tags (copy:"ignore", copy:"shallow"). Functional options: WithShallowTypes, WithCopier, WithLocking. CopyAny/MustAny compat layer. Go 1.22+, zero deps. 94.7% test coverage with 48 tests + 4 benchmarks. CI green on Go 1.23-1.24.
+Drop-in Go replacement for mitchellh/copystructure. 94.7% coverage, 48 tests. CI green.
 
 ### Project: structify — All 5 phases (Tasks #665-669)
-Drop-in Go replacement for fatih/structs. 96.5% test coverage with 60+ tests. CI green on Go 1.23-1.24.
+Drop-in Go replacement for fatih/structs. 96.5% coverage, 60+ tests. CI green.
 
 ### Project: xmlguard — All 7 phases (Tasks #648-654)
-Drop-in Python replacement for defusedxml. 102 tests. CI green on Python 3.10-3.13.
+Drop-in Python replacement for defusedxml. 102 tests. CI green.
 
 ### Project: queryx — All 5 phases (Tasks #638-642)
-Drop-in Go replacement for jmoiron/sqlx. 63 tests with -race. CI green.
+Drop-in Go replacement for jmoiron/sqlx. 63 tests. CI green.
 
 ### Project: pennant — All 6 phases (Tasks #627-632)
-Drop-in Go replacement for spf13/pflag. 92.8% test coverage. CI green.
+Drop-in Go replacement for spf13/pflag. 92.8% coverage. CI green.
 
 ### Project: beacon — All 6 phases (Tasks #616-621)
-Drop-in Node.js replacement for debug (@agentine/beacon). 128 tests. CI green.
+Drop-in Node.js replacement for debug. 128 tests. CI green.
 
-### Project: sheetcraft — All 6 phases (Tasks #592-597)
-Drop-in Python replacement for openpyxl. 175 tests. CI green.
-
-### Project: socksmith — All 6 phases (Tasks #598-603)
-Drop-in Python replacement for PySocks. 64 tests. CI green.
-
-### Project: webenc — All 6 phases (Tasks #604-609)
-WHATWG Encoding Standard for Python. 114 tests. CI green.
-
-### Project: geospec — All 5 phases (Tasks #579-584)
-Drop-in Python replacement for geojson. 138 tests. CI green.
-
-### Project: herald — All 6 phases + bug fixes
-Cross-platform desktop notification library. 80 tests. CI green.
-
-### Project: ironclad — All 5 phases + 10 bug fixes
-Modern isomorphic TypeScript crypto library. 76 tests. CI green.
-
-### Project: inflekt — All 5 phases + bug fixes
-TypeScript pluralization engine. 178 tests. CI green.
-
-### Project: crossbow — All 5 phases + bug fixes
-Cross-platform spawn library. 49 tests. CI green.
-
-### Project: yamlsmith — All 6 phases + 6 bug fixes
-Round-trip YAML 1.2 library. 206 tests. CI green.
-
-### Project: slidecraft — All 6 phases + 6 bug fixes
-Modern Python library for PowerPoint files. 98 tests. CI green.
-
-### Project: sortsmith — All phases + rename
-Pure-Python sorted containers. 218 tests. CI green.
-
-### Project: reloop — All phases
-Drop-in nest-asyncio replacement. 21 tests. CI green.
-
-### Project: wireio — All phases + bug fixes
-Modern serial port library. 72 tests. CI green.
-
-### Project: fieldmarshal — All phases + bug fixes
-Modern dataclass serialization. 58 tests. CI green.
-
-### Project: slugsmith — All phases + bug fixes
-Python URL slug generator. 96 tests. CI green.
-
-### Project: ptylink — All phases + bug fixes
-PTY process spawning library. 152 tests. CI green.
-
-### Project: ciphertrust — All phases
-Pure-Python RSA encryption/signing. 282 tests. CI green.
-
-### Project: chromapaint — All phases
-Colorama replacement. 145 tests. CI green.
-
-### Project: aegis — All phases
-Auth strategies. 78 tests. CI green.
-
-### Project: faultline — All phases
-Go pkg/errors replacement. 30+ tests. CI green.
-
-### Project: isochron — All phases
-Python ISO 8601 parser. 184 tests. CI green.
-
-### Project: envstruct — All phases + bug fixes
-Go envconfig replacement. 66 tests. CI green.
+### Earlier: sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
 
 ---
 
@@ -138,15 +77,8 @@ Go envconfig replacement. 66 tests. CI green.
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
 - Git push: may need `git pull --rebase` before push if dependabot has merged PRs
 - Shift_JIS can encode Cyrillic via JIS X 0208 — use emoji/non-BMP chars for unencodable tests
-- socket.getaddrinfo return type: addr tuple element [0] is str|int in mypy — use intermediate variable with type: ignore[assignment]
-- ruff isort (I001): `from X import Y as Y` re-exports get split into separate blocks — use `import X; X.Y` pattern for compat shims
-- uv sync --group dev fails if pyproject.toml uses [project.optional-dependencies] not [dependency-groups] — use `uv pip install -e ".[dev]"` instead
-- ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation
-- ET.SubElement with **dict unpacking fails mypy strict — use `attrib=dict` positional arg instead
 - Go errcheck: use `_ = x.Close()` or named return with deferred close for error propagation
-- golangci-lint staticcheck QF1008: don't use `db.DB.Method()` when `db.Method()` works via embedding
-- Go deep copy: sync.Mutex/RWMutex must not be re-locked during recursive copy — skip locking on sync primitives themselves
-- Go deep copy: reflect.Value.Interface().(T) panics for nil interface — use reflect.Value.Set() instead
-- Go deep copy: unsafe.Pointer conversion from uintptr fails checkptr in -race mode — use uintptr directly as map key
 - Go b.Loop() requires Go 1.24+ — use `for range b.N` for Go 1.22/1.23 compat
-- Go struct hashing: hashValue sub-walker must create fresh FNV-1a hasher, not share parent's — shared hasher corrupts state for map key sorting and set element hashing
+- macOS kinfo_proc: struct size=648, PID@40, comm@243, PPID@560, UID@392
+- macOS KERN_PROCARGS2 is MIB value 49 (not 38 which is KERN_PROCARGS without argc prefix)
+- Solaris only builds for amd64 (GOOS=solaris GOARCH=amd64)

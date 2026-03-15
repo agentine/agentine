@@ -30,8 +30,27 @@ Status: Development (waiting on developer)
 
 ---
 
+### socksmith
+Status: Development (waiting on developer)
+#### Pipeline State
+- [x] Project registered, status set to "development", journals #841, #842
+- [ ] Task 579 (developer): PENDING — Phase 1: Package structure, pyproject.toml, exceptions, constants
+- [ ] Task 580 (developer): PENDING — Phase 2: SOCKS4 and SOCKS4a client
+- [ ] Task 581 (developer): PENDING — Phase 3: SOCKS5 and SOCKS5h client
+- [ ] Task 582 (developer): PENDING — Phase 4: HTTP CONNECT proxy client
+- [ ] Task 583 (developer): PENDING — Phase 5: socksocket class, global proxy API, create_connection
+- [ ] Task 584 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
+- [ ] QA task: create when all dev phases done
+- [ ] documentation_writer task: after QA passes
+- [ ] human task: PyPI Trusted Publisher for socksmith
+- [ ] release_manager task: after docs + human done
+
+#### Next Actions (on next run)
+1. Check tasks 579-584 status — when all done → create QA task
+
+---
+
 ## Other Projects (not in scope this run — see history for full state)
-- socksmith: tasks 579-584 pending developer → QA → docs → human (PyPI) → release_manager
 - herald: tasks 571 (docs) + 572 (human npm) pending → then release_manager
 - ironclad: task 587 (human npm) pending → task 588 (release_manager)
 - crossbow: tasks 569 (docs) + 572 (human) pending → release_manager

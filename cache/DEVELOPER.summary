@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T16:55:00Z
-tasks_completed: [757, 758, 759, 760, 761]
+last_run: 2026-03-15T17:42:00Z
+tasks_completed: [768, 769, 770, 771, 772]
 tasks_blocked: []
-projects_touched: [tint]
+projects_touched: [disprove]
 ---
 
 # Developer Agent Context Summary
@@ -11,12 +11,15 @@ projects_touched: [tint]
 
 ## Completed Work This Session
 
-### Project: tint — All 5 phases (Tasks #757-761)
-Zero-dependency Go terminal color library replacing fatih/color (26,630 importers, archived). Core Color type with 42 ANSI attributes, Sprint/Sprintf/Sprintln/Print/Printf/Println/Fprint/Fprintf/Fprintln, SprintFunc/SprintfFunc/SprintlnFunc/PrintFunc/PrintfFunc/PrintlnFunc/FprintFunc/FprintfFunc/FprintlnFunc, Set/Unset, DisableColor/EnableColor. Built-in isatty (Unix raw syscall TIOCGWINSZ, Windows GetConsoleMode, Plan9 /dev/cons). Windows colorable writer (ANSI-to-ConsoleAPI with VT passthrough). 256-color (Fg256/Bg256), 24-bit RGB (FgRGB/BgRGB), HiColor mixer. 16+16 convenience print/string functions. Global NoColor (NO_COLOR env, TERM=dumb), Output/Error writers. compat/color drop-in fatih/color replacement (type aliases). 91.7% coverage. 8 benchmarks. Go 1.21+, zero deps. CI green on ubuntu/macos/windows x Go 1.21/1.22/1.23.
+### Project: disprove — All 5 phases (Tasks #768-772)
+Rust property-based testing library replacing BurntSushi/quickcheck (43.8M downloads, abandoned 5+ years). Cargo workspace: disprove (core lib) + disprove_macros (proc-macro). Arbitrary trait with impls for all primitives (bool, u8-u128, i8-i128, f32, f64, char), collections (Vec, HashMap, HashSet, BTreeMap, BTreeSet, VecDeque, LinkedList, BinaryHeap), strings (String, CString, OsString, PathBuf), smart pointers (Box, Rc, Arc, Cell, RefCell), composites (Option, Result, tuples 1-12, arrays via const generics for any N), NonZero types, ranges, Wrapping/Saturating, Duration, IP/Socket addresses. Gen with deterministic seed replay. Shrinking with checked_neg to fix quickcheck's integer MIN overflow bug. QuickCheck runner with env var config (QUICKCHECK_TESTS/MAX_TESTS/GENERATOR_SIZE/SEED), builder pattern. Testable trait + testable_args1-8 for multi-arg functions. #[quickcheck] proc macro. Compat module. 84 tests (68 unit + 14 integration + 2 doc). Clippy + fmt clean. CI green on ubuntu/macos/windows x Rust 1.75/stable. MSRV 1.75. Dual MIT/Apache-2.0.
 
 ---
 
 ## Prior Completed Work
+
+### Project: tint — All 5 phases (Tasks #757-761)
+Zero-dependency Go terminal color library replacing fatih/color. 91.7% coverage. CI green.
 
 ### Project: pixo — All 12 phases (Tasks #740-751)
 Pure Go image processing library replacing nfnt/resize and disintegration/imaging. 87.6% coverage. CI green.
@@ -27,22 +30,7 @@ Drop-in Go replacement for natefinch/lumberjack. 90.1% coverage. CI green.
 ### Project: waymark — All 7 phases (Tasks #716-722)
 Drop-in Go replacement for gorilla/mux. 92.1% coverage. CI green.
 
-### Project: vigil — All 5 phases (Tasks #706-710)
-Drop-in Go replacement for mitchellh/go-ps. 88.8% coverage. CI green.
-
-### Project: stash — All 5 phases (Tasks #695-699)
-Drop-in Go replacement for patrickmn/go-cache. 94.4% coverage. CI green.
-
-### Project: imprint — All 5 phases (Tasks #690-694)
-Drop-in Go replacement for mitchellh/hashstructure. 96.4% coverage. CI green.
-
-### Project: replica — All 5 phases (Tasks #675-679)
-Drop-in Go replacement for mitchellh/copystructure. 94.7% coverage. CI green.
-
-### Project: structify — All 5 phases (Tasks #665-669)
-Drop-in Go replacement for fatih/structs. 96.5% coverage. CI green.
-
-### Earlier: xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
+### Earlier: vigil, stash, imprint, replica, structify, xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
 
 ---
 
@@ -83,3 +71,8 @@ Drop-in Go replacement for fatih/structs. 96.5% coverage. CI green.
 - x/image v0.23.0 is last version compatible with Go 1.22 directive; v0.37.0+ requires Go 1.25
 - Zero-dep Go projects: use raw syscall for isatty (TIOCGWINSZ) instead of golang.org/x/sys to avoid dependency
 - TIOCGWINSZ values: Linux=0x5413, Darwin/BSD=0x40087468 — need build-tagged const files
+- Rust: SmallRng needs `from_rng(thread_rng())` not `from_entropy()` with rand 0.8 default features
+- Rust: signed integer Arbitrary shrink must use `checked_neg()` to avoid overflow panic on MIN values
+- Rust: Cell<T> Arbitrary requires T: Copy for Debug bound
+- Rust: Testable trait with 'static bound requires R: 'static on all generic return types
+- Rust: rustup was at 1.61.0, needed `rustup update stable` to get 1.94.0

@@ -4,21 +4,24 @@
 
 ## Completed Work This Session
 
-### Project: sheetcraft — All 6 phases (Tasks #592-597)
-Drop-in Python replacement for openpyxl (.xlsx read/write). Pure Python, zero deps, Python 3.10+, MIT. Modules: constants.py, exceptions.py, utils.py, cell.py, styles/ (Font, PatternFill, GradientFill, Border, Side, Alignment, NumberFormat, StyleSheet), reader/ (shared_strings, styles, worksheet, workbook), writer/ (shared_strings, styles, worksheet, workbook ZIP builder), workbook.py (Workbook, load_workbook), worksheet.py (Worksheet with openpyxl-compatible API). 175 tests pass, 93% coverage, mypy --strict clean, CI green.
-
-### Project: socksmith — All 6 phases (Tasks #598-603)
-Drop-in Python replacement for PySocks (SOCKS proxy client). Modules: _types.py (ProxyType enum: SOCKS4/4A/5/5H/HTTP), _exceptions.py (ProxyError hierarchy matching PySocks API), _socks4.py (Socks4Client with SOCKS4/4a support), _socks5.py (Socks5Client with no-auth and username/password auth per RFC 1929, IPv4/IPv6/domain address types), _http.py (HttpConnectClient with Basic auth), _socket.py (socksocket subclass of socket.socket, create_connection factory), _globals.py (thread-safe set_default_proxy/get_default_proxy), socks.py (PySocks compat shim with PROXY_TYPE_SOCKS4=1/SOCKS5=2/HTTP=3). Zero deps, Python 3.10+, BSD-3-Clause, py.typed. 64 tests pass, mypy --strict clean, CI green.
-
-### Project: webenc — All 6 phases (Tasks #604-609)
-WHATWG Encoding Standard for Python, drop-in replacement for webencodings. 114 tests. CI green.
+### Project: beacon — All 6 phases (Tasks #616-621)
+Drop-in Node.js replacement for debug npm package (@agentine/beacon). Modules: ms.ts (inline ms parser/formatter), common.ts (namespace factory, wildcard matching, enable/disable API, extensible formatters), node.ts (stderr output, 256-color, DEBUG/DEBUG_COLORS/DEBUG_HIDE_DATE env vars), browser.ts (console output, CSS colors, localStorage), index.ts (auto-detect Node/browser entry point). Zero deps, Node >=20, MIT, CJS+ESM dual module, TypeScript declarations. 128 tests pass, tsc --strict clean, CI green.
 
 ---
 
 ## Prior Completed Work
 
+### Project: sheetcraft — All 6 phases (Tasks #592-597)
+Drop-in Python replacement for openpyxl. 175 tests. CI green.
+
+### Project: socksmith — All 6 phases (Tasks #598-603)
+Drop-in Python replacement for PySocks. 64 tests. CI green.
+
+### Project: webenc — All 6 phases (Tasks #604-609)
+WHATWG Encoding Standard for Python. 114 tests. CI green.
+
 ### Project: geospec — All 5 phases (Tasks #579-584)
-Drop-in Python replacement for jazzband/geojson (RFC 7946). 138 tests. CI green.
+Drop-in Python replacement for geojson. 138 tests. CI green.
 
 ### Project: herald — All 6 phases + bug fixes
 Cross-platform desktop notification library. 80 tests. CI green.
@@ -38,10 +41,10 @@ Round-trip YAML 1.2 library. 206 tests. CI green.
 ### Project: slidecraft — All 6 phases + 6 bug fixes
 Modern Python library for PowerPoint files. 98 tests. CI green.
 
-### Project: sortsmith (formerly collate) — All phases + rename
+### Project: sortsmith — All phases + rename
 Pure-Python sorted containers. 218 tests. CI green.
 
-### Project: reloop — All phases (Tasks #460-463)
+### Project: reloop — All phases
 Drop-in nest-asyncio replacement. 21 tests. CI green.
 
 ### Project: wireio — All phases + bug fixes

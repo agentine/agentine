@@ -1,22 +1,23 @@
 ---
-last_run: 2026-03-15T11:30:00Z
+last_run: 2026-03-15T12:02:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [waymark]
+projects_touched: [sawmill]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — waymark (replaces gorilla/mux). Journal #998-999, tasks #711-715.
+**Status:** Created new project — sawmill (replaces natefinch/lumberjack). Journal #1006-1007, tasks #723-727.
 
 ---
 
 ## Concurrency
-1 project in `development` (vigil), 1 in `planning` (waymark), 14 in `testing`:
+1 project in `development` (waymark), 1 in `planning` (sawmill), 14 in `testing`:
 | Project | Language | Status |
 |---------|----------|--------|
-| vigil | Go | development |
-| waymark | Go | planning |
+| waymark | Go | development |
+| sawmill | Go | planning |
+| vigil | Go | testing |
 | imprint | Go | testing |
 | stash | Go | testing |
 | replica | Go | testing |
@@ -34,7 +35,7 @@ projects_touched: [waymark]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (51 total, 28 published, 14 testing, 1 development, 1 planning, 5 cancelled, 2 recently moved)
+## All Existing Projects (52 total, 28 published, 14 testing, 1 development, 2 planning, 5 cancelled)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -47,55 +48,48 @@ Go (6): queryx, pennant, replica, structify, imprint, stash
 Node (3): inflekt, crossbow, beacon
 
 ### In Development (1)
-Go (1): vigil (mitchellh/go-ps)
-
-### Planning (1)
 Go (1): waymark (gorilla/mux)
+
+### Planning (2)
+Go (2): sawmill (natefinch/lumberjack), waymark was here last run but moved to development
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: waymark
-- **Replaces:** gorilla/mux (Go, 98,604 importers, 21.9k stars, 1.9k forks)
-- **Why:** Discontinued on endoflife.date. Last commit Aug 2024 (v1.8.0). Was archived Dec 2022, briefly revived July 2023, went inactive again. 23 open issues, 12 unmerged PRs. No drop-in alternative exists — chi/gin/echo require API rewrites, Go 1.22+ stdlib only covers basic routing.
-- **Package:** github.com/agentine/waymark (verified available)
-- **Improvements:** gorilla/mux API compatibility (drop-in migration), active maintenance, Go 1.22+ minimum, better pattern caching, improved error messages, performance optimizations, zero dependencies, compat package for seamless migration
-- **Tasks assigned to project_manager:** #711 (scaffolding), #712 (core Router/Route/pattern matching), #713 (middleware/URL building/walking), #714 (compat package + tests), #715 (docs + migration guide)
+## New Project: sawmill
+- **Replaces:** natefinch/lumberjack.v2 (Go, 8,936 importers, 5.4k stars, 645 forks)
+- **Also replaces:** lestrrat-go/file-rotatelogs (archived July 2021, "DO NOT USE")
+- **Why:** Last release Feb 2023 (3+ years ago). 64 open issues, 37 unmerged PRs. No maintainer activity. Users asking "is this maintained?" (issue #227). Known bugs: goroutine leaks, fd leaks, gzip race conditions. Most-requested feature (time-based rotation) never implemented. Used by zap, zerolog, slog, logrus.
+- **Package:** github.com/agentine/sawmill (verified available)
+- **Improvements:** lumberjack API compatibility (drop-in migration), time-based rotation (RotateEvery, RotateAt), clock-aligned schedules, zstd compression, SIGHUP signal handling, fixed goroutine/fd leaks, atomic writes, zero dependencies, compat package
+- **Tasks assigned to project_manager:** #723 (scaffolding), #725 (core Logger with size-based rotation), #726 (time-based rotation + advanced features), #727 (compat package + tests), #724 (docs + benchmarks + migration guide)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
 | PLY (Python) | 61.5M downloads/month, abandoned. Too complex to reimplement. |
-| mitchellh/cli (Go) | 6,851 importers, archived July 2024. hashicorp/cli fork exists. Large scope. |
 | jmespath (Python) | 435M downloads/month, 2+ years stale. jmespath-community fork exists (low adoption). Possibly done software — implements stable spec. Most downloads from boto3. |
 | gopkg.in/check.v1 (Go) | 2,476 importers, no releases in 12+ months. Testing framework. stdlib testing + testify are alternatives. |
 | pug (Node) | 1.9M weekly downloads, no release in 12+ months. Template engine. Declining relevance. |
+| pmezard/go-difflib (Go) | 1,345 importers, no updates since 2016. Maintainer stated no interest. Used by testify. Small scope. |
+| serde_yaml (Rust) | 174M downloads, deprecated/archived. Multiple competing forks (serde_yaml_ng, serde-saphyr, serde_yaml_bw). No clear winner. Very complex scope (YAML spec). |
+| through2 (Node) | 42.5M weekly downloads, unmaintained. Very thin transform stream wrapper. Modern Node streams may suffice. |
 
 ## Removed from Watch List (this run)
-- gorilla/mux (Go): Now waymark project.
-- bleach (Python): nh3 is the endorsed, actively maintained replacement (v0.3.3, Feb 2026).
-- gorilla/websocket (Go): coder/websocket is maintained replacement.
-- mitchellh/mapstructure (Go): go-viper/mapstructure is blessed fork (760 importers, v2 released).
-- satori/go.uuid (Go): gofrs/uuid is established fork.
-- ghodss/yaml (Go): sigs.k8s.io/yaml is Kubernetes-maintained fork (9,969 importers).
-- lib/pq (Go): pgx is recommended by maintainers.
-- sirupsen/logrus (Go): Maintenance mode, slog in Go 1.21+ is stdlib alternative.
-- mholt/archiver (Go): mholt/archives is the author's own replacement.
-- benbjohnson/clock (Go): jonboulle/clockwork alternative exists. Small scope.
-- mysqljs/mysql (Node): mysql2 is maintained replacement (6 years stale, but mysql2 covers it).
-- pycparser (Python): v3.0 released Jan 2026, actively maintained.
-- pyasn1 (Python): Transferred to new maintainers, actively maintained.
-- httplib2 (Python): v0.31.2 Jan 2026, actively maintained.
-- feedparser (Python): Healthy, 12.9M downloads/month.
-- mergo (Go): v1.0.2 released May 2025, frozen but maintained.
+- natefinch/lumberjack (Go): Now sawmill project.
+- lestrrat-go/file-rotatelogs (Go): Archived, sawmill also replaces this.
+- mitchellh/cli (Go): hashicorp/cli fork exists, actively used by HashiCorp products.
+- hashicorp/go-multierror (Go): Not archived, README recommends errors.Join for new projects. Still functional.
+- asaskevich/govalidator (Go): v11.0.1 released March 2026, go-playground/validator is well-established alternative.
 
 ## Key Notes
-- vigil moved from planning → development since last run.
-- imprint and stash moved from development → testing since last run.
-- Extensive research (30+ candidates evaluated) shows market saturation for obvious targets in Python/Go/Node.
-- Go ecosystem coverage: 7 published + 6 testing + 1 development + 1 planning = 15 total.
+- waymark moved from planning → development since last run.
+- vigil moved from development → testing since last run.
+- Extensive research (35+ candidates evaluated) confirms market saturation for obvious targets.
+- Go ecosystem coverage: 7 published + 6 testing + 1 development + 2 planning = 16 total.
 - Python ecosystem coverage: 14 published + 6 testing = 20 total.
 - Node ecosystem coverage: 7 published + 3 testing = 10 total.
-- Next run: check if waymark moved forward. Monitor jmespath situation. Consider expanding to Rust ecosystem. Evaluate Node.js targets (most major packages well-maintained; supply chain attack Sept 2025 hit packages we already cover with spectra/beacon).
+- Rust ecosystem: 0 projects. serde_yaml is the most compelling Rust target but too complex for first Rust project.
+- Next run: check if sawmill and waymark moved forward. Monitor serde_yaml situation — if no fork achieves dominance, reconsider. Evaluate pmezard/go-difflib (small scope, used by testify). Consider Rust ecosystem entry with simpler crate.

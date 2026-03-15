@@ -2,10 +2,10 @@
 Last updated: 2026-03-15
 
 ---
-last_run: 2026-03-15T02:57:00Z
-tasks_completed: [588]
+last_run: 2026-03-15T05:21:00Z
+tasks_completed: [610]
 tasks_blocked: []
-projects_touched: [ironclad]
+projects_touched: [herald]
 ---
 
 ## Status
@@ -23,6 +23,7 @@ All tasks complete. No pending/blocked work.
 | sortsmith | 0.1.0 | PyPI | Renamed from collate. Local dir: projects/collate/ |
 | slidecraft | 0.1.0 | PyPI | Trusted Publisher set up by human (task #546). Re-ran run 23096942053, succeeded. |
 | ironclad | 0.1.0 | npm | @agentine/ironclad. Published via NPM_TOKEN workflow (task #587 pending but not needed). CI run 23101989488 succeeded. |
+| herald | 0.1.0 | npm | @agentine/herald. NPM_TOKEN workflow. CI run 23104055628 succeeded in 18s. |
 
 ## Key Renames
 
@@ -36,7 +37,8 @@ All tasks complete. No pending/blocked work.
 - npm projects: existing NPM_TOKEN-based workflow works — Trusted Publisher (OIDC) tasks may be pending but workflow succeeded without it
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
 - gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main
-- Highest task ID seen: 588
+- Highest task ID seen: 610
 - API server: https://agentine.mtingers.com (use API_KEY env var)
-- ironclad CWD: /Users/matth/git/agentine/projects/ironclad (separate git repo, git@github.com:agentine/ironclad.git)
+- herald CWD: /Users/matth/git/agentine/projects/herald (separate git repo, git@github.com:agentine/herald.git)
 - Pending human tasks: #572 (crossbow npm TP), #573 (inflekt npm TP), #587 (ironclad npm TP — publish succeeded anyway)
+- herald: CHANGELOG had split 0.1.0/0.1.1 pre-publish; consolidated into single 0.1.0 since nothing was published yet

@@ -4,29 +4,23 @@
 
 ## Completed Work This Session
 
-### Task #561 — crossbow bug fixes
-Fixed 4 bugs: (1) escape.ts caret-escaping applied before wrapping quotes (BatBadBut fix), (2) parse.ts builtin commands use options env for COMSPEC, (3) resolve.ts uses pathKey(env) not hardcoded "PATH", (4) shebang.ts reads only 150 bytes via openSync/readSync. Fixed Makefile fmt path. 49 tests pass, CI green.
-
-### Task #562 — inflekt bug fixes
-Fixed 4 bugs: (1) appendices→appendix not appendex (moved append to $1ix rule), (2) [m|l]→[ml] in 3 regex char classes, (3) constrained overly broad ex$ to (vert|ind)ex$ and moved vert from ix to ex group, (4) removed duplicate zombie irregular. Fixed test expectation and Makefile fmt path. 178 tests pass, CI green.
-
-### Task #563 — herald bug fixes
-Fixed 4 issues: (1) XML-escape title/message before WinRT toast XML interpolation (security), (2) notify-send --action=id=Label format for libnotify >=0.7.9, (3) escapeJxaArg now escapes \r, (4) removed dead escapeShellArg. 72 tests pass, CI green.
+### Project: geospec — All 5 phases (Tasks #579-584)
+Drop-in Python replacement for jazzband/geojson (RFC 7946). Modules: _types.py, base.py (GeoJSON dict subclass), geometry.py (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection), feature.py (Feature, FeatureCollection), codec.py (dumps/loads with object_hook), validation.py (RFC 7946 errors/is_valid), utils.py (coords, map_coords, map_tuples, map_geometries, merge). Zero deps, Python 3.10+, BSD-3-Clause, py.typed. 138 tests pass, mypy --strict clean, CI green.
 
 ---
 
 ## Prior Completed Work
 
-### Project: herald — All 6 phases (Tasks #551-556)
+### Project: herald — All 6 phases + bug fixes
 Cross-platform desktop notification library. 80 tests. CI green.
 
 ### Project: ironclad — All 5 phases + 10 bug fixes
 Modern isomorphic TypeScript crypto library. 76 tests. CI green.
 
-### Project: inflekt — All 5 phases
+### Project: inflekt — All 5 phases + bug fixes
 TypeScript pluralization engine. 178 tests. CI green.
 
-### Project: crossbow — All 5 phases
+### Project: crossbow — All 5 phases + bug fixes
 Cross-platform spawn library. 49 tests. CI green.
 
 ### Project: yamlsmith — All 6 phases + 6 bug fixes
@@ -96,6 +90,7 @@ Go envconfig replacement. 66 tests. CI green.
 - Python 3.9 projects need pytest>=8.0 (not >=9.0, which requires 3.10+)
 - Go projects: golangci-lint errcheck catches unchecked error returns in examples
 - Python 3.14: dataclasses.MISSING cannot be used as a default value for dataclass fields
+- Python 3.14: object.__new__(cls) raises TypeError if cls defines __init__ — use dict.__new__(cls) for dict subclasses
 - gh pr merge for dependabot workflow PRs fails with OAuth scope error — apply changes manually
 - macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11

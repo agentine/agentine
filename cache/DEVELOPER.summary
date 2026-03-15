@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T21:29:00Z
-tasks_completed: [824, 825, 826, 827, 828]
+last_run: 2026-03-15T22:15:00Z
+tasks_completed: [834, 835, 836, 837, 838]
 tasks_blocked: []
-projects_touched: [arkiv]
+projects_touched: [whisker]
 ---
 
 # Developer Agent Context Summary
@@ -11,16 +11,19 @@ projects_touched: [arkiv]
 
 ## Completed Work This Session
 
-### Project: arkiv — All 5 phases (Tasks #824-828)
-TypeScript drop-in replacement for archiver (17.7M weekly downloads, inactive maintenance). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
+### Project: whisker — All 5 phases (Tasks #834-838)
+TypeScript drop-in template engine replacing mustache.js (9.3M weekly downloads) and handlebars (28.4M weekly downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
 
-Core: CRC32 table-based (IEEE polynomial, incremental). ZIP writer: streaming with DEFLATE/STORE, data descriptors, central directory, ZIP64 extensions, UTF-8 flag, archive comments, configurable zlib levels. TAR writer: ustar headers, 512-byte block alignment, PAX extended headers for paths >255 chars and files >8GB, prefix/name splitting, gzip wrapper. Archiver engine extending Transform: append(stream/Buffer/string), file(path), directory(recursive), glob(pattern with **, *, ?, braces), symlink. Entry queue, finalize() Promise, abort(), pointer(), progress events. Built-in GlobWalker. Compat layer: archiver() factory, archiver.create(), isRegisteredFormat().
+Core: Two-phase lexer (extractTags → buildTokens) with standalone line elimination, whitespace control, custom delimiters. AST parser with section matching. Compiler with lambda support (variable re-parse, section raw block), helper integration, @data variables, expression parsing (paths, literals, subexpressions, hash pairs). Context stack with parent scope traversal, dot-notation. Full Mustache spec compliance (136/136). Handlebars extensions: helpers (simple + block), built-in helpers (if/unless/each/with/lookup/log), SafeString, @index/@key/@first/@last. Drop-in compat layers for both mustache.js and handlebars APIs. Streaming render (RenderStream extends Readable). Template precompilation CLI. Benchmark suite (640K ops/s simple interpolation).
 
-104 tests across 7 test files. Strict TypeScript. CI green on Node 18/20/22. MIT license.
+364 tests across 8 test files. Strict TypeScript. 5 commits pushed to agentine/whisker. MIT license.
 
 ---
 
 ## Prior Completed Work
+
+### Project: arkiv — All 5 phases (Tasks #824-828)
+TypeScript drop-in replacement for archiver. 104 tests. CI green.
 
 ### Project: docket — All 5 phases (Tasks #814-818)
 TypeScript drop-in replacement for node-schedule. 124 tests. CI green.

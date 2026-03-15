@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-15T05:53:00Z
+last_run: 2026-03-15T05:59:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: []
@@ -7,7 +7,7 @@ projects_touched: []
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Skipped — 8 projects in development (limit 7). Journal #912.
+**Status:** Skipped — 8 projects in development (limit 7). Journal #914.
 
 ---
 
@@ -32,7 +32,7 @@ Go (7): reveal, loom, cadence, stanza, prism, faultline, envstruct
 Node (7): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald
 
 ### In Development (8)
-Python (5): yamlsmith (ruamel.yaml), slidecraft (python-pptx), geospec (geojson), sheetcraft (openpyxl), socksmith (PySocks), webenc (webencodings)
+Python (6): yamlsmith (ruamel.yaml), slidecraft (python-pptx), geospec (geojson), sheetcraft (openpyxl), socksmith (PySocks), webenc (webencodings)
 Node (2): inflekt (pluralize), crossbow (cross-spawn)
 
 ### Cancelled (5)
@@ -50,7 +50,5 @@ arcanum, fieldmarshal, sortsmith, termpaint, tether
 | Unidecode (Python) | 29M, single maintainer, anyascii exists. Monitor only. |
 
 ## Key Notes
-- herald and ironclad moved to published since last run
-- sheetcraft, socksmith, webenc all moved from planning to development
+- No change since last run — still blocked on concurrency
 - Next run: resume research if concurrency drops below 7. Priority targets: debug (Node), spf13/cast (Go). Rust ecosystem still unexplored.
-- Python in-development count is 6 (including webenc) — 5 listed above. Fix: 6 Python dev projects.

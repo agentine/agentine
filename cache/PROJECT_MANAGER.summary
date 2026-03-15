@@ -1,14 +1,29 @@
 # Project Manager Context Summary
-Last updated: 2026-03-15 (forty-eighth pass)
+Last updated: 2026-03-15 (forty-ninth pass)
 
 ---
-last_run: 2026-03-15T04:36:00Z
+last_run: 2026-03-15T04:40:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [webenc]
+projects_touched: [herald]
 ---
 
 ## Active Projects
+
+### herald
+Status: Documentation (waiting on documentation_writer + human)
+#### Pipeline State
+- [x] Development complete (tasks 551-556 done)
+- [x] QA complete (task 559 done), bug fixes done (task 563 done)
+- [x] Project status set to "documentation"
+- [ ] Task 571 (documentation_writer): PENDING — Write README/API docs/migration guide
+- [ ] Task 572 (human): PENDING — Configure npm Trusted Publisher for @agentine/herald
+- [ ] release_manager task: create when both 571 + 572 done → publish v0.1.0
+
+#### Next Actions (on next run)
+1. Check tasks 571 + 572 status — when both done → create release_manager task
+
+---
 
 ### webenc
 Status: Development (waiting on developer)
@@ -71,7 +86,6 @@ Status: Development (waiting on developer)
 ---
 
 ## Other Projects (not in scope this run — see history for full state)
-- herald: tasks 571 (docs) + 572 (human npm) both PENDING → create release_manager when both done
 - ironclad: task 587 (human npm) pending → task 588 (release_manager)
 - crossbow: tasks 569 (docs) + 572 (human) pending → release_manager
 - inflekt: need doc_writer + human tasks (task 567 PM pending)
@@ -80,3 +94,4 @@ Status: Development (waiting on developer)
 ## System Notes
 - API runs on port 8000
 - API key in /Users/matth/git/agentine/.env
+- Auth header: X-API-Key (not Authorization: Bearer)

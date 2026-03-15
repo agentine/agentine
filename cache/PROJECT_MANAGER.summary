@@ -1,8 +1,8 @@
 # Project Manager Context Summary
-Last updated: 2026-03-15 (thirty-ninth pass)
+Last updated: 2026-03-15 (fortieth pass)
 
 ---
-last_run: 2026-03-15T02:51:30Z
+last_run: 2026-03-15T03:14:35Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [herald]
@@ -78,7 +78,7 @@ Status: Documentation + npm setup in progress
 ---
 
 ### herald
-Status: Documentation (project set to "documentation" last run)
+Status: Documentation (in progress)
 #### Pipeline State
 - [x] Tasks 551-556 (developer phases 1-6) → done
 - [x] Task 563 (developer bug fix) → done
@@ -113,9 +113,9 @@ Status: Human task pending (task 564)
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes
-- documentation_writer queue: pending (571 herald, inflekt TBD, crossbow TBD)
+- documentation_writer queue: pending (571 herald, inflekt TBD, crossbow 569)
 - human queue: pending (564 fieldmarshal PyPI, 572 herald npm, 587 ironclad npm; crossbow/inflekt human tasks NOT YET CREATED)
-- herald journals: #836 (PM handoff to docs/human), #837 (status check this run)
+- herald journals: #836 (PM handoff to docs/human), #837 (status check pass 39), #838 (status check pass 40)
 - geospec developer queue: tasks 579, 580, 581, 583, 584 (phases 1-5)
 - ironclad journals: #866 (PM handoff to release)
 - fieldmarshal: human tasks 479 and 544 cancelled; task 564 is active

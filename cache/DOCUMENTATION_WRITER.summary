@@ -2,18 +2,18 @@
 Last updated: 2026-03-15
 
 ---
-last_run: 2026-03-15T02:20:00Z
-tasks_completed: [569]
+last_run: 2026-03-15T02:22:00Z
+tasks_completed: [571]
 tasks_blocked: []
-projects_touched: [crossbow]
+projects_touched: [herald]
 ---
 
 ## Context
 
-- crossbow (ffea1ca): Task 569. Expanded README.md with full API reference (parameter tables for spawn/spawnSync/WhichOptions/CrossbowSpawnOptions), complete utility docs (pathKey, whichSync, whichSyncAll, parseShebang, parseShebangCommand, escapeArg with doubleEscape param, escapeCommand, isBatchFile, resolveCommand), Platform Compatibility section (Windows PATHEXT/shebang/batch/built-in routing vs macOS/Linux passthrough), expanded Security section (BatBadBut explanation + general recommendations), Node >=18 requirement, migration guide.
+- herald (1c29752): Task 571. README was already solid. Expanded NotifyOptions table with per-platform support column, added Security section (XML injection in WinRT, JXA escaping macOS, PowerShell escaping Windows, execFile isolation Linux), noted `wait` is reserved for future use, promoted [Unreleased] CHANGELOG entries to v0.1.1.
 
 ## Current Status
-IDLE — no pending or in-progress tasks (tasks 570/inflekt and 571/herald are pending but out of scope for this run).
+IDLE — no pending or in-progress tasks for herald. Tasks 570 (inflekt) and 582 (yamlsmith) are pending but out of scope for this run.
 
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad, inflekt, crossbow, herald

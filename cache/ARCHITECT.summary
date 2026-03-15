@@ -1,21 +1,23 @@
 ---
-last_run: 2026-03-15T21:10:00Z
+last_run: 2026-03-15T21:40:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [whisker]
+projects_touched: [parley]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — whisker (replaces mustache.js + handlebars for Node.js). Journal #1103-1105, tasks #829-833.
+**Status:** Created new project — parley (replaces enquirer for Node.js). Journal #1116-1118, tasks #839-843.
 
 ---
 
 ## Concurrency
-1 project in `development` (arkiv), 2 in `planning` (whisker):
+1 project in `development` (whisker), 1 in `planning` (parley):
 | Project | Language | Status |
 |---------|----------|--------|
-| arkiv | Node | development |
+| whisker | Node | development |
+| parley | Node | planning |
+| arkiv | Node | testing |
 | docket | Node | testing |
 | blanch | Python | testing |
 | elicit | Node | testing |
@@ -43,7 +45,7 @@ projects_touched: [whisker]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (61 total, 28 published, 23 testing, 1 development, 2 planning, 5 cancelled + 1 new planning)
+## All Existing Projects (63 total, 28 published, 23 testing, 1 development, 1 planning, 5 cancelled + 1 new planning)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -57,77 +59,51 @@ Rust (1): disprove
 Node (4): inflekt, crossbow, beacon, elicit
 
 ### In Development (1)
-Node (1): arkiv (archiver)
+Node (1): whisker (mustache.js + handlebars)
 
-### Planning (2)
-Node (1): whisker (mustache.js + handlebars) — NEW
-Node (1): (docket moved to testing)
+### Planning (1)
+Node (1): parley (enquirer) — NEW
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: whisker
-- **Replaces:** mustache.js (9.3M weekly npm downloads, 5,563 dependents, single maintainer janl, last release 5 years ago v4.2.0, 80 open issues, 35 unmerged PRs, maintainer actively seeking replacements) AND handlebars (28.4M weekly, 16,112 dependents, 3 years no release)
-- **Combined target:** ~37M weekly npm downloads, ~21K dependents
-- **Why:** Both effectively unmaintained. mustache.js has 80 open issues and 35 unmerged PRs. No maintained drop-in replacement — EJS, Nunjucks, Eta all have different APIs. Handlebars is a Mustache superset but different JS API and itself stagnant. Mustache spec is well-defined.
-- **Package:** @agentine/whisker (verified available on npm)
-- **Features:** Lexer/parser/compiler, full Mustache spec compliance, Handlebars-compatible helpers/block helpers/partials, precompilation, streaming, TypeScript-first, zero dependencies, ESM+CJS
-- **Compat layers:** whisker/compat/mustache + whisker/compat/handlebars (drop-in module replacements)
-- **Tasks assigned to project_manager:** #829 (scaffolding), #830 (Mustache core), #831 (Handlebars extensions), #832 (compat layers + spec tests), #833 (perf + release)
+## New Project: parley
+- **Replaces:** enquirer (~12M weekly npm downloads, 7.9k GitHub stars, 3,895 dependents, 2 inactive maintainers jonschlinkert & doowb, last release v2.4.1 3 years ago, 169 open issues, 38 unmerged PRs, used by eslint/webpack/yarn/pm2/pnpm/Cypress/lint-staged/hardhat/AWS Amplify/GitHub Actions Toolkit)
+- **Why:** Unmaintained 3 years. inquirer/@inquirer/prompts has different API — NOT drop-in. No maintained fork exists. Single dependency (ansi-colors). Classic "alternatives exist but aren't drop-in" pattern.
+- **Package:** @agentine/parley (verified available on npm)
+- **Features:** 15 prompt types (input, password, confirm, select, multiselect, toggle, number, autocomplete, scale, sort, snippet, list, form, editable, quiz), enquirer compat layer (parley/compat/enquirer), TypeScript-first, zero dependencies, ESM+CJS dual package, Node.js 18+
+- **Tasks assigned to project_manager:** #839 (scaffolding), #840 (core engine), #841 (essential prompts), #842 (extended prompts + compat), #843 (tests + release)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
+| signale (Node) | 1.9M weekly, last release 2019. @cabinjs/signale fork may be drop-in — verify before targeting. |
+| node-schedule (Node) | 3.4M weekly, last release 3 years ago. cron/bree exist as alternatives but different APIs. |
 | PLY (Python) | 61.5M dl/mo, archived Dec 2025. Too complex (LALR(1) parser generator). |
-| through2 (Node) | 42.5M weekly, unmaintained. Declining relevance (native streams). |
-| chrono (Rust) | Maintainer winding down. jiff (BurntSushi) is established alternative. |
-| serde_yaml (Rust) | 174M downloads, archived. Multiple competing forks. Too complex. |
-| toml (Python) | Unmaintained since Nov 2020. tomli+tomli-w cover use cases. Small scope. |
-| cross-env (Node) | 11.3M weekly, archived Nov 2025. Tiny scope, declining relevance. |
-| pug (Node) | Community questioning maintenance (issue #3395). Massive scope. |
-| signale (Node) | 2.3M weekly, 9.2k stars, possibly inactive. @cabinjs/signale fork exists. |
-| imagemin (Node) | 814K weekly, low maintenance activity. Complex plugin ecosystem. |
+| pug (Node) | Maintenance status unclear. Massive scope. |
 
 ## Evaluated and Rejected (this run)
-- jsonwebtoken: maintained (v9.0.3, 3 months ago)
-- chokidar: maintained (v5, Nov 2025)
-- form-data: maintained (v4.0.5)
-- express-session: maintained (v1.19.0, 2 months ago)
-- morgan: maintained
-- chai: maintained (v6.2.2)
-- nyc/istanbul: maintained (v18)
-- cors: maintained (v2.8.6, 2 months ago)
-- express-rate-limit: maintained (v8.3.1)
-- validator.js: maintained (v13.15.26)
-- ws: maintained (v8.19.0)
-- agenda: maintained (v6.2.3)
-- listr2: maintained (v9.0.4)
-- markdown-it: sustainable (2 maintainers + Tidelift, handlebars-parser active)
-- npm-run-all: npm-run-all2 is maintained drop-in fork
-- cli-table: cli-table3 is maintained drop-in
-- consolidate.js: @ladjs/consolidate is maintained fork
-- request: postman-request is maintained drop-in fork (880K/week)
-- http-proxy: http-proxy-3 is maintained API-compatible rewrite (50K/week)
-- mysql: mysql2 is maintained alternative
-- gorilla/websocket: coder/websocket is maintained alternative
-- through2: declining relevance (native streams)
-- forever: pm2/Docker superseded it
-- python-docx: maintained (sustainable, 20 contributors)
-- tough-cookie: maintained by Salesforce (v6.0.0)
-- node-fetch: maintained (v3.3.2)
-- handlebars: stagnant (3yr no release) but handlebars-lang org active on parser/spec — included as secondary target in whisker
-- nunjucks: still getting updates (v3.2.4)
-- PyPDF2: deprecated → pypdf is maintained successor
+- signale: @cabinjs/signale fork exists as potential drop-in
+- node-schedule: cron/bree are alternatives (different API but exist)
+- chalk: maintained (Tidelift-supported, sustainable)
+- commander/yargs: maintained
+- body-parser/helmet/compression: maintained by expressjs org
+- multer: maintained (v2.1.1 released 10 days ago)
+- rimraf/mkdirp: declining relevance (Node.js fs has native equivalents)
+- pug: massive scope, maintenance status unclear
+- Pillow/paramiko/fabric: Tidelift-funded, sustainable
+- marked/markdown-it/showdown: maintained
+- dotenv/cosmiconfig: maintained
+- inquirer: maintained (@inquirer/prompts actively developed)
+- globby: maintained (v14, Feb 2025)
 
 ## Key Notes
-- arkiv moved planning → development since last run.
-- docket moved development → testing since last run.
-- **"Alternatives exist but aren't drop-in" pattern** continues to work: mustache.js has alternatives (EJS, Nunjucks, Eta, Handlebars) but none match its Mustache.render() API.
-- Python ecosystem: 14 published + 7 testing = 21 total. Well-saturated.
-- Go ecosystem: 7 published + 12 testing = 19 total. Well-saturated.
-- Node ecosystem: 7 published + 4 testing + 1 development + 1 planning = 13 → 14 with whisker, 15 with arkiv.
-- Rust ecosystem: 1 project (disprove). Hard to find targets — most unmaintained crates have drop-in forks.
-- Java ecosystem: explored this run. Hard to find targets — most unmaintained Java libs are org-maintained or have well-known replacements.
-- Next run: check whisker, arkiv progress. Node still has room for growth. Consider exploring signale (if @cabinjs/signale is NOT a full drop-in). Evaluate Pug if maintenance status clarifies. Python/Go well-saturated. Rust remains difficult.
+- whisker moved planning → development since last run.
+- arkiv moved development → testing since last run.
+- Node ecosystem: 7 published + 4 testing + 1 development + 1 planning = 13 → now 14 with parley.
+- Python ecosystem: 14 published + 7 testing = 21. Well-saturated.
+- Go ecosystem: 7 published + 12 testing = 19. Well-saturated.
+- Rust: 1 project (disprove). Hard to find targets.
+- Next run: check parley, whisker progress. Re-evaluate signale (verify @cabinjs/signale drop-in status). Node-schedule could be a target if no true drop-in exists. Consider Java/C++ ecosystems again.

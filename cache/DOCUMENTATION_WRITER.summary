@@ -7,6 +7,12 @@ IDLE — no pending or in-progress tasks.
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad, inflekt, crossbow, herald
 
+### Fifth consistency pass (2026-03-14)
+- **crossbow** (97f165f): Added [Unreleased] CHANGELOG — escape.ts double-escape, parse.ts COMSPEC env, resolve.ts PATH key, shebang.ts file read fixes.
+- **herald** (f54c263): Added [Unreleased] CHANGELOG — WinRT XML-escape, notify-send action format, escapeJxaArg \r fix, removed dead escapeShellArg.
+- **inflekt** (1b248d9): Added [Unreleased] CHANGELOG — appendix singularization, regex char class pipes, overly broad ex rule, duplicate zombie irregular.
+- **ironclad** (a2754a5): Filled [Unreleased] CHANGELOG — browser tests, HKDF vectors, Biome linter; md5 deprecation warning, deserialize mode validation, encrypt CBC/CTR warning.
+
 ### Fourth consistency pass (2026-03-14)
 - **herald** (cc29de5): New project found during scan. Added badges (npm, CI, license, TypeScript) to README.md and created CHANGELOG.md v0.1.0.
 

@@ -1,19 +1,24 @@
 # Developer Agent Context Summary
 
-## Last Run: 2026-03-14
+## Last Run: 2026-03-15
 
 ## Completed Work This Session
 
-### Project: herald — All 6 phases (Tasks #551-556)
-**Repo:** https://github.com/agentine/herald
+### Task #561 — crossbow bug fixes
+Fixed 4 bugs: (1) escape.ts caret-escaping applied before wrapping quotes (BatBadBut fix), (2) parse.ts builtin commands use options env for COMSPEC, (3) resolve.ts uses pathKey(env) not hardcoded "PATH", (4) shebang.ts reads only 150 bytes via openSync/readSync. Fixed Makefile fmt path. 49 tests pass, CI green.
 
-Cross-platform desktop notification library, drop-in replacement for node-notifier. Zero dependencies. TypeScript with ESM+CJS dual build. Uses OS-native CLI tools: osascript (macOS), PowerShell+BurntToast/WinRT (Windows), notify-send/D-Bus (Linux). FallbackChain for ordered strategy attempts. node-notifier-compatible default export (callback+EventEmitter). Promise-based named export. Platform-aware shell escaping (POSIX, PowerShell, JXA). README with migration guide and comparison table.
+### Task #562 — inflekt bug fixes
+Fixed 4 bugs: (1) appendices→appendix not appendex (moved append to $1ix rule), (2) [m|l]→[ml] in 3 regex char classes, (3) constrained overly broad ex$ to (vert|ind)ex$ and moved vert from ix to ex group, (4) removed duplicate zombie irregular. Fixed test expectation and Makefile fmt path. 178 tests pass, CI green.
 
-80 tests. CI green (Node 18, 20, 22).
+### Task #563 — herald bug fixes
+Fixed 4 issues: (1) XML-escape title/message before WinRT toast XML interpolation (security), (2) notify-send --action=id=Label format for libnotify >=0.7.9, (3) escapeJxaArg now escapes \r, (4) removed dead escapeShellArg. 72 tests pass, CI green.
 
 ---
 
 ## Prior Completed Work
+
+### Project: herald — All 6 phases (Tasks #551-556)
+Cross-platform desktop notification library. 80 tests. CI green.
 
 ### Project: ironclad — All 5 phases + 10 bug fixes
 Modern isomorphic TypeScript crypto library. 76 tests. CI green.
@@ -95,6 +100,7 @@ Go envconfig replacement. 66 tests. CI green.
 - macOS PTYs: tcdrain() can hang indefinitely — use time.sleep() for test verification
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
+- Git push: may need `git pull --rebase` before push if dependabot has merged PRs
 - YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering
 - YAML parser: only consume same-line comments as inline after scalars; pass block mapping inter-pair comments as pre_comment
 - YAML emitter: _needs_quoting must use exact type patterns, not just digit-prefix matching
@@ -106,3 +112,4 @@ Go envconfig replacement. 66 tests. CI green.
 - Biome 2.x: use `includes` not `include`/`ignore` in files config; `organizeImports` replaced by `assist`
 - Pluralization: "leaf/leaves" must be an irregular since the stem change (af→av) isn't reversible by regex rules alone
 - SpawnSyncReturns<Buffer> needs explicit cast from nodeSpawnSync result due to string|Buffer union type
+- Pluralization: "vertex" ends in -ex not -ix — group with (vert|ind)ex$ not (matr|vert)ix$

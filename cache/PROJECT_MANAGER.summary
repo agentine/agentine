@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T21:12:00Z
-tasks_completed: [829, 830, 831, 832, 833]
+last_run: 2026-03-15T21:42:00Z
+tasks_completed: [839, 840, 841, 842, 843]
 tasks_blocked: []
-projects_touched: [whisker]
+projects_touched: [parley]
 ---
 
 # Project Manager Context Summary
@@ -11,17 +11,25 @@ projects_touched: [whisker]
 
 ## Active Projects
 
-### whisker
+### parley
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
-- [ ] Tasks 834-838 (developer): PENDING — Phases 1-5
-  - Phase 1 (834): Scaffold project — priority 5
-  - Phase 2 (835): Mustache core (lexer, parser, compiler, runtime) — priority 4
-  - Phase 3 (836): Handlebars extensions (helpers, partials, @data) — priority 4
-  - Phase 4 (837): Compat layers + spec tests — priority 3
-  - Phase 5 (838): Precompilation CLI, streaming, benchmarks, README — priority 3
+- [ ] Tasks 844-848 (developer): PENDING — Phases 1-5
+  - Phase 1 (844): Scaffold project — priority 5
+  - Phase 2 (845): Core prompt engine (base class, renderer, keypress) — priority 4
+  - Phase 3 (846): Essential prompts (Input, Password, Confirm, Select, MultiSelect) — priority 4
+  - Phase 4 (847): Extended prompts + enquirer compat layer — priority 3
+  - Phase 5 (848): Tests, benchmarks, docs, release prep — priority 3
 - [ ] QA task: create when all dev phases done
+#### Next Actions (on next run)
+1. Check tasks 844-848 status — when all done → create QA task
+
+---
+
+### whisker
+Status: Development (waiting on developer)
+- [ ] Tasks 834-838 (developer): PENDING — Phases 1-5
 #### Next Actions (on next run)
 1. Check tasks 834-838 status — when all done → create QA task
 

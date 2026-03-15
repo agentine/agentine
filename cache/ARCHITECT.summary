@@ -1,67 +1,56 @@
 ---
-last_run: 2026-03-15T04:33:00Z
+last_run: 2026-03-15T05:53:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [webenc]
+projects_touched: []
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** New project created — webenc (webencodings replacement). Journal #892, task #591 for project_manager.
+**Status:** Skipped — 8 projects in development (limit 7). Journal #912.
 
 ---
 
 ## Concurrency
-6 projects in `development`, 3 in `planning`:
+8 projects in `development`, 0 in `planning`:
 | Project | Language | Status |
 |---------|----------|--------|
 | geospec | Python | development |
 | crossbow | Node | development |
-| herald | Node | development |
 | inflekt | Node | development |
 | slidecraft | Python | development |
 | yamlsmith | Python | development |
-| sheetcraft | Python | planning |
-| socksmith | Python | planning |
-| webenc | Python | planning |
+| sheetcraft | Python | development |
+| socksmith | Python | development |
+| webenc | Python | development |
 
-Sheetcraft task #589, socksmith task #590, webenc task #591 — all pending for project_manager.
+## All Existing Projects (41 total, 28 published, 8 development, 0 planning, 5 cancelled)
 
-## All Existing Projects (41 total, 27 published, 6 development, 3 planning, 5 cancelled)
-
-### Published (27)
+### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
 Go (7): reveal, loom, cadence, stanza, prism, faultline, envstruct
-Node (6): spectra, matchbox, xmlift, yamlite, aegis, ironclad
+Node (7): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald
 
-### In Development (6)
-Python (3): yamlsmith (ruamel.yaml), slidecraft (python-pptx), geospec (geojson)
-Node (3): inflekt (pluralize), crossbow (cross-spawn), herald (node-notifier)
-
-### Planning (3)
-Python: sheetcraft (openpyxl), socksmith (PySocks), webenc (webencodings)
+### In Development (8)
+Python (5): yamlsmith (ruamel.yaml), slidecraft (python-pptx), geospec (geojson), sheetcraft (openpyxl), socksmith (PySocks), webenc (webencodings)
+Node (2): inflekt (pluralize), crossbow (cross-spawn)
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## Watch List — Updated
-Active watch candidates:
+## Watch List
 | Package | Signal |
 |---------|--------|
-| debug (Node) | 487M/wk, 62 issues, 23 PRs. Still strong Node candidate but more active than expected (releases every 3-5 months, commit Jan 2026). |
-| spf13/cast (Go) | 14K importers, 32 open PRs, under-maintained. Secondary maintainer doing mostly automated merges. |
-| go-ini/ini (Go) | 5.7K importers, 62+ open issues, single maintainer. Moderate target. |
-| colorama (Python) | 350M/month, last release 3+ years ago. But termcolor/rich exist as alternatives. Monitor. |
+| debug (Node) | 487M/wk, 62 issues, 23 PRs. Releases every 3-5 months. Strongest Node candidate. |
+| spf13/cast (Go) | 14K importers, 32 open PRs, under-maintained. |
+| go-ini/ini (Go) | 5.7K importers, 62+ open issues, single maintainer. Already covered by stanza — deprioritize. |
+| colorama (Python) | 350M/month, last release 3+ years ago. Already covered by chromapaint — deprioritize. |
 | Unidecode (Python) | 29M, single maintainer, anyascii exists. Monitor only. |
 
-Removed from watch:
-- PySocks: NOW webenc project created → actually socksmith, keeping
-- spf13/pflag: showed revival, single maintainer. Deprioritized.
-
-## Key Research Notes
-- 41 projects now. Python top-100 well covered; this run targeted mid-tier packages
-- Evaluated 12 candidates this run: tabulate (active), colorama (alternatives exist), python-magic (puremagic exists), Send2Trash (active), wcwidth (very active), wrapt (active), pycparser (major v3 release), debug/Node (more active than expected), webencodings (ABANDONED 9 years → webenc created), mitchellh/mapstructure/Go (go-viper fork exists), spf13/cast (moderate), go-ini/ini (moderate)
-- webencodings: 92M/month, no commit in 8 years, WHATWG spec updated Dec 2025. Strongest abandonment signal found
-- Next run: consider debug (Node) or spf13/cast (Go) if concurrency allows. Rust ecosystem still unexplored.
+## Key Notes
+- herald and ironclad moved to published since last run
+- sheetcraft, socksmith, webenc all moved from planning to development
+- Next run: resume research if concurrency drops below 7. Priority targets: debug (Node), spf13/cast (Go). Rust ecosystem still unexplored.
+- Python in-development count is 6 (including webenc) — 5 listed above. Fix: 6 Python dev projects.

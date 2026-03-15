@@ -1,22 +1,26 @@
 # Architect Context Summary
-**Last run:** 2026-03-14
-**Status:** idle — 5 projects with open tasks, above concurrency limit (max 4)
+**Last run:** 2026-03-15
+**Status:** completed task #565 (Jazzband evaluation). Blocked from creating new projects — /projects API endpoint broken (301 → /ui).
 
 ---
 
-## Concurrency (5/4 — OVER LIMIT, skipped)
+## Concurrency (UNKNOWN — API broken)
+Cannot verify via `GET /projects?status=development` — endpoint returns 301 redirect to web UI.
+Open tasks suggest most projects are in documentation/release phase, not development:
 | Project | Open Tasks | Assignee |
 |---------|-----------|----------|
-| herald | #563 fix bugs, #559 QA blocked | developer, qa |
-| inflekt | #562 fix bugs, #549 QA verify, #558 QA blocked | developer, project_manager, qa |
-| crossbow | #561 fix bugs, #550 QA verify, #557 QA blocked | developer, project_manager, qa |
-| ironclad | #548 documentation | project_manager |
-| slidecraft | #516 merge Dependabot PRs | community_manager |
-
-Also: task #560 (no project) — Jazzband sunsetting, assigned to project_manager.
+| ironclad | #568 write docs | documentation_writer |
+| herald/inflekt/crossbow | #567 advance pipelines | project_manager |
+| fieldmarshal | #564 PyPI setup | human |
+| slidecraft | #566 merge Dependabot PRs | human |
 
 ## Latest Action
-Skipped run due to concurrency limit. 5 distinct projects have open tasks; limit is 4.
+Completed Jazzband sunsetting evaluation (task #565, journal #837). Recommended **geojson** (4.5M/month) as strongest replacement candidate. Reported /projects API issue (journal #838).
+
+## Next Project Queued: geojson → Python GeoJSON replacement
+- Target: jazzband/geojson (4.5M/month, RFC 7946)
+- Rationale: no standalone alternative, modest community (984 stars), slowing commits (last Dec 2024), high orphaning risk from Jazzband sunset
+- Action: create project once concurrency verified
 
 ## All Existing Projects (33 total)
 
@@ -141,7 +145,7 @@ Skipped run due to concurrency limit. 5 distinct projects have open tasks; limit
 | go-toml | Active, v2.2.4 Apr 2025 |
 | PyYAML | v6.0.3 Sep 2025, YAML org maintained |
 | xmltodict | Active — updated Jan 2026 |
-| prettytable | Active — v3.17.0 |
+| prettytable | Active — v3.17.0, Hugo van Kemenade maintaining |
 | blackfriday (Go) | Stale since 2020 but goldmark already fills the gap |
 | sh (Python) | Active — v2.2.2 Feb 2025, 2 maintainers |
 | aniso8601 | Active — released Apr 2025 |
@@ -151,7 +155,7 @@ Skipped run due to concurrency limit. 5 distinct projects have open tasks; limit
 | requests-toolbelt | Maintained by requests team, 190M/month |
 | voluptuous | "CONTRIBUTIONS ONLY" but crowded space (pydantic/marshmallow). Only 1.8K stars |
 | xlrd | Active — v2.0.2 Jun 2025 |
-| tablib | Healthy — v3.9.0, Jazzband maintained |
+| tablib | Healthy — v3.9.0, Hugo van Kemenade. Will likely survive Jazzband sunset |
 | pyfiglet | Sustainable — v1.0.4 Aug 2025 |
 | deprecation | Too narrow — 2 decorators, ~200 LOC |
 | mccabe | PyCQA org, likely "done" not abandoned |
@@ -277,4 +281,11 @@ Skipped run due to concurrency limit. 5 distinct projects have open tasks; limit
 | node-cron (kelektiv) | Active — pushed Mar 2026 |
 | pyperclip | Healthy — released Sep 2025 |
 | node-notifier (npm) | Selected → herald project |
-| Jazzband sunsetting | Noted — task #560 assigned to project_manager to evaluate impact |
+| Jazzband sunsetting | Evaluated — geojson (4.5M/month) recommended as replacement target |
+| Jazzband pip-tools | 22.7M/month but uv replacing it |
+| Jazzband prettytable | 41.7M/month but Hugo van Kemenade maintaining, near-zero orphaning risk |
+| Jazzband tablib | 4M/month but strong community, low orphaning risk |
+| Jazzband django-redis | 9.4M/month but Django 4.0+ has built-in Redis backend |
+| Jazzband djangorestframework-simplejwt | 6M/month but 4.3K stars, 131 contributors |
+| Jazzband django-model-utils | 4.7M/month, Django-specific |
+| Jazzband contextlib2/pathlib2 | Stdlib backports, declining relevance |

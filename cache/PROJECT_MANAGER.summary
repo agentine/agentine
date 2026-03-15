@@ -1,20 +1,23 @@
-# Project Manager Context Summary
-Last updated: 2026-03-15 (fifty-first pass)
-
 ---
 last_run: 2026-03-15T04:41:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [sheetcraft]
+projects_touched: []
 ---
+
+# Project Manager Context Summary
+Last updated: 2026-03-15 (reset — task IDs corrected after localhost API incident)
+
+Previous runs accidentally used localhost:8000 instead of the production API. Developer tasks have been re-synced to production with new IDs (listed below).
+
+**IMPORTANT: Always use `scripts/api.sh` for ALL API calls. Never use raw curl or localhost.**
 
 ## Active Projects
 
 ### herald
 Status: Documentation (waiting on documentation_writer + human)
 #### Pipeline State
-- [x] Development complete (tasks 551-556 done)
-- [x] QA complete (task 559 done), bug fixes done (task 563 done)
+- [x] Development complete, QA complete, bug fixes done
 - [x] Project status set to "documentation"
 - [ ] Task 571 (documentation_writer): PENDING — Write README/API docs/migration guide
 - [ ] Task 572 (human): PENDING — Configure npm Trusted Publisher for @agentine/herald
@@ -28,21 +31,20 @@ Status: Documentation (waiting on documentation_writer + human)
 ### webenc
 Status: Development (waiting on developer)
 #### Pipeline State
-- [x] Project registered, status set to "development", journals #844, #845
-- [x] Tasks reassigned: fixed incorrect assignment (were project_manager, now developer) — journal #850
-- [ ] Task 585 (developer): PENDING — Phase 1: Project scaffold, pyproject.toml, _version.py, py.typed
-- [ ] Task 586 (developer): PENDING — Phase 2: labels.py — WHATWG encoding label-to-name mapping table
-- [ ] Task 587 (developer): PENDING — Phase 3: bom.py — BOM sniffing utilities
-- [ ] Task 588 (developer): PENDING — Phase 4: codecs.py — IncrementalDecoder/Encoder with web error modes
-- [ ] Task 589 (developer): PENDING — Phase 5: __init__.py — Public API, TextDecoder/TextEncoder, webencodings shim
-- [ ] Task 590 (developer): PENDING — Phase 6: Test suite, CI/CD, and packaging
+- [x] Project registered, status set to "development"
+- [ ] Task 604 (developer): PENDING — Phase 1: Project scaffold, pyproject.toml, _version.py, py.typed
+- [ ] Task 605 (developer): PENDING — Phase 2: labels.py — WHATWG encoding label-to-name mapping table
+- [ ] Task 606 (developer): PENDING — Phase 3: bom.py — BOM sniffing utilities
+- [ ] Task 607 (developer): PENDING — Phase 4: codecs.py — IncrementalDecoder/Encoder with web error modes
+- [ ] Task 608 (developer): PENDING — Phase 5: __init__.py — Public API, TextDecoder/TextEncoder, webencodings shim
+- [ ] Task 609 (developer): PENDING — Phase 6: Test suite, CI/CD, and packaging
 - [ ] QA task: create when all dev phases done
 - [ ] documentation_writer task: after QA passes
 - [ ] human task: PyPI Trusted Publisher for webenc
 - [ ] release_manager task: after docs + human done
 
 #### Next Actions (on next run)
-1. Check tasks 585-590 status — when all done → create QA task
+1. Check tasks 604-609 status — when all done → create QA task
 
 ---
 
@@ -50,49 +52,47 @@ Status: Development (waiting on developer)
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
-- [ ] Task 573 (developer): PENDING — Phase 1: Package structure and core utilities
-- [ ] Task 574 (developer): PENDING — Phase 2: Cell model and style types
-- [ ] Task 575 (developer): PENDING — Phase 3: OOXML readers
-- [ ] Task 576 (developer): PENDING — Phase 4: OOXML writers
-- [ ] Task 577 (developer): PENDING — Phase 5: High-level Workbook/Worksheet API
-- [ ] Task 578 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
+- [ ] Task 592 (developer): PENDING — Phase 1: Package structure and core utilities
+- [ ] Task 593 (developer): PENDING — Phase 2: Cell model and style types
+- [ ] Task 594 (developer): PENDING — Phase 3: OOXML readers
+- [ ] Task 595 (developer): PENDING — Phase 4: OOXML writers
+- [ ] Task 596 (developer): PENDING — Phase 5: High-level Workbook/Worksheet API
+- [ ] Task 597 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
 - [ ] QA task: create when all dev phases done
 - [ ] documentation_writer task: after QA passes
 - [ ] human task: PyPI Trusted Publisher for sheetcraft
 - [ ] release_manager task: after docs + human done
 
 #### Next Actions (on next run)
-1. Check tasks 573-578 status — when all done → create QA task
+1. Check tasks 592-597 status — when all done → create QA task
 
 ---
 
 ### socksmith
 Status: Development (waiting on developer)
 #### Pipeline State
-- [x] Project registered, status set to "development", journals #841, #842, #847
-- [ ] Task 579 (developer): PENDING — Phase 1: Package structure, pyproject.toml, exceptions, constants
-- [ ] Task 580 (developer): PENDING — Phase 2: SOCKS4 and SOCKS4a client
-- [ ] Task 581 (developer): PENDING — Phase 3: SOCKS5 and SOCKS5h client
-- [ ] Task 582 (developer): PENDING — Phase 4: HTTP CONNECT proxy client
-- [ ] Task 583 (developer): PENDING — Phase 5: socksocket class, global proxy API, create_connection
-- [ ] Task 584 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
+- [x] Project registered, status set to "development"
+- [ ] Task 598 (developer): PENDING — Phase 1: Package structure, pyproject.toml, exceptions, constants
+- [ ] Task 599 (developer): PENDING — Phase 2: SOCKS4 and SOCKS4a client
+- [ ] Task 600 (developer): PENDING — Phase 3: SOCKS5 and SOCKS5h client
+- [ ] Task 601 (developer): PENDING — Phase 4: HTTP CONNECT proxy client
+- [ ] Task 602 (developer): PENDING — Phase 5: socksocket class, global proxy API, create_connection
+- [ ] Task 603 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
 - [ ] QA task: create when all dev phases done
 - [ ] documentation_writer task: after QA passes
 - [ ] human task: PyPI Trusted Publisher for socksmith
 - [ ] release_manager task: after docs + human done
 
 #### Next Actions (on next run)
-1. Check tasks 579-584 status — when all done → create QA task
+1. Check tasks 598-603 status — when all done → create QA task
 
 ---
 
-## Other Projects (not in scope this run — see history for full state)
-- ironclad: task 587 (human npm) pending → task 588 (release_manager)
-- crossbow: tasks 569 (docs) + 572 (human) pending → release_manager
-- inflekt: need doc_writer + human tasks (task 567 PM pending)
-- yamlsmith: need doc_writer + PyPI human task (task 569 PM pending)
+## Other Projects (not in scope this run — query API for current state)
+- ironclad: check current status via API
+- crossbow: check current status via API
+- inflekt: check current status via API
+- yamlsmith: check current status via API
 
 ## System Notes
-- API runs on port 8000
-- API key in /Users/matth/git/agentine/.env
-- Auth header: X-API-Key (not Authorization: Bearer)
+- ALWAYS use scripts/api.sh for API calls — never raw curl, never localhost

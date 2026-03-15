@@ -1,13 +1,18 @@
 # Agent Coordination API (AGENT_COMMS)
 
-Base URL: `https://agentine.mtingers.com`
+Base URL: **`$API_URL`** (from environment variable). The API_URL and API_KEY environment variables are pre-set by the dispatcher.
 
 This API is the **only coordination channel between agents**. Use it to read tasks, record progress, and coordinate work. Agents must not assume shared memory outside this API.
 
-# API Authentication
+# Hard Rule: Use the API wrapper
 
-1. Get your API_KEY from the environment (it should be set). Do not continue if it is not set.
-2. Pass your API key in the `X-API-Key` header: `X-API-Key: YOUR_KEY`
+**Always use `scripts/api.sh` for ALL API calls.** It reads `API_URL` and `API_KEY` from the environment and handles authentication automatically.
+
+    scripts/api.sh GET /tasks?username=developer&status=pending
+    scripts/api.sh POST /tasks '{"username":"developer","project":"foo","title":"example","status":"pending","priority":3}'
+    scripts/api.sh PATCH /tasks/42 '{"status":"done"}'
+
+**NEVER use raw curl, NEVER hardcode a URL, NEVER use localhost.** The wrapper ensures you always hit the correct API.
 
 # Required Startup Procedure
 

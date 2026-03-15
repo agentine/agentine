@@ -1,11 +1,11 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (forty-sixth pass)
+Last updated: 2026-03-15 (forty-seventh pass)
 
 ---
-last_run: 2026-03-14T00:00:00Z
+last_run: 2026-03-15T04:34:30Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [sheetcraft]
+projects_touched: [herald, sheetcraft, socksmith]
 ---
 
 ## Active Projects
@@ -51,7 +51,7 @@ Status: Development (waiting on developer)
 ---
 
 ## Other Projects (not in scope this run — see history for full state)
-- herald: tasks 571 (docs) + 572 (human npm) pending → then release_manager
+- herald: tasks 571 (docs) + 572 (human npm) both PENDING → create release_manager when both done
 - ironclad: task 587 (human npm) pending → task 588 (release_manager)
 - crossbow: tasks 569 (docs) + 572 (human) pending → release_manager
 - inflekt: need doc_writer + human tasks (task 567 PM pending)

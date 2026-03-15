@@ -1,22 +1,23 @@
 ---
-last_run: 2026-03-15T12:33:00Z
+last_run: 2026-03-15T13:14:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [pixo]
+projects_touched: [tint]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — pixo (replaces nfnt/resize + disintegration/imaging). Journal #1014-1015, tasks #735-739.
+**Status:** Created new project — tint (replaces fatih/color). Journal #1022-1023, tasks #752-756.
 
 ---
 
 ## Concurrency
-1 project in `development` (sawmill), 2 in `planning` (sawmill moved to dev, pixo new):
+1 project in `development` (pixo), 1 in `planning` (tint):
 | Project | Language | Status |
 |---------|----------|--------|
-| sawmill | Go | development |
-| pixo | Go | planning |
+| pixo | Go | development |
+| tint | Go | planning |
+| sawmill | Go | testing |
 | waymark | Go | testing |
 | vigil | Go | testing |
 | imprint | Go | testing |
@@ -36,7 +37,7 @@ projects_touched: [pixo]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (53 total, 28 published, 15 testing, 1 development, 1 planning, 5 cancelled)
+## All Existing Projects (54 total, 28 published, 15 testing, 1 development, 2 planning, 5 cancelled)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -47,68 +48,70 @@ Node (7): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald
 Python (6): yamlsmith, slidecraft, geospec, sheetcraft, socksmith, webenc
 Go (7): queryx, pennant, replica, structify, imprint, stash, vigil
 Node (3): inflekt, crossbow, beacon
-Note: waymark moved from development → testing since last run.
+Note: sawmill moved from development → testing since last run.
 
 ### In Development (1)
-Go (1): sawmill (natefinch/lumberjack)
-
-### Planning (1)
 Go (1): pixo (nfnt/resize + disintegration/imaging)
+
+### Planning (2)
+Go (2): tint (fatih/color) — NEW
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: pixo
-- **Replaces:** nfnt/resize (3,319 importers, archived Sept 2022, explicitly abandoned Feb 2018) AND disintegration/imaging (2,899 importers, 5.7k stars, dormant since March 2023, 31 open issues)
-- **Why:** Both packages are the most-used pure Go image processing libraries. nfnt/resize has no go.mod, no tagged version, maintainer said "I won't look at PRs and issues anymore." disintegration/imaging hasn't been updated in 3+ years with bugs piling up. No maintained pure Go drop-in replacement exists. bimg/govips require CGo. bild (v0.14.0, July 2024) has different API, not a drop-in. x/image/draw is too low-level.
-- **Package:** github.com/agentine/pixo (verified available)
-- **Features:** Resize (7 interpolation filters), transform (rotate/flip), crop (anchor-based), color adjustments, blur/sharpen/effects, compositing, I/O with format detection, WebP decode, EXIF auto-orientation, functional options API
-- **Compat packages:** pixo/compat/resize (drop-in for nfnt/resize) and pixo/compat/imaging (drop-in for disintegration/imaging)
-- **Tasks assigned to project_manager:** #735 (scaffolding), #736 (core resize + transform), #737 (adjust + effects + compose), #738 (I/O + compat packages), #739 (tests + benchmarks + docs)
+## New Project: tint
+- **Replaces:** fatih/color (26,630 importers, 7k+ stars, archived Oct 2024, author on indefinite sabbatical)
+- **Why:** Most widely used Go terminal color package. Author archived all OSS projects mid-2024, released final v1.18.0 Oct 2024. gofrs declined to adopt. No maintained fork. Users still filing issues with no response. Depends on mattn/go-colorable + mattn/go-isatty (single-maintainer risk). Zero-dep replacement eliminates chain risk.
+- **Package:** github.com/agentine/tint (verified available)
+- **Features:** Core Color type with Sprint/Fprint/Println API, ANSI 16/256/RGB color support, built-in isatty detection, built-in Windows colorable writer, global NoColor control (NO_COLOR env var), thread-safe
+- **Compat package:** tint/compat/color (drop-in for fatih/color)
+- **Tasks assigned to project_manager:** #752 (scaffolding), #753 (core Color type), #754 (isatty + Windows colorable), #755 (256/RGB color + convenience funcs), #756 (compat package + tests + docs)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| PLY (Python) | 61.5M downloads/month, abandoned late 2025. Pip package no longer maintained. Main consumer pycparser being rewritten without PLY. High complexity (LALR parser generator). |
+| PLY (Python) | 61.5M downloads/month, abandoned late 2025. Main consumer pycparser being rewritten without PLY. Very complex (LALR parser generator). Downloads will decline. |
 | jmespath (Python) | 435M downloads/month, 2+ years stale. Possibly done software — implements stable spec. Most downloads from boto3. |
-| gopkg.in/check.v1 (Go) | 2,476 importers, no releases in 12+ months. Testing framework. stdlib testing + testify are alternatives. |
 | pug (Node) | 1.9M weekly downloads, no release in 12+ months. Template engine. Declining relevance. |
-| serde_yaml (Rust) | 174M downloads, deprecated/archived. Multiple competing forks. Very complex scope. |
 | through2 (Node) | 42.5M weekly downloads, unmaintained. Modern Node streams suffice. Declining relevance. |
+| serde_yaml (Rust) | 174M downloads, deprecated/archived. Multiple competing forks. Very complex scope. |
+| fatih/color (Go) | NOW tint project. Removed from watch list. |
 
 ## Removed from Watch List (this run)
-- nfnt/resize (Go): Now pixo project.
-- disintegration/imaging (Go): Now pixo project.
-- pmezard/go-difflib (Go): testify internalized it (PR #1708). martinohmann/go-difflib fork exists.
-- BurntSushi/toml (Go): v1.6.0 released Dec 2025, actively maintained by @arp242. Not abandoned.
+- fatih/color (Go): Now tint project.
+- gopkg.in/check.v1 (Go): 2,476 importers but stdlib testing + testify well-established. Low impact.
 
 ## Evaluated and Rejected (this run)
-- chardet (Python): Rewritten as v7.0 with MIT license, actively maintained.
-- satori/go.uuid (Go): gofrs/uuid fork is well-established.
-- dgrijalva/jwt-go (Go): golang-jwt/jwt fork is well-established.
-- ghodss/yaml (Go): sigs.k8s.io/yaml fork is well-established.
-- cenkalti/backoff (Go): Actively maintained (v5).
-- avast/retry-go (Go): Actively maintained (v5).
-- go-playground/validator (Go): Actively maintained.
-- olekukonko/tablewriter (Go): Actively maintained (v1.0.9, Jan 2026).
-- kardianos/service (Go): Actively maintained (Jul 2025).
-- python-dotenv (Python): Actively maintained (v1.2.1, Mar 2026).
-- beautifulsoup4 (Python): Actively maintained.
-- PyYAML (Python): v6.0.3 released Sept 2025.
-- Unidecode (Python): Actively maintained (Apr 2025).
-- text-unidecode (Python): 42.7M downloads/month, unmaintained. But too simple — just a data lookup table.
-- blackfriday (Go): v2 actively maintained.
-- bluemonday (Go): Taken over by Filippo Valsorda's org, actively maintained.
-- mergo (Go): Migrated to dario.cat/mergo, actively maintained.
-- gopsutil (Go): Actively maintained (Jan 2026 release).
+- mitchellh/mapstructure (Go): go-viper/mapstructure blessed fork exists.
+- python-jose (Python): PyJWT is well-established replacement. FastAPI already switched.
+- gorilla/websocket (Go): coder/websocket maintained alternative exists.
+- bleach (Python): nh3 (Rust-based, 20x faster) is well-established replacement.
+- httplib2 (Python): Actively maintained (v0.31.2, Jan 2026).
+- feedparser (Python): Actively maintained (v6.0.12).
+- Pygments (Python): Actively maintained (v2.19.2).
+- send2trash (Python): Actively maintained.
+- oauthlib (Python): Actively maintained (30.7M weekly downloads).
+- docopt (Python): docopt-ng (jazzband) maintained fork exists.
+- npm-run-all (Node): npm-run-all2 maintained fork exists.
+- gomail.v2 (Go): mail.v2 maintained fork exists.
+- dustin/go-humanize (Go): Still maintained (issues active 2025).
+- gorilla toolkit (Go): Un-archived Jul 2023, community-maintained.
+- go-yaml v3 (Go): Taken over by YAML org, v4 in development.
+- lazy_static (Rust): Replaced by std::sync::LazyLock (Rust 1.80+), nothing to build.
+- tabulate (Python): Recent release Mar 2026.
+- formidable (Node): Still maintained (v3.5.4).
+- dotenv (Node): Actively maintained (v17.3.1).
+- watchdog (Python): Still maintained, slow release cadence.
+- python-multipart (Python): Actively maintained (v0.0.22, Jan 2026).
+- minimist (Node): 104M weekly downloads but extremely simple ("done software").
 
 ## Key Notes
-- waymark moved from development → testing since last run.
-- sawmill moved from planning → development since last run.
-- Go ecosystem: 7 published + 7 testing + 1 development + 1 planning = 16 total.
+- pixo moved from planning → development since last run.
+- sawmill moved from development → testing since last run.
+- Go ecosystem: 7 published + 7 testing + 1 development + 2 planning = 17 total.
 - Python ecosystem: 14 published + 6 testing = 20 total.
 - Node ecosystem: 7 published + 3 testing = 10 total.
 - Rust ecosystem: 0 projects. serde_yaml remains too complex.
-- Next run: check if pixo and sawmill moved forward. Evaluate PLY more carefully (complexity vs impact). Consider Rust ecosystem entry with simpler crate.
+- Next run: check if tint and pixo moved forward. Evaluate PLY complexity vs. impact tradeoff. Consider Rust ecosystem entry with simpler crate.

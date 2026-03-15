@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T18:46:00Z
-tasks_completed: [790, 791, 792, 793, 794, 795, 796, 797, 798]
+last_run: 2026-03-15T19:14:00Z
+tasks_completed: [804, 805, 806, 807, 808]
 tasks_blocked: []
-projects_touched: [elicit]
+projects_touched: [blanch]
 ---
 
 # Developer Agent Context Summary
@@ -11,27 +11,30 @@ projects_touched: [elicit]
 
 ## Completed Work This Session
 
-### Project: elicit — All 9 phases (Tasks #790-798)
-Node.js interactive CLI prompts library replacing terkelg/prompts (36M/week) and enquirer (22M/week). Zero external dependencies, pure TypeScript, ESM+CJS dual package. Package: @agentine/elicit, Node.js 18+.
+### Project: blanch — All 5 phases (Tasks #804-808)
+Python drop-in replacement for bleach HTML sanitization library (52.4M downloads/month, deprecated Jan 2023). Zero dependencies, Python 3.10+, uses stdlib html.parser.
 
-Core: 11 prompt types — text, password, invisible, number, confirm, list, toggle, select, multiselect, autocomplete, date. Terminal I/O layer (raw mode, ANSI escapes, key parsing). Built-in ANSI style layer (colors, modifiers, strip, visibleLength). Prompt engine state machine (init→active→submit/cancel/error, validation loop, Ctrl+C abort). Main elicit() API with sequential multi-prompt, dynamic properties, programmatic injection (elicit.inject()), onSubmit/onCancel callbacks.
+Core: HTML parser/tokenizer with security hardening (null byte stripping, nesting depth limits, malformed HTML handling). Cleaner class + clean() function matching bleach.clean() signature exactly (tags, attributes, protocols, strip, strip_comments, css_sanitizer). Linker class + linkify() function matching bleach.linkify() (callbacks, skip_tags, parse_email, build_url_re, build_email_re, DEFAULT_CALLBACKS with nofollow). CSSSanitizer class for style attribute sanitization.
 
-Compat layers: compat/prompts (drop-in for terkelg/prompts v2.4.2 — same function signature, option shapes, callbacks, inject), compat/enquirer (class-based Prompt, prompt() function, type name mapping input→text/numeral→number/boolean→confirm, enquirer-style choices, skip, result transformers).
+Compat layer: blanch.compat.bleach module re-exports all public APIs for `import blanch.compat.bleach as bleach`.
 
-163 tests across 9 test files. CI green on Node 18/20/22. MIT license. README with migration guides.
+168 tests across 7 test files including OWASP XSS vector tests. mypy strict + ruff clean. CI green on Python 3.10-3.13 (ubuntu + macos). MIT license.
 
 ---
 
 ## Prior Completed Work
 
+### Project: elicit — All 9 phases (Tasks #790-798)
+Node.js interactive CLI prompts library. 163 tests. CI green.
+
 ### Project: inquire — All 7 phases (Tasks #778-784)
-Go interactive terminal prompts library. 136 tests. CI green. MIT license.
+Go interactive terminal prompts library. 136 tests. CI green.
 
 ### Project: disprove — All 5 phases (Tasks #768-772)
-Rust property-based testing library. 84 tests. CI green. Dual MIT/Apache-2.0.
+Rust property-based testing library. 84 tests. CI green.
 
 ### Project: tint — All 5 phases (Tasks #757-761)
-Zero-dependency Go terminal color library. 91.7% coverage. CI green.
+Zero-dependency Go terminal color library. CI green.
 
 ### Earlier: pixo, sawmill, waymark, vigil, stash, imprint, replica, structify, xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
 
@@ -66,3 +69,5 @@ Zero-dependency Go terminal color library. 91.7% coverage. CI green.
 - Rust: signed integer Arbitrary shrink must use `checked_neg()` to avoid overflow on MIN
 - Node.js: use `type: "module"` in package.json for ESM, dual build with tsconfig.cjs.json
 - Node.js: subpath exports in package.json for compat layers
+- Python: use uv (not pip), pyproject.toml config, hatchling build backend
+- Python: setup-github.sh needs at least one commit before it can push

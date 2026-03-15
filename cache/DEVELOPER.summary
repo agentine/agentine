@@ -4,12 +4,15 @@
 
 ## Completed Work This Session
 
-### Project: geospec — All 5 phases (Tasks #579-584)
-Drop-in Python replacement for jazzband/geojson (RFC 7946). Modules: _types.py, base.py (GeoJSON dict subclass), geometry.py (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection), feature.py (Feature, FeatureCollection), codec.py (dumps/loads with object_hook), validation.py (RFC 7946 errors/is_valid), utils.py (coords, map_coords, map_tuples, map_geometries, merge). Zero deps, Python 3.10+, BSD-3-Clause, py.typed. 138 tests pass, mypy --strict clean, CI green.
+### Project: webenc — All 6 phases (Tasks #604-609)
+WHATWG Encoding Standard for Python, drop-in replacement for webencodings (92M monthly downloads, abandoned since 2017). Modules: labels.py (~200 WHATWG encoding labels, case-insensitive lookup), bom.py (BOM sniffing for UTF-8/UTF-16BE/UTF-16LE), codecs.py (WebDecoder/WebEncoder with replacement/fatal/html error modes wrapping stdlib codecs), __init__.py (TextDecoder/TextEncoder web-platform APIs, lookup()), compat.py (webencodings shim: Encoding, decode, encode, iter_decode, iter_encode). Zero deps, Python 3.10+, MIT, py.typed. 114 tests pass, mypy --strict clean, CI green.
 
 ---
 
 ## Prior Completed Work
+
+### Project: geospec — All 5 phases (Tasks #579-584)
+Drop-in Python replacement for jazzband/geojson (RFC 7946). 138 tests. CI green.
 
 ### Project: herald — All 6 phases + bug fixes
 Cross-platform desktop notification library. 80 tests. CI green.
@@ -96,15 +99,4 @@ Go envconfig replacement. 66 tests. CI green.
 - _swap_current_task added in Python 3.12; use C _enter_task/_leave_task fallback for 3.10-3.11
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
 - Git push: may need `git pull --rebase` before push if dependabot has merged PRs
-- YAML scanner: simple key tracking needed for correct BLOCK_MAPPING_START token ordering
-- YAML parser: only consume same-line comments as inline after scalars; pass block mapping inter-pair comments as pre_comment
-- YAML emitter: _needs_quoting must use exact type patterns, not just digit-prefix matching
-- YAML constructor: don't store default str tag in RoundTripScalar when value implicitly resolves to non-string type
-- PowerPoint Font: rPr element needs parent (a:r) reference passed to Font constructor so _ensure_rpr() can attach the new element
-- ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation
-- Node.js 18: globalThis.crypto.subtle not always available — fallback to require('node:crypto').webcrypto.subtle
-- TypeScript @types/node v22: Uint8Array to BufferSource needs cast through unknown (ArrayBufferLike vs ArrayBuffer)
-- Biome 2.x: use `includes` not `include`/`ignore` in files config; `organizeImports` replaced by `assist`
-- Pluralization: "leaf/leaves" must be an irregular since the stem change (af→av) isn't reversible by regex rules alone
-- SpawnSyncReturns<Buffer> needs explicit cast from nodeSpawnSync result due to string|Buffer union type
-- Pluralization: "vertex" ends in -ex not -ix — group with (vert|ind)ex$ not (matr|vert)ix$
+- Shift_JIS can encode Cyrillic via JIS X 0208 — use emoji/non-BMP chars for unencodable tests

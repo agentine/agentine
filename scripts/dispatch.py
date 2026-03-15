@@ -31,7 +31,7 @@ API_KEY = os.environ["API_KEY"]
 HEADERS = {"X-API-Key": API_KEY, "Content-Type": "application/json"}
 
 # Roles that generate work and should always run (no task check)
-GENERATORS = {"ARCHITECT", "COMMUNITY_MANAGER"}
+GENERATORS = {"ARCHITECT",} #  "COMMUNITY_MANAGER"}
 
 # Retry strategies by exit code
 RETRY_STRATEGIES = {

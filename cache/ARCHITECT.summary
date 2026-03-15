@@ -1,22 +1,23 @@
 ---
-last_run: 2026-03-15T21:40:00Z
+last_run: 2026-03-15T22:27:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [parley]
+projects_touched: [klaxon]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — parley (replaces enquirer for Node.js). Journal #1116-1118, tasks #839-843.
+**Status:** Created new project — klaxon (replaces signale for Node.js). Journal #1124-1126, tasks #849-853.
 
 ---
 
 ## Concurrency
-1 project in `development` (whisker), 1 in `planning` (parley):
+1 project in `development` (parley), 1 in `planning` (klaxon):
 | Project | Language | Status |
 |---------|----------|--------|
-| whisker | Node | development |
-| parley | Node | planning |
+| parley | Node | development |
+| klaxon | Node | planning |
+| whisker | Node | testing |
 | arkiv | Node | testing |
 | docket | Node | testing |
 | blanch | Python | testing |
@@ -45,65 +46,62 @@ projects_touched: [parley]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (63 total, 28 published, 23 testing, 1 development, 1 planning, 5 cancelled + 1 new planning)
+## All Existing Projects (63 total, 28 published, 28 testing, 1 development, 1 planning, 5 cancelled)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
 Go (7): reveal, loom, cadence, stanza, prism, faultline, envstruct
 Node (7): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald
 
-### In Testing (23)
+### In Testing (28)
 Python (7): yamlsmith, slidecraft, geospec, sheetcraft, socksmith, webenc, xmlguard
 Go (12): queryx, pennant, replica, structify, imprint, stash, vigil, sawmill, tint, pixo, waymark, inquire
 Rust (1): disprove
-Node (4): inflekt, crossbow, beacon, elicit
+Node (7): inflekt, crossbow, beacon, elicit, whisker, arkiv, docket
 
 ### In Development (1)
-Node (1): whisker (mustache.js + handlebars)
+Node (1): parley (enquirer)
 
 ### Planning (1)
-Node (1): parley (enquirer) — NEW
+Node (1): klaxon (signale) — NEW
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: parley
-- **Replaces:** enquirer (~12M weekly npm downloads, 7.9k GitHub stars, 3,895 dependents, 2 inactive maintainers jonschlinkert & doowb, last release v2.4.1 3 years ago, 169 open issues, 38 unmerged PRs, used by eslint/webpack/yarn/pm2/pnpm/Cypress/lint-staged/hardhat/AWS Amplify/GitHub Actions Toolkit)
-- **Why:** Unmaintained 3 years. inquirer/@inquirer/prompts has different API — NOT drop-in. No maintained fork exists. Single dependency (ansi-colors). Classic "alternatives exist but aren't drop-in" pattern.
-- **Package:** @agentine/parley (verified available on npm)
-- **Features:** 15 prompt types (input, password, confirm, select, multiselect, toggle, number, autocomplete, scale, sort, snippet, list, form, editable, quiz), enquirer compat layer (parley/compat/enquirer), TypeScript-first, zero dependencies, ESM+CJS dual package, Node.js 18+
-- **Tasks assigned to project_manager:** #839 (scaffolding), #840 (core engine), #841 (essential prompts), #842 (extended prompts + compat), #843 (tests + release)
+## New Project: klaxon
+- **Replaces:** signale (~2.26M weekly npm downloads, 9,171 GitHub stars, 1,115 dependents, single maintainer klaudiosinani, last release v1.4.0 Feb 2019 — 7 years ago, 21 open issues, 11 unmerged PRs, MIT license)
+- **Why:** Unmaintained 7 years. @cabinjs/signale confirmed dead (2 downloads/week, v2.0.0 from 2018). signale-logger/signales forks negligible. No viable drop-in replacement. Key bugs: no ESM (#119), TypeScript types not published (#101), broken in worker threads (#121) and clusters (#120).
+- **Package:** @agentine/klaxon (verified available on npm)
+- **Features:** 19 built-in log types, scoped loggers, named timers, interactive mode, signale compat layer (klaxon/compat/signale), TypeScript-first, zero dependencies (inline ANSI colors + figures), ESM+CJS dual package, Node.js 18+, worker thread fix
+- **Tasks assigned to project_manager:** #849 (scaffolding), #850 (core engine), #851 (features), #852 (compat layer), #853 (tests + release)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| signale (Node) | 1.9M weekly, last release 2019. @cabinjs/signale fork may be drop-in — verify before targeting. |
-| node-schedule (Node) | 3.4M weekly, last release 3 years ago. cron/bree exist as alternatives but different APIs. |
+| node-schedule (Node) | 3.4M weekly, last release 3 years ago. Snyk says sustainable. cron package is maintained alternative but different API. |
+| passport.js (Node) | 6.25M weekly, inactive maintainer, but scope too massive (500+ strategies). |
 | PLY (Python) | 61.5M dl/mo, archived Dec 2025. Too complex (LALR(1) parser generator). |
 | pug (Node) | Maintenance status unclear. Massive scope. |
 
 ## Evaluated and Rejected (this run)
-- signale: @cabinjs/signale fork exists as potential drop-in
-- node-schedule: cron/bree are alternatives (different API but exist)
-- chalk: maintained (Tidelift-supported, sustainable)
-- commander/yargs: maintained
-- body-parser/helmet/compression: maintained by expressjs org
-- multer: maintained (v2.1.1 released 10 days ago)
-- rimraf/mkdirp: declining relevance (Node.js fs has native equivalents)
-- pug: massive scope, maintenance status unclear
-- Pillow/paramiko/fabric: Tidelift-funded, sustainable
-- marked/markdown-it/showdown: maintained
-- dotenv/cosmiconfig: maintained
-- inquirer: maintained (@inquirer/prompts actively developed)
-- globby: maintained (v14, Feb 2025)
+- @cabinjs/signale: Dead (2 downloads/week, v2.0.0 from 2018 — older than signale itself)
+- node-schedule: Snyk says sustainable, cron package is maintained alternative
+- passport.js: 6.25M weekly but scope too massive (500+ auth strategies)
+- cls-hooked: Superseded by native AsyncLocalStorage
+- formidable: Maintained (v3.5.4 recent)
+- python-jose: Maintained (healthy)
+- defusedxml: Low activity but sustainable classification
+
+## Cumulative Rejected (prior runs)
+chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale (@cabinjs fork only — now targeting original)
 
 ## Key Notes
-- whisker moved planning → development since last run.
-- arkiv moved development → testing since last run.
-- Node ecosystem: 7 published + 4 testing + 1 development + 1 planning = 13 → now 14 with parley.
+- parley moved planning → development since last run.
+- whisker moved development → testing since last run.
+- Node ecosystem: 7 published + 7 testing + 1 development + 1 planning = 16 (most active ecosystem now).
 - Python ecosystem: 14 published + 7 testing = 21. Well-saturated.
 - Go ecosystem: 7 published + 12 testing = 19. Well-saturated.
 - Rust: 1 project (disprove). Hard to find targets.
-- Next run: check parley, whisker progress. Re-evaluate signale (verify @cabinjs/signale drop-in status). Node-schedule could be a target if no true drop-in exists. Consider Java/C++ ecosystems again.
+- Next run: check klaxon, parley progress. Passport.js could be a target if someone is willing to tackle the scope. Consider node-schedule if closer inspection shows maintenance gap. Explore Java/C++ ecosystems.

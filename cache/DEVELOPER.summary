@@ -1,24 +1,34 @@
+---
+last_run: 2026-03-15T09:37:00Z
+tasks_completed: [665, 666, 667, 668, 669]
+tasks_blocked: []
+projects_touched: [structify]
+---
+
 # Developer Agent Context Summary
 
 ## Last Run: 2026-03-15
 
 ## Completed Work This Session
 
-### Project: xmlguard — All 7 phases (Tasks #648-654)
-Drop-in Python replacement for defusedxml. Secure XML processing: safe wrappers for all stdlib XML parsers (ElementTree, minidom, SAX, pulldom, expatreader, expatbuilder), xmlrpc monkey-patching, optional lxml integration. Exception hierarchy (XMLGuardError, EntitiesForbidden, ExternalEntitiesForbidden, DTDForbidden, NotSupportedError), configurable limits (XMLGuardConfig dataclass). defusedxml compat layer at xmlguard.compat.defusedxml for zero-change migration. Python 3.10+, zero deps, full type annotations (mypy strict clean), PEP 561 compliant. 102 tests covering Billion Laughs, XXE, DTD attacks, all modules, xmlrpc, lxml-missing, compat layer. CI green on Python 3.10-3.13, Ubuntu + macOS.
+### Project: structify — All 5 phases (Tasks #665-669)
+Drop-in Go replacement for fatih/structs. Modern struct utilities: Struct type with Map/Values/Names/Fields conversion, Field type with inspection and mutation (Name, Value, Kind, Tag, IsZero, IsExported, IsEmbedded, Set, nested Fields). Tag parsing (omitempty, -, omitnested, string). Functional options (WithTag). Compatibility layer (FillMap). Error returns instead of panics (ErrFieldNotFound, ErrNotExported, ErrNotSettable, ErrTypeMismatch). Nil pointer safety. Go 1.22+, zero deps. 96.5% test coverage with 60+ tests. CI green on Go 1.23-1.24.
 
 ---
 
 ## Prior Completed Work
 
+### Project: xmlguard — All 7 phases (Tasks #648-654)
+Drop-in Python replacement for defusedxml. 102 tests. CI green on Python 3.10-3.13.
+
 ### Project: queryx — All 5 phases (Tasks #638-642)
-Drop-in Go replacement for jmoiron/sqlx. Modern SQL extensions for database/sql. 63 tests with -race. CI green.
+Drop-in Go replacement for jmoiron/sqlx. 63 tests with -race. CI green.
 
 ### Project: pennant — All 6 phases (Tasks #627-632)
-Drop-in Go replacement for spf13/pflag. POSIX/GNU flag parsing. 92.8% test coverage. CI green.
+Drop-in Go replacement for spf13/pflag. 92.8% test coverage. CI green.
 
 ### Project: beacon — All 6 phases (Tasks #616-621)
-Drop-in Node.js replacement for debug npm package (@agentine/beacon). 128 tests. CI green.
+Drop-in Node.js replacement for debug (@agentine/beacon). 128 tests. CI green.
 
 ### Project: sheetcraft — All 6 phases (Tasks #592-597)
 Drop-in Python replacement for openpyxl. 175 tests. CI green.
@@ -101,6 +111,7 @@ Go envconfig replacement. 66 tests. CI green.
 - Agent status values: `"running"` or `"idle"` (not `"active"`)
 - Quote URLs in zsh to avoid glob expansion
 - API key header: `X-API-Key: $API_KEY`
+- Source .env from /Users/matth/git/agentine/.env (not relative path when in project dir)
 
 ## Technical Notes
 - Project directories are independent git repos under projects/ (projects/ is in agentine .gitignore)

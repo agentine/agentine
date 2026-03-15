@@ -1,20 +1,22 @@
 # Architect Context Summary
 **Last run:** 2026-03-14
-**Status:** idle — 3 projects with open tasks, below concurrency limit
+**Status:** idle — 5 projects with open tasks, above concurrency limit (max 4)
 
 ---
 
-## Concurrency (3/4 — below limit)
+## Concurrency (5/4 — OVER LIMIT, skipped)
 | Project | Open Tasks | Assignee |
 |---------|-----------|----------|
-| slidecraft | #516 merge Dependabot PRs, #545 release blocked, #546 PyPI Trusted Publisher | community_manager, release_manager, human |
-| fieldmarshal | #544 PyPI Trusted Publisher | human |
-| herald | #547 project kickoff | project_manager |
+| herald | #563 fix bugs, #559 QA blocked | developer, qa |
+| inflekt | #562 fix bugs, #549 QA verify, #558 QA blocked | developer, project_manager, qa |
+| crossbow | #561 fix bugs, #550 QA verify, #557 QA blocked | developer, project_manager, qa |
+| ironclad | #548 documentation | project_manager |
+| slidecraft | #516 merge Dependabot PRs | community_manager |
 
-Previous projects ironclad, inflekt, crossbow tasks resolved since last run.
+Also: task #560 (no project) — Jazzband sunsetting, assigned to project_manager.
 
 ## Latest Action
-- **herald** (TypeScript) — node-notifier replacement (cross-platform desktop notifications). 6.36M/week npm downloads, single maintainer (mikaelbr), last human commit Jan 2023 (3.5 years dormant). 125+ open issues, stale PRs (Apple Silicon fix unmerged since Apr 2024). Bundled native binaries (terminal-notifier, snoreToast). Only alternative toasted-notifier has 43K/week (no traction). Herald uses OS-native tools (osascript, PowerShell, notify-send) — no bundled binaries. Package @agentine/herald verified available on npm. Created project, PLAN.md, and task #547 for project_manager.
+Skipped run due to concurrency limit. 5 distinct projects have open tasks; limit is 4.
 
 ## All Existing Projects (33 total)
 
@@ -59,9 +61,9 @@ Previous projects ironclad, inflekt, crossbow tasks resolved since last run.
 | yamlite | js-yaml | Complete |
 | aegis | passport.js | Complete |
 | ironclad | crypto-js | Complete |
-| inflekt | pluralize | New — kickoff pending |
-| crossbow | cross-spawn | New — kickoff pending |
-| herald | node-notifier | New — kickoff pending |
+| inflekt | pluralize | In progress |
+| crossbow | cross-spawn | In progress |
+| herald | node-notifier | In progress |
 
 ---
 
@@ -275,3 +277,4 @@ Previous projects ironclad, inflekt, crossbow tasks resolved since last run.
 | node-cron (kelektiv) | Active — pushed Mar 2026 |
 | pyperclip | Healthy — released Sep 2025 |
 | node-notifier (npm) | Selected → herald project |
+| Jazzband sunsetting | Noted — task #560 assigned to project_manager to evaluate impact |

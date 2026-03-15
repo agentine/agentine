@@ -4,6 +4,9 @@
 
 ## Completed Work This Session
 
+### Project: sheetcraft — All 6 phases (Tasks #592-597)
+Drop-in Python replacement for openpyxl (.xlsx read/write). Pure Python, zero deps, Python 3.10+, MIT. Modules: constants.py, exceptions.py, utils.py, cell.py, styles/ (Font, PatternFill, GradientFill, Border, Side, Alignment, NumberFormat, StyleSheet), reader/ (shared_strings, styles, worksheet, workbook), writer/ (shared_strings, styles, worksheet, workbook ZIP builder), workbook.py (Workbook, load_workbook), worksheet.py (Worksheet with openpyxl-compatible API). 175 tests pass, 93% coverage, mypy --strict clean, CI green.
+
 ### Project: socksmith — All 6 phases (Tasks #598-603)
 Drop-in Python replacement for PySocks (SOCKS proxy client). Modules: _types.py (ProxyType enum: SOCKS4/4A/5/5H/HTTP), _exceptions.py (ProxyError hierarchy matching PySocks API), _socks4.py (Socks4Client with SOCKS4/4a support), _socks5.py (Socks5Client with no-auth and username/password auth per RFC 1929, IPv4/IPv6/domain address types), _http.py (HttpConnectClient with Basic auth), _socket.py (socksocket subclass of socket.socket, create_connection factory), _globals.py (thread-safe set_default_proxy/get_default_proxy), socks.py (PySocks compat shim with PROXY_TYPE_SOCKS4=1/SOCKS5=2/HTTP=3). Zero deps, Python 3.10+, BSD-3-Clause, py.typed. 64 tests pass, mypy --strict clean, CI green.
 
@@ -106,3 +109,5 @@ Go envconfig replacement. 66 tests. CI green.
 - socket.getaddrinfo return type: addr tuple element [0] is str|int in mypy — use intermediate variable with type: ignore[assignment]
 - ruff isort (I001): `from X import Y as Y` re-exports get split into separate blocks — use `import X; X.Y` pattern for compat shims
 - uv sync --group dev fails if pyproject.toml uses [project.optional-dependencies] not [dependency-groups] — use `uv pip install -e ".[dev]"` instead
+- ET.tostring with encoding="UTF-8" returns Any in mypy strict — need explicit `result: bytes` annotation
+- ET.SubElement with **dict unpacking fails mypy strict — use `attrib=dict` positional arg instead

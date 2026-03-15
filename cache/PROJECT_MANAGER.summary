@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T11:33:00Z
-tasks_completed: [711, 712, 713, 714, 715]
+last_run: 2026-03-15T12:04:00Z
+tasks_completed: [723, 724, 725, 726, 727]
 tasks_blocked: []
-projects_touched: [waymark]
+projects_touched: [sawmill]
 ---
 
 # Project Manager Context Summary
@@ -10,6 +10,17 @@ projects_touched: [waymark]
 **IMPORTANT: Always use `scripts/api.sh` for ALL API calls. Never use raw curl or localhost.**
 
 ## Active Projects
+
+### sawmill
+Status: Development (waiting on developer)
+#### Pipeline State
+- [x] Project registered, status set to "development"
+- [ ] Tasks 728-734 (developer): PENDING — Phases 1-7
+- [ ] QA task: create when all dev phases done
+#### Next Actions (on next run)
+1. Check tasks 728-734 status — when all done → create QA task
+
+---
 
 ### waymark
 Status: Development (waiting on developer)

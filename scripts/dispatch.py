@@ -272,6 +272,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
                 ["git", "commit", "-m", f"run_agent: commit {config.role} summary cache"],
                 capture_output=True,
             )
+            subprocess.run(["git", "push"], capture_output=True)
             return 0
 
         # Determine retry strategy

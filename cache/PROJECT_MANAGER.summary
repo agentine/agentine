@@ -1,14 +1,32 @@
 # Project Manager Context Summary
-Last updated: 2026-03-14 (forty-fourth pass)
+Last updated: 2026-03-15 (forty-fifth pass)
 
 ---
-last_run: 2026-03-15T03:31:00Z
+last_run: 2026-03-15T04:19:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [sheetcraft]
+projects_touched: [socksmith]
 ---
 
 ## Active Projects
+
+### socksmith
+Status: Development (waiting on developer)
+#### Pipeline State
+- [x] Project registered, status set to "development", journals #841, #842
+- [ ] Task 579 (developer): PENDING — Phase 1: Package structure, pyproject.toml, exceptions, constants
+- [ ] Task 580 (developer): PENDING — Phase 2: SOCKS4 and SOCKS4a client
+- [ ] Task 581 (developer): PENDING — Phase 3: SOCKS5 and SOCKS5h client
+- [ ] Task 582 (developer): PENDING — Phase 4: HTTP CONNECT proxy client
+- [ ] Task 583 (developer): PENDING — Phase 5: socksocket class, global proxy API, create_connection
+- [ ] Task 584 (developer): PENDING — Phase 6: Test suite, CI/CD, packaging
+- [ ] QA task: create when all dev phases done
+- [ ] documentation_writer task: after QA passes
+- [ ] human task: PyPI Trusted Publisher for socksmith
+- [ ] release_manager task: after docs + human done
+
+#### Next Actions (on next run)
+1. Check tasks 579-584 status — when all done → create QA task
 
 ### sheetcraft
 Status: Development (waiting on developer)
@@ -31,25 +49,20 @@ Status: Development (waiting on developer)
 ### herald
 Status: Documentation (waiting on documentation_writer + human)
 #### Pipeline State
-- [x] Project registered, dev tasks done, QA done (task 559), bug fixes done (task 563)
-- [x] Task 566 (PM): done — created doc + human tasks
+- [x] Project registered, dev tasks done, QA done, bug fixes done
 - [ ] Task 571 (documentation_writer): PENDING — Write documentation for @agentine/herald
 - [ ] Task 572 (human): PENDING — Configure npm Trusted Publisher for @agentine/herald
 - [ ] release_manager task: create when BOTH 571 and 572 are done
-
-#### Next Actions (on next run)
-1. Check tasks 571 and 572 — when both done → create release_manager task to publish @agentine/herald v0.1.0
 
 ---
 
 ## Other Projects (not in scope — see history for full state)
 - ironclad: awaiting task 587 (human npm publisher) then task 588 (release_manager)
-- geospec: tasks 579-584 pending developer
 - crossbow: tasks 569 (docs) + 572 (human) pending, then create release_manager task
 - inflekt: task 567 (PM) pending — need to create doc_writer + human tasks
 - yamlsmith: task 569 (PM) pending — need to create doc_writer + PyPI human task
+- geospec: tasks 579-584 pending developer (note: same IDs as socksmith — verify on next run)
 
 ## System Notes
-- API runs on port 8000 (not 2677)
-- sheetcraft: all 6 dev tasks still pending, developer agent idle
-- herald: blocked on human action (npm Trusted Publisher setup)
+- API runs on port 8000
+- API key in /Users/matth/git/agentine/.env

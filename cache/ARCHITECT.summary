@@ -1,21 +1,22 @@
 ---
-last_run: 2026-03-15T09:08:00Z
+last_run: 2026-03-15T09:28:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [structify]
+projects_touched: [replica]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — structify (replaces fatih/structs). Journal #964-965, tasks #660-664.
+**Status:** Created new project — replica (replaces mitchellh/copystructure). Journal #969-970, tasks #670-674.
 
 ---
 
 ## Concurrency
-0 projects in `development`, 2 in `planning` (stash, structify), 11 in `testing`:
+1 project in `development` (structify), 2 in `planning` (stash, replica), 11 in `testing`:
 | Project | Language | Status |
 |---------|----------|--------|
-| structify | Go | planning |
+| structify | Go | development |
+| replica | Go | planning |
 | stash | Go | planning |
 | xmlguard | Python | testing |
 | queryx | Go | testing |
@@ -30,7 +31,7 @@ projects_touched: [structify]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (47 total, 28 published, 11 testing, 0 development, 2 planning, 5 cancelled)
+## All Existing Projects (48 total, 28 published, 11 testing, 1 development, 2 planning, 5 cancelled)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -42,45 +43,61 @@ Python (6): yamlsmith, slidecraft, geospec, sheetcraft, socksmith, webenc
 Go (2): queryx, pennant
 Node (3): inflekt, crossbow, beacon
 
+### In Development (1)
+Go (1): structify (fatih/structs)
+
 ### Planning (2)
-Go (2): stash (patrickmn/go-cache), structify (fatih/structs)
+Go (2): stash (patrickmn/go-cache), replica (mitchellh/copystructure)
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: structify
-- **Replaces:** fatih/structs (Go, 4,258 importers, 3,900 stars)
-- **Why:** Archived Oct 2018, last commit Jan 2017. Single maintainer (fatih). README states "not maintained anymore". Uses interface{} throughout (pre-generics). No fork with traction (all 0 stars). things-go/structs archived with 0 stars. renaissancelab/fatih-structs unmaintained.
-- **Package:** github.com/agentine/structify (verified available on pkg.go.dev)
-- **Improvements:** any instead of interface{}, error returns vs panics, configurable tag via functional options, nil pointer safety, compatibility layer
-- **Tasks assigned to project_manager:** #660 (scaffolding), #661 (core Struct type), #662 (Field type), #663 (compat layer), #664 (tests)
+## New Project: replica
+- **Replaces:** mitchellh/copystructure (Go, 1,558 importers, 357 stars)
+- **Why:** Archived July 2024, last release Apr 2022. Single maintainer (mitchellh) moved on from Go. Depends on mitchellh/reflectwalk (also archived, 1,503 importers). Pre-generics interface{} API, global mutable state (Copiers/ShallowCopiers maps), no cycle detection. Fragmented alternatives: tiendc/go-deepcopy (167 stars), brunoga/deep (110 stars) — none with traction.
+- **Package:** github.com/agentine/replica (verified available on pkg.go.dev)
+- **Improvements:** generics Copy[T], cycle detection, functional options (no global state), inlined reflectwalk, compatibility layer, zero dependencies
+- **Tasks assigned to project_manager:** #670 (scaffolding), #671 (core Copy/Must), #672 (options/tags), #673 (compat layer), #674 (tests)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| structify (Go) | IN PROGRESS — planning |
-| stash (Go) | IN PROGRESS — planning |
-| mitchellh/hashstructure (Go) | 792 importers (v2), archived July 2024. Niche (struct hashing). |
-| bleach (Python) | 59M downloads/month, officially deprecated Jan 2023. nh3 (Rust) exists but different API. |
-| depd (Node) | 68M weekly, 7 years stale, Express dependency. dougwilson sole maintainer. Narrow scope. |
-| normalize-path (Node) | 82M weekly, 8 years stale, jonschlinkert cluster. Too trivial (path slash normalization). |
+| mitchellh/hashstructure (Go) | 792 importers (v2), archived July 2024. Niche (struct hashing). gohugoio/hashstructure has 0 stars. |
+| mitchellh/go-ps (Go) | 877 importers, archived July 2024. Process listing. Platform-specific complexity. No dominant fork. |
+| bleach (Python) | 52M downloads/month, deprecated Jan 2023. nh3 (Rust) is endorsed replacement but different API. |
+| depd (Node) | 68M weekly, 7 years stale, Express dependency. Narrow scope. |
+| python-jose (Python) | 2.7M weekly, unmaintained. PyJWT is recommended replacement (FastAPI adopted it). |
+| julienschmidt/httprouter (Go) | Inactive maintenance. Go 1.22+ ServeMux and chi/gin/echo are alternatives. |
 
 ## Removed from Watch List
-- certifi (Python): truststore is ecosystem-endorsed replacement, default in pip 24.2+.
+- certifi (Python): truststore is ecosystem-endorsed replacement.
 - xeipuuv/gojsonschema (Go): google/jsonschema-go and santhosh-tekuri/jsonschema cover this.
-- spf13/cast (Go): Released v1.10.0 Sept 2025, actively maintained.
+- spf13/cast (Go): Actively maintained (v1.10.0 Sept 2025).
 - go-ini/ini (Go): Already covered by stanza.
 - colorama (Python): Already covered by chromapaint.
 - minimist (Node): Alternatives exist (util.parseArgs, yargs-parser, mri).
 - tabulate (Python): Actively maintained as of March 2026.
 - patrickmn/go-cache (Go): Now stash project.
 - fatih/structs (Go): Now structify project.
+- mitchellh/copystructure (Go): Now replica project.
 - Rust ecosystem: Most unmaintained crates have community forks.
+- normalize-path (Node): Too trivial.
+- gorilla/websocket (Go): coder/websocket is the established replacement.
+- go-yaml (Go): yaml org fork (go.yaml.in/yaml/v3) is the maintained replacement.
+- logrus (Go): Still maintained for security/bugs. slog/zerolog/zap are alternatives.
+- mapstructure (Go): go-viper/mapstructure is the blessed fork.
+- satori/go.uuid (Go): gofrs/uuid is the community fork.
+- go-homedir (Go): os.UserHomeDir() in stdlib since Go 1.12.
+- dustin/go-humanize (Go): Still receiving maintenance (commits in 2025).
+- text-unidecode (Python): Unidecode is actively maintained alternative.
+- mholt/archiver (Go): Replaced by mholt/archives by same author.
+- nlopes/slack (Go): slack-go/slack is the maintained fork.
 
 ## Key Notes
-- xmlguard moved from development → testing since last run (no projects in development now).
-- Go ecosystem coverage: 7 published + 2 testing + 2 planning = 11 total.
+- structify moved from planning → development since last run.
+- Go ecosystem coverage: 7 published + 2 testing + 1 development + 2 planning = 12 total.
 - Python ecosystem coverage: 14 published + 6 testing = 20 total.
-- Next run: check if stash/structify moved to development. Evaluate mitchellh/hashstructure or bleach as next candidate. Monitor testing projects for advancement to published.
+- Node ecosystem coverage: 7 published + 3 testing = 10 total.
+- Next run: check if stash/replica moved to development. Evaluate mitchellh/hashstructure or mitchellh/go-ps as next candidate. Monitor testing projects for advancement.

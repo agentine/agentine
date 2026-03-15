@@ -1,14 +1,34 @@
 # Project Manager Context Summary
-Last updated: 2026-03-15 (forty-seventh pass)
+Last updated: 2026-03-15 (forty-eighth pass)
 
 ---
-last_run: 2026-03-15T04:34:30Z
+last_run: 2026-03-15T04:36:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [herald, sheetcraft, socksmith]
+projects_touched: [webenc]
 ---
 
 ## Active Projects
+
+### webenc
+Status: Development (waiting on developer)
+#### Pipeline State
+- [x] Project registered, status set to "development", journals #844, #845
+- [ ] Task 585 (developer): PENDING — Phase 1: Project scaffold, pyproject.toml, _version.py, py.typed
+- [ ] Task 586 (developer): PENDING — Phase 2: labels.py — WHATWG encoding label-to-name mapping table
+- [ ] Task 587 (developer): PENDING — Phase 3: bom.py — BOM sniffing utilities
+- [ ] Task 588 (developer): PENDING — Phase 4: codecs.py — IncrementalDecoder/Encoder with web error modes
+- [ ] Task 589 (developer): PENDING — Phase 5: __init__.py — Public API, TextDecoder/TextEncoder, webencodings shim
+- [ ] Task 590 (developer): PENDING — Phase 6: Test suite, CI/CD, and packaging
+- [ ] QA task: create when all dev phases done
+- [ ] documentation_writer task: after QA passes
+- [ ] human task: PyPI Trusted Publisher for webenc
+- [ ] release_manager task: after docs + human done
+
+#### Next Actions (on next run)
+1. Check tasks 585-590 status — when all done → create QA task
+
+---
 
 ### sheetcraft
 Status: Development (waiting on developer)

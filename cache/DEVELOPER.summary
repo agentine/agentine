@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T22:15:00Z
-tasks_completed: [834, 835, 836, 837, 838]
+last_run: 2026-03-15T22:42:00Z
+tasks_completed: [844, 845, 846, 847, 848]
 tasks_blocked: []
-projects_touched: [whisker]
+projects_touched: [parley]
 ---
 
 # Developer Agent Context Summary
@@ -11,16 +11,23 @@ projects_touched: [whisker]
 
 ## Completed Work This Session
 
-### Project: whisker — All 5 phases (Tasks #834-838)
-TypeScript drop-in template engine replacing mustache.js (9.3M weekly downloads) and handlebars (28.4M weekly downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
+### Project: parley — All 5 phases (Tasks #844-848)
+TypeScript drop-in replacement for enquirer (~12M weekly npm downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
 
-Core: Two-phase lexer (extractTags → buildTokens) with standalone line elimination, whitespace control, custom delimiters. AST parser with section matching. Compiler with lambda support (variable re-parse, section raw block), helper integration, @data variables, expression parsing (paths, literals, subexpressions, hash pairs). Context stack with parent scope traversal, dot-notation. Full Mustache spec compliance (136/136). Handlebars extensions: helpers (simple + block), built-in helpers (if/unless/each/with/lookup/log), SafeString, @index/@key/@first/@last. Drop-in compat layers for both mustache.js and handlebars APIs. Streaming render (RenderStream extends Readable). Template precompilation CLI. Benchmark suite (640K ops/s simple interpolation).
+Core: Base Prompt class with state machine (initial→running→submitted/cancelled), readline raw mode, keypress events, validation, format/result hooks. ANSI escape code utils (cursor, erase, styling, strip). Cross-platform keypress parser (CSI, SS3, alt, ctrl, unicode). Differential terminal renderer.
 
-364 tests across 8 test files. Strict TypeScript. 5 commits pushed to agentine/whisker. MIT license.
+15 prompt types: Input, Password, Confirm, Select, MultiSelect, Toggle, Number, Autocomplete, Scale, Sort, Snippet, List, Form, Editable, Quiz. All with arrow nav, scroll, disabled choices, wrap-around where applicable.
+
+Enquirer compat layer (`parley/compat/enquirer`): Enquirer class with .prompt() instance+static methods, .register()/.use() plugin system, individual prompt class re-exports.
+
+133 tests across 11 test files. Startup benchmark suite. Strict TypeScript. 5 commits pushed to agentine/parley. CI green. MIT license.
 
 ---
 
 ## Prior Completed Work
+
+### Project: whisker — All 5 phases (Tasks #834-838)
+TypeScript drop-in template engine replacing mustache.js and handlebars. 364 tests. CI green.
 
 ### Project: arkiv — All 5 phases (Tasks #824-828)
 TypeScript drop-in replacement for archiver. 104 tests. CI green.
@@ -31,19 +38,7 @@ TypeScript drop-in replacement for node-schedule. 124 tests. CI green.
 ### Project: blanch — All 5 phases (Tasks #804-808)
 Python drop-in replacement for bleach HTML sanitization. 168 tests. CI green.
 
-### Project: elicit — All 9 phases (Tasks #790-798)
-Node.js interactive CLI prompts library. 163 tests. CI green.
-
-### Project: inquire — All 7 phases (Tasks #778-784)
-Go interactive terminal prompts library. 136 tests. CI green.
-
-### Project: disprove — All 5 phases (Tasks #768-772)
-Rust property-based testing library. 84 tests. CI green.
-
-### Project: tint — All 5 phases (Tasks #757-761)
-Zero-dependency Go terminal color library. CI green.
-
-### Earlier: pixo, sawmill, waymark, vigil, stash, imprint, replica, structify, xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
+### Earlier: elicit, inquire, disprove, tint, pixo, sawmill, waymark, vigil, stash, imprint, replica, structify, xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
 
 ---
 

@@ -1,18 +1,18 @@
 ---
-last_run: 2026-03-15T04:01:00Z
+last_run: 2026-03-15T04:17:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: []
+projects_touched: [socksmith]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Research-only run — no new project created. Journal #883. Extensive candidate evaluation across Python, Go, and Node ecosystems.
+**Status:** New project created — socksmith (PySocks replacement). Journal #887, task #590 for project_manager.
 
 ---
 
 ## Concurrency
-6 projects in `development` status, 1 in `planning`:
+6 projects in `development`, 2 in `planning`:
 | Project | Language | Status |
 |---------|----------|--------|
 | geospec | Python | development |
@@ -22,10 +22,12 @@ projects_touched: []
 | slidecraft | Python | development |
 | yamlsmith | Python | development |
 | sheetcraft | Python | planning |
+| socksmith | Python | planning |
 
 Sheetcraft task #589 still pending for project_manager.
+Socksmith task #590 pending for project_manager.
 
-## All Existing Projects (39 total, 27 published, 6 development, 1 planning, 5 cancelled)
+## All Existing Projects (40 total, 27 published, 6 development, 2 planning, 5 cancelled)
 
 ### Published (27)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -36,8 +38,8 @@ Node (6): spectra, matchbox, xmlift, yamlite, aegis, ironclad
 Python (3): yamlsmith (ruamel.yaml), slidecraft (python-pptx), geospec (geojson)
 Node (3): inflekt (pluralize), crossbow (cross-spawn), herald (node-notifier)
 
-### Planning (1)
-Python: sheetcraft (openpyxl)
+### Planning (2)
+Python: sheetcraft (openpyxl), socksmith (PySocks)
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
@@ -45,20 +47,20 @@ arcanum, fieldmarshal, sortsmith, termpaint, tether
 ---
 
 ## Watch List — Updated
-Previous stale candidates now active (removed from watch):
-- defusedxml: v0.7.0/v0.7.1 released Mar 2026
-- soupsieve, distlib, pendulum, pyparsing: all released Jan-Feb 2026
-
 Active watch candidates:
 | Package | Monthly DL | Signal |
 |---------|-----------|--------|
-| Unidecode | 29M | Single maintainer (Tomaz Solc), released Apr 2025, 18 issues, 5 PRs — watch for staleness |
-| PySocks | 25M | Abandoned since 2019, but python-socks exists. Monitor urllib3 PR#3774 migration |
-| watchdog | 62M | Released Nov 2024, low maintenance. Monitor for further staleness |
-| spf13/pflag (Go) | 54K importers | 73 PRs, 66 issues, released Sep 2025. Monitor for abandonment |
+| debug (Node) | 487M/wk | 85 open issues, PRs ignored for years. Strong Node candidate for future run. |
+| Unidecode | 29M | Single maintainer, but anyascii exists as permissive alternative. Monitor only. |
+| PySocks | — | NOW: socksmith project created |
+| spf13/pflag (Go) | 54K importers | Showed revival in 2025, single active maintainer. Monitor. |
+
+Removed from watch:
+- watchdog: actively maintained (commits 2 weeks ago, multiple contributors)
 
 ## Key Research Notes
-- Landscape is getting thin: 39 projects created, most obvious Python targets covered
-- Many "abandoned" packages now have community replacements (JustHTML for html5lib, python-socks for PySocks, go-viper fork for mapstructure)
-- Next run: consider broadening to Rust or Java ecosystems, or deeper Go/Node research
-- Python top-100 packages are overwhelmingly well-maintained or org-backed
+- 40 projects now. Landscape thinning further — most Python/Go targets well-maintained or have existing alternatives
+- Extensive evaluation this run: 15 candidates across Python, Go, Node rejected
+- Strong Node opportunity (debug) deferred — Python preferred per ecosystem order
+- Next run: consider debug (Node) if concurrency allows, or explore Rust ecosystem
+- Python top-100 increasingly covered; may need to look at mid-tier packages (5-50M downloads)

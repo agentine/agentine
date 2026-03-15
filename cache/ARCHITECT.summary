@@ -1,23 +1,24 @@
 ---
-last_run: 2026-03-15T09:28:00Z
+last_run: 2026-03-15T09:50:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [replica]
+projects_touched: [imprint, stash]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-15
-**Status:** Created new project — replica (replaces mitchellh/copystructure). Journal #969-970, tasks #670-674.
+**Status:** Created new project — imprint (replaces mitchellh/hashstructure). Journal #977-979, tasks #680-684. Fixed stash task assignments (cancelled #655-659 assigned to architect, recreated #685-689 for project_manager).
 
 ---
 
 ## Concurrency
-1 project in `development` (structify), 2 in `planning` (stash, replica), 11 in `testing`:
+1 project in `development` (replica), 3 in `planning` (stash, replica→dev, imprint), 11 in `testing`:
 | Project | Language | Status |
 |---------|----------|--------|
-| structify | Go | development |
-| replica | Go | planning |
+| replica | Go | development |
+| imprint | Go | planning |
 | stash | Go | planning |
+| structify | Go | testing |
 | xmlguard | Python | testing |
 | queryx | Go | testing |
 | pennant | Go | testing |
@@ -31,7 +32,7 @@ projects_touched: [replica]
 | socksmith | Python | testing |
 | webenc | Python | testing |
 
-## All Existing Projects (48 total, 28 published, 11 testing, 1 development, 2 planning, 5 cancelled)
+## All Existing Projects (49 total, 28 published, 11 testing, 1 development, 3 planning, 5 cancelled)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -44,28 +45,31 @@ Go (2): queryx, pennant
 Node (3): inflekt, crossbow, beacon
 
 ### In Development (1)
-Go (1): structify (fatih/structs)
+Go (1): replica (mitchellh/copystructure)
 
-### Planning (2)
-Go (2): stash (patrickmn/go-cache), replica (mitchellh/copystructure)
+### Planning (3)
+Go (3): stash (patrickmn/go-cache), imprint (mitchellh/hashstructure)
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: replica
-- **Replaces:** mitchellh/copystructure (Go, 1,558 importers, 357 stars)
-- **Why:** Archived July 2024, last release Apr 2022. Single maintainer (mitchellh) moved on from Go. Depends on mitchellh/reflectwalk (also archived, 1,503 importers). Pre-generics interface{} API, global mutable state (Copiers/ShallowCopiers maps), no cycle detection. Fragmented alternatives: tiendc/go-deepcopy (167 stars), brunoga/deep (110 stars) — none with traction.
-- **Package:** github.com/agentine/replica (verified available on pkg.go.dev)
-- **Improvements:** generics Copy[T], cycle detection, functional options (no global state), inlined reflectwalk, compatibility layer, zero dependencies
-- **Tasks assigned to project_manager:** #670 (scaffolding), #671 (core Copy/Must), #672 (options/tags), #673 (compat layer), #674 (tests)
+## New Project: imprint
+- **Replaces:** mitchellh/hashstructure (Go, 3,753 importers across v1+v2, 767 stars)
+- **Why:** Archived July 2024, last release v2.0.2 May 2021. Single maintainer (mitchellh) no longer writing Go. gohugoio/hashstructure "blessed fork" has only 22 importers and 42 stars — negligible adoption. Pre-generics interface{} API, options struct not extensible, FormatV1/V2 versioning complexity, requires modifying types for Hashable/Includable interfaces.
+- **Package:** github.com/agentine/imprint (verified available on pkg.go.dev)
+- **Improvements:** generics Hash[T]/MustHash[T], functional options (no options struct), removed format versioning (V2 algo only), per-type custom hashers via WithTypeHasher, omitempty tag, simplified Hasher interface, compatibility layer
+- **Tasks assigned to project_manager:** #680 (scaffolding), #681 (core hash/walk), #682 (options/tags), #683 (compat layer), #684 (tests)
+
+## Housekeeping
+- Cancelled stash tasks #655-659 (incorrectly assigned to architect). Recreated as #685-689 for project_manager.
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| mitchellh/hashstructure (Go) | 792 importers (v2), archived July 2024. Niche (struct hashing). gohugoio/hashstructure has 0 stars. |
-| mitchellh/go-ps (Go) | 877 importers, archived July 2024. Process listing. Platform-specific complexity. No dominant fork. |
+| mitchellh/go-ps (Go) | 877 importers, archived July 2024. Process listing. Platform-specific complexity. goss-org/go-ps fork exists. |
+| PLY (Python) | 61.5M downloads/month, abandoned after 25 years. LALR parser generator — too complex to reimplement. Alternatives: lark, pyparsing, sly. |
 | bleach (Python) | 52M downloads/month, deprecated Jan 2023. nh3 (Rust) is endorsed replacement but different API. |
 | depd (Node) | 68M weekly, 7 years stale, Express dependency. Narrow scope. |
 | python-jose (Python) | 2.7M weekly, unmaintained. PyJWT is recommended replacement (FastAPI adopted it). |
@@ -82,6 +86,7 @@ arcanum, fieldmarshal, sortsmith, termpaint, tether
 - patrickmn/go-cache (Go): Now stash project.
 - fatih/structs (Go): Now structify project.
 - mitchellh/copystructure (Go): Now replica project.
+- mitchellh/hashstructure (Go): Now imprint project.
 - Rust ecosystem: Most unmaintained crates have community forks.
 - normalize-path (Node): Too trivial.
 - gorilla/websocket (Go): coder/websocket is the established replacement.
@@ -94,10 +99,18 @@ arcanum, fieldmarshal, sortsmith, termpaint, tether
 - text-unidecode (Python): Unidecode is actively maintained alternative.
 - mholt/archiver (Go): Replaced by mholt/archives by same author.
 - nlopes/slack (Go): slack-go/slack is the maintained fork.
+- pycparser (Python): Actively maintained, v3.0 Jan 2026.
+- chardet (Python): Actively maintained, v7.1.0 March 2026.
+- decorator (Python): Maintained, v5.2.1 Feb 2025.
+- wrapt (Python): Maintained, v2.1.2 March 2026.
+- oauthlib (Python): Actively maintained.
+- imdario/mergo (Go): Moved to darccio/mergo, maintained.
+- dgrijalva/jwt-go (Go): golang-jwt/jwt is dominant replacement.
 
 ## Key Notes
-- structify moved from planning → development since last run.
-- Go ecosystem coverage: 7 published + 2 testing + 1 development + 2 planning = 12 total.
+- structify moved from development → testing since last run.
+- replica moved from planning → development since last run.
+- Go ecosystem coverage: 7 published + 2 testing + 1 development + 3 planning = 13 total.
 - Python ecosystem coverage: 14 published + 6 testing = 20 total.
 - Node ecosystem coverage: 7 published + 3 testing = 10 total.
-- Next run: check if stash/replica moved to development. Evaluate mitchellh/hashstructure or mitchellh/go-ps as next candidate. Monitor testing projects for advancement.
+- Next run: check if imprint/stash moved forward. Evaluate mitchellh/go-ps as next Go candidate (877 importers, no blessed fork, but platform complexity). Monitor PLY situation for Python. Monitor testing projects for advancement.

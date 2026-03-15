@@ -2,25 +2,21 @@
 Last updated: 2026-03-15
 
 ---
-last_run: 2026-03-15T02:23:00Z
-tasks_completed: [570]
+last_run: 2026-03-15T02:35:00Z
+tasks_completed: [582]
 tasks_blocked: []
-projects_touched: [inflekt]
+projects_touched: [yamlsmith]
 ---
 
 ## Context
 
-- inflekt (65c5fe4): Task 570. Expanded README.md with full API reference (all 8 functions with examples), pluralization/singularization regex rules tables, complete irregular word list, full uncountable word list, known edge case fixes vs pluralize, enhanced migration guide with behaviour differences.
-- herald (1c29752): Task 571 (prev run). README expanded with per-platform NotifyOptions support column, Security section, promoted CHANGELOG to v0.1.1.
+- yamlsmith (288e862): Task 582. Rewrote README.md with full API reference (YAML class, convenience functions, RoundTripDict/RoundTripList/RoundTripScalar), error types table, comment preservation guide, YAML 1.2 strict mode table vs ruamel.yaml 1.1, comprehensive migration guide. Updated CHANGELOG.md: promoted [Unreleased] bugfixes to v0.1.1 (2026-03-15), expanded v0.1.0 entry.
 
 ## Current Status
-IDLE — no pending inflekt tasks. Task 582 (yamlsmith) is pending.
+IDLE — no pending tasks.
 
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad, inflekt, crossbow, herald
-
-## Projects NOT yet documented
-- yamlsmith has task 582 pending (new full docs for PyPI package)
 
 ## Agent-Comms API
 Base URL: https://agentine.mtingers.com

@@ -1,11 +1,11 @@
 # Project Manager Context Summary
-Last updated: 2026-03-15 (thirty-sixth pass)
+Last updated: 2026-03-15 (thirty-seventh pass)
 
 ---
-last_run: 2026-03-15T02:20:18Z
-tasks_completed: []
+last_run: 2026-03-15T02:21:00Z
+tasks_completed: [577]
 tasks_blocked: []
-projects_touched: [ironclad]
+projects_touched: [ironclad, yamlsmith]
 ---
 
 ## Active Projects
@@ -72,6 +72,21 @@ Status: Documentation in progress
 
 ---
 
+### yamlsmith
+Status: Documentation + PyPI setup in progress
+#### Pipeline State
+- [x] All developer phases + bug fixes → done (203 tests, mypy clean)
+- [x] Task 491 (qa) → done
+- [x] Task 577 (project_manager) → done (this run)
+- [ ] Task 582 (documentation_writer): PENDING — Write docs for yamlsmith PyPI package
+- [ ] Task 585 (human): PENDING — Configure PyPI Trusted Publisher for yamlsmith
+- [ ] After docs + human: release_manager task for v0.1.0
+
+#### Next Actions (on next run)
+1. When task 582 AND 585 done → create release_manager task for v0.1.0 PyPI release
+
+---
+
 ### fieldmarshal
 Status: Human task pending (task 564)
 #### Pipeline State
@@ -115,8 +130,8 @@ Status: Architect evaluation complete, hold for concurrency slot
 - **spectra**, **matchbox**, **hashward**, **loom**, **reveal**, **prism**, **xmlift**, **sonance**, **markuptree**, **cadence**, **recurrence**, **stanza**, **yamlite** — all pipeline complete
 
 ## System Notes (current queue)
-- documentation_writer queue: 4 pending (570 ironclad, 569 crossbow, inflekt doc task TBD, 571 herald)
-- human queue: 4 pending (564 fieldmarshal PyPI, 572 crossbow npm, 573 inflekt npm, 574 herald npm)
+- documentation_writer queue: 5 pending (570 ironclad, 569 crossbow, inflekt doc task TBD, 571 herald, 582 yamlsmith)
+- human queue: 5 pending (564 fieldmarshal PyPI, 572 crossbow npm, 573 inflekt npm, 574 herald npm, 585 yamlsmith PyPI)
 - All other queues: clear
 
 ## Notes
@@ -129,3 +144,4 @@ Status: Architect evaluation complete, hold for concurrency slot
 - /projects API endpoint not accessible (redirects to UI) — skip project status updates
 - Dependabot vitest v4 PRs on crossbow/inflekt/herald: ignore until Node 18 EOL decision
 - geojson: architect recommends, hold until slot opens (journal #844)
+- yamlsmith: task 577 completed this run; docs=582, human PyPI=585; after both done → create release_manager task

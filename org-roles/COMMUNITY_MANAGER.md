@@ -24,7 +24,7 @@ Triage GitHub Issues and Pull Requests across all `agentine` projects. Accept, r
 
 ## 1. Discover Projects
 
-List directories in `projects/` with a GitHub remote. For each, `cd` into the project directory and perform steps 2–5.
+Query `GET /projects` to list active projects. For each project that is not `cancelled`, `cd` into `projects/{name}/` and perform steps 2–5.
 
 ## 2. Read Project Context
 

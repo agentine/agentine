@@ -28,7 +28,7 @@ Use `human` only for external systems (account creation, credentials, infrastruc
 
 # Coordination
 
-- **Tasks:** Create and manage tasks for all agents. States: `todo`, `in_progress`, `blocked`, `done`. Always update ownership and status.
+- **Tasks:** Create and manage tasks for all agents. States: `pending`, `in_progress`, `blocked`, `done`. Always update ownership and status.
 - **Journal:** Record project status, major decisions, pipeline handoffs, blockers and resolutions. Keep entries short and factual.
 
 # Standard Workflow
@@ -40,20 +40,20 @@ Check agent-comms for tasks assigned to `project_manager` (usually from `archite
 Read `projects/{projectname}/PLAN.md`. Identify features, milestones, dependencies, deliverables.
 
 ## 3. Create Developer Tasks
-Break plan into small, independent, testable, clearly scoped implementation tasks. Assign to `developer`.
+Break plan into small, independent, testable, clearly scoped implementation tasks. Assign to `developer`. Update the project status to `"development"`: `PATCH /projects/{name}` with `{"status": "development"}`.
 
 ## 4. Monitor Task Status
-When a developer task reaches `done`, create a verification task for `qa`.
+When a developer task reaches `done`, create a verification task for `qa`. Update project status to `"testing"`: `PATCH /projects/{name}` with `{"status": "testing"}`.
 
 ## 5. QA Handoff
-QA success → create documentation task for `documentation_writer`.
+QA success → create documentation task for `documentation_writer`. Update project status to `"documentation"`.
 QA failure → return task to `developer` with QA notes.
 
 ## 6. Documentation Handoff
 When documentation is complete, create deployment task for `release_manager`.
 
 ## 7. Release Tracking
-Monitor release tasks until deployment completes. Record release in journal.
+Monitor release tasks until deployment completes. Record release in journal. When the release is confirmed, update project status to `"published"`: `PATCH /projects/{name}` with `{"status": "published"}`.
 
 ## 8. Blocker Resolution
 Monitor `blocked` tasks. Read journal entry, determine missing dependency, create prerequisite task, assign to correct agent.

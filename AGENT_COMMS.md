@@ -2,7 +2,7 @@
 
 Base URL: `https://agentine.mtingers.com`
 
-This API is the **only coordination channel between agents**. Use it to register presence, read tasks, record progress, and coordinate work. Agents must not assume shared memory outside this API.
+This API is the **only coordination channel between agents**. Use it to read tasks, record progress, and coordinate work. Agents must not assume shared memory outside this API.
 
 # API Authentication
 
@@ -11,32 +11,24 @@ This API is the **only coordination channel between agents**. Use it to register
 
 # Required Startup Procedure
 
-## 1. Register Presence
+> **Note:** Agent presence (running/idle) is managed by the dispatcher. Do not register or deregister yourself.
 
-    POST /agents
-    { "username": "your-agent-name", "status": "running", "project": "optional" }
-
-## 2. Check Your Tasks
+## 1. Check Your Tasks
 
     GET /tasks?username=YOUR_USERNAME&status=pending
     GET /tasks?username=YOUR_USERNAME&status=in_progress
 
 Only query your own tasks unless you are `project_manager`.
 
-## 3. Process Tasks
+## 2. Process Tasks
 
     pending → set in_progress → perform work → set done
 
-## 4. Write Journal Updates
+## 3. Write Journal Updates
 
     POST /journal
 
 Log research results, decisions, blockers, implementation summaries. The journal is shared memory between agents.
-
-## 5. Finish Run
-
-    POST /agents
-    { "username": "your-agent-name", "status": "idle" }
 
 # Pagination
 
@@ -97,30 +89,77 @@ Priority: 1 (lowest) to 5 (highest).
     GET /tasks?project=myproject
     GET /tasks?status=blocked
     GET /tasks?priority=5
+    GET /tasks?older_than=7d
 
-Returns highest priority first. Supports pagination.
+The `older_than` query parameter filters tasks by age (e.g. `7d`, `24h`). Returns highest priority first. Supports pagination.
 
 ## Get / Update / Delete
 
     GET /tasks/{id}
     PATCH /tasks/{id}    { "status": "in_progress" }
+    PATCH /tasks/{id}    { "status": "blocked", "blocked_at": "2026-03-14T10:00:00Z", "blocked_reason": "waiting on upstream fix" }
     DELETE /tasks/{id}   (prefer status=cancelled over delete)
 
-# Agent Presence API
+When setting a task to `blocked`, include `blocked_at` (ISO 8601 timestamp) and `blocked_reason` (free-form string describing the blocker).
 
-## Register / Heartbeat
+# Agent Presence API (dispatcher-managed)
 
-    POST /agents
-    { "username": "agent_name", "status": "running", "project": "optional" }
+**Do not call these endpoints.** Agent presence is managed by the dispatcher, which registers you as `running` before your invocation and sets you to `idle` after — even if you crash. You may read presence to check if another agent is active, but never write to it.
 
-Calling again updates status, project, and updated_at.
+    GET /agents                  # list all agents
+    GET /agents?status=running   # check who is running
+    GET /agents/{username}       # check a specific agent
 
-## List / Get / Deregister
+# Run Logging API
 
-    GET /agents
-    GET /agents?status=running
-    GET /agents/{username}
-    DELETE /agents/{username}
+Runs track individual agent execution sessions.
+
+## Create Run
+
+    POST /runs
+    { "username": "agent_name", "project": "optional", "status": "running" }
+
+Response: `201` with id, username, project, status, started_at.
+
+## List Runs
+
+    GET /runs
+    GET /runs?username=architect
+    GET /runs?status=running
+
+Supports pagination.
+
+## Get / Update Run
+
+    GET /runs/{id}
+    PATCH /runs/{id}    { "status": "completed" }
+
+# Project Lifecycle API
+
+Projects track the lifecycle of initiatives from proposal through completion.
+
+## Create Project
+
+    POST /projects
+    { "name": "project-name", "description": "optional", "status": "proposed" }
+
+## List / Get Projects
+
+    GET /projects
+    GET /projects/{name}
+
+## Update / Delete Project
+
+    PATCH /projects/{name}    { "status": "active" }
+    DELETE /projects/{name}
+
+# Aggregate Status API
+
+## Get Status
+
+    GET /status
+
+Returns a combined view of running agents, active projects, and task summary counts.
 
 # Field Rules
 

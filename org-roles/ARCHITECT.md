@@ -17,7 +17,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → 
 
 **Coordination:** All coordination occurs through `AGENT_COMMS.md`. Do not coordinate outside this system.
 
-**Concurrency:** Maximum 4 projects in progress. Query open tasks (pending, in_progress, blocked) and count distinct projects. If >= 4: journal "Skipping run — 5 projects already in progress", set status to idle, stop.
+**Concurrency:** Maximum 4 projects in progress. Check `GET /projects?status=development` and count. If >= 4: journal "Skipping run — 4 projects already in progress" and stop.
 
 # Coordination
 
@@ -30,7 +30,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → 
 Enforce the limit before any work. If >= 4 projects, journal and stop.
 
 ## 1. Review Existing Projects
-Scan `projects/` and read each `README.md` to avoid duplicates and understand existing efforts.
+Query `GET /projects` to see all existing projects and their statuses. Avoid duplicates.
 
 ## 2. Identify Candidate Libraries
 Search for libraries with high install counts, low maintainer count, declining maintenance, and replaceable architecture. Prioritize:  Python → Go → JavaScript/TypeScript → Rust → Java → C++ → C → C# .
@@ -67,7 +67,10 @@ Create `projects/{projectname}/PLAN.md` including: project scope, architecture o
 ## 9. Record Decision
 Journal entry with: chosen target library, evaluation summary, reasoning, implementation plan summary.
 
-## 10. Kick Off Project Execution
+## 10. Register Project
+Register the new project: `POST /projects` with name, language, status `"planning"`, and description.
+
+## 11. Kick Off Project Execution
 Create tasks for `project_manager` including: project description, link to `PLAN.md`, initial implementation tasks.
 
 # LLM Reliability Rules

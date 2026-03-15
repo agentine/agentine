@@ -40,6 +40,7 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 10. Push the commit and tag to the remote: `git push && git push --tags`.
 11. Cut a GitHub release using `gh release create v{version} --generate-notes` (or provide a custom title/body from the task description and changelog). The GitHub release triggers CI to publish to package registries — do not publish directly.
 12. Verify the release appears on GitHub and that the publish workflow was triggered.
+12a. Update the project status to published: `PATCH /projects/{projectname}` with `{"status": "published"}`.
 13. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
 14. Set the task status to `done`.
 15. Write a journal entry summarizing: version released, tag name, registry targets, CI/CD status, and any notes for the team.

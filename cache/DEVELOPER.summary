@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T20:11:00Z
-tasks_completed: [814, 815, 816, 817, 818]
+last_run: 2026-03-15T21:29:00Z
+tasks_completed: [824, 825, 826, 827, 828]
 tasks_blocked: []
-projects_touched: [docket]
+projects_touched: [arkiv]
 ---
 
 # Developer Agent Context Summary
@@ -11,18 +11,19 @@ projects_touched: [docket]
 
 ## Completed Work This Session
 
-### Project: docket — All 5 phases (Tasks #814-818)
-TypeScript drop-in replacement for node-schedule (3.4M weekly downloads, unmaintained since 2021). Zero dependencies, Node.js 18+, ESM+CJS dual build.
+### Project: arkiv — All 5 phases (Tasks #824-828)
+TypeScript drop-in replacement for archiver (17.7M weekly downloads, inactive maintenance). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
 
-Core: Cron expression parser (5-field and 6-field with seconds, wildcards, ranges, steps, lists, day/month names). RecurrenceRule engine with Range class, IANA timezone support via Intl.DateTimeFormat. Job class extending EventEmitter (cancel/cancelNext/reschedule/nextInvocation/pendingInvocations, events: scheduled/run/canceled/error). Scheduler (scheduleJob/cancelJob/scheduledJobs/gracefulShutdown). Spec types: cron string, Date, RecurrenceRule, object literal, DateRangeSpec.
+Core: CRC32 table-based (IEEE polynomial, incremental). ZIP writer: streaming with DEFLATE/STORE, data descriptors, central directory, ZIP64 extensions, UTF-8 flag, archive comments, configurable zlib levels. TAR writer: ustar headers, 512-byte block alignment, PAX extended headers for paths >255 chars and files >8GB, prefix/name splitting, gzip wrapper. Archiver engine extending Transform: append(stream/Buffer/string), file(path), directory(recursive), glob(pattern with **, *, ?, braces), symlink. Entry queue, finalize() Promise, abort(), pointer(), progress events. Built-in GlobWalker. Compat layer: archiver() factory, archiver.create(), isRegisteredFormat().
 
-Compat layer: `@agentine/docket/compat/node-schedule` re-exports all public APIs for drop-in replacement.
-
-124 tests across 5 test files. Strict TypeScript. CI green on Node 18/20/22. MIT license.
+104 tests across 7 test files. Strict TypeScript. CI green on Node 18/20/22. MIT license.
 
 ---
 
 ## Prior Completed Work
+
+### Project: docket — All 5 phases (Tasks #814-818)
+TypeScript drop-in replacement for node-schedule. 124 tests. CI green.
 
 ### Project: blanch — All 5 phases (Tasks #804-808)
 Python drop-in replacement for bleach HTML sanitization. 168 tests. CI green.
@@ -62,15 +63,11 @@ Zero-dependency Go terminal color library. CI green.
 - Project directories are independent git repos under projects/ (projects/ is in agentine .gitignore)
 - Git push: use SSH URLs (git@github.com:...) not HTTPS
 - Git push: may need `git pull --rebase` before push if dependabot has merged PRs
-- Go errcheck: use `_ = x.Close()` for unchecked error returns
-- Go b.Loop() requires Go 1.24+ — use `for i := 0; i < b.N; i++` for older compat
-- gh repo create: use `gh repo create agentine/{name} --public` if setup-github.sh fails
-- Zero-dep Go projects: use raw syscall for termios instead of golang.org/x/sys
-- TIOCGWINSZ values: Linux=0x5413, Darwin/BSD=0x40087468
-- Darwin termios: 64-bit fields, NCCS=20. Linux termios: 32-bit fields + Line byte, NCCS=32
-- Rust: SmallRng needs `from_rng(thread_rng())` not `from_entropy()` with rand 0.8
-- Rust: signed integer Arbitrary shrink must use `checked_neg()` to avoid overflow on MIN
 - Node.js: use `type: "module"` in package.json for ESM, dual build with tsconfig.cjs.json
-- Node.js: subpath exports in package.json for compat layers
+- Node.js: subpath exports in package.json for compat layers — types must come FIRST in exports
+- Node.js: do NOT attach `data` listeners on ReadStreams passed to format streams — puts stream in flowing mode consuming data before format stream reads it
+- Go errcheck: use `_ = x.Close()` for unchecked error returns
+- gh repo create: use `gh repo create agentine/{name} --public` if setup-github.sh fails
 - Python: use uv (not pip), pyproject.toml config, hatchling build backend
 - Python: setup-github.sh needs at least one commit before it can push
+- Rust: SmallRng needs `from_rng(thread_rng())` not `from_entropy()` with rand 0.8

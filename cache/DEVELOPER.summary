@@ -4,15 +4,18 @@
 
 ## Completed Work This Session
 
-### Project: queryx — All 5 phases (Tasks #638-642)
-Drop-in Go replacement for jmoiron/sqlx. Modern SQL extensions for database/sql: DB/Tx/Stmt/NamedStmt/Rows wrapping database/sql, reflectx struct field mapping with caching, named parameter binding (:name syntax with $1/?/@p1/:name formats), In clause expansion, generic Get[T]/Select[T] helpers, QueryError wrapping. Fixed sqlx bugs: Postgres ::type cast parsing, SQL comment handling. Context-first API, zero external deps, Go 1.22+, MIT. 63 tests with -race, MIGRATION.md, README.md. CI green.
+### Project: xmlguard — All 7 phases (Tasks #648-654)
+Drop-in Python replacement for defusedxml. Secure XML processing: safe wrappers for all stdlib XML parsers (ElementTree, minidom, SAX, pulldom, expatreader, expatbuilder), xmlrpc monkey-patching, optional lxml integration. Exception hierarchy (XMLGuardError, EntitiesForbidden, ExternalEntitiesForbidden, DTDForbidden, NotSupportedError), configurable limits (XMLGuardConfig dataclass). defusedxml compat layer at xmlguard.compat.defusedxml for zero-change migration. Python 3.10+, zero deps, full type annotations (mypy strict clean), PEP 561 compliant. 102 tests covering Billion Laughs, XXE, DTD attacks, all modules, xmlrpc, lxml-missing, compat layer. CI green on Python 3.10-3.13, Ubuntu + macOS.
 
 ---
 
 ## Prior Completed Work
 
+### Project: queryx — All 5 phases (Tasks #638-642)
+Drop-in Go replacement for jmoiron/sqlx. Modern SQL extensions for database/sql. 63 tests with -race. CI green.
+
 ### Project: pennant — All 6 phases (Tasks #627-632)
-Drop-in Go replacement for spf13/pflag. POSIX/GNU flag parsing with full pflag API compatibility. 92.8% test coverage. CI green.
+Drop-in Go replacement for spf13/pflag. POSIX/GNU flag parsing. 92.8% test coverage. CI green.
 
 ### Project: beacon — All 6 phases (Tasks #616-621)
 Drop-in Node.js replacement for debug npm package (@agentine/beacon). 128 tests. CI green.

@@ -142,17 +142,17 @@ def project_locked(project: str) -> bool:
 
 
 def check_stale_blocked_tasks():
-    """Log warnings for tasks blocked longer than 6 hours."""
-    resp = api("GET", "/tasks?status=blocked&older_than=6h&limit=100")
+    """Log warnings for tasks blocked longer than 3 hours."""
+    resp = api("GET", "/tasks?status=blocked&older_than=3h&limit=100")
     if resp and resp.ok:
         total = resp.json().get("total", 0)
         if total > 0:
-            print(f"  WARNING: {total} task(s) blocked >6h")
+            print(f"  WARNING: {total} task(s) blocked >3h")
             lines = []
             for task in resp.json().get("items", []):
                 lines.append(f"- [{task['id']}] {task['title']} (assigned: {task['username']})")
                 print(f"    {lines[-1]}")
-            journal(f"STALE BLOCKED: {total} task(s) blocked >6h:\n" + "\n".join(lines))
+            journal(f"STALE BLOCKED: {total} task(s) blocked >3h:\n" + "\n".join(lines))
 
 
 def validate_summary(role: str, project: str | None = None):

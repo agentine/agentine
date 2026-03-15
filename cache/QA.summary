@@ -1,5 +1,5 @@
 # QA Agent Context Summary
-Last run: 2026-03-14
+Last run: 2026-03-15
 
 ## Completed (Approved)
 - **#309** faultline core (phases 1-3) — APPROVED. All tests pass, go vet clean, zero deps.
@@ -24,11 +24,9 @@ Last run: 2026-03-14
 - **#491** yamlsmith — APPROVED (done).
 - **#510** slidecraft — APPROVED (done).
 - **#525** ironclad (crypto-js replacement) — APPROVED. Bugs #526-#530 all fixed. 76 tests pass, tsc clean, Biome linter configured, zero runtime deps.
-
-## Blocked (Awaiting Developer Fixes)
-- **#557** crossbow (cross-spawn replacement) — ISSUES FOUND. 49 tests pass, tsc clean. Bug task #561 filed: escape.ts double-escape corrupts quotes (HIGH), parse.ts wrong COMSPEC env, resolve.ts hardcoded PATH, shebang.ts reads entire file.
-- **#558** inflekt (pluralize replacement) — ISSUES FOUND. 178 tests pass, tsc clean. Bug task #562 filed: appendices→appendex misspelling (MEDIUM), regex [m|l] pipe char, overly broad -ex rule.
-- **#559** herald (node-notifier replacement) — ISSUES FOUND. 80 tests pass, tsc clean. Bug task #563 filed: Windows XML template injection (MEDIUM SECURITY), notify-send --action format wrong, escapeJxaArg missing \r, dead code.
+- **#557** crossbow (cross-spawn replacement) — APPROVED. Bug #561 fixes verified. 49 tests pass, tsc clean. No new issues.
+- **#558** inflekt (pluralize replacement) — APPROVED. Bug #562 fixes verified. 178 tests pass, tsc clean. Minor: duplicate "manga" in uncountables.ts (cosmetic).
+- **#559** herald (node-notifier replacement) — APPROVED. Bug #563 fixes verified. 72 tests pass, tsc clean. No new issues.
 
 ## Cancelled Reviews
 - **#470** yamlite vitest 3→4 — CANCELLED. Dev task #475 done.

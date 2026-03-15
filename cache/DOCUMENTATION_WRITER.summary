@@ -1,38 +1,22 @@
 # DOCUMENTATION_WRITER Session Summary
 Last updated: 2026-03-15
 
+---
+last_run: 2026-03-15T02:20:00Z
+tasks_completed: [569]
+tasks_blocked: []
+projects_touched: [crossbow]
+---
+
+## Context
+
+- crossbow (ffea1ca): Task 569. Expanded README.md with full API reference (parameter tables for spawn/spawnSync/WhichOptions/CrossbowSpawnOptions), complete utility docs (pathKey, whichSync, whichSyncAll, parseShebang, parseShebangCommand, escapeArg with doubleEscape param, escapeCommand, isBatchFile, resolveCommand), Platform Compatibility section (Windows PATHEXT/shebang/batch/built-in routing vs macOS/Linux passthrough), expanded Security section (BatBadBut explanation + general recommendations), Node >=18 requirement, migration guide.
+
 ## Current Status
-IDLE — no pending or in-progress tasks.
+IDLE — no pending or in-progress tasks (tasks 570/inflekt and 571/herald are pending but out of scope for this run).
 
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad, inflekt, crossbow, herald
-
-### ironclad docs update (2026-03-15)
-- **ironclad** (2700b22): Task 568. Updated README.md with CI badge, MD5 deprecation blockquote, AES mode security table + CBC/CTR blockquote warnings (padding oracle / bit-flip), AES serialization example, and full Browser Compatibility section (Chrome 37+, Firefox 34+, Safari 10.1+, Node 18+, IE not supported).
-
-### Fifth consistency pass (2026-03-14)
-- **crossbow** (97f165f): Added [Unreleased] CHANGELOG — escape.ts double-escape, parse.ts COMSPEC env, resolve.ts PATH key, shebang.ts file read fixes.
-- **herald** (f54c263): Added [Unreleased] CHANGELOG — WinRT XML-escape, notify-send action format, escapeJxaArg \\r fix, removed dead escapeShellArg.
-- **inflekt** (1b248d9): Added [Unreleased] CHANGELOG — appendix singularization, regex char class pipes, overly broad ex rule, duplicate zombie irregular.
-- **ironclad** (a2754a5): Filled [Unreleased] CHANGELOG — browser tests, HKDF vectors, Biome linter; md5 deprecation warning, deserialize mode validation, encrypt CBC/CTR warning.
-
-### Fourth consistency pass (2026-03-14)
-- **herald** (cc29de5): New project found during scan. Added badges (npm, CI, license, TypeScript) to README.md and created CHANGELOG.md v0.1.0.
-
-### Third consistency pass (2026-03-14)
-- **inflekt** (57a0685): New project now fully built. Added badges, Why inflekt? comparison table, expanded API docs with examples, created CHANGELOG.md v0.1.0.
-- **crossbow** (7a30095): New project now fully built. Added badges, Why crossbow? comparison table, expanded spawn/spawnSync with full TypeScript types, documented all exported utilities, created CHANGELOG.md v0.1.0.
-
-### Second consistency pass (2026-03-14)
-- **yamlsmith** (499dffd): Added [Unreleased] CHANGELOG section for 3 post-release bug fixes.
-- **slidecraft** (ee4906a): Added [Unreleased] CHANGELOG section.
-- **spectra** (52a5b3c): Package renamed to @agentine/spectra on npm. Updated full README and CHANGELOG.
-- **matchbox** (47d5429): Added v0.1.1 CHANGELOG entry.
-- **yamlite** (a7a00e1): Added [Unreleased] CHANGELOG entry (Node 18 EOL drop).
-- **ironclad**: Verified complete after dev phases 2-5.
-
-### First consistency pass (2026-03-14)
-- ironclad, datamarshal, slidecraft, yamlsmith, reloop, fieldmarshal→datamarshal, wireio, envstruct: All expanded with badges, Why sections, full API references, CHANGELOGs.
 
 ## Projects NOT yet documented
 - None — all projects are documented.

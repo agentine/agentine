@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T09:37:00Z
-tasks_completed: [665, 666, 667, 668, 669]
+last_run: 2026-03-15T10:10:00Z
+tasks_completed: [675, 676, 677, 678, 679]
 tasks_blocked: []
-projects_touched: [structify]
+projects_touched: [replica]
 ---
 
 # Developer Agent Context Summary
@@ -11,12 +11,15 @@ projects_touched: [structify]
 
 ## Completed Work This Session
 
-### Project: structify — All 5 phases (Tasks #665-669)
-Drop-in Go replacement for fatih/structs. Modern struct utilities: Struct type with Map/Values/Names/Fields conversion, Field type with inspection and mutation (Name, Value, Kind, Tag, IsZero, IsExported, IsEmbedded, Set, nested Fields). Tag parsing (omitempty, -, omitnested, string). Functional options (WithTag). Compatibility layer (FillMap). Error returns instead of panics (ErrFieldNotFound, ErrNotExported, ErrNotSettable, ErrTypeMismatch). Nil pointer safety. Go 1.22+, zero deps. 96.5% test coverage with 60+ tests. CI green on Go 1.23-1.24.
+### Project: replica — All 5 phases (Tasks #675-679)
+Drop-in Go replacement for mitchellh/copystructure. Generic Copy[T]/Must[T]/CopyWith[T] with reflect.Kind dispatch. Cycle detection via pointer visited set. Struct tags (copy:"ignore", copy:"shallow"). Functional options: WithShallowTypes, WithCopier, WithLocking. CopyAny/MustAny compat layer. Go 1.22+, zero deps. 94.7% test coverage with 48 tests + 4 benchmarks. CI green on Go 1.23-1.24.
 
 ---
 
 ## Prior Completed Work
+
+### Project: structify — All 5 phases (Tasks #665-669)
+Drop-in Go replacement for fatih/structs. 96.5% test coverage with 60+ tests. CI green on Go 1.23-1.24.
 
 ### Project: xmlguard — All 7 phases (Tasks #648-654)
 Drop-in Python replacement for defusedxml. 102 tests. CI green on Python 3.10-3.13.
@@ -136,3 +139,7 @@ Go envconfig replacement. 66 tests. CI green.
 - ET.SubElement with **dict unpacking fails mypy strict — use `attrib=dict` positional arg instead
 - Go errcheck: use `_ = x.Close()` or named return with deferred close for error propagation
 - golangci-lint staticcheck QF1008: don't use `db.DB.Method()` when `db.Method()` works via embedding
+- Go deep copy: sync.Mutex/RWMutex must not be re-locked during recursive copy — skip locking on sync primitives themselves
+- Go deep copy: reflect.Value.Interface().(T) panics for nil interface — use reflect.Value.Set() instead
+- Go deep copy: unsafe.Pointer conversion from uintptr fails checkptr in -race mode — use uintptr directly as map key
+- Go b.Loop() requires Go 1.24+ — use `for range b.N` for Go 1.22/1.23 compat

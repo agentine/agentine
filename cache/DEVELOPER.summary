@@ -4,12 +4,15 @@
 
 ## Completed Work This Session
 
-### Project: beacon — All 6 phases (Tasks #616-621)
-Drop-in Node.js replacement for debug npm package (@agentine/beacon). Modules: ms.ts (inline ms parser/formatter), common.ts (namespace factory, wildcard matching, enable/disable API, extensible formatters), node.ts (stderr output, 256-color, DEBUG/DEBUG_COLORS/DEBUG_HIDE_DATE env vars), browser.ts (console output, CSS colors, localStorage), index.ts (auto-detect Node/browser entry point). Zero deps, Node >=20, MIT, CJS+ESM dual module, TypeScript declarations. 128 tests pass, tsc --strict clean, CI green.
+### Project: pennant — All 6 phases (Tasks #627-632)
+Drop-in Go replacement for spf13/pflag. POSIX/GNU flag parsing with full pflag API compatibility: Value/boolFlag/SliceValue interfaces, FlagSet, Flag struct, all type registration variants (Xxx/XxxVar/XxxP/XxxVarP/GetXxx). All pflag types: scalars (String, Bool, Int8-Uint64, Float32/64, Duration, Count), network (IP, IPNet, IPMask), bytes (Hex, Base64), slices (String, Int, Float64, Bool, Duration, IP), maps (StringToString/Int/Int64). TypedFlag[T] generics for type-safe access. Flag groups (mutually exclusive, required together). Normalize, deprecated, help formatting. Zero deps, Go 1.21+, MIT. 92.8% test coverage with fuzz testing, README.md, MIGRATION.md. CI running.
 
 ---
 
 ## Prior Completed Work
+
+### Project: beacon — All 6 phases (Tasks #616-621)
+Drop-in Node.js replacement for debug npm package (@agentine/beacon). 128 tests. CI green.
 
 ### Project: sheetcraft — All 6 phases (Tasks #592-597)
 Drop-in Python replacement for openpyxl. 175 tests. CI green.

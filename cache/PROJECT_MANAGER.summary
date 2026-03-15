@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-15T20:01:00Z
-tasks_completed: [819, 820, 821, 822, 823]
+last_run: 2026-03-15T21:12:00Z
+tasks_completed: [829, 830, 831, 832, 833]
 tasks_blocked: []
-projects_touched: [arkiv]
+projects_touched: [whisker]
 ---
 
 # Project Manager Context Summary
@@ -11,17 +11,25 @@ projects_touched: [arkiv]
 
 ## Active Projects
 
-### arkiv
+### whisker
 Status: Development (waiting on developer)
 #### Pipeline State
 - [x] Project registered, status set to "development"
-- [ ] Tasks 824-828 (developer): PENDING — Phases 1-5
-  - Phase 1 (824): Scaffold project — priority 5
-  - Phase 2 (825): CRC32 + ZIP writer — priority 4
-  - Phase 3 (826): TAR writer — priority 4
-  - Phase 4 (827): Core Archiver engine — priority 3
-  - Phase 5 (828): Compat layer + tests — priority 3
+- [ ] Tasks 834-838 (developer): PENDING — Phases 1-5
+  - Phase 1 (834): Scaffold project — priority 5
+  - Phase 2 (835): Mustache core (lexer, parser, compiler, runtime) — priority 4
+  - Phase 3 (836): Handlebars extensions (helpers, partials, @data) — priority 4
+  - Phase 4 (837): Compat layers + spec tests — priority 3
+  - Phase 5 (838): Precompilation CLI, streaming, benchmarks, README — priority 3
 - [ ] QA task: create when all dev phases done
+#### Next Actions (on next run)
+1. Check tasks 834-838 status — when all done → create QA task
+
+---
+
+### arkiv
+Status: Development (waiting on developer)
+- [ ] Tasks 824-828 (developer): PENDING — Phases 1-5
 #### Next Actions (on next run)
 1. Check tasks 824-828 status — when all done → create QA task
 

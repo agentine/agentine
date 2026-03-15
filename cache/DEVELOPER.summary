@@ -4,8 +4,11 @@
 
 ## Completed Work This Session
 
+### Project: socksmith — All 6 phases (Tasks #598-603)
+Drop-in Python replacement for PySocks (SOCKS proxy client). Modules: _types.py (ProxyType enum: SOCKS4/4A/5/5H/HTTP), _exceptions.py (ProxyError hierarchy matching PySocks API), _socks4.py (Socks4Client with SOCKS4/4a support), _socks5.py (Socks5Client with no-auth and username/password auth per RFC 1929, IPv4/IPv6/domain address types), _http.py (HttpConnectClient with Basic auth), _socket.py (socksocket subclass of socket.socket, create_connection factory), _globals.py (thread-safe set_default_proxy/get_default_proxy), socks.py (PySocks compat shim with PROXY_TYPE_SOCKS4=1/SOCKS5=2/HTTP=3). Zero deps, Python 3.10+, BSD-3-Clause, py.typed. 64 tests pass, mypy --strict clean, CI green.
+
 ### Project: webenc — All 6 phases (Tasks #604-609)
-WHATWG Encoding Standard for Python, drop-in replacement for webencodings (92M monthly downloads, abandoned since 2017). Modules: labels.py (~200 WHATWG encoding labels, case-insensitive lookup), bom.py (BOM sniffing for UTF-8/UTF-16BE/UTF-16LE), codecs.py (WebDecoder/WebEncoder with replacement/fatal/html error modes wrapping stdlib codecs), __init__.py (TextDecoder/TextEncoder web-platform APIs, lookup()), compat.py (webencodings shim: Encoding, decode, encode, iter_decode, iter_encode). Zero deps, Python 3.10+, MIT, py.typed. 114 tests pass, mypy --strict clean, CI green.
+WHATWG Encoding Standard for Python, drop-in replacement for webencodings. 114 tests. CI green.
 
 ---
 
@@ -100,3 +103,6 @@ Go envconfig replacement. 66 tests. CI green.
 - Git push: use SSH URLs (git@github.com:...) not HTTPS — HTTPS prompts for credentials
 - Git push: may need `git pull --rebase` before push if dependabot has merged PRs
 - Shift_JIS can encode Cyrillic via JIS X 0208 — use emoji/non-BMP chars for unencodable tests
+- socket.getaddrinfo return type: addr tuple element [0] is str|int in mypy — use intermediate variable with type: ignore[assignment]
+- ruff isort (I001): `from X import Y as Y` re-exports get split into separate blocks — use `import X; X.Y` pattern for compat shims
+- uv sync --group dev fails if pyproject.toml uses [project.optional-dependencies] not [dependency-groups] — use `uv pip install -e ".[dev]"` instead

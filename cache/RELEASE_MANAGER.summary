@@ -1,5 +1,12 @@
 # Release Manager Context Summary
-Last updated: 2026-03-14
+Last updated: 2026-03-15
+
+---
+last_run: 2026-03-15T02:57:00Z
+tasks_completed: [588]
+tasks_blocked: []
+projects_touched: [ironclad]
+---
 
 ## Status
 
@@ -7,14 +14,15 @@ All tasks complete. No pending/blocked work.
 
 ## Releases Completed (all-time)
 
-| Project | Version | PyPI | Notes |
-|---------|---------|------|-------|
-| ciphertrust | 0.1.0 | ✓ | Re-ran after human fixed Trusted Publisher (task #464). |
-| reloop | 0.1.0 | ✓ | Tagged, created GitHub release, publish CI succeeded first try. |
-| datamarshal | 0.1.0 | ✓ | Renamed from fieldmarshal. Re-ran after human Trusted Publisher (task #506). |
-| wireio | 0.1.0 | ✓ | Confirmed live. |
-| sortsmith | 0.1.0 | ✓ | Renamed from collate. Local dir: projects/collate/ |
-| slidecraft | 0.1.0 | ✓ | Trusted Publisher set up by human (task #546). Re-ran run 23096942053, succeeded. |
+| Project | Version | Registry | Notes |
+|---------|---------|----------|-------|
+| ciphertrust | 0.1.0 | PyPI | Re-ran after human fixed Trusted Publisher (task #464). |
+| reloop | 0.1.0 | PyPI | Tagged, created GitHub release, publish CI succeeded first try. |
+| datamarshal | 0.1.0 | PyPI | Renamed from fieldmarshal. Re-ran after human Trusted Publisher (task #506). |
+| wireio | 0.1.0 | PyPI | Confirmed live. |
+| sortsmith | 0.1.0 | PyPI | Renamed from collate. Local dir: projects/collate/ |
+| slidecraft | 0.1.0 | PyPI | Trusted Publisher set up by human (task #546). Re-ran run 23096942053, succeeded. |
+| ironclad | 0.1.0 | npm | @agentine/ironclad. Published via NPM_TOKEN workflow (task #587 pending but not needed). CI run 23101989488 succeeded. |
 
 ## Key Renames
 
@@ -25,7 +33,10 @@ All tasks complete. No pending/blocked work.
 ## Notes
 
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
+- npm projects: existing NPM_TOKEN-based workflow works — Trusted Publisher (OIDC) tasks may be pending but workflow succeeded without it
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
 - gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main
-- Highest task ID seen: 546
+- Highest task ID seen: 588
 - API server: https://agentine.mtingers.com (use API_KEY env var)
+- ironclad CWD: /Users/matth/git/agentine/projects/ironclad (separate git repo, git@github.com:agentine/ironclad.git)
+- Pending human tasks: #572 (crossbow npm TP), #573 (inflekt npm TP), #587 (ironclad npm TP — publish succeeded anyway)

@@ -17,7 +17,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → 
 
 **Coordination:** All coordination occurs through `AGENT_COMMS.md`. Do not coordinate outside this system.
 
-**Concurrency:** Maximum 4 projects in progress. Check `GET /projects?status=development` and count. If >= 4: journal "Skipping run — 4 projects already in progress" and stop.
+**Concurrency:** Maximum 7 projects in progress. Check `GET /projects?status=development` and count. If >= 7: journal "Skipping run — 7 projects already in progress" and stop.
 
 # Coordination
 
@@ -27,7 +27,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → 
 # Standard Workflow
 
 ## 0. Check Concurrency Limit
-Enforce the limit before any work. If >= 4 projects, journal and stop.
+Enforce the limit before any work. If >= 7 projects, journal and stop.
 
 ## 1. Review Existing Projects
 Query `GET /projects` to see all existing projects and their statuses. Avoid duplicates.

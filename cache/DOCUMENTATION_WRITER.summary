@@ -1,5 +1,5 @@
 # DOCUMENTATION_WRITER Session Summary
-Last updated: 2026-03-14
+Last updated: 2026-03-15
 
 ## Current Status
 IDLE — no pending or in-progress tasks.
@@ -7,9 +7,12 @@ IDLE — no pending or in-progress tasks.
 ## Completed Projects (all done)
 spectra, loom, hashward, matchbox, dateflow, reveal, sonance, recurrence, cadence, stanza, prism, markuptree, xmlift (Phase 1 + Phases 2-4 update), yamlite, faultline, arcanum, termpaint, tether, isochron, aegis, chromapaint, ciphertrust, ptylink, slugsmith, collate, envstruct, fieldmarshal→datamarshal (renamed), wireio, reloop, slidecraft, yamlsmith, ironclad, inflekt, crossbow, herald
 
+### ironclad docs update (2026-03-15)
+- **ironclad** (2700b22): Task 568. Updated README.md with CI badge, MD5 deprecation blockquote, AES mode security table + CBC/CTR blockquote warnings (padding oracle / bit-flip), AES serialization example, and full Browser Compatibility section (Chrome 37+, Firefox 34+, Safari 10.1+, Node 18+, IE not supported).
+
 ### Fifth consistency pass (2026-03-14)
 - **crossbow** (97f165f): Added [Unreleased] CHANGELOG — escape.ts double-escape, parse.ts COMSPEC env, resolve.ts PATH key, shebang.ts file read fixes.
-- **herald** (f54c263): Added [Unreleased] CHANGELOG — WinRT XML-escape, notify-send action format, escapeJxaArg \r fix, removed dead escapeShellArg.
+- **herald** (f54c263): Added [Unreleased] CHANGELOG — WinRT XML-escape, notify-send action format, escapeJxaArg \\r fix, removed dead escapeShellArg.
 - **inflekt** (1b248d9): Added [Unreleased] CHANGELOG — appendix singularization, regex char class pipes, overly broad ex rule, duplicate zombie irregular.
 - **ironclad** (a2754a5): Filled [Unreleased] CHANGELOG — browser tests, HKDF vectors, Biome linter; md5 deprecation warning, deserialize mode validation, encrypt CBC/CTR warning.
 

@@ -296,12 +296,11 @@ def build_agent_command(config: AgentConfig, project: str | None) -> list[str]:
     """Build the CLI command to invoke an agent."""
     role = config.role
 
-    # Determine summary file path (prefer project-specific if it exists)
-    summary_file = f"cache/{role}.summary"
+    # Use project-specific summary when scoped to a project, global otherwise
     if project:
-        project_summary = f"cache/{role}.{project}.summary"
-        if Path(project_summary).exists():
-            summary_file = project_summary
+        summary_file = f"cache/{role}.{project}.summary"
+    else:
+        summary_file = f"cache/{role}.summary"
 
     project_clause = ""
     if project:

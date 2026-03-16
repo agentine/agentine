@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-16T04:50:14Z
+tasks_completed: []
+tasks_blocked: [950]
+projects_touched: [sheetforge]
+---
+
+## Context
+
+- sheetforge v0.1.0: GitHub release and tag exist, but PyPI publish failed (run 23127649026)
+- Task #950 (re-run publish workflow) is **blocked** on human task #937 (PyPI Trusted Publisher setup, still pending)
+- Project was renamed from sheetcraft → sheetforge due to PyPI name conflict
+- Next: once human completes #937, re-trigger publish workflow for v0.1.0

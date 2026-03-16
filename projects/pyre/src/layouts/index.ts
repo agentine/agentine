@@ -94,4 +94,141 @@ registerLayout('json', () => (event) => {
   });
 });
 
+// pattern: configurable format string
+// Tokens: %d (date), %p (level), %c (category), %m (message), %n (newline),
+//         %x{token} (context value), %z (pid), %f (filename), %l (line), %o (column),
+//         %[ / %] (color start/end), %% (literal %)
+registerLayout('pattern', (config) => {
+  const pattern = (config?.pattern as string) ?? '%d %p %c - %m';
+  const tokens = (config?.tokens as Record<string, string | ((event: LogEvent) => string)>) ?? {};
+
+  return (event) => {
+    let result = '';
+    let i = 0;
+    while (i < pattern.length) {
+      if (pattern[i] === '%' && i + 1 < pattern.length) {
+        const next = pattern[i + 1];
+        switch (next) {
+          case 'd': {
+            // Check for date format: %d{format}
+            if (pattern[i + 2] === '{') {
+              const end = pattern.indexOf('}', i + 3);
+              if (end > 0) {
+                const fmt = pattern.substring(i + 3, end);
+                result += formatDatePattern(event.startTime, fmt);
+                i = end + 1;
+                continue;
+              }
+            }
+            result += event.startTime.toISOString();
+            i += 2;
+            break;
+          }
+          case 'p':
+            result += event.level.levelStr;
+            i += 2;
+            break;
+          case 'c': {
+            // %c{n} — show only last n parts of category
+            if (pattern[i + 2] === '{') {
+              const end = pattern.indexOf('}', i + 3);
+              if (end > 0) {
+                const n = parseInt(pattern.substring(i + 3, end), 10);
+                const parts = event.categoryName.split('.');
+                result += parts.slice(-n).join('.');
+                i = end + 1;
+                continue;
+              }
+            }
+            result += event.categoryName;
+            i += 2;
+            break;
+          }
+          case 'm':
+            result += formatData(event.data);
+            i += 2;
+            break;
+          case 'n':
+            result += '\n';
+            i += 2;
+            break;
+          case 'z':
+            result += event.pid.toString();
+            i += 2;
+            break;
+          case 'f':
+            result += event.fileName ?? '';
+            i += 2;
+            break;
+          case 'l':
+            result += event.lineNumber?.toString() ?? '';
+            i += 2;
+            break;
+          case 'o':
+            result += event.columnNumber?.toString() ?? '';
+            i += 2;
+            break;
+          case 'x': {
+            // %x{tokenName}
+            if (pattern[i + 2] === '{') {
+              const end = pattern.indexOf('}', i + 3);
+              if (end > 0) {
+                const tokenName = pattern.substring(i + 3, end);
+                const tokenVal = tokens[tokenName];
+                if (typeof tokenVal === 'function') {
+                  result += tokenVal(event);
+                } else if (typeof tokenVal === 'string') {
+                  result += tokenVal;
+                } else if (event.context[tokenName] !== undefined) {
+                  result += String(event.context[tokenName]);
+                }
+                i = end + 1;
+                continue;
+              }
+            }
+            i += 2;
+            break;
+          }
+          case '[': {
+            const color = ANSI_COLORS[event.level.colour] ?? '';
+            result += color;
+            i += 2;
+            break;
+          }
+          case ']':
+            result += ANSI_RESET;
+            i += 2;
+            break;
+          case '%':
+            result += '%';
+            i += 2;
+            break;
+          default:
+            result += pattern[i];
+            i++;
+        }
+      } else {
+        result += pattern[i];
+        i++;
+      }
+    }
+    return result;
+  };
+});
+
+function formatDatePattern(date: Date, format: string): string {
+  if (format === 'ISO8601' || format === 'ISO8601_FORMAT') {
+    return date.toISOString();
+  }
+  const pad = (n: number, len = 2) => n.toString().padStart(len, '0');
+  return format
+    .replace('yyyy', date.getFullYear().toString())
+    .replace('MM', pad(date.getMonth() + 1))
+    .replace('dd', pad(date.getDate()))
+    .replace('hh', pad(date.getHours()))
+    .replace('mm', pad(date.getMinutes()))
+    .replace('ss', pad(date.getSeconds()))
+    .replace('SSS', pad(date.getMilliseconds(), 3));
+}
+
 export { formatData };

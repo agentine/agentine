@@ -1,0 +1,31 @@
+---
+last_run: 2026-03-16T10:00:00Z
+tasks_completed: []
+tasks_blocked: []
+projects_touched: [aegis, cadence, chromapaint, ciphertrust, collate, datamarshal, envstruct, faultline, matchbox, spectra]
+---
+
+## Context
+
+First maintenance run. Audited 10 of 60 published projects (oldest-updated-at first).
+
+### Critical
+- **faultline**: CI failing on main — golangci-lint errcheck in bench_test.go:55. Created task #1011 (p4) for developer. Also go.mod 1.21 very outdated, task #1012 (p3).
+- **spectra**: Publish workflow failed — NPM_TOKEN secret missing. Created task #1013 (p4) for human. No dependabot, task #1014 (p2).
+
+### Needs Attention
+- **aegis**: Stale lock file (express 4→5, @types/node 22→25), Node 18 EOL in CI. Task #1015 (p2).
+- **cadence**: go.mod 1.21 (current 1.26.1), no dependabot, outdated CI actions. Task #1016 (p3).
+- **chromapaint**: No dependabot, Python 3.9 EOL, outdated CI actions. Task #1017 (p2).
+- **ciphertrust**: No dependabot, Python 3.9 EOL, outdated CI actions. Task #1018 (p2).
+- **matchbox**: No dependabot. Task #1019 (p2).
+
+### Healthy
+- **collate**: CI green, dependabot configured, modern actions, Python >=3.10, zero deps.
+- **datamarshal**: CI green, dependabot configured, zero deps.
+- **envstruct**: CI green, dependabot configured, go 1.23 (within 2 minor of current).
+
+### Next Run
+- Audit remaining 50 published projects, prioritize oldest: dateflow, hashward, isochron, loom, markuptree, ptylink, recurrence, reloop, reveal, slugsmith, sonance, stanza, wireio, xmlift, yamlite, etc.
+- Check npm audit for all Node projects.
+- Follow up on tasks #1011-1019 status.

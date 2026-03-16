@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-16T15:35:00Z
+tasks_completed: [1049]
+tasks_blocked: []
+projects_touched: [bellows]
+---
+
+## Context
+
+- bellows: Investigated Dependabot PR CI failures. Root cause was stale PR base — both PRs created before test files were added. Rebased via @dependabot rebase, CI passed, merged both.
+- bellows now on vitest 4.1.0 and @types/node 25.5.0, all 94 tests passing, CI green on Node 20+22.
+- All original implementation tasks (scaffold, types, node backend, browser backend, tests, release v0.1.0) were already done.
+- No remaining pending tasks for developer on bellows.

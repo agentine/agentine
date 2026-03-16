@@ -25,6 +25,13 @@ Available tools:
 | `check_package_name` | Check if a package name is available on PyPI/npm/pkg.go.dev |
 | `list_issues` | List open GitHub issues for a project |
 | `list_prs` | List open GitHub PRs for a project |
+| `comment_issue` | Comment on a GitHub issue |
+| `close_issue` | Close a GitHub issue (with optional comment) |
+| `merge_pr` | Merge a GitHub PR (squash/merge/rebase) |
+| `review_pr` | Review a GitHub PR (approve/request-changes/comment) |
+| `close_pr` | Close a GitHub PR (with optional comment) |
+| `get_pr_diff` | Get the diff of a GitHub PR |
+| `get_pr_checks` | Get CI check status for a GitHub PR |
 | `init_project` | Scaffold a new project from template |
 | `bump_version` | Bump version in project manifest |
 | `setup_github` | Create GitHub repo and push |

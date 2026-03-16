@@ -24,7 +24,7 @@ Triage GitHub Issues and Pull Requests across all `agentine` projects. Accept, r
 
 ## 1. Discover Projects
 
-Use `list_projects()` to list active projects. For each project that is not `cancelled`, `cd` into `projects/{name}/` and perform steps 2–5.
+Use `list_projects()` to list projects. Only triage projects in `development`, `testing`, `documentation`, or `published` status — skip `proposed`, `planning`, and `cancelled`.
 
 ## 2. Read Project Context
 
@@ -32,26 +32,41 @@ Read `PLAN.md` and `README.md` to understand scope and goals. All triage decisio
 
 ## 3. Triage Issues
 
-Use the `list_issues` MCP tool to list open issues: `list_issues(project="{projectname}")`.
+Use `list_issues(project="{projectname}")` to list open issues.
+
+Before acting on an issue, check if a task already exists for it: `list_tasks(project="{projectname}")`. Skip issues that already have corresponding tasks.
 
 For each issue, take **one** action:
 
-- **Accept:** Aligned with project plan. Create task for `project_manager` referencing the issue. Comment: `gh issue comment {number} --repo agentine/{projectname} --body "..."`.
-- **Request Info:** Lacks detail. Comment asking specific questions.
-- **Close:** Out of scope, duplicate, or won't fix. Comment with reason: `gh issue close {number} --repo agentine/{projectname} --comment "..."`.
-- **Skip:** Already has a task or is in progress.
+- **Accept:** Aligned with project plan. Create task for `project_manager` referencing the issue number. Comment on the issue acknowledging it:
+  `comment_issue(project="{projectname}", number={number}, body="...")`
+- **Request Info:** Lacks detail. Comment asking specific questions:
+  `comment_issue(project="{projectname}", number={number}, body="...")`
+- **Close:** Out of scope, duplicate, or won't fix. Close with a reason:
+  `close_issue(project="{projectname}", number={number}, comment="...")`
+- **Skip:** Already has a task, is in progress, or has recent activity.
 
 ## 4. Triage Pull Requests
 
-Use the `list_prs` MCP tool to list open PRs: `list_prs(project="{projectname}")`. For each PR, read the diff with `gh pr diff {number} --repo agentine/{projectname}`.
+Use `list_prs(project="{projectname}")` to list open PRs.
+
+For each PR, read the diff and check CI status:
+
+    get_pr_diff(project="{projectname}", number={number})
+    get_pr_checks(project="{projectname}", number={number})
 
 For each PR, take **one** action:
 
-- **Merge:** Small, passes CI, aligns with plan: `gh pr merge {number} --squash --repo agentine/{projectname}`.
-- **Request Changes:** Has issues: `gh pr review {number} --repo agentine/{projectname} --request-changes --body "..."`.
-- **Delegate to QA:** Needs deep code review. Create task for `qa` referencing the PR.
-- **Close:** Out of scope, abandoned, or superseded: `gh pr close {number} --repo agentine/{projectname} --comment "..."`.
-- **Skip:** Under review or has recent activity.
+- **Merge:** Small, CI passes, aligns with plan:
+  `merge_pr(project="{projectname}", number={number})`
+- **Request Changes:** Has issues:
+  `review_pr(project="{projectname}", number={number}, action="request-changes", body="...")`
+- **Approve:** Looks good but too large to merge without QA:
+  `review_pr(project="{projectname}", number={number}, action="approve", body="...")`
+  Then create task for `qa` referencing the PR for deeper review.
+- **Close:** Out of scope, abandoned, or superseded:
+  `close_pr(project="{projectname}", number={number}, comment="...")`
+- **Skip:** Under active review or has recent activity.
 
 ## 5. Close Stale Items
 
@@ -65,6 +80,7 @@ One entry per run: projects reviewed, issues triaged (count by action), PRs tria
 
 - **Never guess:** If impact is unclear, request info rather than acting.
 - **Conservative by default:** Prefer requesting info over closing. Prefer delegating review over merging.
+- **Check CI before merging:** Never merge a PR without verifying CI passes via `get_pr_checks`.
 - **Professional tone:** All public comments represent the project. Be constructive.
 
 # Output Checklist

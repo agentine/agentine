@@ -328,6 +328,72 @@ def list_prs(project: str) -> str:
 
 
 @mcp.tool()
+def comment_issue(project: str, number: int, body: str) -> str:
+    """Add a comment to a GitHub issue on an agentine project."""
+    repo = f"agentine/{project}"
+    return _gh("issue", "comment", str(number), "--repo", repo, "--body", body)
+
+
+@mcp.tool()
+def close_issue(project: str, number: int, comment: str = "") -> str:
+    """Close a GitHub issue on an agentine project, optionally with a closing comment."""
+    repo = f"agentine/{project}"
+    args = ["issue", "close", str(number), "--repo", repo]
+    if comment:
+        args += ["--comment", comment]
+    return _gh(*args)
+
+
+@mcp.tool()
+def merge_pr(project: str, number: int, strategy: str = "squash") -> str:
+    """Merge a GitHub pull request on an agentine project.
+
+    Strategy: squash (default), merge, or rebase.
+    """
+    repo = f"agentine/{project}"
+    return _gh("pr", "merge", str(number), f"--{strategy}", "--repo", repo)
+
+
+@mcp.tool()
+def review_pr(
+    project: str, number: int, action: str = "comment", body: str = ""
+) -> str:
+    """Review a GitHub pull request on an agentine project.
+
+    Action: approve, request-changes, or comment.
+    """
+    repo = f"agentine/{project}"
+    args = ["pr", "review", str(number), "--repo", repo, f"--{action}"]
+    if body:
+        args += ["--body", body]
+    return _gh(*args)
+
+
+@mcp.tool()
+def close_pr(project: str, number: int, comment: str = "") -> str:
+    """Close a GitHub pull request on an agentine project, optionally with a comment."""
+    repo = f"agentine/{project}"
+    args = ["pr", "close", str(number), "--repo", repo]
+    if comment:
+        args += ["--comment", comment]
+    return _gh(*args)
+
+
+@mcp.tool()
+def get_pr_diff(project: str, number: int) -> str:
+    """Get the diff of a GitHub pull request on an agentine project."""
+    repo = f"agentine/{project}"
+    return _gh("pr", "diff", str(number), "--repo", repo)
+
+
+@mcp.tool()
+def get_pr_checks(project: str, number: int) -> str:
+    """Get CI check status for a GitHub pull request on an agentine project."""
+    repo = f"agentine/{project}"
+    return _gh("pr", "checks", str(number), "--repo", repo)
+
+
+@mcp.tool()
 def init_project(name: str, language: str, description: str) -> str:
     """Scaffold a new agentine project from a language template.
 

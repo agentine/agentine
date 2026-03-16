@@ -2,36 +2,19 @@
 """Agentine dispatcher — owns agent lifecycle, presence, and scheduling."""
 
 import concurrent.futures
-import os
 import signal
 import subprocess
 import sys
 import time
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-import requests
-
-# Load .env if present
-env_path = Path(__file__).resolve().parent.parent / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#"):
-            # Handle: export KEY='value' or KEY=value
-            line = line.removeprefix("export").strip()
-            if "=" in line:
-                key, _, value = line.partition("=")
-                value = value.strip("'\"")
-                os.environ.setdefault(key.strip(), value)
-
-API = os.environ.get("API_URL", "https://agentine.mtingers.com")
-API_KEY = os.environ["API_KEY"]
-HEADERS = {"X-API-Key": API_KEY, "Content-Type": "application/json"}
+from agentine.config import AgentConfig, api, load_agents, API_URL
 
 # Roles that generate work and should always run (no task check)
-GENERATORS = {"ARCHITECT",} #  "COMMUNITY_MANAGER"}
+GENERATORS = {
+    "ARCHITECT",
+}  #  "COMMUNITY_MANAGER"}
 
 # Retry strategies by exit code
 RETRY_STRATEGIES = {
@@ -44,43 +27,6 @@ DEFAULT_RETRY = {"delays": [60, 300, 600], "max_attempts": 3}
 
 # OOM/crash retry
 OOM_RETRY = {"delays": [300, 600], "max_attempts": 2}
-
-
-@dataclass
-class AgentConfig:
-    role: str
-    backend: str
-    model: str
-    effort: str
-
-
-def load_config(path: str = "agents.conf") -> list[AgentConfig]:
-    agents = []
-    conf = Path(path)
-    if not conf.exists():
-        print(f"error: {path} not found")
-        sys.exit(1)
-    for line in conf.read_text().splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        parts = line.split("|")
-        if len(parts) != 4:
-            print(f"warning: skipping malformed line: {line}")
-            continue
-        role, backend, model, effort = parts
-        agents.append(AgentConfig(role.strip(), backend.strip(), model.strip(), effort.strip()))
-    return agents
-
-
-def api(method: str, path: str, **kwargs) -> requests.Response | None:
-    try:
-        return requests.request(
-            method, f"{API}{path}", headers=HEADERS, timeout=30, **kwargs
-        )
-    except requests.RequestException as e:
-        print(f"  api error: {method} {path} — {e}")
-        return None
 
 
 def journal(content: str, project: str | None = None):
@@ -107,7 +53,9 @@ def clear_all_presence():
             for username in stuck:
                 print(f"  cleanup: {username} was stuck as 'running', setting idle")
                 set_presence(username, "idle")
-            journal(f"startup cleanup: reset {len(stuck)} stuck agent(s) to idle: {', '.join(stuck)}")
+            journal(
+                f"startup cleanup: reset {len(stuck)} stuck agent(s) to idle: {', '.join(stuck)}"
+            )
 
 
 def has_work(username: str) -> bool:
@@ -150,9 +98,151 @@ def check_stale_blocked_tasks():
             print(f"  WARNING: {total} task(s) blocked >3h")
             lines = []
             for task in resp.json().get("items", []):
-                lines.append(f"- [{task['id']}] {task['title']} (assigned: {task['username']})")
+                lines.append(
+                    f"- [{task['id']}] {task['title']} (assigned: {task['username']})"
+                )
                 print(f"    {lines[-1]}")
             journal(f"STALE BLOCKED: {total} task(s) blocked >3h:\n" + "\n".join(lines))
+
+
+def check_stale_development_projects():
+    """Transition development projects with no active tasks to testing.
+
+    Projects can get stuck in 'development' status after all their tasks
+    complete, which blocks the architect's concurrency check. Detect these
+    and advance them to 'testing' so the pipeline keeps moving.
+    """
+    resp = api("GET", "/projects?status=development&limit=100")
+    if not resp or not resp.ok:
+        return
+
+    projects = resp.json().get("items", [])
+    if not projects:
+        return
+
+    for proj in projects:
+        name = proj["name"]
+
+        # Check for any active (pending/in_progress) tasks on this project
+        has_active = False
+        for status in ("pending", "in_progress"):
+            task_resp = api("GET", f"/tasks?project={name}&status={status}&limit=1")
+            if task_resp and task_resp.ok and task_resp.json().get("total", 0) > 0:
+                has_active = True
+                break
+
+        if has_active:
+            continue
+
+        # Verify at least one done task exists (confirms work actually happened,
+        # avoids advancing a project that just entered development)
+        done_resp = api("GET", f"/tasks?project={name}&status=done&limit=1")
+        if not done_resp or not done_resp.ok or done_resp.json().get("total", 0) == 0:
+            continue
+
+        # No active tasks but completed work exists — advance to testing
+        patch_resp = api("PATCH", f"/projects/{name}", json={"status": "testing"})
+        if patch_resp and patch_resp.ok:
+            print(f"  ADVANCE: {name} development → testing (no active tasks)")
+            journal(
+                "auto-advanced project from development to testing — "
+                "no pending/in_progress tasks remain",
+                name,
+            )
+        else:
+            print(f"  WARNING: failed to advance {name} to testing")
+
+
+def check_stale_pipeline_projects():
+    """Advance projects stuck in testing/documentation and ensure release tasks exist.
+
+    - testing → documentation: when all tasks are done
+    - documentation (all tasks done): create release_manager task if missing
+      (release_manager sets status to 'published' when done)
+    """
+
+    def _project_is_idle(name: str) -> bool:
+        """True if project has no active tasks but at least one done task."""
+        for status in ("pending", "in_progress"):
+            task_resp = api(
+                "GET", f"/tasks?project={name}&status={status}&limit=1"
+            )
+            if (
+                task_resp
+                and task_resp.ok
+                and task_resp.json().get("total", 0) > 0
+            ):
+                return False
+        done_resp = api("GET", f"/tasks?project={name}&status=done&limit=1")
+        return (
+            done_resp is not None
+            and done_resp.ok
+            and done_resp.json().get("total", 0) > 0
+        )
+
+    # Phase 1: Advance testing → documentation
+    resp = api("GET", "/projects?status=testing&limit=100")
+    if resp and resp.ok:
+        for proj in resp.json().get("items", []):
+            name = proj["name"]
+            if not _project_is_idle(name):
+                continue
+            patch_resp = api(
+                "PATCH", f"/projects/{name}", json={"status": "documentation"}
+            )
+            if patch_resp and patch_resp.ok:
+                print(f"  ADVANCE: {name} testing → documentation (no active tasks)")
+                journal(
+                    "auto-advanced project from testing to documentation — "
+                    "no pending/in_progress tasks remain",
+                    name,
+                )
+            else:
+                print(f"  WARNING: failed to advance {name} to documentation")
+
+    # Phase 2: Documentation done → ensure release_manager task exists
+    resp = api("GET", "/projects?status=documentation&limit=100")
+    if resp and resp.ok:
+        for proj in resp.json().get("items", []):
+            name = proj["name"]
+            if not _project_is_idle(name):
+                continue
+
+            # Check if a release_manager task already exists for this project
+            rm_resp = api(
+                "GET",
+                f"/tasks?project={name}&username=release_manager&limit=1",
+            )
+            has_rm_task = (
+                rm_resp
+                and rm_resp.ok
+                and rm_resp.json().get("total", 0) > 0
+            )
+            if has_rm_task:
+                continue
+
+            task_payload = {
+                "title": f"Release {name} v0.1.0",
+                "description": (
+                    f"Documentation complete for {name}. "
+                    "Perform initial release: bump version, tag, "
+                    "push, and create GitHub release to trigger "
+                    "CI publish."
+                ),
+                "username": "release_manager",
+                "project": name,
+                "status": "pending",
+            }
+            create_resp = api("POST", "/tasks", json=task_payload)
+            if create_resp and create_resp.ok:
+                task_id = create_resp.json().get("id", "?")
+                print(f"  TASK: created release task #{task_id} for {name}")
+                journal(
+                    f"auto-created release task #{task_id} for release_manager",
+                    name,
+                )
+            else:
+                print(f"  WARNING: failed to create release task for {name}")
 
 
 def validate_summary(role: str, project: str | None = None):
@@ -208,6 +298,78 @@ def utcnow() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def build_agent_command(config: AgentConfig, project: str | None) -> list[str]:
+    """Build the CLI command to invoke an agent."""
+    role = config.role
+
+    # Determine summary file path (prefer project-specific if it exists)
+    summary_file = f"cache/{role}.summary"
+    if project:
+        project_summary = f"cache/{role}.{project}.summary"
+        if Path(project_summary).exists():
+            summary_file = project_summary
+
+    project_clause = ""
+    if project:
+        project_clause = (
+            f"Focus exclusively on project: {project}. "
+            f"Only work on tasks where project={project}."
+        )
+
+    if config.backend == "claude":
+        prompt = (
+            f"0. Read @org-roles/{role}.md .\n"
+            f"  1. Read previous context summary at @{summary_file} (if exists).\n"
+            f"  2. {project_clause}\n"
+            f"  3. Do your job. Note: your presence (running/idle) is managed by "
+            f"the dispatcher — do not call POST /agents or change your agent status.\n"
+            f"  4. Finally, save a new short and concise context summary to "
+            f"{summary_file} for next run. Use the format in @SUMMARY_FORMAT.md ."
+        )
+        return [
+            "claude",
+            "-p",
+            prompt,
+            "--dangerously-skip-permissions",
+            "--output-format",
+            "stream-json",
+            "--verbose",
+            "--include-partial-messages",
+            "--model",
+            config.model,
+            "--effort",
+            config.effort,
+        ]
+
+    elif config.backend == "codex":
+        role_content = Path(f"org-roles/{role}.md").read_text()
+        try:
+            summary = Path(summary_file).read_text()
+        except FileNotFoundError:
+            summary = "(no prior context)"
+
+        prompt = (
+            f"You are: {role}\n\n"
+            f"{role_content}\n\n"
+            f"Previous context summary:\n{summary}\n\n"
+            f"{project_clause}\n\n"
+            f"Do your job. Your presence (running/idle) is managed by the "
+            f"dispatcher — do not call POST /agents or change your agent status.\n\n"
+            f"When done, save a short context summary to {summary_file}."
+        )
+        return [
+            "codex",
+            "--model",
+            config.model,
+            "--full-auto",
+            "--prompt",
+            prompt,
+        ]
+
+    else:
+        raise ValueError(f"unknown backend: {config.backend}")
+
+
 def run_agent(config: AgentConfig, project: str | None = None) -> int:
     """Invoke an agent with retry logic, managing its presence lifecycle."""
     label = f"{config.role}" + (f"/{project}" if project else "")
@@ -222,15 +384,12 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         # --- Dispatcher owns presence ---
         set_presence(username, "running", project)
 
-        cmd = [
-            "scripts/run_agent.sh",
-            config.role,
-            config.backend,
-            config.model,
-            config.effort,
-        ]
-        if project:
-            cmd.append(project)
+        cmd = build_agent_command(config, project)
+        print(
+            f"  dispatch: role={config.role} backend={config.backend} "
+            f"model={config.model} effort={config.effort} "
+            f"project={project or '<all>'}"
+        )
 
         started_at = utcnow()
         start_time = time.monotonic()
@@ -267,9 +426,17 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             # Validate summary format
             validate_summary(config.role, project)
             # Commit cache summary
-            subprocess.run(["git", "add"] + list(Path("cache").glob("*summary")), capture_output=True)
             subprocess.run(
-                ["git", "commit", "-m", f"run_agent: commit {config.role} summary cache"],
+                ["git", "add"] + list(Path("cache").glob("*summary")),
+                capture_output=True,
+            )
+            subprocess.run(
+                [
+                    "git",
+                    "commit",
+                    "-m",
+                    f"run_agent: commit {config.role} summary cache",
+                ],
                 capture_output=True,
             )
             subprocess.run(["git", "push"], capture_output=True)
@@ -289,12 +456,19 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             return exit_code
 
         if attempt >= strategy["max_attempts"]:
-            print(f"  GIVE UP: {label} — failed {attempt} attempts (last exit {exit_code})")
-            journal(f"gave up on {label} after {attempt} attempts (exit {exit_code})", project)
+            print(
+                f"  GIVE UP: {label} — failed {attempt} attempts (last exit {exit_code})"
+            )
+            journal(
+                f"gave up on {label} after {attempt} attempts (exit {exit_code})",
+                project,
+            )
             return exit_code
 
         delay = strategy["delays"][min(attempt - 1, len(strategy["delays"]) - 1)]
-        print(f"  RETRY: {label} — exit {exit_code}, waiting {delay}s (attempt {attempt}/{strategy['max_attempts']})")
+        print(
+            f"  RETRY: {label} — exit {exit_code}, waiting {delay}s (attempt {attempt}/{strategy['max_attempts']})"
+        )
         time.sleep(delay)
 
 
@@ -303,6 +477,10 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
     # Check for stale blocked tasks
     check_stale_blocked_tasks()
+
+    # Advance stale projects through the pipeline
+    check_stale_development_projects()
+    check_stale_pipeline_projects()
 
     # Phase 1: Run generators sequentially (they create work for others)
     for config in agents:
@@ -364,10 +542,12 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
 def main():
     allow_architect = len(sys.argv) > 1 and sys.argv[1] == "yes"
-    agents = load_config()
+    agents = load_agents()
 
-    print(f"agentine dispatcher starting (architect={'enabled' if allow_architect else 'disabled'})")
-    print(f"  api: {API}")
+    print(
+        f"agentine dispatcher starting (architect={'enabled' if allow_architect else 'disabled'})"
+    )
+    print(f"  api: {API_URL}")
     print(f"  agents: {', '.join(a.role for a in agents)}")
 
     # Clean up stale presence from previous crashed run
@@ -386,9 +566,9 @@ def main():
 
     iteration = 0
     while True:
-        print(f"\n{'='*40}")
+        print(f"\n{'=' * 40}")
         print(f"iteration {iteration}")
-        print(f"{'='*40}")
+        print(f"{'=' * 40}")
 
         dispatch_cycle(agents, allow_architect)
 

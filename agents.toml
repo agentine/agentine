@@ -1,0 +1,27 @@
+# Agent configuration — defaults apply to all agents unless overridden per-agent.
+
+[defaults]
+backend = "claude"
+model = "claude-opus-4-6"
+effort = "max"
+
+[[agents]]
+role = "ARCHITECT"
+
+[[agents]]
+role = "PROJECT_MANAGER"
+
+[[agents]]
+role = "COMMUNITY_MANAGER"
+
+[[agents]]
+role = "DEVELOPER"
+
+[[agents]]
+role = "QA"
+
+[[agents]]
+role = "DOCUMENTATION_WRITER"
+
+[[agents]]
+role = "RELEASE_MANAGER"

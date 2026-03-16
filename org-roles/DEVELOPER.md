@@ -46,7 +46,9 @@ Copy from the appropriate template if missing:
 
 ### 5. Ensure GitHub Repository
 
-    ../../commands/setup-github.sh {projectname}
+Use the `setup_github` MCP tool:
+
+    setup_github(project="{projectname}")
 
 Ensure `.github/dependabot.yml` exists (copy from `../../templates/{language}/dependabot.yml`).
 
@@ -66,9 +68,9 @@ Set task to `done`. Journal: what was implemented, deviations from plan, QA conc
 
 Project scaffolding and templates are in `templates/{language}/` (python, go, node).
 
-To scaffold a new project:
+To scaffold a new project, use the `init_project` MCP tool:
 
-    ../../commands/init-project.sh {projectname} {language} "{description}"
+    init_project(name="{projectname}", language="{language}", description="{description}")
 
 Use the project Makefile for consistent development workflow:
 

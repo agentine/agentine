@@ -23,7 +23,7 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 2. Set the task status to `in_progress`.
 3. Read the relevant `projects/{projectname}/PLAN.md` and review the codebase to understand the project type and package registry targets.
 4. Determine the version bump type (`patch`, `minor`, or `major`) based on the changes described in the task and any prior release history.
-5. **Before the first release**, verify the package name is available on the target registry. Use `npm view {name}` (NPM) or `pip index versions {name}` (PyPI) to check. If a conflict is discovered:
+5. **Before the first release**, verify the package name is available on the target registry using the `check_package_name` MCP tool. If a conflict is discovered:
    - Choose a new, available name.
    - Rename the package in all manifest files (`package.json`, `pyproject.toml`, etc.).
    - Rename the local `projects/{projectname}/` directory to match.
@@ -31,16 +31,16 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - Update the remote URL: `git remote set-url origin {new-url}`.
    - Journal the rename with the old and new names.
    - Notify `project_manager` via a task about the rename.
-6. Bump the version:
+6. Bump the version using the `bump_version` MCP tool:
 
-       ../../commands/bump-version.sh {projectname} {version}
+       bump_version(project="{projectname}", version="{version}")
 7. Update `CHANGELOG.md` with the changes included in this release (summarize from task descriptions, journal entries, and commit history).
 8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (or similar) that triggers on GitHub releases and publishes to the appropriate registry (NPM, PyPI, etc.). Create or update it if missing. Assign a task to `human` if registry secrets (e.g., `NPM_TOKEN`, `PYPI_TOKEN`) need to be added to the repo.
 9. Commit the version bump, changelog update, and any CI workflow changes. Create a git tag: `git tag v{version}`.
 10. Push the commit and tag to the remote: `git push && git push --tags`.
 11. Cut a GitHub release using `gh release create v{version} --generate-notes` (or provide a custom title/body from the task description and changelog). The GitHub release triggers CI to publish to package registries — do not publish directly.
 12. Verify the release appears on GitHub and that the publish workflow was triggered.
-12a. Update the project status to published: `PATCH /projects/{projectname}` with `{"status": "published"}`.
+12a. Update the project status: `update_project(name="{projectname}", status="published")`.
 13. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
 14. Set the task status to `done`.
 15. Write a journal entry summarizing: version released, tag name, registry targets, CI/CD status, and any notes for the team.

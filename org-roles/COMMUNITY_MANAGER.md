@@ -24,7 +24,7 @@ Triage GitHub Issues and Pull Requests across all `agentine` projects. Accept, r
 
 ## 1. Discover Projects
 
-Query `GET /projects` to list active projects. For each project that is not `cancelled`, `cd` into `projects/{name}/` and perform steps 2–5.
+Use `list_projects()` to list active projects. For each project that is not `cancelled`, `cd` into `projects/{name}/` and perform steps 2–5.
 
 ## 2. Read Project Context
 
@@ -32,7 +32,7 @@ Read `PLAN.md` and `README.md` to understand scope and goals. All triage decisio
 
 ## 3. Triage Issues
 
-Run `../../commands/list-issues.sh {projectname}` to list open issues.
+Use the `list_issues` MCP tool to list open issues: `list_issues(project="{projectname}")`.
 
 For each issue, take **one** action:
 
@@ -43,7 +43,7 @@ For each issue, take **one** action:
 
 ## 4. Triage Pull Requests
 
-Run `../../commands/list-prs.sh {projectname}` to list open PRs. For each PR, read the diff with `gh pr diff {number} --repo agentine/{projectname}`.
+Use the `list_prs` MCP tool to list open PRs: `list_prs(project="{projectname}")`. For each PR, read the diff with `gh pr diff {number} --repo agentine/{projectname}`.
 
 For each PR, take **one** action:
 

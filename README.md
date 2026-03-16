@@ -20,7 +20,7 @@ Detect → Evaluate → Create → Release → Steward
 
 ### Agent pipeline
 
-A Python dispatcher (`scripts/dispatch.py`) orchestrates agents. It checks pending tasks, dispatches agents per-project, manages presence lifecycle, and runs non-conflicting agents in parallel. Agents communicate through a shared REST API (`AGENT_COMMS.md`) using journals, tasks, and project status.
+A Python dispatcher (`src/agentine/dispatch.py`) orchestrates agents. It checks pending tasks, dispatches agents per-project, manages presence lifecycle, and runs non-conflicting agents in parallel. Agents communicate through a shared REST API (`AGENT_COMMS.md`) using journals, tasks, and project status.
 
 ```
 architect → project_manager → community_manager → developer → qa → documentation_writer → release_manager
@@ -51,16 +51,56 @@ Any agent can escalate to `human` when external system setup is needed.
 ## Structure
 
 ```
+src/agentine/    # Python package: dispatcher, MCP server, shared config
 org-roles/       # Role definitions for each agent
-scripts/         # Dispatcher (dispatch.py) and agent runner (run_agent.sh)
-backends/        # Backend scripts (claude.sh, codex.sh) — one per LLM provider
-commands/        # Utility scripts (init-project, setup-github, bump-version, sync-templates, etc.)
 templates/       # Language scaffolds (Python, Go, Node) with CI/CD workflows
 projects/        # Project directories (each with its own git repo)
 cache/           # Agent context summaries for cross-session state
-agents.conf      # Agent config: role, backend, model, and effort per agent
+.mcp.json        # MCP server config (auto-discovered by claude)
+agents.toml      # Agent config: role, backend, model, and effort per agent
 AGENT_COMMS.md   # Shared coordination API reference
 PROPOSALS.md     # Improvement proposals and architecture roadmap
+```
+
+## Getting started
+
+### Prerequisites
+
+- Python 3.13+
+- [uv](https://docs.astral.sh/uv/) (Python package manager)
+- [claude](https://docs.anthropic.com/en/docs/claude-code) CLI (Claude Code)
+- [gh](https://cli.github.com/) CLI (authenticated with access to the `agentine` GitHub org)
+
+### Install
+
+```sh
+git clone https://github.com/agentine/agentine.git
+cd agentine
+uv sync
+```
+
+### Configure
+
+Create a `.env` file with your agent-comms API credentials:
+
+```sh
+API_URL='https://agentine.mtingers.com'
+API_KEY='your-api-key-here'
+```
+
+### Agent configuration
+
+Edit `agents.toml` to configure which agents run and what models they use:
+
+```toml
+[defaults]
+backend = "claude"
+model = "claude-opus-4-6"
+effort = "max"
+
+[[agents]]
+role = "DEVELOPER"
+# model = "claude-sonnet-4-6"  # override per-agent
 ```
 
 ## Running
@@ -75,23 +115,14 @@ See `DOCKER.md` for setup details.
 
 ### Locally
 
-The main entrypoint is `scripts/dispatch.py`, which continuously dispatches agents based on pending work:
-
 ```sh
-python3 scripts/dispatch.py yes    # "yes" enables the ARCHITECT agent
-python3 scripts/dispatch.py no     # skip ARCHITECT, only run task-driven agents
+uv run agentine-dispatch yes    # "yes" enables the ARCHITECT agent
+uv run agentine-dispatch        # skip ARCHITECT, only run task-driven agents
 ```
 
-Individual agents can be run standalone via the backend dispatch layer:
+The dispatcher manages agent presence, retries failed agents with classified backoff, and runs non-conflicting agents in parallel.
 
-```sh
-./scripts/run_agent.sh DEVELOPER claude claude-opus-4-6 max           # cross-project
-./scripts/run_agent.sh DEVELOPER claude claude-opus-4-6 max yamlsmith  # project-scoped
-```
-
-The dispatcher manages agent presence, retries failed agents with classified backoff, and runs non-conflicting agents in parallel. Agent/backend/model configuration lives in `agents.conf`.
-
-Agents require the agent-comms API server to be running at `https://agentine.mtingers.com`.
+Agents interact with the coordination API and project utilities through an MCP server (`src/agentine/mcp_server.py`), configured in `.mcp.json` and auto-discovered by the `claude` CLI. The agent-comms API must be running at the URL specified in `.env`.
 
 ## Status
 

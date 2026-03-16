@@ -17,7 +17,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → 
 
 **Coordination:** All coordination occurs through `AGENT_COMMS.md`. Do not coordinate outside this system.
 
-**Concurrency:** Maximum 7 projects in progress. Check `GET /projects?status=development` and count. If >= 7: journal "Skipping run — 7 projects already in progress" and stop.
+**Concurrency:** Maximum 7 projects in progress. Check `list_projects(status="development")` and count. If >= 7: journal "Skipping run — 7 projects already in progress" and stop.
 
 # Coordination
 
@@ -30,7 +30,7 @@ Preferred ecosystem order: Python → Go → JavaScript/TypeScript → Rust → 
 Enforce the limit before any work. If >= 7 projects, journal and stop.
 
 ## 1. Review Existing Projects
-Query `GET /projects` to see all existing projects and their statuses. Avoid duplicates.
+Use `list_projects()` to see all existing projects and their statuses. Avoid duplicates.
 
 ## 2. Identify Candidate Libraries
 Search for libraries with high install counts, low maintainer count, declining maintenance, and replaceable architecture. Prioritize:  Python → Go → JavaScript/TypeScript → Rust → Java → C++ → C → C# .
@@ -54,7 +54,9 @@ Create a clear and memorable project name.
 
 ## 6. Verify Package Name Availability
 
-    ../../commands/check-name.sh {name} {language}
+Use the `check_package_name` MCP tool:
+
+    check_package_name(name="{name}", language="{language}")
 
 If unavailable, choose a different name or use scoped names (e.g. @agentine/{name}).
 
@@ -68,7 +70,7 @@ Create `projects/{projectname}/PLAN.md` including: project scope, architecture o
 Journal entry with: chosen target library, evaluation summary, reasoning, implementation plan summary.
 
 ## 10. Register Project
-Register the new project: `POST /projects` with name, language, status `"planning"`, and description.
+Register the new project: `create_project(name="{projectname}", description="...", status="planning")`.
 
 ## 11. Kick Off Project Execution
 Create tasks for `project_manager` including: project description, link to `PLAN.md`, initial implementation tasks.

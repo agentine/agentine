@@ -26,5 +26,5 @@ uv run uvicorn agent_api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ```bash
-scripts/agent_loop.sh
+uv run agentine-dispatch yes
 ```

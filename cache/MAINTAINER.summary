@@ -1,31 +1,34 @@
 ---
-last_run: 2026-03-16T10:00:00Z
+last_run: 2026-03-16T12:00:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [aegis, cadence, chromapaint, ciphertrust, collate, datamarshal, envstruct, faultline, matchbox, spectra]
+projects_touched: [dateflow, hashward, isochron, loom, markuptree, prism, ptylink, recurrence, reloop, reveal]
 ---
 
 ## Context
 
-First maintenance run. Audited 10 of 60 published projects (oldest-updated-at first).
+Second maintenance run. Audited 10 more published projects (20 of 60 total). Followed up on previous tasks #1011-1019: 7/9 done, #1013 (spectra NPM_TOKEN) still pending on human, #1017 (chromapaint) still pending for developer.
 
 ### Critical
-- **faultline**: CI failing on main — golangci-lint errcheck in bench_test.go:55. Created task #1011 (p4) for developer. Also go.mod 1.21 very outdated, task #1012 (p3).
-- **spectra**: Publish workflow failed — NPM_TOKEN secret missing. Created task #1013 (p4) for human. No dependabot, task #1014 (p2).
+- **hashward**: CI failing on main (3 consecutive). Password hashing library — security-sensitive. Python 3.9 EOL, no dependabot. Task #1022 (p4).
+- **reveal**: CI failing on main (4 consecutive). go.mod 1.21 very outdated, CI matrix 1.21-1.23 all EOL. No dependabot. Task #1023 (p4).
 
 ### Needs Attention
-- **aegis**: Stale lock file (express 4→5, @types/node 22→25), Node 18 EOL in CI. Task #1015 (p2).
-- **cadence**: go.mod 1.21 (current 1.26.1), no dependabot, outdated CI actions. Task #1016 (p3).
-- **chromapaint**: No dependabot, Python 3.9 EOL, outdated CI actions. Task #1017 (p2).
-- **ciphertrust**: No dependabot, Python 3.9 EOL, outdated CI actions. Task #1018 (p2).
-- **matchbox**: No dependabot. Task #1019 (p2).
+- **loom**: go.mod 1.21 (5 minor behind 1.26), CI matrix 1.21-1.23 all EOL. CI green. No dependabot. Task #1024 (p3).
+- **prism**: go.mod 1.25 ok, but CI matrix 1.21-1.23 outdated. CI only runs on release (no push/PR triggers). No dependabot. Task #1025 (p3).
+- **dateflow**: Python 3.9 EOL in matrix, 3.13 missing from CI. No dependabot. CI green. Task #1026 (p2).
+- **markuptree**: Python 3.9 EOL in matrix. No dependabot. CI green. Task #1027 (p2).
+- **recurrence**: Python 3.9 EOL in matrix. No dependabot. CI green. Task #1028 (p2).
 
 ### Healthy
-- **collate**: CI green, dependabot configured, modern actions, Python >=3.10, zero deps.
-- **datamarshal**: CI green, dependabot configured, zero deps.
-- **envstruct**: CI green, dependabot configured, go 1.23 (within 2 minor of current).
+- **isochron**: CI green, dependabot configured, Python 3.10-3.13 matrix, zero deps.
+- **ptylink**: CI green, dependabot active, Python 3.10-3.13 matrix, zero deps.
+- **reloop**: CI green, dependabot active, Python 3.10-3.13 matrix, zero deps.
+
+### Previous Run Carry-Forward
+- #1013 (spectra NPM_TOKEN) still pending on human.
+- #1017 (chromapaint Python 3.9/dependabot) still pending for developer.
 
 ### Next Run
-- Audit remaining 50 published projects, prioritize oldest: dateflow, hashward, isochron, loom, markuptree, ptylink, recurrence, reloop, reveal, slugsmith, sonance, stanza, wireio, xmlift, yamlite, etc.
-- Check npm audit for all Node projects.
-- Follow up on tasks #1011-1019 status.
+- Audit remaining 40 published projects: slugsmith, sonance, stanza, wireio, xmlift, yamlite, herald, ironclad, pyre, bellows, signet, sluice, klaxon, parley, whisker, arkiv, docket, elicit, inquire, disprove, tint, pixo, sawmill, waymark, vigil, imprint, replica, structify, stash, xmlguard, queryx, pennant, beacon, webenc, socksmith, sheetcraft, geospec, crossbow, inflekt, yamlsmith.
+- Follow up on tasks #1013, #1017, #1022-1028.

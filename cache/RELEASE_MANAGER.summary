@@ -2,15 +2,15 @@
 Last updated: 2026-03-16
 
 ---
-last_run: 2026-03-16T04:00:00Z
-tasks_completed: [912]
-tasks_blocked: []
-projects_touched: [beacon]
+last_run: 2026-03-16T04:01:00Z
+tasks_completed: []
+tasks_blocked: [896]
+projects_touched: [blanch]
 ---
 
 ## Status
 
-All tasks complete. No pending/blocked work.
+Task #896 (blanch v0.1.0) blocked — waiting on human task #931 to set up PyPI Trusted Publisher.
 
 ## Releases Completed (all-time)
 
@@ -27,6 +27,10 @@ All tasks complete. No pending/blocked work.
 | arkiv | 0.1.0 | npm | @agentine/arkiv. Tag/release already existed. Publish run 23126536754 succeeded in 20s. Confirmed live on npm. |
 | beacon | 0.1.0 | npm | @agentine/beacon. Publish CI run 23127349258 triggered. Human task #930 for NPM_TOKEN. |
 
+## In Progress
+
+- blanch 0.1.0 (PyPI): Tag v0.1.0 pushed, GitHub release created. Publish run 23126536273 failed (no TP). Human task #931 pending.
+
 ## Key Renames
 
 - ptylink (from tether), chromapaint (from termpaint), ciphertrust (from arcanum)
@@ -39,6 +43,6 @@ All tasks complete. No pending/blocked work.
 - npm projects: existing NPM_TOKEN-based workflow works — Trusted Publisher (OIDC) tasks may be pending but workflow succeeded without it
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
 - gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main
-- Highest task ID seen: 930
+- Highest task ID seen: 931
 - API server: https://agentine.mtingers.com (use API_KEY env var)
-- Pending human tasks: #572 (crossbow npm TP), #573 (inflekt npm TP), #587 (ironclad npm TP — publish succeeded anyway), #930 (beacon npm NPM_TOKEN)
+- Pending human tasks: #572 (crossbow npm TP), #573 (inflekt npm TP), #587 (ironclad npm TP — publish succeeded anyway), #930 (beacon npm NPM_TOKEN), #931 (blanch PyPI TP)

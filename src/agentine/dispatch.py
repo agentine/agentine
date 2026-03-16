@@ -149,6 +149,26 @@ def check_stale_blocked_tasks():
             journal(f"STALE BLOCKED: {total} task(s) blocked >3h:\n" + "\n".join(lines))
 
 
+def check_stale_human_tasks():
+    """Log warnings for pending human tasks older than 6 hours."""
+    resp = api("GET", "/tasks?username=human&status=pending&older_than=6h&limit=100")
+    if not resp or not resp.ok:
+        return
+    tasks = resp.json().get("items", [])
+    if not tasks:
+        return
+    print(f"  WARNING: {len(tasks)} pending human task(s)")
+    lines = []
+    for task in tasks:
+        proj = task.get("project") or "unscoped"
+        lines.append(f"- [{task['id']}] {proj}: {task['title']}")
+        print(f"    {lines[-1]}")
+    journal(
+        f"HUMAN ACTION NEEDED: {len(tasks)} pending task(s) "
+        f"requiring manual intervention:\n" + "\n".join(lines)
+    )
+
+
 def check_stale_development_projects():
     """Transition development projects with no active tasks to testing.
 
@@ -604,8 +624,9 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
     if _is_stopping():
         return
 
-    # Check for stale blocked tasks
+    # Check for stale blocked tasks and pending human tasks
     check_stale_blocked_tasks()
+    check_stale_human_tasks()
 
     # Advance stale projects through the pipeline
     check_stale_development_projects()
@@ -654,19 +675,21 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=_dispatch.max_workers) as executor:
         futures: dict[concurrent.futures.Future, str] = {}
+        submitted_projects: set[str] = set()
 
         for config, proj in work_queue:
             if _is_stopping():
                 break
             label = f"{config.role}" + (f"/{proj}" if proj else "")
 
-            if proj and project_locked(proj):
+            if proj and (project_locked(proj) or proj in submitted_projects):
                 print(f"  SKIP: {label} (project locked)")
-                journal(f"skipped {label} — project locked by another agent", proj)
                 continue
 
             future = executor.submit(run_agent, config, proj)
             futures[future] = label
+            if proj:
+                submitted_projects.add(proj)
 
         for future in concurrent.futures.as_completed(futures):
             label = futures[future]

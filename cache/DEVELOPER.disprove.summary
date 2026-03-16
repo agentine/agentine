@@ -1,12 +1,11 @@
 ---
-last_run: 2026-03-16T14:55:00Z
-tasks_completed: [1042]
+last_run: 2026-03-16T15:30:00Z
+tasks_completed: [1050]
 tasks_blocked: []
 projects_touched: [disprove]
 ---
 
 ## Context
 
-- disprove: Bumped rand from 0.8 to 0.9. Migrated all API changes (gen→random, thread_rng→rng, distributions→distr). Added manual Arbitrary impls for usize/isize/NonZeroUsize/NonZeroIsize since rand 0.9 dropped SampleUniform for pointer-width types.
-- All tests pass (68 unit + 14 integration), CI green on all platforms.
+- disprove: Closed Dependabot PR #2 (rand 0.8→0.10). CI was failing; project already on rand 0.9 from task #1042. The 0.10 jump has breaking changes (MSRV 1.85, SmallRng removal, Rng→RngExt rename).
 - No remaining pending tasks for disprove.

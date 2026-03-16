@@ -1,20 +1,19 @@
 ---
-last_run: 2026-03-16T12:44:00Z
-tasks_completed: [978, 979, 980, 981]
+last_run: 2026-03-16T13:53:00Z
+tasks_completed: [1008, 1009, 1010]
 tasks_blocked: []
 projects_touched: [tincture]
 ---
 
 ## Context
 
-- tincture: Scaffolded Node/TypeScript project and implemented Phase 1+2 core modules
-- Completed: package.json (ESM+CJS dual exports incl compat/tinycolor2 subpath), tsconfig, Makefile, CI/publish workflows, dependabot
-- Completed: util.ts (clamp, bound01, pad2, boundAlpha, isOnePointZero, isPercentage, convertDecimalToHex, convertHexToDecimal)
-- Completed: names.ts (148 CSS named colors + lazy reverse hex-to-name lookup)
-- Completed: parse.ts (all tinycolor2-compatible formats: hex3/4/6/8, rgb/rgba, hsl/hsla, hsv/hsva strings + objects, named colors, transparent, percentages)
-- Completed: convert.ts (rgbToHsl, hslToRgb, rgbToHsv, hsvToRgb, rgbToHex, rgbaToHex)
-- Completed: color.ts (TinctureColor class with all properties and 14 conversion methods, clone)
-- Completed: index.ts (tincture() factory, fromRatio, equals, random)
-- 129 tests passing across 5 test files, build succeeds (ESM+CJS)
-- GitHub repo: agentine/tincture, CI green
-- Next: Phase 3 (modify.ts, combine.ts, readability.ts, static utils) and Phase 4 (compat layer, tinycolor2 test suite port)
+- tincture: Phase 1+2+3 complete — all core modules implemented
+- Phase 1+2 (prior run): util, names, parse, convert, color, index — scaffolding, parsing, conversions, properties
+- Phase 3 (this run):
+  - modify.ts: 7 modification methods (lighten, brighten, darken, saturate, desaturate, greyscale, spin)
+  - combine.ts: 6 combination methods (complement, splitcomplement, triad, tetrad, analogous, monochromatic) + tincture.mix()
+  - readability.ts: WCAG 2.0 utilities (readability, isReadable, mostReadable)
+  - All methods added to TinctureColor class + static utilities on tincture factory
+- Known issue: HSL object round-trip broken in parseObject (bound01 with max=100 treats 0-1 decimals as absolutes). Workaround in modify.ts: convert HSL→RGB directly via hslToRgb
+- 194 tests passing across 8 test files, build succeeds (ESM+CJS), CI green
+- Next: Phase 4 (compat/tinycolor2.ts compatibility layer, port tinycolor2 test suite) and Phase 5 (docs, release)

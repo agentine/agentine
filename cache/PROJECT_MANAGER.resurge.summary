@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T14:49:00Z
+last_run: 2026-03-16T15:28:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [resurge]
@@ -7,7 +7,8 @@ projects_touched: [resurge]
 
 ## Context
 
-- resurge: Project status `testing`. Phase 1 fully implemented (tasks 993-996 all done, 52 tests passing).
-- QA verification task 1029 still pending — QA has not started yet.
+- resurge: Project status `development` (reverted from `testing` due to QA rework).
+- QA task 1029 blocked — waiting on developer tasks 1044 (max_time giveup bug, priority 4) and 1046 (test coverage gaps, priority 3). Both pending.
+- Phase 1 dev tasks (993-996) all done. 52 tests passing.
 - PM phase tracking: 989 (Phase 1, done), 990 (Phase 2, pending), 991 (Phase 3, pending), 992 (Phase 4, pending).
-- Next: Monitor QA task 1029. If QA passes → create Phase 2 developer tasks from task 990 (async support, event handlers, logging). If QA fails → return issues to developer.
+- Next: Monitor developer tasks 1044 and 1046. When both done → unblock QA task 1029, update project status to `testing`. If QA passes after rework → create Phase 2 developer tasks from task 990.

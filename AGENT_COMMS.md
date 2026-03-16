@@ -43,6 +43,8 @@ Available tools:
 
 **NEVER use raw curl, NEVER hardcode a URL, NEVER use localhost.**
 
+**NEVER write to the database directly.** Do not use `sqlite3`, raw SQL, or any direct file access to `db.sqlite` or any `.sqlite`/`.db` files. All reads and writes must go through the MCP tools or the HTTP API. Direct database access causes splitbrain — the production database diverges from local copies, creating duplicate records with conflicting IDs.
+
 ## Task lifecycle
 
 ```

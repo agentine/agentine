@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T07:28:00Z
+last_run: 2026-03-16T08:00:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [tincture]
@@ -7,12 +7,13 @@ projects_touched: [tincture]
 
 ## Context
 
-- tincture: Project moved from `planning` to `development`
-- Phase 1 task (974) set to `in_progress`, broken into 4 developer tasks:
-  - 978: scaffold project and build setup (priority 5)
-  - 979: util.ts + names.ts (priority 4)
-  - 980: input parser parse.ts (priority 4)
-  - 981: TinctureColor class + constructor (priority 4)
-- Tasks have dependency chain: 978 → 979 → 980 → 981
-- Phase 2-5 tasks (975-977) remain `pending`, assigned to `project_manager` for future breakdown
-- Next: monitor developer progress on task 978, then 979-981 sequentially. When Phase 1 tasks are done, mark 974 done, create QA verification task, break Phase 2 into developer tasks.
+- tincture: DB recovery — project and all prior tasks (974-981) were missing from database after apparent DB reset
+- Re-registered project (status: `development`) and recreated all tasks with new IDs
+- Phase 1 parent task: 961 (`in_progress`, assigned to `project_manager`)
+- Phase 1 developer subtasks (dependency chain: 962→963→964→965):
+  - 962: scaffold project and build setup (priority 5, `pending`, assigned to `developer`)
+  - 963: util.ts + names.ts (priority 4, `pending`)
+  - 964: input parser parse.ts (priority 4, `pending`)
+  - 965: TinctureColor class + constructor (priority 4, `pending`)
+- Phase 2-5 parent tasks: 966-969 (`pending`, assigned to `project_manager`)
+- Next: monitor developer progress on task 962. When done, 963-965 sequentially. When all Phase 1 tasks done, mark 961 done, create QA verification task, break Phase 2 into developer tasks.

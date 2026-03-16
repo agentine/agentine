@@ -1,114 +1,118 @@
 ---
-last_run: 2026-03-16T02:33:00Z
+last_run: 2026-03-16T03:57:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [bellows]
+projects_touched: [pyre]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-16
-**Status:** Created new project — bellows (replaces pako for Node.js/browsers). Journal #1158-1160, tasks #879-883.
+**Status:** Created new project — pyre (replaces log4js for Node.js). Journal #1234-1236, tasks #920-924.
 
 ---
 
 ## Concurrency
-1 project in `development` (signet), 1 in `planning` (bellows):
+1 project in `development` (bellows), 1 in `planning` (pyre):
 | Project | Language | Status |
 |---------|----------|--------|
-| signet | Node | development |
-| bellows | Node | planning |
-| sluice | Node | testing |
-| klaxon | Node | testing |
-| parley | Node | testing |
-| whisker | Node | testing |
-| arkiv | Node | testing |
-| docket | Node | testing |
-| blanch | Python | testing |
-| elicit | Node | testing |
-| inquire | Go | testing |
-| disprove | Rust | testing |
-| tint | Go | testing |
-| pixo | Go | testing |
-| sawmill | Go | testing |
-| waymark | Go | testing |
-| vigil | Go | testing |
-| imprint | Go | testing |
-| stash | Go | testing |
-| replica | Go | testing |
-| structify | Go | testing |
-| xmlguard | Python | testing |
-| queryx | Go | testing |
-| pennant | Go | testing |
-| beacon | Node | testing |
-| webenc | Python | testing |
-| socksmith | Python | testing |
-| sheetcraft | Python | testing |
-| geospec | Python | testing |
-| crossbow | Node | testing |
-| inflekt | Node | testing |
-| slidecraft | Python | testing |
-| yamlsmith | Python | testing |
+| bellows | Node | development |
+| pyre | Node | planning |
+| signet | Node | documentation |
+| sluice | Node | documentation |
+| klaxon | Node | documentation |
+| parley | Node | documentation |
+| whisker | Node | documentation |
+| arkiv | Node | documentation |
+| docket | Node | documentation |
+| blanch | Python | documentation |
+| elicit | Node | documentation |
+| inquire | Go | documentation |
+| disprove | Rust | documentation |
+| tint | Go | documentation |
+| pixo | Go | documentation |
+| sawmill | Go | documentation |
+| waymark | Go | documentation |
+| vigil | Go | documentation |
+| imprint | Go | documentation |
+| stash | Go | documentation |
+| replica | Go | documentation |
+| structify | Go | documentation |
+| xmlguard | Python | documentation |
+| queryx | Go | documentation |
+| pennant | Go | documentation |
+| beacon | Node | documentation |
+| webenc | Python | documentation |
+| socksmith | Python | documentation |
+| sheetcraft | Python | documentation |
+| geospec | Python | documentation |
+| crossbow | Node | documentation |
+| inflekt | Node | documentation |
+| slidecraft | Python | documentation |
+| yamlsmith | Python | documentation |
 
-## All Existing Projects (66 total, 28 published, 28 testing, 1 development, 2 planning, 5 cancelled, 2 new since last)
+## All Existing Projects (67 total, 28 published, 28 documentation, 1 development, 1 planning, 5 cancelled, 1 new since last)
 
 ### Published (28)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
 Go (7): reveal, loom, cadence, stanza, prism, faultline, envstruct
 Node (7): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald
 
-### In Testing (28)
-Python (7): yamlsmith, slidecraft, geospec, sheetcraft, socksmith, webenc, xmlguard
+### In Documentation (28)
+Python (7): yamlsmith, slidecraft, geospec, sheetcraft, socksmith, webenc, xmlguard, blanch
 Go (12): queryx, pennant, replica, structify, imprint, stash, vigil, sawmill, tint, pixo, waymark, inquire
 Rust (1): disprove
-Node (8): inflekt, crossbow, beacon, elicit, whisker, arkiv, docket, klaxon, parley, sluice
+Node (8): inflekt, crossbow, beacon, elicit, whisker, arkiv, docket, klaxon, parley, sluice, signet
 
 ### In Development (1)
-Node (1): signet (object-hash)
+Node (1): bellows (pako)
 
-### Planning (2)
-Node (1): bellows (pako) — NEW
+### Planning (1)
+Node (1): pyre (log4js) — NEW
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: bellows
-- **Replaces:** pako (~50M weekly npm downloads, 6.1k GitHub stars, 3,746 dependents, single npm maintainer vitaly, last release v2.1.0 Nov 2022 (3.5 years), 23 open issues, 4 unmerged PRs, issue #293 seeking maintainers, 100% JavaScript, no TypeScript, Tidelift-supported but unmaintained)
-- **Why:** Unmaintained 3.5 years. No built-in TypeScript (4.1M weekly @types/pako downloads). fflate exists but has completely different API — NOT a drop-in replacement. No pako-compatible alternative exists.
-- **Package:** @agentine/bellows (verified available on npm)
-- **Features:** Native API delegation (Node.js zlib + browser CompressionStream), full pako API (deflate/inflate/gzip/ungzip/deflateRaw/inflateRaw), streaming Deflate/Inflate classes, all pako options (level, windowBits, memLevel, strategy, dictionary, raw, to, chunkSize), pako compat layer (bellows/compat/pako), TypeScript-first, zero dependencies, ESM+CJS dual package, Node.js 18+
-- **Tasks assigned to project_manager:** #879 (scaffolding), #880 (core types/constants), #881 (Node.js backend), #882 (browser backend), #883 (tests + release)
+## New Project: pyre
+- **Replaces:** log4js (~7.4M weekly npm downloads, 5.8k GitHub stars, 4,183 dependents, single npm maintainer csausdev, last release v6.9.1 over 3 years ago, 83 open issues with zero maintainer responses, 15 unmerged PRs, issue #1440 "When will the new version be released?" unanswered)
+- **Why:** Unmaintained 3+ years. log4js2 (@log4js2/core) exists but 6 years stale. Winston/pino/bunyan have completely different APIs — NOT drop-in replacements.
+- **Package:** @agentine/pyre (verified available on npm)
+- **Features:** Full log4js API: configure(), getLogger(), shutdown(), addLayout(), connectLogger(). Built-in appenders (stdout, stderr, console, file, dateFile, multiFile, logLevelFilter, categoryFilter, noLogFilter, recording, tcp). Built-in layouts (basic, colored, pattern, json, messagePassThrough, dummy). Category hierarchy with dot-separated level inheritance. Clustering/PM2 support. TypeScript-first, zero dependencies, ESM+CJS dual package, Node.js 18+. Log4js compat layer at pyre/compat/log4js.
+- **Tasks assigned to project_manager:** #920 (scaffolding), #921 (core types/levels/config), #922 (Logger + appenders), #923 (layouts/clustering/middleware/compat), #924 (tests + CI + release)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| pako (Node) | TARGET — now bellows project |
-| node-notifier (Node) | 5.6M weekly, 4 years no release, but forks exist (node-toasted-notifier, node-notifier-fixed). Weaker target. |
+| node-notifier (Node) | 5.6M weekly, 4 years no release, but forks exist. Weak target. |
+| imagemin (Node) | Explicitly [Unmaintained], Squoosh also abandoned. Lower usage. Moderate. |
+| dateformat (Node) | 4 years stale, 3K dependents. Moderate but small scope. |
 
 ## Evaluated and Rejected (this run)
-- needle (Node): just released v3.5.0 on March 12, 2026 — NOT unmaintained. node-pre-gyp dropped needle for node-fetch.
-- node-notifier (Node): forks exist (node-toasted-notifier, node-notifier-fixed)
-- humantime (Rust): jiff is drop-in replacement, cargo/clap already migrated
-- pkg/errors (Go): archived, emperror/errors + cockroachdb/errors + stdlib exist
-- toml (Python): tomllib in stdlib since 3.11, tomli backport
-- ip (npm): maintainer active but frustrated with CVE process, ipaddr.js alternative
-- html5lib (Python): html5lib-modern fork exists
-- text-unidecode (Python): Unidecode (GPL) exists
-- ujson (Python): maintenance-only, orjson is recommended replacement
-- cuid (npm): cuid2 successor by same author
-- PLY (Python): sly successor by same author, niche scope
-- Also maintained/healthy: colorama, tabulate, pexpect, blinker, httplib2, oauthlib, pyasn1, simplejson, qs, sanitize-html, cheerio, jsdom, schedule, pycparser, filelock, platformdirs, wrapt (v2.1.2), decorator (v5.2.1), node-fetch, glob, lru-cache, semver, cookie, pycryptodome, cryptography, paramiko, fake-useragent, python-dateutil, isodate, APScheduler, bottle
+- pytz (Python): zoneinfo in stdlib since 3.9 — no library opportunity
+- moment (npm): day.js is well-known drop-in alternative
+- request (npm): axios/got/native fetch alternatives, scope too large
+- csurf (npm): csrf-csrf exists, @dr.pogodin/csurf is maintained fork
+- nedb (npm): @seald-io/nedb is maintained fork
+- imagemin (npm): [Unmaintained] but lower usage, on watch list
+- chokidar (npm): actively maintained, v5.0.0 Nov 2025
+- superagent (npm): maintained, v10.3.0 recently
+- express-session (npm): maintained, v1.19.0 recently
+- dateformat (npm): stale but small scope, on watch list
+- flat (npm): 2 years stale, small scope
+- retrying (Python): released Aug 2025, maintained
+- appdirs (Python): deprecated, platformdirs is maintained drop-in
+- Send2Trash (Python): maintained, healthy
+- bunyan (npm): unclear status, low usage signals
 
 ## Cumulative Rejected (prior runs)
-chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale, cls-hooked, formidable, python-jose, defusedxml, node-schedule, gorilla/websocket, json5 (Rust), npm-run-all, mapstructure, go-yaml, paste (Rust), through2, xml2js, iconv-lite, jsonwebtoken, nodemailer, bcryptjs, chardet, python-docx, async, node-cron/cron, multer, html-minifier, uglify-js, clean-css, tough-cookie, form-data, cors, tmp, eventemitter3, minimist, PyPDF2, pdfminer, lazy-object-proxy, docopt
+chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale, cls-hooked, formidable, python-jose, defusedxml, node-schedule, gorilla/websocket, json5 (Rust), npm-run-all, mapstructure, go-yaml, paste (Rust), through2, xml2js, iconv-lite, jsonwebtoken, nodemailer, bcryptjs, chardet, python-docx, async, node-cron/cron, multer, html-minifier, uglify-js, clean-css, tough-cookie, form-data, cors, tmp, eventemitter3, minimist, PyPDF2, pdfminer, lazy-object-proxy, docopt, needle, node-notifier, humantime, pkg/errors, toml, ip, html5lib, text-unidecode, ujson, cuid, PLY
 
 ## Key Notes
-- needle removed from watch list (now maintained again, v3.5.0 March 2026).
-- signet moved planning → development since last run.
-- sluice moved development → testing since last run.
-- Node ecosystem: 7 published + 10 testing + 1 development + 1 planning = 19 (most active).
-- Python ecosystem: 14 published + 7 testing = 21. Well-saturated.
-- Go ecosystem: 7 published + 12 testing = 19. Well-saturated.
+- All 28 former "testing" projects moved to "documentation" status since last run.
+- bellows moved planning → development since last run.
+- Node ecosystem: 7 published + 10 documentation + 1 development + 1 planning = 19 (most active).
+- Python ecosystem: 14 published + 8 documentation = 22. Well-saturated.
+- Go ecosystem: 7 published + 12 documentation = 19. Well-saturated.
 - Rust: 1 project (disprove). Hard to find targets.
-- Next run: check bellows, signet progress. node-notifier remains on watch list (weak). Consider Java/C++ ecosystems.
+- Next run: check pyre, bellows progress. Consider Java/C++ ecosystems or watch list candidates.

@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-16T10:00:00Z
+tasks_completed: []
+tasks_blocked: []
+projects_touched: [stanza]
+---
+
+## Context
+
+- stanza: All tasks complete (phases 1-4, bugs, QA, release, docs). v0.1.0 released.
+- No open tasks, GitHub issues, or PRs.
+- Tests pass. Codebase healthy.
+- MCP server disabled; used agent-comms db.sqlite directly.

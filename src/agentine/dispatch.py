@@ -45,13 +45,20 @@ def clear_all_presence():
     """Reset all agents to idle on startup."""
     resp = api("GET", "/agents?status=running")
     if resp and resp.ok:
-        stuck = [a["username"] for a in resp.json().get("items", [])]
+        stuck = resp.json().get("items", [])
         if stuck:
-            for username in stuck:
-                print(f"  cleanup: {username} was stuck as 'running', setting idle")
-                set_presence(username, "idle")
+            for agent in stuck:
+                username = agent["username"]
+                project = agent.get("project") or None
+                label = f"{username}/{project}" if project else username
+                print(f"  cleanup: {label} was stuck as 'running', setting idle")
+                set_presence(username, "idle", project)
             journal(
-                f"startup cleanup: reset {len(stuck)} stuck agent(s) to idle: {', '.join(stuck)}"
+                f"startup cleanup: reset {len(stuck)} stuck agent(s) to idle: "
+                + ", ".join(
+                    f"{a['username']}/{a.get('project', '')}" if a.get("project") else a["username"]
+                    for a in stuck
+                )
             )
 
 
@@ -397,8 +404,8 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             print(f"  ERROR: {label} — {e}")
             exit_code = 1
         finally:
-            # --- Always clean up presence ---
-            set_presence(username, "idle")
+            # --- Always clean up presence (must include project for composite PK) ---
+            set_presence(username, "idle", project)
 
         finished_at = utcnow()
         duration = int(time.monotonic() - start_time)

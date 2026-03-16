@@ -2,12 +2,14 @@
 """Agentine dispatcher — owns agent lifecycle, presence, and scheduling."""
 
 import concurrent.futures
+import json
 import os
 import signal
 import subprocess
 import sys
 import threading
 import time
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -30,6 +32,18 @@ _dispatch: DispatchConfig = DispatchConfig()
 _stop_event = threading.Event()
 _children: list[subprocess.Popen] = []
 _children_lock = threading.Lock()
+
+
+@dataclass
+class RunStats:
+    """Stats captured from the claude stream-json result event."""
+    input_tokens: int = 0
+    output_tokens: int = 0
+    cache_read_tokens: int = 0
+    cache_creation_tokens: int = 0
+    cost_usd: float = 0.0
+    num_turns: int = 0
+    session_id: str = ""
 
 
 def _is_stopping() -> bool:
@@ -298,6 +312,7 @@ def log_run(
     finished_at: str,
     exit_code: int,
     duration_seconds: int,
+    stats: RunStats | None = None,
 ):
     """Log a run to the agent-comms API."""
     payload: dict = {
@@ -311,6 +326,10 @@ def log_run(
     }
     if project:
         payload["project"] = project
+    if stats:
+        payload["input_tokens"] = stats.input_tokens
+        payload["output_tokens"] = stats.output_tokens
+        payload["cost_usd"] = f"{stats.cost_usd:.6f}"
     api("POST", "/runs", json=payload)
 
 
@@ -422,10 +441,36 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         start_time = time.monotonic()
         print(f"  START: {label} (attempt {attempt})")
 
-        proc = subprocess.Popen(cmd)
+        # Capture stdout to parse stream-json result event for stats
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
         with _children_lock:
             _children.append(proc)
+
+        stats: RunStats | None = None
         try:
+            # Stream stdout line by line, tee to terminal, parse result event
+            assert proc.stdout is not None
+            for line in proc.stdout:
+                sys.stdout.write(line)
+                sys.stdout.flush()
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    event = json.loads(line)
+                    if event.get("type") == "result":
+                        usage = event.get("usage", {})
+                        stats = RunStats(
+                            input_tokens=usage.get("input_tokens", 0),
+                            output_tokens=usage.get("output_tokens", 0),
+                            cache_read_tokens=usage.get("cache_read_input_tokens", 0),
+                            cache_creation_tokens=usage.get("cache_creation_input_tokens", 0),
+                            cost_usd=event.get("total_cost_usd", 0.0) or 0.0,
+                            num_turns=event.get("num_turns", 0),
+                            session_id=event.get("session_id", ""),
+                        )
+                except (json.JSONDecodeError, TypeError):
+                    pass
             proc.wait()
             exit_code = proc.returncode
         except Exception as e:
@@ -445,6 +490,14 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         finished_at = utcnow()
         duration = int(time.monotonic() - start_time)
 
+        if stats:
+            print(
+                f"  STATS: {label} — "
+                f"in={stats.input_tokens} out={stats.output_tokens} "
+                f"cache_read={stats.cache_read_tokens} "
+                f"cost=${stats.cost_usd:.4f} turns={stats.num_turns}"
+            )
+
         # Log run to API
         log_run(
             agent=config.role.lower(),
@@ -455,6 +508,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             finished_at=finished_at,
             exit_code=exit_code,
             duration_seconds=duration,
+            stats=stats,
         )
 
         if exit_code == 0:

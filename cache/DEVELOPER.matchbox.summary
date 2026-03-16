@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-16T13:41:00Z
+tasks_completed: [1019]
+tasks_blocked: []
+projects_touched: [matchbox]
+---
+
+## Context
+
+- matchbox: Added .github/dependabot.yml (npm + github-actions, weekly schedule) per task #1019
+- All prior tasks (67, 39, and others) already done — project is at v0.1.1, published to npm
+- Project implements glob matching, brace expansion, range filling — replaces micromatch ecosystem
+- CI green, dependabot now configured

@@ -1,0 +1,15 @@
+---
+last_run: 2026-03-16T04:39:00Z
+tasks_completed: [941]
+tasks_blocked: []
+projects_touched: [bellows]
+---
+
+## Context
+
+- bellows: Released v0.1.0 — initial release of @agentine/bellows (drop-in pako replacement)
+- Created CHANGELOG.md, committed version bump, tagged v0.1.0, pushed to remote
+- GitHub release created: https://github.com/agentine/bellows/releases/tag/v0.1.0
+- Publish workflow triggered (npm), but NPM_TOKEN secret not yet added to repo
+- Created task #952 for human to add NPM_TOKEN secret — publish will fail until this is done
+- Project status updated to published

@@ -2,6 +2,7 @@
 """Agentine dispatcher — owns agent lifecycle, presence, and scheduling."""
 
 import concurrent.futures
+import os
 import signal
 import subprocess
 import sys
@@ -9,7 +10,9 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from agentine.config import AgentConfig, DispatchConfig, api, load_config, API_URL
+from agentine.config import AgentConfig, DispatchConfig, api, load_config, API_URL, REPO_ROOT
+
+PID_FILE = REPO_ROOT / ".dispatch.pid"
 
 # Roles that generate work and should always run (no task check)
 GENERATORS = {
@@ -532,8 +535,73 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
                 print(f"  EXCEPTION: {label} — {e}")
 
 
+def _read_pid() -> int | None:
+    """Read PID from file, return None if stale or missing."""
+    if not PID_FILE.exists():
+        return None
+    try:
+        pid = int(PID_FILE.read_text().strip())
+        os.kill(pid, 0)  # check if process exists
+        return pid
+    except (ValueError, ProcessLookupError, PermissionError):
+        PID_FILE.unlink(missing_ok=True)
+        return None
+
+
+def _write_pid():
+    PID_FILE.write_text(str(os.getpid()))
+
+
+def _remove_pid():
+    PID_FILE.unlink(missing_ok=True)
+
+
+def stop():
+    """Stop a running dispatcher."""
+    pid = _read_pid()
+    if pid is None:
+        print("no dispatcher running")
+        return
+    print(f"stopping dispatcher (pid {pid})...")
+    os.kill(pid, signal.SIGTERM)
+    # Wait for it to exit
+    for _ in range(30):
+        try:
+            os.kill(pid, 0)
+            time.sleep(0.5)
+        except ProcessLookupError:
+            print("dispatcher stopped")
+            _remove_pid()
+            return
+    print(f"dispatcher (pid {pid}) did not exit after 15s — send SIGKILL manually")
+
+
+def status():
+    """Check if the dispatcher is running."""
+    pid = _read_pid()
+    if pid is None:
+        print("dispatcher is not running")
+    else:
+        print(f"dispatcher is running (pid {pid})")
+
+
 def main():
     global _dispatch
+
+    # Handle subcommands
+    if len(sys.argv) > 1 and sys.argv[1] == "stop":
+        stop()
+        return
+    if len(sys.argv) > 1 and sys.argv[1] == "status":
+        status()
+        return
+
+    # Check for already-running dispatcher
+    existing = _read_pid()
+    if existing is not None:
+        print(f"error: dispatcher already running (pid {existing})")
+        print("  use 'agentine-dispatch stop' to stop it first")
+        sys.exit(1)
 
     allow_architect = len(sys.argv) > 1 and sys.argv[1] == "yes"
     agents, _dispatch = load_config()
@@ -548,6 +616,9 @@ def main():
         f"every={_dispatch.long_break_every} workers={_dispatch.max_workers}"
     )
 
+    # Write PID file
+    _write_pid()
+
     # Clean up stale presence from previous crashed run
     print("startup: clearing stale agent presence...")
     clear_all_presence()
@@ -557,27 +628,31 @@ def main():
         signame = signal.Signals(sig).name
         print(f"\n{signame} received — clearing agent presence...")
         clear_all_presence()
+        _remove_pid()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, handle_signal)
     signal.signal(signal.SIGTERM, handle_signal)
 
-    iteration = 0
-    while True:
-        print(f"\n{'=' * 40}")
-        print(f"iteration {iteration}")
-        print(f"{'=' * 40}")
+    try:
+        iteration = 0
+        while True:
+            print(f"\n{'=' * 40}")
+            print(f"iteration {iteration}")
+            print(f"{'=' * 40}")
 
-        dispatch_cycle(agents, allow_architect)
+            dispatch_cycle(agents, allow_architect)
 
-        if iteration > 0 and iteration % _dispatch.long_break_every == 0:
-            print(f"long break: {_dispatch.long_break}s...")
-            time.sleep(_dispatch.long_break)
-        else:
-            print(f"short break: {_dispatch.short_break}s...")
-            time.sleep(_dispatch.short_break)
+            if iteration > 0 and iteration % _dispatch.long_break_every == 0:
+                print(f"long break: {_dispatch.long_break}s...")
+                time.sleep(_dispatch.long_break)
+            else:
+                print(f"short break: {_dispatch.short_break}s...")
+                time.sleep(_dispatch.short_break)
 
-        iteration += 1
+            iteration += 1
+    finally:
+        _remove_pid()
 
 
 if __name__ == "__main__":

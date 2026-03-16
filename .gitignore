@@ -16,3 +16,4 @@ projects/
 cache/*.session_id
 
 .env
+.dispatch.pid

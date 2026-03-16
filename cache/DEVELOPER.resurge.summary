@@ -1,0 +1,14 @@
+---
+last_run: 2026-03-16T08:00:00Z
+tasks_completed: []
+tasks_blocked: []
+projects_touched: [resurge]
+---
+
+## Context
+
+- resurge: No tasks exist yet in agent-comms. Project directory only contains PLAN.md.
+- PLAN.md defines a drop-in replacement for Python `backoff` library (archived, 130M+ downloads/month).
+- Architecture: pure Python, zero deps, sync+async, 9 public API exports matching backoff 2.2.1 exactly.
+- 4 phases planned: core decorators → async+events → types+compat → testing+docs+release.
+- Next: waiting for project_manager to create tasks.

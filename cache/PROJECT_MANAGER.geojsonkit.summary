@@ -1,0 +1,14 @@
+---
+last_run: 2026-03-16T04:36:50Z
+tasks_completed: [934]
+tasks_blocked: []
+projects_touched: [geojsonkit]
+---
+
+## Context
+
+- geojsonkit (renamed from geospec): v0.1.0 released, all pipeline stages complete
+- Project status: published (under old name "geospec" in API, actual package/repo is geojsonkit)
+- Pending: human task #933 — PyPI Trusted Publisher setup for geojsonkit. PyPI publish CI run will fail without it.
+- All dev tasks (#579-584), release task (#916) done under project "geospec"
+- No further PM action needed until human completes #933

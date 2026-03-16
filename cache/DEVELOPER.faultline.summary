@@ -1,0 +1,12 @@
+---
+last_run: 2026-03-16T13:43:00Z
+tasks_completed: [1011, 1012]
+tasks_blocked: []
+projects_touched: [faultline]
+---
+
+## Context
+
+- faultline: Fixed all CI failures. Resolved errcheck lint failures in bench_test.go, errors.go, and wrap.go (unchecked fmt.Fprintf returns in Format methods). Updated CI actions to Node.js 24 compat versions (checkout@v6, setup-go@v6, golangci-lint-action@v9). Bumped go.mod minimum to 1.24, CI matrix now tests Go 1.24/1.25/1.26.
+- CI is fully green on all jobs (test, lint, staticcheck).
+- No remaining pending tasks for faultline.

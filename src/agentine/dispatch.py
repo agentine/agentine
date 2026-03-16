@@ -103,7 +103,7 @@ def clear_all_presence():
 
 
 def has_work(username: str) -> bool:
-    for status in ("pending", "in_progress"):
+    for status in ("pending", "in_progress", "blocked"):
         resp = api("GET", f"/tasks?username={username}&status={status}&limit=1")
         if resp and resp.ok and resp.json().get("total", 0) > 0:
             return True
@@ -111,9 +111,9 @@ def has_work(username: str) -> bool:
 
 
 def get_pending_projects(username: str) -> list[str]:
-    """Return unique projects with pending/in_progress tasks for this agent."""
+    """Return unique projects with pending/in_progress/blocked tasks for this agent."""
     found: set[str] = set()
-    for status in ("pending", "in_progress"):
+    for status in ("pending", "in_progress", "blocked"):
         resp = api("GET", f"/tasks?username={username}&status={status}&limit=100")
         if resp and resp.ok:
             for task in resp.json().get("items", []):
@@ -167,9 +167,9 @@ def check_stale_development_projects():
     for proj in projects:
         name = proj["name"]
 
-        # Check for any active (pending/in_progress) tasks on this project
+        # Check for any active (pending/in_progress/blocked) tasks on this project
         has_active = False
-        for status in ("pending", "in_progress"):
+        for status in ("pending", "in_progress", "blocked"):
             task_resp = api("GET", f"/tasks?project={name}&status={status}&limit=1")
             if task_resp and task_resp.ok and task_resp.json().get("total", 0) > 0:
                 has_active = True
@@ -207,7 +207,7 @@ def check_stale_pipeline_projects():
 
     def _project_is_idle(name: str) -> bool:
         """True if project has no active tasks but at least one done task."""
-        for status in ("pending", "in_progress"):
+        for status in ("pending", "in_progress", "blocked"):
             task_resp = api(
                 "GET", f"/tasks?project={name}&status={status}&limit=1"
             )

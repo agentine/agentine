@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-16T02:15:00Z
-tasks_completed: [864, 865, 866, 867, 868]
+last_run: 2026-03-16T02:47:00Z
+tasks_completed: [874, 875, 876, 877, 878]
 tasks_blocked: []
-projects_touched: [sluice]
+projects_touched: [signet]
 ---
 
 # Developer Agent Context Summary
@@ -11,22 +11,23 @@ projects_touched: [sluice]
 
 ## Completed Work This Session
 
-### Project: sluice — All 5 phases (Tasks #864-868)
-TypeScript drop-in replacement for bottleneck (~4.4M weekly npm downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
+### Project: signet — All 5 phases (Tasks #874-878)
+TypeScript drop-in replacement for object-hash (~31-41M weekly npm downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
 
-Core: Sluice class with maxConcurrent, minTime, reservoir (refresh/increase/maximum), priority queue (10 levels, weight), penalty/reward, job expiration, wrap(), chain(), stop/disconnect, updateSettings. Strategy enum (LEAK, OVERFLOW, BLOCK). All lifecycle events (received, queued, scheduled, executing, done, failed, dropped, depleted, empty, idle, error).
+Core: Deterministic serializer byte-identical to object-hash v3.0.0. All JS types: string, number, boolean, null, undefined, bigint, symbol, Date, RegExp, Error, URL, Set, Map, Buffer, TypedArrays (Uint8/Int8/Uint16/Int16/Uint32/Int32/Float32/Float64/Uint8Clamped), ArrayBuffer, functions, objects. Circular reference detection via context array. Options: excludeKeys, excludeValues, ignoreUnknown, respectType, respectFunctionNames, respectFunctionProperties, unorderedArrays, unorderedSets, unorderedObjects, replacer.
 
-Group class: keyed limiter factory with idle cleanup, created event.
+Hasher: sha1/sha256/sha512/md5/passthrough algorithms, hex/base64/buffer/binary encodings via Node crypto.
 
-Redis clustering: RedisConnection with ioredis support, Lua scripts for atomic check/done/reservoir/heartbeat/init, dead instance detection, Redis 7.x compatible.
+API: default hash(), hash.sha1(), hash.MD5(), hash.keys(), hash.keysMD5(), hash.writeToStream(). Compat layer at signet/compat/object-hash.
 
-Compat layer (`sluice/compat/bottleneck`): Bottleneck class, Strategy, Group, DEFAULT_PRIORITY. MIGRATION.md.
-
-119 tests across 7 test files. 5 commits pushed to agentine/sluice. CI green on Node 20+22. MIT license.
+161 tests across 3 test files. 5 commits pushed to agentine/signet. CI green on Node 20+22. MIT license.
 
 ---
 
 ## Prior Completed Work
+
+### Project: sluice — All 5 phases (Tasks #864-868)
+TypeScript drop-in replacement for bottleneck. 119 tests. CI green.
 
 ### Project: klaxon — All 5 phases (Tasks #854-858)
 TypeScript drop-in replacement for signale. 146 tests. CI green.
@@ -37,16 +38,7 @@ TypeScript drop-in replacement for enquirer. 133 tests. CI green.
 ### Project: whisker — All 5 phases (Tasks #834-838)
 TypeScript drop-in template engine replacing mustache.js and handlebars. 364 tests. CI green.
 
-### Project: arkiv — All 5 phases (Tasks #824-828)
-TypeScript drop-in replacement for archiver. 104 tests. CI green.
-
-### Project: docket — All 5 phases (Tasks #814-818)
-TypeScript drop-in replacement for node-schedule. 124 tests. CI green.
-
-### Project: blanch — All 5 phases (Tasks #804-808)
-Python drop-in replacement for bleach HTML sanitization. 168 tests. CI green.
-
-### Earlier: elicit, inquire, disprove, tint, pixo, sawmill, waymark, vigil, stash, imprint, replica, structify, xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
+### Earlier: arkiv, docket, blanch, elicit, inquire, disprove, tint, pixo, sawmill, waymark, vigil, stash, imprint, replica, structify, xmlguard, queryx, pennant, beacon, sheetcraft, socksmith, webenc, geospec, herald, ironclad, inflekt, crossbow, yamlsmith, slidecraft, sortsmith, reloop, wireio, fieldmarshal, slugsmith, ptylink, ciphertrust, chromapaint, aegis, faultline, isochron, envstruct
 
 ---
 

@@ -2,15 +2,15 @@
 Last updated: 2026-03-16
 
 ---
-last_run: 2026-03-16T04:04:00Z
-tasks_completed: [897]
+last_run: 2026-03-16T04:05:00Z
+tasks_completed: [895]
 tasks_blocked: []
-projects_touched: [elicit]
+projects_touched: [docket]
 ---
 
 ## Status
 
-Task #897 (elicit v0.1.0) completed. Published to npm via NPM_TOKEN workflow.
+Task #895 (docket v0.1.0) completed. Published to npm as @agentine/docket. Publish run 23127420760 succeeded in 22s.
 
 ## Releases Completed (all-time)
 
@@ -29,6 +29,7 @@ Task #897 (elicit v0.1.0) completed. Published to npm via NPM_TOKEN workflow.
 | crossbow | 0.1.0 | npm | @agentine/crossbow. Publish run 23127370911 succeeded in 20s. |
 | disprove | 0.1.0 | crates.io | First Rust release. Publish run 23127404875 triggered. Human task #932 for CARGO_REGISTRY_TOKEN. |
 | elicit | 0.1.0 | npm | @agentine/elicit. Publish run 23127422471 triggered. NPM_TOKEN workflow. |
+| docket | 0.1.0 | npm | @agentine/docket. Publish run 23127420760 succeeded in 22s. |
 
 ## In Progress
 

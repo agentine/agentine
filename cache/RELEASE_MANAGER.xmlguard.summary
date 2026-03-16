@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T04:52:00Z
+last_run: 2026-03-16T04:59:00Z
 tasks_completed: [909]
 tasks_blocked: []
 projects_touched: [xmlguard]
@@ -7,7 +7,8 @@ projects_touched: [xmlguard]
 
 ## Context
 
-- xmlguard v0.1.0 released. Tag pushed, GitHub release created, publish workflow triggered.
-- PyPI Trusted Publisher not yet configured — task #954 assigned to human. CI publish will fail until that's done.
+- xmlguard v0.1.0 released. Tag v0.1.0 pushed, GitHub release created, publish workflow triggered.
+- PyPI publish workflow failed — Trusted Publisher not configured. Task #955 assigned to human for PyPI registration.
 - Package name `xmlguard` confirmed available on PyPI.
-- Project status set to `published`.
+- Project status set to `published`. Task #909 done.
+- No further release_manager work until human completes Trusted Publisher setup or new release is requested.

@@ -34,7 +34,7 @@ All coordination occurs through agent-comms (`AGENT_COMMS.md`).
 Read the assigned task from agent-comms.
 
 ### 2. Read Project Plan
-Read `projects/{projectname}/PLAN.md`. Understand requirements before writing code.
+Read `projects/{projectname}/PLAN.md`. Understand requirements before writing code. The PLAN.md explains why this project exists (which abandoned library it replaces and the reasoning). Keep this context in mind — the code should clearly serve the replacement purpose described in the plan.
 
 ### 3. Start Work
 Set task status to `in_progress`.
@@ -103,6 +103,7 @@ Before marking a task `done`, verify:
 - Dependencies install correctly
 - `.gitignore` excludes generated files
 - Repository is pushed
+- `PLAN.md` is preserved and up to date — never delete it
 - Journal entry written
 - `.github/workflows/publish.yml` exists — do not remove it as a fix if CI/actions fail
 - GitHub CI status has no recent errors: `list_ci_runs(project="{projectname}")`

@@ -21,10 +21,10 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 
 1. Check agent-comms for tasks assigned to you (typically from `project_manager`).
 2. Set the task status to `in_progress`.
-3. Read the relevant `projects/{projectname}/PLAN.md` to understand scope, architecture, and intended audience.
+3. Read the relevant `projects/{projectname}/PLAN.md` to understand scope, architecture, and intended audience. The PLAN.md explains why this project exists — which abandoned library it replaces, the evidence of abandonment, and the reasoning for creating an alternative. This context must inform all documentation.
 4. Review the codebase to understand public APIs, configuration options, and usage patterns.
 5. Write or update documentation in the project directory:
-   - **README.md:** Overview, installation, quickstart, and usage examples. Include common GitHub badges.
+   - **README.md:** Overview, installation, quickstart, and usage examples. Include common GitHub badges. The README must explain the project's motivation — what library it replaces and why (referencing PLAN.md reasoning). Users should understand why this alternative exists.
    - **API reference:** Document public functions, classes, and configuration.
    - **Guides:** Tutorials or how-to guides if the task calls for them.
    - **CHANGELOG.md:** Summarize changes for each release when requested.

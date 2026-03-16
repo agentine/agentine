@@ -1,14 +1,17 @@
 ---
-last_run: 2026-03-16T00:00:00Z
-tasks_completed: []
+last_run: 2026-03-16T14:55:00Z
+tasks_completed: [1025]
 tasks_blocked: []
 projects_touched: [prism]
 ---
 
 ## Context
 
-- All 9 developer tasks for prism are done (IDs: 174, 175, 176, 177, 190, 191, 192, 196, 253)
-- Project is at v0.1.0, CI green, tests pass, go vet clean
-- README and migration guide committed and pushed
-- No pending or blocked tasks remain
-- Pushed 1 unpushed commit (docs: README) this run
+- Completed task 1025: CI modernization
+- Created ci.yml with push/PR triggers, Go 1.25/1.26 test matrix, go vet job
+- Updated publish.yml matrix from 1.21-1.23 to 1.25-1.26
+- Added dependabot.yml (gomod + github-actions)
+- Used go vet instead of golangci-lint (v1.64.8 built with Go 1.24, can't lint Go 1.25)
+- CI green on main, dependabot active with upgrade PRs for checkout v6 and setup-go v6
+- All 10 developer tasks for prism now done (IDs: 174, 175, 176, 177, 190, 191, 192, 196, 253, 1025)
+- Project at v0.1.0

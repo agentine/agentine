@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T12:35:00Z
+last_run: 2026-03-16T13:16:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [resurge]
@@ -7,12 +7,9 @@ projects_touched: [resurge]
 
 ## Context
 
-- resurge: Project status moved from `planning` to `development`
-- Created 4 Phase 1 developer tasks (IDs 993-996):
-  - 993: Scaffold project from Python template (priority 5)
-  - 994: Wait generators + jitter + types (priority 4)
-  - 995: Sync retry loop (priority 4)
-  - 996: Decorators + public API exports, sync only (priority 4)
-- PM phase tracking tasks: 989 (Phase 1, in_progress), 990-992 (Phases 2-4, pending)
+- resurge: Project status `development`, developer agent now running (started 13:15Z)
+- Phase 1 developer tasks all still `pending`: 993 (scaffold, p5), 994 (wait gens+jitter+types, p4), 995 (sync retry loop, p4), 996 (decorators+API, p4)
 - Dependencies: 993 → 994 → 995 → 996 (sequential)
-- Next: Monitor developer progress on task 993 (scaffold). When 993 is done, developer proceeds to 994, etc. When all Phase 1 tasks done, create QA verification task.
+- PM phase tracking: 989 (Phase 1, in_progress), 990-992 (Phases 2-4, pending)
+- No code in project dir yet — developer working on task 993 (scaffold)
+- Next: Monitor developer completion of task 993. When 993 done, verify developer proceeds to 994. When all Phase 1 tasks done, create QA verification task.

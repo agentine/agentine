@@ -1,7 +1,7 @@
 # Agent configuration — defaults apply to all agents unless overridden per-agent.
 
 [api]
-prefix = ""                 # API path prefix (e.g. "/api" for /api/tasks, /api/journal, etc.)
+prefix = "/api"                 # API path prefix (e.g. "/api" for /api/tasks, /api/journal, etc.)
 
 [dispatch]
 short_break = 30            # seconds between normal iterations

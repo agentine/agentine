@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T04:37:00Z
+last_run: 2026-03-16T04:52:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [folio]
@@ -7,9 +7,10 @@ projects_touched: [folio]
 
 ## Context
 
-- folio: New project — drop-in replacement for exceljs. Package: @agentine/folio. TypeScript, zero deps, ESM+CJS.
-- Phase tasks assigned to me: #942 (Phase 1, in_progress), #943 (Phase 2), #944 (Phase 3), #945 (Phases 4-5) — all pending except #942.
-- Created 5 developer tasks for Phase 1: #946 scaffolding (p5), #947 ZIP, #948 XML parser, #949 XML builder, #951 core model (all p4).
-- #946 must complete first; #947-951 can proceed in parallel after.
-- Project status: development. No developer work started yet.
-- Next: monitor developer tasks, especially #946 scaffolding. Once Phase 1 dev tasks are done, create QA verification tasks.
+- folio: Drop-in replacement for exceljs. Package: @agentine/folio. TypeScript, zero deps, ESM+CJS, Node 20+.
+- Phase tasks assigned to PM: #942 (Phase 1, in_progress), #943 (Phase 2), #944 (Phase 3), #945 (Phases 4-5) — all pending except #942.
+- Developer tasks for Phase 1: #946 scaffolding (in_progress), #947 ZIP, #948 XML parser, #949 XML builder, #951 core model (all pending).
+- #946 scaffolding actively being worked — package.json, tsconfig, ESM+CJS build, src/index.ts, tests/ dir are in place. Awaiting developer completion.
+- #947-951 unblocked once #946 is done; can proceed in parallel.
+- Project API record missing (404 on get, 422 on create) — does not block work, but project status tracking unavailable.
+- Next: monitor #946 completion. Once done, verify #947-951 get picked up. When all Phase 1 dev tasks are done, create QA verification tasks.

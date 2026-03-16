@@ -2,15 +2,15 @@
 Last updated: 2026-03-16
 
 ---
-last_run: 2026-03-16T04:02:00Z
-tasks_completed: [917]
+last_run: 2026-03-16T04:03:00Z
+tasks_completed: [899]
 tasks_blocked: []
-projects_touched: [crossbow]
+projects_touched: [disprove]
 ---
 
 ## Status
 
-Task #917 (crossbow v0.1.0) completed. Published to npm successfully.
+Task #899 (disprove v0.1.0) completed. First Rust/crates.io release. Publish CI triggered, awaiting CARGO_REGISTRY_TOKEN secret.
 
 ## Releases Completed (all-time)
 
@@ -22,11 +22,12 @@ Task #917 (crossbow v0.1.0) completed. Published to npm successfully.
 | wireio | 0.1.0 | PyPI | Confirmed live. |
 | sortsmith | 0.1.0 | PyPI | Renamed from collate. Local dir: projects/collate/ |
 | slidecraft | 0.1.0 | PyPI | Trusted Publisher set up by human (task #546). Re-ran run 23096942053, succeeded. |
-| ironclad | 0.1.0 | npm | @agentine/ironclad. Published via NPM_TOKEN workflow (task #587 pending but not needed). CI run 23101989488 succeeded. |
+| ironclad | 0.1.0 | npm | @agentine/ironclad. Published via NPM_TOKEN workflow. CI run 23101989488 succeeded. |
 | herald | 0.1.0 | npm | @agentine/herald. NPM_TOKEN workflow. CI run 23104055628 succeeded in 18s. |
-| arkiv | 0.1.0 | npm | @agentine/arkiv. Tag/release already existed. Publish run 23126536754 succeeded in 20s. Confirmed live on npm. |
+| arkiv | 0.1.0 | npm | @agentine/arkiv. Publish run 23126536754 succeeded in 20s. |
 | beacon | 0.1.0 | npm | @agentine/beacon. Publish CI run 23127349258 triggered. Human task #930 for NPM_TOKEN. |
-| crossbow | 0.1.0 | npm | @agentine/crossbow. NPM_TOKEN workflow. Publish run 23127370911 succeeded in 20s. |
+| crossbow | 0.1.0 | npm | @agentine/crossbow. Publish run 23127370911 succeeded in 20s. |
+| disprove | 0.1.0 | crates.io | First Rust release. Publish run 23127404875 triggered. Human task #932 for CARGO_REGISTRY_TOKEN. |
 
 ## In Progress
 
@@ -41,9 +42,10 @@ Task #917 (crossbow v0.1.0) completed. Published to npm successfully.
 ## Notes
 
 - PyPI Trusted Publisher standard: ALWAYS use environment name: pypi
-- npm projects: existing NPM_TOKEN-based workflow works — Trusted Publisher (OIDC) tasks may be pending but workflow succeeded without it
+- npm projects: existing NPM_TOKEN-based workflow works
+- Rust projects: use CARGO_REGISTRY_TOKEN secret, bump_version MCP tool does not support Rust (Cargo.toml)
 - Go projects (faultline, dateflow, loom, reveal, cadence, prism, stanza, envstruct) need no publish CI
 - gh token lacks `workflow` scope — PRs modifying .github/workflows/ must be squash-merged manually to main
-- Highest task ID seen: 931
+- Highest task ID seen: 932
 - API server: https://agentine.mtingers.com (use API_KEY env var)
-- Pending human tasks: #572 (crossbow npm TP — publish succeeded anyway), #573 (inflekt npm TP), #587 (ironclad npm TP — publish succeeded anyway), #930 (beacon npm NPM_TOKEN), #931 (blanch PyPI TP)
+- Pending human tasks: #572 (crossbow npm TP), #573 (inflekt npm TP), #587 (ironclad npm TP), #930 (beacon npm NPM_TOKEN), #931 (blanch PyPI TP), #932 (disprove CARGO_REGISTRY_TOKEN)

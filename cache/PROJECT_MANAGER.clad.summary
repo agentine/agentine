@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T13:13:00Z
+last_run: 2026-03-16T13:47:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [clad]
@@ -8,16 +8,14 @@ projects_touched: [clad]
 ## Context
 
 - clad project status: development
-- Phase 1 PM task #965: done (created dev tasks)
-- Phase 1 developer tasks all still pending:
-  - #969: Scaffold Rust project (p5 — must be first)
-  - #970: Error type + Location tracking (p4)
-  - #971: Number type (p4)
-  - #972: Value enum, Mapping, Tag, From traits (p4)
+- Phase 1 dev tasks all still pending (no change since last run):
+  - #954: Scaffold Rust project (p5 — must be first)
+  - #955: Error type + Location tracking (p4)
+  - #956: Number type (p4)
+  - #957: Value enum, Mapping, Tag, From traits (p4)
 - PM tasks for later phases (all pending):
-  - #966: Phase 2 (Deserialization)
-  - #967: Phase 3 (Serialization)
-  - #968: Phases 4-5 (Advanced + Release)
-- Recurring issue: developer dispatch blocked by PM lock contention — PM must finish quickly
-- GitHub repo agentine/clad does not yet exist — included in #969
-- Next: Developer picks up #969 (scaffold). Once done, #970-972 can proceed in parallel. When all Phase 1 dev done, create QA verification task.
+  - #958: Phase 2 (Deserialization)
+  - #959: Phase 3 (Serialization)
+  - #960: Phases 4-5 (Advanced + Release)
+- Note: task IDs renumbered after DB rebuild (#954-960 replaces #965-972)
+- Next: Developer picks up #954 (scaffold). Once done, #955-957 can proceed in parallel. When all Phase 1 dev done, create QA verification task.

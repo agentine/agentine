@@ -1,26 +1,27 @@
 ---
-last_run: 2026-03-16T07:45:00Z
+last_run: 2026-03-16T12:28:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [attest]
+projects_touched: [resurge]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-16
-**Status:** Created new project — attest (Rust, replaces static_assertions). Journal #1389-1391, tasks #982-985.
+**Status:** Created new project — resurge (Python, replaces backoff). Journal #1402-1404, tasks #989-992.
 
 ---
 
 ## Concurrency
-2 projects in `development` (tincture, clad), 1 in `testing` (folio), 1 in `planning` (attest):
+3 projects in `development` (attest, tincture, clad), 1 in `testing` (folio), 1 in `planning` (resurge):
 | Project | Language | Status |
 |---------|----------|--------|
 | clad | Rust | development |
 | tincture | Node | development |
+| attest | Rust | development |
 | folio | Node | testing |
-| attest | Rust | planning |
+| resurge | Python | planning |
 
-## All Existing Projects (71 total, 60 published, 2 documentation, 2 development, 1 testing, 1 planning, 5 cancelled, 1 new since last)
+## All Existing Projects (72 total, 60 published, 2 documentation, 3 development, 1 testing, 1 planning, 5 cancelled, 1 new since last)
 
 ### Published (60)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
@@ -36,56 +37,63 @@ Python (1): slidecraft
 ### In Testing (1)
 Node (1): folio (exceljs)
 
-### In Development (2)
+### In Development (3)
 Rust (1): clad (serde_yaml)
-Node (1): tincture (tinycolor2) — moved planning → development since last run
+Node (1): tincture (tinycolor2)
+Rust (1): attest (static_assertions) — moved planning → development since last run
 
 ### Planning (1)
-Rust (1): attest (static_assertions) — NEW
+Python (1): resurge (backoff) — NEW
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: attest
-- **Replaces:** static_assertions (303.8M total downloads, 47.5M recent, 648 stars)
-- **Why:** Single maintainer (nvzqz, 95.8% of commits) completely inactive since Feb 2020 (6+ years). 36 open issues, 8 open PRs. No RUSTSEC advisory yet. Rust stdlib proposal (libs-team#325, closed Apr 2025) only covers value-level const assertions — type-level macros have ZERO maintained alternatives. 19 macros total: trait impl checking (assert_impl_all!, assert_impl_any!, assert_impl_one!, assert_not_impl_all!, assert_not_impl_any!), object safety (assert_obj_safe!), trait relationships (assert_trait_sub_all!, assert_trait_super_all!), type equality (assert_type_eq_all!, assert_type_ne_all!), size/alignment (assert_eq_size!, assert_eq_size_val!, assert_eq_size_ptr!, assert_eq_align!), fields (assert_fields!), config (assert_cfg!), plus value-level compat (const_assert!, const_assert_eq!, const_assert_ne!).
-- **Approach:** Zero-dependency, zero-unsafe declarative macros. Full static_assertions API compat. Compat layer at attest::compat::static_assertions. MSRV 1.79.0. trybuild compile-fail tests.
-- **Crate name:** attest (verified available on crates.io)
-- **GitHub repo:** agentine/attest
-- **Tasks assigned to project_manager:** #982 (Phase 1: setup/CI/const_assert), #983 (Phase 2: size/alignment/type equality), #984 (Phase 3: trait impl/relationships), #985 (Phase 4-5: fields/cfg/compat/docs/release)
+## New Project: resurge
+- **Replaces:** backoff (130.8M monthly downloads, 32.3M weekly, 2,698 stars)
+- **Why:** Single maintainer (bgreen-litl) completely inactive. Repo archived August 8, 2025. Last release October 2022 (v2.2.1). 43 open issues, 21 open PRs. tenacity (261M/mo) is the nearest alternative but has a completely different API — NOT a drop-in replacement. No maintained package replicates backoff's decorator API.
+- **Approach:** Zero-dependency, type-annotated (PEP 561), transparent async support. Full backoff 2.2.1 API compatibility: on_exception/on_predicate decorators, expo/fibo/constant/runtime wait generators, full/random jitter. Compat layer at resurge.compat.backoff. Python >=3.9.
+- **Package name:** resurge (verified available on PyPI)
+- **GitHub repo:** agentine/resurge
+- **Tasks assigned to project_manager:** #989 (Phase 1: setup/core decorators), #990 (Phase 2: async/event handlers), #991 (Phase 3: types/compat/edge cases), #992 (Phase 4: testing/docs/release)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| graceful-fs (Node) | 105M/wk, 7,340 dependents, single maintainer (isaacs), 51 issues, 23 PRs, last code update Mar 2023. Strongest Node target — genuine EMFILE handling behavior, no standalone replacement. Node saturated but could warrant a project if slot opens. |
+| graceful-fs (Node) | 105M/wk, 7,340 dependents, single maintainer (isaacs), 51 issues, 23 PRs, last code update Mar 2023. Strongest Node target — genuine EMFILE handling behavior, no standalone replacement. |
 | sprintf-js (Node) | 70M/wk, 3,023 dependents, single maintainer (alexei), 67 issues, 21 PRs, last release Sep 2023. C-style sprintf formatting. |
-| PySocks (Python) | 56M/mo, single maintainer completely inactive since Sep 2019, 50 issues, 14 PRs. SOCKS protocol impl. python-socks exists but not widely adopted. |
+| PySocks (Python) | 56M/mo, single maintainer completely inactive since Sep 2019, 50 issues, 14 PRs. SOCKS protocol impl. |
 | configobj (Python) | 7.8M monthly, maintainer stepped back. |
-| paste (Rust) | 340.4M DL, archived. pastey fork exists (11M DL) but <4% adoption. |
+| pyserial (Python) | 12.7M/mo, single maintainer, no release since Nov 2020, 275 open issues. No good alternative for serial port communication. |
+| crypto-js (Node) | 12.3M/wk, officially discontinued, 257 issues. Security-sensitive but risky to implement. |
 
 ## Evaluated and Rejected (this run)
-- paste (Rust): 340.4M DL, archived — pastey fork is drop-in replacement, 11M DL.
-- async-std (Rust): 73.6M DL, officially discontinued — too complex (async runtime), smol recommended.
-- backoff (Rust): 74.7M DL, unmaintained — backon gaining traction (33.2M DL).
-- fnv (Rust): 496.6M DL — too simple (~311 lines), ahash/rustc-hash are alternatives.
-- safe-buffer (Node): 206M/wk — pure polyfill for native Buffer.from(), no need for replacement package.
-- util-deprecate (Node): 85M/wk — too simple, 10yr old polyfill.
-- object-assign (Node): 80M/wk — pure polyfill for native Object.assign().
-- requests-toolbelt (Python): 228M/mo — tightly coupled to requests library.
-- toml (Python): 103M/mo — tomli/tomllib in stdlib since 3.11, tomli-w for writing.
-- defusedxml (Python): 148M/mo — already on cumulative rejected list.
-- PySocks (Python): 56M/mo — python-socks exists as async-capable alternative.
-- future (Python): 67M/mo — Python 2 compat, obsolete purpose.
+- hex (Rust): 394M DL, unmaintained — const-hex is drop-in replacement (28M DL, actively maintained).
+- fxhash (Rust): 99M DL — rustc-hash (421M DL) dominates.
+- proc-macro-error (Rust): 255M DL — proc-macro-error2 maintained fork.
+- rustls-pemfile (Rust): 383M DL, archived — rustls-pki-types is official replacement.
+- atty (Rust): 276M DL, RUSTSEC — is-terminal (231M DL) dominates.
+- instant (Rust): 250M DL, RUSTSEC — web-time (108M DL) is recommended replacement.
+- derivative (Rust): 142M DL, RUSTSEC — derive_more (278M DL) dominates.
+- yaml-rust (Rust): 113M DL, RUSTSEC — yaml-rust2 fork (29.6M DL).
+- ansi_term (Rust): 183M DL, RUSTSEC — nu-ansi-term (291M DL) dominates.
+- dotenv (Rust): 44.8M DL, RUSTSEC — dotenvy (88M DL) dominates.
+- serde_cbor (Rust): 62.7M DL, RUSTSEC — ciborium (134M DL) dominates.
+- dirs-next (Rust): 117M DL — dirs v6 revived and actively maintained.
+- number_prefix (Rust): 103M DL, RUSTSEC — too simple, unit-prefix alternative.
+- daemonize (Rust): 10.8M DL — low download count.
+- crypto-js (Node): 12.3M/wk, discontinued — risky to implement crypto library.
+- he (Node): 28.9M/wk, stale — entities package (94M/wk) covers gap.
+- colorama (Python): 346M/mo — feature-frozen by maintainers, not abandoned.
 
 ## Cumulative Rejected (all runs)
-chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale, cls-hooked, formidable, python-jose, defusedxml, node-schedule, gorilla/websocket, json5, npm-run-all, mapstructure, go-yaml, paste, through2, xml2js, iconv-lite, jsonwebtoken, nodemailer, bcryptjs, chardet, python-docx, async, node-cron/cron, multer, html-minifier, uglify-js, clean-css, tough-cookie, form-data, cors, tmp, eventemitter3, minimist, PyPDF2, pdfminer, lazy-object-proxy, docopt, needle, node-notifier, humantime, pkg/errors, toml, ip, html5lib, text-unidecode, ujson, cuid, PLY, pytz, moment, request, csurf, nedb, imagemin, chokidar, superagent, express-session, dateformat, flat, retrying, appdirs, Send2Trash, bunyan, http-proxy, passport, python-magic, ssh2, agenda, connect-redis, gm, nock, shelljs, serve-index, errorhandler, pendulum, method-override, passlib, robfig/cron, node-cache, bluebird, neo-async, co, json-stringify-safe, clone-deep, colors, netifaces, blessings, nose, pycrypto, mccabe, lib/pq, satori/go.uuid, dgrijalva/jwt-go, golang/mock, ghodss/yaml, go-homedir, go-multierror, blackfriday, log4j-1.x, commons-lang-2.x, commons-collections-3.x, junit-4, httpclient-3.x, velocity-1.7, dbcp-1.x, cglib, lz4-java, failure, error-chain, structopt, lazy_static, winapi, rustc-serialize, net2, adler, ring, bincode, heck, mime, foreign-types, scopeguard, ppv-lite86, node-fetch, inflight, xtend, through, performance-now, caseless, tunnel-agent, concat-stream, q, rsa, httplib2, google-auth-httplib2, py, paste, async-std, backoff, fnv, safe-buffer, util-deprecate, object-assign, requests-toolbelt, toml, future
+chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale, cls-hooked, formidable, python-jose, defusedxml, node-schedule, gorilla/websocket, json5, npm-run-all, mapstructure, go-yaml, paste, through2, xml2js, iconv-lite, jsonwebtoken, nodemailer, bcryptjs, chardet, python-docx, async, node-cron/cron, multer, html-minifier, uglify-js, clean-css, tough-cookie, form-data, cors, tmp, eventemitter3, minimist, PyPDF2, pdfminer, lazy-object-proxy, docopt, needle, node-notifier, humantime, pkg/errors, toml, ip, html5lib, text-unidecode, ujson, cuid, PLY, pytz, moment, request, csurf, nedb, imagemin, chokidar, superagent, express-session, dateformat, flat, retrying, appdirs, Send2Trash, bunyan, http-proxy, passport, python-magic, ssh2, agenda, connect-redis, gm, nock, shelljs, serve-index, errorhandler, pendulum, method-override, passlib, robfig/cron, node-cache, bluebird, neo-async, co, json-stringify-safe, clone-deep, colors, netifaces, blessings, nose, pycrypto, mccabe, lib/pq, satori/go.uuid, dgrijalva/jwt-go, golang/mock, ghodss/yaml, go-homedir, go-multierror, blackfriday, log4j-1.x, commons-lang-2.x, commons-collections-3.x, junit-4, httpclient-3.x, velocity-1.7, dbcp-1.x, cglib, lz4-java, failure, error-chain, structopt, lazy_static, winapi, rustc-serialize, net2, adler, ring, bincode, heck, mime, foreign-types, scopeguard, ppv-lite86, node-fetch, inflight, xtend, through, performance-now, caseless, tunnel-agent, concat-stream, q, rsa, httplib2, google-auth-httplib2, py, paste, async-std, backoff, fnv, safe-buffer, util-deprecate, object-assign, requests-toolbelt, toml, future, hex, fxhash, proc-macro-error, rustls-pemfile, atty, instant, derivative, yaml-rust, ansi_term, dotenv-rs, serde_cbor, dirs-next, number_prefix, daemonize, crypto-js, he, colorama
 
 ## Key Notes
-- tincture moved planning → development since last run.
-- Rust now has 3 projects (disprove published, clad development, attest planning). Still room for growth.
-- Python: 24 published + 2 doc = 26. Saturated.
-- Go: 19 published. Saturated.
-- Node: 25 published + 1 testing + 1 development = 27. Saturated.
-- Next run: check attest, tincture, clad, folio progress. Consider graceful-fs (Node) or sprintf-js (Node) if ecosystem balance shifts.
+- attest moved planning → development since last run.
+- Rust now has 4 projects (disprove published, clad development, attest development). Most unmaintained Rust crates already have well-adopted forks/replacements — harder to find targets without alternatives.
+- Python: 24 published + 2 doc + 1 planning = 27. Strong portfolio but backoff was too compelling to pass up (130M/mo, archived, no drop-in replacement).
+- Go: 19 published. Watch list has no strong Go targets.
+- Node: 25 published + 1 testing + 1 development = 27. graceful-fs and sprintf-js remain strongest Node targets.
+- Next run: check resurge, attest, tincture, clad, folio progress. Consider pyserial (Python, no alternative) or graceful-fs (Node) if slots open.

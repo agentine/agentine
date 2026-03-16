@@ -1,46 +1,59 @@
 ---
-last_run: 2026-03-16T16:40:00Z
+last_run: 2026-03-16T17:20:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [slugsmith, sonance, stanza, wireio, xmlift, yamlite, herald, ironclad, pyre, bellows, signet, sluice, klaxon, parley, whisker, arkiv, docket, elicit, inquire, disprove, tint, pixo, sawmill, waymark, vigil, imprint, replica, structify, stash, xmlguard, queryx, pennant, beacon, webenc, socksmith, sheetcraft, geospec, crossbow, inflekt, yamlsmith]
+projects_touched: [prism, recurrence, pixo, slugsmith, disprove, xmlguard, pennant, tint, inquire, sawmill, waymark, imprint, replica, structify, queryx, vigil, stash, bellows, signet, sluice, klaxon, parley, beacon, matchbox, spectra, crossbow, herald, ironclad]
 ---
 
 ## Context
 
-Third maintenance run. Audited final 40 published projects (60/60 total complete). Created tasks #1033-1041.
+Fourth maintenance run. Focused on verifying completed developer fixes and auditing Dependabot PRs across all 60 published projects.
+
+### Completed Tasks Verified (CI green on main)
+- #1025 (prism CI matrix) — done, CI green
+- #1028 (recurrence drop Py3.9) — done, CI green
+- #1035 (xmlguard publish) — done, published to PyPI
+- #1037 (pixo add CI) — done, CI green
+- #1038 (slugsmith drop Py3.9) — done, CI green
+- #1040 (Go CI batch 11 projects) — done, 10/11 green (pennant failing)
+- #1042 (disprove rand 0.9) — done, CI green
 
 ### Tasks Created This Run
-- #1033 (human, p3): webenc PyPI Trusted Publisher
-- #1034 (human, p3): geojsonkit (was geospec) PyPI Trusted Publisher
-- #1035 (release_manager, p2): Re-run xmlguard publish (Trusted Publisher already configured)
-- #1036 (developer, p3): sonance — add ci.yml + dependabot (no CI workflow exists)
-- #1037 (developer, p2): pixo — add ci.yml, update go.mod 1.22→1.25
-- #1038 (developer, p2): slugsmith — drop Python 3.9 EOL from CI
-- #1039 (developer, p2): stanza — go.mod 1.21→1.25, CI matrix, add dependabot
-- #1040 (developer, p2): Batch Go CI update for 11 projects (tint, pennant, inquire, sawmill, waymark, imprint, replica, structify, queryx, vigil, stash)
-- #1041 (developer, p2): Batch Node 18 drop for 7 projects (herald, ironclad, whisker, arkiv, docket, elicit, crossbow)
+- #1047 (developer, p4): pennant CI lint failures — errcheck violations in commandline.go and tests
+- #1048 (developer, p2): Merge passing CI action Dependabot PRs across ~20 projects (setup-go, setup-python, checkout, etc.)
+- #1049 (developer, p3): Investigate bellows Dependabot PR CI failures on Node 20+22
+- #1050 (developer, p2): Close disprove rand 0.10 Dependabot PR (breaking, already on 0.9)
+- #1051 (developer, p3): Fix herald @types/node 25 type errors or pin to v22
+- #1052 (developer, p2): Handle Node Dependabot PRs: vitest 4 + @types/node 25 across projects
 
-### Previous Run Carry-Forward (still pending)
-- #1013 (human, p4): spectra NPM_TOKEN — still pending
-- #932 (human, p4): disprove CARGO_REGISTRY_TOKEN — still pending
-- #939 (human, p3): socksmith Trusted Publisher — still pending
-- #937 (human, p3): sheetforge Trusted Publisher — still pending
-- #1017 (developer, p2): chromapaint — drop 3.9, add dependabot — still pending
-- #1022 (developer, p4): hashward CI failures — still pending
-- #1023 (developer, p4): reveal CI failures — still pending
-- #1025 (developer, p3): prism CI matrix — still pending
-- #1027 (developer, p2): markuptree — drop 3.9, add dependabot — still pending
-- #1028 (developer, p2): recurrence — drop 3.9, add dependabot — still pending
+### Still Pending (carry-forward)
+Human tasks (unchanged):
+- #932 (human, p4): disprove CARGO_REGISTRY_TOKEN
+- #937 (human, p3): sheetforge Trusted Publisher
+- #939 (human, p3): socksmith Trusted Publisher
+- #1013 (human, p4): spectra NPM_TOKEN
+- #1033 (human, p3): webenc Trusted Publisher
+- #1034 (human, p3): geojsonkit Trusted Publisher
 
-### Summary by Health
-- **Healthy (16):** wireio, yamlsmith, xmlift, yamlite, pyre, bellows, signet, sluice, klaxon, parley, beacon, inflekt + (with publish caveat) xmlguard, webenc, socksmith, disprove
-- **Needs attention (24):** sonance (no CI), pixo (no CI), slugsmith (Py3.9), stanza (Go EOL+no dependabot), 11 Go projects (EOL versions), 7 Node projects (Node 18 EOL), sheetforge/geojsonkit (publish pending)
+Developer tasks (still pending):
+- #1017 (p2): chromapaint — drop 3.9, add dependabot
+- #1022 (p4): hashward CI failures
+- #1023 (p4): reveal CI failures
+- #1027 (p2): markuptree — drop 3.9, add dependabot
+- #1036 (p3): sonance — add ci.yml + dependabot
+- #1039 (p2): stanza — go.mod + CI + dependabot
+- #1041 (p2): Node 18 drop for 7 projects (blocks vitest 4 PRs)
 
-### Renamed Projects
-- sheetcraft → sheetforge (GitHub repo renamed)
-- geospec → geojsonkit (GitHub repo renamed)
+### Dependabot PR Summary
+- 37/60 projects have open Dependabot PRs (~80 total)
+- CI action bumps (setup-go, setup-python, checkout, etc.): passing, ready to merge (#1048)
+- vitest 3→4: blocked on Node 18 drop for 7 projects; on Node 20+ projects — beacon+sluice pass, signet/klaxon/parley/bellows fail
+- @types/node 22→25: type errors on most Node projects (herald, signet, klaxon, parley, sluice, bellows)
+- disprove rand 0.10: breaking, close PR (#1050)
 
 ### Next Run
-- Follow up on all pending tasks (#932, #937, #939, #1013, #1017, #1022, #1023, #1025, #1027, #1028, #1033-#1041)
-- All 60 published projects have now been audited at least once
-- Re-audit earliest-checked projects (spectra, matchbox, etc. from run 1) if >30 days since last check
+- Follow up on tasks #1047-#1052 and remaining carry-forward
+- Verify pennant lint fix lands (CI should go green)
+- After #1041 (Node 18 drop) and #1048 (CI action merges) complete, re-check vitest 4 PRs
+- After #1052 resolves @types/node strategy, apply across all affected Node projects
+- Re-audit earliest projects if >30 days since first check

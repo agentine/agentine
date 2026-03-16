@@ -6,6 +6,7 @@ import os
 import signal
 import subprocess
 import sys
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -24,6 +25,30 @@ NO_RETRY_CODES = {0, 2}
 
 # Module-level dispatch config, set in main()
 _dispatch: DispatchConfig = DispatchConfig()
+
+# Shutdown coordination
+_stop_event = threading.Event()
+_children: list[subprocess.Popen] = []
+_children_lock = threading.Lock()
+
+
+def _is_stopping() -> bool:
+    return _stop_event.is_set()
+
+
+def _interruptible_sleep(seconds: int):
+    """Sleep that returns immediately when stop is requested."""
+    _stop_event.wait(timeout=seconds)
+
+
+def _terminate_children():
+    """Terminate all running child processes."""
+    with _children_lock:
+        for proc in _children:
+            try:
+                proc.terminate()
+            except OSError:
+                pass
 
 
 def journal(content: str, project: str | None = None):
@@ -380,7 +405,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
 
     attempt = 0
 
-    while True:
+    while not _is_stopping():
         attempt += 1
 
         # --- Dispatcher owns presence ---
@@ -397,15 +422,25 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         start_time = time.monotonic()
         print(f"  START: {label} (attempt {attempt})")
 
+        proc = subprocess.Popen(cmd)
+        with _children_lock:
+            _children.append(proc)
         try:
-            result = subprocess.run(cmd)
-            exit_code = result.returncode
+            proc.wait()
+            exit_code = proc.returncode
         except Exception as e:
             print(f"  ERROR: {label} — {e}")
             exit_code = 1
         finally:
+            with _children_lock:
+                if proc in _children:
+                    _children.remove(proc)
             # --- Always clean up presence (must include project for composite PK) ---
             set_presence(username, "idle", project)
+
+        # If we're stopping, don't log or retry — just exit
+        if _is_stopping():
+            return exit_code
 
         finished_at = utcnow()
         duration = int(time.monotonic() - start_time)
@@ -471,11 +506,15 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         print(
             f"  RETRY: {label} — exit {exit_code}, waiting {delay}s (attempt {attempt}/{strategy['max_attempts']})"
         )
-        time.sleep(delay)
+        _interruptible_sleep(delay)
+
+    return 1  # stopped
 
 
 def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
     """Run one dispatch cycle."""
+    if _is_stopping():
+        return
 
     # Check for stale blocked tasks
     check_stale_blocked_tasks()
@@ -486,12 +525,17 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
     # Phase 1: Run generators sequentially (they create work for others)
     for config in agents:
+        if _is_stopping():
+            return
         if config.role not in GENERATORS:
             continue
         if config.role == "ARCHITECT" and not allow_architect:
             print(f"  SKIP: {config.role} (disabled)")
             continue
         run_agent(config)
+
+    if _is_stopping():
+        return
 
     # Phase 2: Collect work for task-driven agents
     work_queue: list[tuple[AgentConfig, str | None]] = []
@@ -524,6 +568,8 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
         futures: dict[concurrent.futures.Future, str] = {}
 
         for config, proj in work_queue:
+            if _is_stopping():
+                break
             label = f"{config.role}" + (f"/{proj}" if proj else "")
 
             if proj and project_locked(proj):
@@ -572,7 +618,7 @@ def stop():
     print(f"stopping dispatcher (pid {pid})...")
     os.kill(pid, signal.SIGTERM)
     # Wait for it to exit
-    for _ in range(30):
+    for _ in range(60):
         try:
             os.kill(pid, 0)
             time.sleep(0.5)
@@ -580,7 +626,13 @@ def stop():
             print("dispatcher stopped")
             _remove_pid()
             return
-    print(f"dispatcher (pid {pid}) did not exit after 15s — send SIGKILL manually")
+    print(f"dispatcher (pid {pid}) did not exit after 30s — sending SIGKILL...")
+    try:
+        os.kill(pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    _remove_pid()
+    print("dispatcher killed")
 
 
 def status():
@@ -590,6 +642,22 @@ def status():
         print("dispatcher is not running")
     else:
         print(f"dispatcher is running (pid {pid})")
+
+
+def _shutdown():
+    """Clean shutdown: signal stop, terminate children, clear presence, remove PID."""
+    _stop_event.set()
+    _terminate_children()
+    # Wait briefly for children to exit
+    with _children_lock:
+        procs = list(_children)
+    for proc in procs:
+        try:
+            proc.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+    clear_all_presence()
+    _remove_pid()
 
 
 def main():
@@ -630,12 +698,11 @@ def main():
     print("startup: clearing stale agent presence...")
     clear_all_presence()
 
-    # Clean up on exit
+    # Signal handler sets stop event — actual cleanup happens in _shutdown
     def handle_signal(sig, _frame):
         signame = signal.Signals(sig).name
-        print(f"\n{signame} received — clearing agent presence...")
-        clear_all_presence()
-        _remove_pid()
+        print(f"\n{signame} received — shutting down...")
+        _shutdown()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, handle_signal)
@@ -643,23 +710,26 @@ def main():
 
     try:
         iteration = 0
-        while True:
+        while not _is_stopping():
             print(f"\n{'=' * 40}")
             print(f"iteration {iteration}")
             print(f"{'=' * 40}")
 
             dispatch_cycle(agents, allow_architect)
 
+            if _is_stopping():
+                break
+
             if iteration > 0 and iteration % _dispatch.long_break_every == 0:
                 print(f"long break: {_dispatch.long_break}s...")
-                time.sleep(_dispatch.long_break)
+                _interruptible_sleep(_dispatch.long_break)
             else:
                 print(f"short break: {_dispatch.short_break}s...")
-                time.sleep(_dispatch.short_break)
+                _interruptible_sleep(_dispatch.short_break)
 
             iteration += 1
     finally:
-        _remove_pid()
+        _shutdown()
 
 
 if __name__ == "__main__":

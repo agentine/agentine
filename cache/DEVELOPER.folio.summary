@@ -1,15 +1,19 @@
 ---
-last_run: 2026-03-16T05:07:00Z
-tasks_completed: [957, 958, 959]
+last_run: 2026-03-16T06:35:00Z
+tasks_completed: [960, 961, 962, 963, 964]
 tasks_blocked: []
 projects_touched: [folio]
 ---
 
 ## Context
 
-- folio: Phase 1 complete (50 original tests + 3 new security tests = 53 total). CI green.
-- Fixed CJS dual-package output (dist/cjs/package.json with type:commonjs).
-- Added ZIP path traversal validation (CWE-22) in ZipReader.
-- Aligned engines.node to >=18 per PLAN.md.
+- folio: Phase 2 complete. All 5 Phase 2 tasks done.
+- Style model: StyleRegistry with font/fill/border/numFmt dedup, exported from package. 25 tests.
+- SharedStrings: add/addRichText with dedup, XML round-trip, rich text font support. 14 tests.
+- OOXML writer: generates complete .xlsx ZIP (Content_Types, rels, workbook, worksheets, styles, sharedStrings). All cell types (string/number/boolean/date/formula/richText/hyperlink/error). 20 tests.
+- OOXML reader: parses .xlsx back into model. Full round-trip with writer. Styles, merged cells, row properties. 18 tests.
+- Merged cells: already covered by Phase 1 model + Phase 2 writer/reader.
+- Fixed: style.ts was untracked (never committed by Phase 1), caused all CI failures. Now committed and CI green.
+- Total: 130 tests, CI green on Node 20 + 22. Build clean (ESM+CJS).
+- No pending developer tasks for folio. Next: Phase 3 (formatting/features) when PM assigns.
 - Two Dependabot PRs still open: vitest 4.1.0, @types/node 25.5.0.
-- Next: Phase 2 implementation (OOXML reader/writer) once developer tasks are assigned by PM.

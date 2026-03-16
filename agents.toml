@@ -1,5 +1,15 @@
 # Agent configuration — defaults apply to all agents unless overridden per-agent.
 
+[dispatch]
+short_break = 300           # seconds between normal iterations
+long_break = 1800           # seconds for extended breaks
+long_break_every = 4        # take a long break every N iterations
+max_workers = 4             # parallel agent slots
+retry_delays = [60, 300, 600]
+retry_max_attempts = 3
+oom_delays = [300, 600]
+oom_max_attempts = 2
+
 [defaults]
 backend = "claude"
 model = "claude-opus-4-6"

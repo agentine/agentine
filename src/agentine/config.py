@@ -46,8 +46,26 @@ class AgentConfig:
     effort: str
 
 
-def load_agents(path: str = "agents.toml") -> list[AgentConfig]:
-    """Load agent configuration from TOML file."""
+@dataclass
+class DispatchConfig:
+    short_break: int = 300  # seconds between normal iterations
+    long_break: int = 1800  # seconds for extended breaks
+    long_break_every: int = 4  # take a long break every N iterations
+    max_workers: int = 4  # parallel agent slots
+    retry_delays: list[int] | None = None  # default retry delays
+    retry_max_attempts: int = 3
+    oom_delays: list[int] | None = None  # OOM/crash retry delays
+    oom_max_attempts: int = 2
+
+    def __post_init__(self):
+        if self.retry_delays is None:
+            self.retry_delays = [60, 300, 600]
+        if self.oom_delays is None:
+            self.oom_delays = [300, 600]
+
+
+def load_config(path: str = "agents.toml") -> tuple[list[AgentConfig], DispatchConfig]:
+    """Load agent and dispatch configuration from TOML file."""
     conf_path = REPO_ROOT / path
     if not conf_path.exists():
         raise FileNotFoundError(f"{path} not found")
@@ -55,6 +73,20 @@ def load_agents(path: str = "agents.toml") -> list[AgentConfig]:
     with open(conf_path, "rb") as f:
         data = tomllib.load(f)
 
+    # Dispatch config
+    d = data.get("dispatch", {})
+    dispatch = DispatchConfig(
+        short_break=d.get("short_break", 300),
+        long_break=d.get("long_break", 1800),
+        long_break_every=d.get("long_break_every", 4),
+        max_workers=d.get("max_workers", 4),
+        retry_delays=d.get("retry_delays"),
+        retry_max_attempts=d.get("retry_max_attempts", 3),
+        oom_delays=d.get("oom_delays"),
+        oom_max_attempts=d.get("oom_max_attempts", 2),
+    )
+
+    # Agent configs
     defaults = data.get("defaults", {})
     agents = []
     for entry in data.get("agents", []):
@@ -66,7 +98,7 @@ def load_agents(path: str = "agents.toml") -> list[AgentConfig]:
                 effort=entry.get("effort", defaults.get("effort", "max")),
             )
         )
-    return agents
+    return agents, dispatch
 
 
 def api(method: str, path: str, **kwargs) -> requests.Response | None:

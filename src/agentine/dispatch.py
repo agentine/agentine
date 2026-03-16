@@ -9,24 +9,18 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from agentine.config import AgentConfig, api, load_agents, API_URL
+from agentine.config import AgentConfig, DispatchConfig, api, load_config, API_URL
 
 # Roles that generate work and should always run (no task check)
 GENERATORS = {
     "ARCHITECT",
 }  #  "COMMUNITY_MANAGER"}
 
-# Retry strategies by exit code
-RETRY_STRATEGIES = {
-    0: None,  # success
-    2: None,  # bad input — don't retry
-}
+# Retry strategies by exit code (None = don't retry)
+NO_RETRY_CODES = {0, 2}
 
-# Default retry: general error
-DEFAULT_RETRY = {"delays": [60, 300, 600], "max_attempts": 3}
-
-# OOM/crash retry
-OOM_RETRY = {"delays": [300, 600], "max_attempts": 2}
+# Module-level dispatch config, set in main()
+_dispatch: DispatchConfig = DispatchConfig()
 
 
 def journal(content: str, project: str | None = None):
@@ -287,11 +281,11 @@ def log_run(
 
 def get_retry_strategy(exit_code: int) -> dict | None:
     """Get retry strategy for a given exit code."""
-    if exit_code in RETRY_STRATEGIES:
-        return RETRY_STRATEGIES[exit_code]
+    if exit_code in NO_RETRY_CODES:
+        return None
     if exit_code in (137, 139):
-        return OOM_RETRY
-    return DEFAULT_RETRY
+        return {"delays": _dispatch.oom_delays, "max_attempts": _dispatch.oom_max_attempts}
+    return {"delays": _dispatch.retry_delays, "max_attempts": _dispatch.retry_max_attempts}
 
 
 def utcnow() -> str:
@@ -375,7 +369,6 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
     label = f"{config.role}" + (f"/{project}" if project else "")
     username = config.role.lower()
 
-    strategy = DEFAULT_RETRY
     attempt = 0
 
     while True:
@@ -518,7 +511,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
     # Phase 3: Execute work queue in parallel (respecting project locks)
     print(f"  dispatching {len(work_queue)} agent/project pair(s)...")
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=_dispatch.max_workers) as executor:
         futures: dict[concurrent.futures.Future, str] = {}
 
         for config, proj in work_queue:
@@ -541,14 +534,20 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
 
 def main():
+    global _dispatch
+
     allow_architect = len(sys.argv) > 1 and sys.argv[1] == "yes"
-    agents = load_agents()
+    agents, _dispatch = load_config()
 
     print(
         f"agentine dispatcher starting (architect={'enabled' if allow_architect else 'disabled'})"
     )
     print(f"  api: {API_URL}")
     print(f"  agents: {', '.join(a.role for a in agents)}")
+    print(
+        f"  timing: short={_dispatch.short_break}s long={_dispatch.long_break}s "
+        f"every={_dispatch.long_break_every} workers={_dispatch.max_workers}"
+    )
 
     # Clean up stale presence from previous crashed run
     print("startup: clearing stale agent presence...")
@@ -572,12 +571,12 @@ def main():
 
         dispatch_cycle(agents, allow_architect)
 
-        if iteration > 0 and iteration % 4 == 0:
-            print("long break: 30 minutes...")
-            time.sleep(1800)
+        if iteration > 0 and iteration % _dispatch.long_break_every == 0:
+            print(f"long break: {_dispatch.long_break}s...")
+            time.sleep(_dispatch.long_break)
         else:
-            print("short break: 5 minutes...")
-            time.sleep(300)
+            print(f"short break: {_dispatch.short_break}s...")
+            time.sleep(_dispatch.short_break)
 
         iteration += 1
 

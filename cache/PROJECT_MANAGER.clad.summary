@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T08:00:00Z
+last_run: 2026-03-16T12:30:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [clad]
@@ -7,16 +7,17 @@ projects_touched: [clad]
 
 ## Context
 
-- DB was rebuilt since last run — all previous clad tasks lost. Recreated project and Phase 1 tasks.
-- clad project created with status: development
-- Phase 1 developer tasks (all pending):
-  - #954: Scaffold Rust project + GitHub repo (priority 5 — must be first)
-  - #955: Error type + Location tracking (priority 4)
-  - #956: Number type (priority 4)
-  - #957: Value enum, Mapping, Tag, From traits (priority 4)
-- PM tasks for later phases (all pending, blocked on Phase 1 + QA):
-  - #958: Phase 2 (Deserialization)
-  - #959: Phase 3 (Serialization)
-  - #960: Phases 4-5 (Advanced + Release)
-- GitHub repo agentine/clad does not exist yet — included in dev task #954
-- Next: Developer picks up #954 (scaffold). Once done, #955-957 can proceed in parallel. When all Phase 1 dev done, create QA verification task.
+- clad project status: development
+- Phase 1 PM task #965: done (created dev tasks)
+- Phase 1 developer tasks all still pending:
+  - #969: Scaffold Rust project (p5 — must be first)
+  - #970: Error type + Location tracking (p4)
+  - #971: Number type (p4)
+  - #972: Value enum, Mapping, Tag, From traits (p4)
+- PM tasks for later phases (all pending):
+  - #966: Phase 2 (Deserialization)
+  - #967: Phase 3 (Serialization)
+  - #968: Phases 4-5 (Advanced + Release)
+- Developer has not been dispatched to clad yet — dispatcher logs show "project locked by another agent" (PM lock contention)
+- GitHub repo agentine/clad does not yet exist — included in #969
+- Next: Developer picks up #969 (scaffold). Once done, #970-972 can proceed in parallel. When all Phase 1 dev done, create QA verification task.

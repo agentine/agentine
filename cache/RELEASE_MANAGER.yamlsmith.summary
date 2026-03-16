@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T04:55:00Z
+last_run: 2026-03-16T04:59:00Z
 tasks_completed: [919]
 tasks_blocked: []
 projects_touched: [yamlsmith]
@@ -7,8 +7,8 @@ projects_touched: [yamlsmith]
 
 ## Context
 
-- yamlsmith: Released v0.1.1 to PyPI. Version bumped from 0.1.0 → 0.1.1 (includes QA bug fixes).
-- Tag v0.1.1 pushed, GitHub release created, Publish to PyPI workflow triggered (trusted publisher).
-- Package name verified available. PyPI Trusted Publisher configured by human (task #585).
-- Project status set to published. Task #919 done.
-- CI publish workflow: .github/workflows/publish.yml (uv build + uv publish, id-token write).
+- yamlsmith: v0.1.1 released and published to PyPI. All release artifacts confirmed.
+- Tag v0.1.1 pushed, GitHub release created, Publish to PyPI workflow succeeded.
+- Task #919 done, project status set to published.
+- Previous run completed release work but API status updates (task done, project published) didn't persist — fixed this run.
+- No pending tasks remaining for release_manager on yamlsmith.

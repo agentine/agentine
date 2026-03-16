@@ -32,6 +32,10 @@ Available tools:
 | `close_pr` | Close a GitHub PR (with optional comment) |
 | `get_pr_diff` | Get the diff of a GitHub PR |
 | `get_pr_checks` | Get CI check status for a GitHub PR |
+| `create_release` | Create a GitHub release (triggers CI publish) |
+| `list_ci_runs` | List recent CI workflow runs for a project |
+| `update_repo_description` | Update a GitHub repo description |
+| `rename_repo` | Rename a GitHub repo (updates remote URL too) |
 | `init_project` | Scaffold a new project from template |
 | `bump_version` | Bump version in project manifest |
 | `setup_github` | Create GitHub repo and push |

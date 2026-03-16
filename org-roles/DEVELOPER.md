@@ -105,7 +105,7 @@ Before marking a task `done`, verify:
 - Repository is pushed
 - Journal entry written
 - `.github/workflows/publish.yml` exists — do not remove it as a fix if CI/actions fail
-- GitHub CI status has no recent errors: `gh run list --repo agentine/{projectname}`
-- GitHub project description is accurate: `gh repo edit <repository> --description <string>`
+- GitHub CI status has no recent errors: `list_ci_runs(project="{projectname}")`
+- GitHub project description is accurate: `update_repo_description(project="{projectname}", description="...")`
 
 Only then set status to `done`.

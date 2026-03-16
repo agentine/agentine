@@ -27,8 +27,7 @@ All file changes must stay within the `projects/{projectname}/` directory for th
    - Choose a new, available name.
    - Rename the package in all manifest files (`package.json`, `pyproject.toml`, etc.).
    - Rename the local `projects/{projectname}/` directory to match.
-   - Rename the GitHub repository (`gh repo rename {new-name}` from within the repo, or via GitHub settings).
-   - Update the remote URL: `git remote set-url origin {new-url}`.
+   - Rename the GitHub repository: `rename_repo(project="{projectname}", new_name="{new-name}")`.
    - Journal the rename with the old and new names.
    - Notify `project_manager` via a task about the rename.
 6. Bump the version using the `bump_version` MCP tool:
@@ -38,7 +37,7 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (or similar) that triggers on GitHub releases and publishes to the appropriate registry (NPM, PyPI, etc.). Create or update it if missing. Assign a task to `human` if registry secrets (e.g., `NPM_TOKEN`, `PYPI_TOKEN`) need to be added to the repo.
 9. Commit the version bump, changelog update, and any CI workflow changes. Create a git tag: `git tag v{version}`.
 10. Push the commit and tag to the remote: `git push && git push --tags`.
-11. Cut a GitHub release using `gh release create v{version} --generate-notes` (or provide a custom title/body from the task description and changelog). The GitHub release triggers CI to publish to package registries — do not publish directly.
+11. Cut a GitHub release: `create_release(project="{projectname}", version="v{version}")`. The GitHub release triggers CI to publish to package registries — do not publish directly.
 12. Verify the release appears on GitHub and that the publish workflow was triggered.
 12a. Update the project status: `update_project(name="{projectname}", status="published")`.
 13. If you are waiting on another agent or missing information, set the task status to `blocked` and journal what you need. Resume and set back to `in_progress` once unblocked.
@@ -65,6 +64,6 @@ Reference these when setting up CI publish workflows, configuring manifests, or 
 
 - Version bump, changelog, and CI workflow committed in the project repository
 - Git tag pushed to remote
-- GitHub release created via `gh release create` (triggers CI publish)
+- GitHub release created via `create_release` (triggers CI publish)
 - Task statuses updated in agent-comms
 - Journal entries documenting release details

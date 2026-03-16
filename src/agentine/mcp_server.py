@@ -380,6 +380,57 @@ def close_pr(project: str, number: int, comment: str = "") -> str:
 
 
 @mcp.tool()
+def create_release(
+    project: str, version: str, generate_notes: bool = True, body: str = ""
+) -> str:
+    """Create a GitHub release for an agentine project.
+
+    This triggers CI to publish to package registries — do not publish directly.
+    Version should include the 'v' prefix (e.g. 'v0.1.0').
+    """
+    repo = f"agentine/{project}"
+    args = ["release", "create", version, "--repo", repo]
+    if generate_notes:
+        args.append("--generate-notes")
+    if body:
+        args += ["--notes", body]
+    return _gh(*args)
+
+
+@mcp.tool()
+def list_ci_runs(project: str, limit: int = 10) -> str:
+    """List recent CI workflow runs for an agentine project."""
+    repo = f"agentine/{project}"
+    return _gh("run", "list", "--repo", repo, "--limit", str(limit))
+
+
+@mcp.tool()
+def update_repo_description(project: str, description: str) -> str:
+    """Update the GitHub repository description for an agentine project."""
+    repo = f"agentine/{project}"
+    return _gh("repo", "edit", repo, "--description", description)
+
+
+@mcp.tool()
+def rename_repo(project: str, new_name: str) -> str:
+    """Rename a GitHub repository under the agentine org.
+
+    Also updates the local git remote URL to match.
+    """
+    project_dir = PROJECTS_DIR / project
+    output = _gh("repo", "rename", new_name, "--repo", f"agentine/{project}", "--yes")
+    if "exit code" not in output and project_dir.is_dir():
+        subprocess.run(
+            ["git", "remote", "set-url", "origin", f"https://github.com/agentine/{new_name}.git"],
+            capture_output=True,
+            text=True,
+            cwd=project_dir,
+        )
+        output += f"\nRemote URL updated to agentine/{new_name}"
+    return output
+
+
+@mcp.tool()
 def get_pr_diff(project: str, number: int) -> str:
     """Get the diff of a GitHub pull request on an agentine project."""
     repo = f"agentine/{project}"

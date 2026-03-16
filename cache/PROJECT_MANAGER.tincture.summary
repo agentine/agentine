@@ -1,18 +1,17 @@
 ---
-last_run: 2026-03-16T12:35:00Z
-tasks_completed: []
+last_run: 2026-03-16T13:19:00Z
+tasks_completed: [974, 975]
 tasks_blocked: []
 projects_touched: [tincture]
 ---
 
 ## Context
 
-- tincture: status check run — all Phase 1 developer tasks still pending, no work started
-- Phase 1 parent task: 974 (`in_progress`, assigned to `project_manager`)
-- Phase 1 developer subtasks (dependency chain: 978→979→980→981):
-  - 978: scaffold project and build setup (priority 5, `pending`, assigned to `developer`)
-  - 979: util.ts + names.ts (priority 4, `pending`)
-  - 980: input parser parse.ts (priority 4, `pending`)
-  - 981: TinctureColor class + constructor (priority 4, `pending`)
-- Phase 2-5 parent tasks: 975-977 (`pending`, assigned to `project_manager`)
-- Next: monitor developer progress on task 978. When done, 979-981 sequentially. When all Phase 1 done, mark 974 done, create QA verification task, break Phase 2 into developer tasks.
+- tincture: Phase 1+2 complete. Developer implemented all parsing, conversions, properties, and core class in one batch (129 tests). Project status: testing.
+- QA verification task 1007 (p5, pending) covers Phase 1+2 — assigned to qa
+- Phase 3 parent task 976 now in_progress. Developer subtasks:
+  - 1008: modify.ts — 7 modification methods (p5, pending)
+  - 1009: combine.ts — 6 palette methods + mix (p4, pending, depends on 1008)
+  - 1010: readability.ts — WCAG contrast methods (p4, pending, independent)
+- Phase 4-5 parent task 977 still pending
+- Next: monitor QA task 1007. When QA passes Phase 1+2, monitor developer tasks 1008-1010. When 1008 done, 1009 can start. When all Phase 3 done, mark 976 done, create QA task for Phase 3, break Phase 4 into tasks.

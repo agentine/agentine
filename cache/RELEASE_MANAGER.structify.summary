@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-16T04:40:06Z
+tasks_completed: [907]
+tasks_blocked: []
+projects_touched: [structify]
+---
+
+## Context
+
+- structify: Released v0.1.0 (initial release). CHANGELOG.md added, tagged, pushed, GitHub release created.
+- Publish workflow triggered — will index on pkg.go.dev via Go module proxy.
+- Project status set to published. No further release tasks pending.
+- Install: go get github.com/agentine/structify@v0.1.0

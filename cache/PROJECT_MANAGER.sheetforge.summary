@@ -1,0 +1,14 @@
+---
+last_run: 2026-03-16T04:37:00Z
+tasks_completed: [938]
+tasks_blocked: []
+projects_touched: [sheetforge]
+---
+
+## Context
+
+- sheetforge (renamed from sheetcraft): Phase 1 MVP complete, v0.1.0 tagged and GitHub release created
+- PyPI publish failed — blocked on human task #937 (Trusted Publisher setup)
+- Created task #950 for release_manager to re-run publish after human completes #937
+- Project API still uses old name "sheetcraft" with status "published"
+- No other active development or QA tasks — pipeline is idle until publish completes

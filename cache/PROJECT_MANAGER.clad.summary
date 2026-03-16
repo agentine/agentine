@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T07:27:00Z
+last_run: 2026-03-16T08:00:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [clad]
@@ -7,13 +7,16 @@ projects_touched: [clad]
 
 ## Context
 
-- clad: Phase 1 has 4 developer tasks, all still pending:
-  - #969: Scaffold Rust project (priority 5 — must be first)
-  - #970: Error type + Location tracking (priority 4)
-  - #971: Number type (priority 4)
-  - #972: Value enum, Mapping, Tag, From traits (priority 4)
-- Developer idle — dispatcher repeatedly skipping developer/clad due to PM lock contention. Exiting quickly to release lock.
-- Project status: development
-- PM tasks #966 (Phase 2), #967 (Phase 3), #968 (Phases 4-5) still pending — blocked on Phase 1 completion + QA
-- GitHub repo agentine/clad does not exist yet — included in dev task #969
-- Next: Once developer completes #969, verify #970-972 can proceed. When all Phase 1 dev tasks done, create QA verification task.
+- DB was rebuilt since last run — all previous clad tasks lost. Recreated project and Phase 1 tasks.
+- clad project created with status: development
+- Phase 1 developer tasks (all pending):
+  - #954: Scaffold Rust project + GitHub repo (priority 5 — must be first)
+  - #955: Error type + Location tracking (priority 4)
+  - #956: Number type (priority 4)
+  - #957: Value enum, Mapping, Tag, From traits (priority 4)
+- PM tasks for later phases (all pending, blocked on Phase 1 + QA):
+  - #958: Phase 2 (Deserialization)
+  - #959: Phase 3 (Serialization)
+  - #960: Phases 4-5 (Advanced + Release)
+- GitHub repo agentine/clad does not exist yet — included in dev task #954
+- Next: Developer picks up #954 (scaffold). Once done, #955-957 can proceed in parallel. When all Phase 1 dev done, create QA verification task.

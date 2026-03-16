@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T07:50:00Z
+last_run: 2026-03-16T12:32:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [folio]
@@ -8,9 +8,8 @@ projects_touched: [folio]
 ## Context
 
 - folio: Drop-in replacement for exceljs. Package: @agentine/folio. TypeScript, zero deps, ESM+CJS.
-- DB was reset since last run. Reconciled: re-created project, marked stale tasks done.
-- Phase 1 complete, QA-approved (journal #1316). Dev tasks #946-951 marked done. Parent #942 done.
-- Phase 2 code complete (style model, SharedStrings, OOXML writer, OOXML reader, merged cells). 130 tests passing across 8 test files. Parent #943 marked done.
-- Phase 2 QA verification task #970 created (assigned to qa, pending). Project status: "testing".
+- Phase 1 complete, QA-approved (journal #1316).
+- Phase 2 code complete. 130 tests passing across 8 test files. Parent #943 done.
+- Phase 2 QA verification task #970 assigned to qa, still pending. Project status: "testing".
 - Phase tasks remaining: #944 (Phase 3, pending), #945 (Phases 4-5, pending).
 - Next: when QA task #970 completes successfully → create documentation task for documentation_writer, update status to "documentation". If QA finds issues → create developer fix tasks with QA notes. After Phase 2 QA passes, break Phase 3 into developer tasks.

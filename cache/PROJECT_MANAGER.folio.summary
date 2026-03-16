@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T05:01:00Z
+last_run: 2026-03-16T05:04:50Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [folio]
@@ -7,9 +7,10 @@ projects_touched: [folio]
 
 ## Context
 
-- folio: Drop-in replacement for exceljs. Package: @agentine/folio. TypeScript, zero deps, ESM+CJS, Node 20+.
-- Phase 1 complete. QA verification task #954 still pending (not yet picked up by qa agent).
+- folio: Drop-in replacement for exceljs. Package: @agentine/folio. TypeScript, zero deps, ESM+CJS.
+- Phase 1 dev complete. QA reviewed and found 3 issues — task #954 blocked pending developer fixes.
+- Developer fix tasks: #957 (HIGH, CJS broken — missing dist/cjs/package.json), #958 (MEDIUM, ZIP path traversal), #959 (LOW, engines.node mismatch). All pending.
 - Phase tasks remaining: #943 (Phase 2, pending), #944 (Phase 3, pending), #945 (Phases 4-5, pending).
-- Project API record still 404 — does not block work.
+- Project API record still unavailable (404/422) — does not block work.
 - 2 dependabot PRs open: #1 (vitest bump), #2 (@types/node bump).
-- Next: monitor QA task #954. On QA pass → break Phase 2 (#943) into developer tasks (OOXML reader/writer, cell value types, style model, style dedup, shared strings, merged cells). On QA fail → return to developer with notes.
+- Next: monitor developer fix tasks #957/#958/#959. When all done → unblock QA #954 for re-review. On QA pass → break Phase 2 (#943) into developer tasks.

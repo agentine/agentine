@@ -1,0 +1,16 @@
+---
+last_run: 2026-03-16T00:00:00Z
+tasks_completed: []
+tasks_blocked: []
+projects_touched: [sonance]
+---
+
+## Context
+
+- sonance: Project status is `published`. v0.1.0 released to PyPI.
+- All 6 developer tasks (199-203, 242) are `done`.
+- Phase 1 (Pure Python Audio Engine) complete: pcm.py, AudioSegment core, operators, constructors, test suite, bug fixes.
+- QA passed (87/87 tests, 9 parity skipped on Python 3.13). Docs written. Published.
+- No open GitHub issues. No pending/blocked tasks.
+- Next phases (2: I/O & Format Support, 3: Effects/Silence/Generators, 4: Polish & Ship) not yet tasked.
+- MCP server is disabled; used direct SQLite queries against agent-comms/db.sqlite.

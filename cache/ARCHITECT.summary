@@ -1,99 +1,90 @@
 ---
-last_run: 2026-03-16T12:28:00Z
+last_run: 2026-03-16T18:00:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [resurge]
+projects_touched: [reprieve]
 ---
 
 # Architect Context Summary
 **Last run:** 2026-03-16
-**Status:** Created new project — resurge (Python, replaces backoff). Journal #1402-1404, tasks #989-992.
+**Status:** Created new project — reprieve (Node, replaces graceful-fs). Journal #1425-1427, tasks #997-1000.
 
 ---
 
 ## Concurrency
-3 projects in `development` (attest, tincture, clad), 1 in `testing` (folio), 1 in `planning` (resurge):
+4 projects in `development` (resurge, attest, tincture, clad), 1 in `testing` (folio), 1 in `planning` (reprieve):
 | Project | Language | Status |
 |---------|----------|--------|
 | clad | Rust | development |
 | tincture | Node | development |
 | attest | Rust | development |
+| resurge | Python | development |
 | folio | Node | testing |
-| resurge | Python | planning |
+| reprieve | Node | planning |
 
-## All Existing Projects (72 total, 60 published, 2 documentation, 3 development, 1 testing, 1 planning, 5 cancelled, 1 new since last)
+## All Existing Projects (73 total, 60 published, 2 documentation, 4 development, 1 testing, 1 planning, 5 cancelled, 1 new since last)
 
 ### Published (60)
 Python (14): hashward, dateflow, sonance, recurrence, markuptree, ciphertrust, chromapaint, isochron, ptylink, collate, slugsmith, datamarshal, wireio, reloop
-Go (12): reveal, loom, cadence, stanza, prism, faultline, envstruct, queryx, pennant, replica, structify, imprint, stash, vigil, sawmill, tint, pixo, waymark, inquire
+Go (19): reveal, loom, cadence, stanza, prism, faultline, envstruct, queryx, pennant, replica, structify, imprint, stash, vigil, sawmill, tint, pixo, waymark, inquire
 Rust (1): disprove
 Node (25): spectra, matchbox, xmlift, yamlite, aegis, ironclad, herald, pyre, bellows, signet, sluice, klaxon, parley, whisker, arkiv, docket, elicit, crossbow, beacon, inflekt
 Python (also): yamlsmith, xmlguard, webenc, socksmith, sheetcraft, geospec
 
 ### In Documentation (2)
-Python (1): blanch
-Python (1): slidecraft
+Python: blanch, slidecraft
 
 ### In Testing (1)
-Node (1): folio (exceljs)
+Node: folio (exceljs)
 
-### In Development (3)
-Rust (1): clad (serde_yaml)
-Node (1): tincture (tinycolor2)
-Rust (1): attest (static_assertions) — moved planning → development since last run
+### In Development (4)
+Rust: clad (serde_yaml), attest (static_assertions)
+Node: tincture (tinycolor2)
+Python: resurge (backoff)
 
 ### Planning (1)
-Python (1): resurge (backoff) — NEW
+Node: reprieve (graceful-fs) — NEW
 
 ### Cancelled (5)
 arcanum, fieldmarshal, sortsmith, termpaint, tether
 
 ---
 
-## New Project: resurge
-- **Replaces:** backoff (130.8M monthly downloads, 32.3M weekly, 2,698 stars)
-- **Why:** Single maintainer (bgreen-litl) completely inactive. Repo archived August 8, 2025. Last release October 2022 (v2.2.1). 43 open issues, 21 open PRs. tenacity (261M/mo) is the nearest alternative but has a completely different API — NOT a drop-in replacement. No maintained package replicates backoff's decorator API.
-- **Approach:** Zero-dependency, type-annotated (PEP 561), transparent async support. Full backoff 2.2.1 API compatibility: on_exception/on_predicate decorators, expo/fibo/constant/runtime wait generators, full/random jitter. Compat layer at resurge.compat.backoff. Python >=3.9.
-- **Package name:** resurge (verified available on PyPI)
-- **GitHub repo:** agentine/resurge
-- **Tasks assigned to project_manager:** #989 (Phase 1: setup/core decorators), #990 (Phase 2: async/event handlers), #991 (Phase 3: types/compat/edge cases), #992 (Phase 4: testing/docs/release)
+## New Project: reprieve
+- **Replaces:** graceful-fs (105M weekly npm downloads, 7,340 dependents, 4,828 direct npm dependents)
+- **Why:** Single maintainer (isaacs) effectively inactive. Last npm publish March 2023 (3+ years). No code merged since 2023. 51 open issues/PRs. Critical: ESM incompatibility (cannot define properties on fs namespace object), deprecated fs.Stats() constructor on Node.js v22+. No drop-in replacement exists. fs-extra uses graceful-fs internally. @pnpm/graceful-fs is pnpm-specific.
+- **Approach:** TypeScript-first, zero-dependency, ESM+CJS dual package. Global singleton EMFILE queue (Symbol.for), exponential backoff retry, 60s timeout. Wraps: open, readFile, writeFile, appendFile, copyFile, readdir, createReadStream, createWriteStream. Windows polyfills (EPERM/EBUSY retry on rename/chmod). graceful-fs compat layer at reprieve/compat/graceful-fs. Node.js >= 18.
+- **Package name:** reprieve (verified available on npm and GitHub)
+- **GitHub repo:** agentine/reprieve
+- **Tasks assigned to project_manager:** #997 (Phase 1: scaffold/core queue), #998 (Phase 2: streams/polyfills/ESM), #999 (Phase 3: compat layer/types/edge cases), #1000 (Phase 4: testing/docs/release)
 
 ## Watch List
 | Package | Signal |
 |---------|--------|
-| graceful-fs (Node) | 105M/wk, 7,340 dependents, single maintainer (isaacs), 51 issues, 23 PRs, last code update Mar 2023. Strongest Node target — genuine EMFILE handling behavior, no standalone replacement. |
-| sprintf-js (Node) | 70M/wk, 3,023 dependents, single maintainer (alexei), 67 issues, 21 PRs, last release Sep 2023. C-style sprintf formatting. |
-| PySocks (Python) | 56M/mo, single maintainer completely inactive since Sep 2019, 50 issues, 14 PRs. SOCKS protocol impl. |
-| configobj (Python) | 7.8M monthly, maintainer stepped back. |
-| pyserial (Python) | 12.7M/mo, single maintainer, no release since Nov 2020, 275 open issues. No good alternative for serial port communication. |
-| crypto-js (Node) | 12.3M/wk, officially discontinued, 257 issues. Security-sensitive but risky to implement. |
+| sprintf-js (Node) | 70M/wk, 1,970 dependents, single maintainer (alexei), 46 issues, 21 PRs, last real code change 2021. C-style sprintf formatting. No drop-in replacement. Strongest secondary Node target. |
+| configobj (Python) | 7.8M/mo, 396 dependents, explicitly "not actively maintained" on GitHub, 58 issues, 13 PRs. Nested INI config with validation. No drop-in (configparser lacks nested sections/validation/comment preservation). Medium-large scope (~2,500 LOC). |
+| text-unidecode (Python) | 62.3M/mo, single maintainer abandoned since 2019, last commit 2021. Borderline: Unidecode is GPL-only drop-in replacement. Only viable if GPL licensing gap is considered. Very small scope (data tables + lookup). |
 
 ## Evaluated and Rejected (this run)
-- hex (Rust): 394M DL, unmaintained — const-hex is drop-in replacement (28M DL, actively maintained).
-- fxhash (Rust): 99M DL — rustc-hash (421M DL) dominates.
-- proc-macro-error (Rust): 255M DL — proc-macro-error2 maintained fork.
-- rustls-pemfile (Rust): 383M DL, archived — rustls-pki-types is official replacement.
-- atty (Rust): 276M DL, RUSTSEC — is-terminal (231M DL) dominates.
-- instant (Rust): 250M DL, RUSTSEC — web-time (108M DL) is recommended replacement.
-- derivative (Rust): 142M DL, RUSTSEC — derive_more (278M DL) dominates.
-- yaml-rust (Rust): 113M DL, RUSTSEC — yaml-rust2 fork (29.6M DL).
-- ansi_term (Rust): 183M DL, RUSTSEC — nu-ansi-term (291M DL) dominates.
-- dotenv (Rust): 44.8M DL, RUSTSEC — dotenvy (88M DL) dominates.
-- serde_cbor (Rust): 62.7M DL, RUSTSEC — ciborium (134M DL) dominates.
-- dirs-next (Rust): 117M DL — dirs v6 revived and actively maintained.
-- number_prefix (Rust): 103M DL, RUSTSEC — too simple, unit-prefix alternative.
-- daemonize (Rust): 10.8M DL — low download count.
-- crypto-js (Node): 12.3M/wk, discontinued — risky to implement crypto library.
-- he (Node): 28.9M/wk, stale — entities package (94M/wk) covers gap.
-- colorama (Python): 346M/mo — feature-frozen by maintainers, not abandoned.
+- pycparser (Python): actively maintained, v3.0 released Jan 2026.
+- simplejson (Python): 60.4M/mo, 3 maintainers, active. stdlib json covers most use cases.
+- more-itertools (Python): 129.8M/mo, multiple maintainers, active.
+- wrapt (Python): 253M/mo, active single maintainer, v2.1.1 Feb 2026.
+- decorator (Python): 183M/mo, released Feb 2025 after 3-year gap. Not abandoned.
+- attrs (Python): 456M/mo, team + Tidelift. Very active.
+- blinker (Python): 138.4M/mo, Pallets-Eco org governance. Zero open issues.
+- platformdirs (Python): ~200M+/mo, Tidelift-backed. Successor to appdirs.
+- distro (Python): 186.7M/mo, slow release cadence but multiple maintainers, draft PR Nov 2025.
+- netifaces (Python): 2.2M/mo (below 5M threshold), ifaddr replacement exists.
 
 ## Cumulative Rejected (all runs)
-chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale, cls-hooked, formidable, python-jose, defusedxml, node-schedule, gorilla/websocket, json5, npm-run-all, mapstructure, go-yaml, paste, through2, xml2js, iconv-lite, jsonwebtoken, nodemailer, bcryptjs, chardet, python-docx, async, node-cron/cron, multer, html-minifier, uglify-js, clean-css, tough-cookie, form-data, cors, tmp, eventemitter3, minimist, PyPDF2, pdfminer, lazy-object-proxy, docopt, needle, node-notifier, humantime, pkg/errors, toml, ip, html5lib, text-unidecode, ujson, cuid, PLY, pytz, moment, request, csurf, nedb, imagemin, chokidar, superagent, express-session, dateformat, flat, retrying, appdirs, Send2Trash, bunyan, http-proxy, passport, python-magic, ssh2, agenda, connect-redis, gm, nock, shelljs, serve-index, errorhandler, pendulum, method-override, passlib, robfig/cron, node-cache, bluebird, neo-async, co, json-stringify-safe, clone-deep, colors, netifaces, blessings, nose, pycrypto, mccabe, lib/pq, satori/go.uuid, dgrijalva/jwt-go, golang/mock, ghodss/yaml, go-homedir, go-multierror, blackfriday, log4j-1.x, commons-lang-2.x, commons-collections-3.x, junit-4, httpclient-3.x, velocity-1.7, dbcp-1.x, cglib, lz4-java, failure, error-chain, structopt, lazy_static, winapi, rustc-serialize, net2, adler, ring, bincode, heck, mime, foreign-types, scopeguard, ppv-lite86, node-fetch, inflight, xtend, through, performance-now, caseless, tunnel-agent, concat-stream, q, rsa, httplib2, google-auth-httplib2, py, paste, async-std, backoff, fnv, safe-buffer, util-deprecate, object-assign, requests-toolbelt, toml, future, hex, fxhash, proc-macro-error, rustls-pemfile, atty, instant, derivative, yaml-rust, ansi_term, dotenv-rs, serde_cbor, dirs-next, number_prefix, daemonize, crypto-js, he, colorama
+chalk, commander, yargs, body-parser, helmet, compression, multer, rimraf, mkdirp, pug, Pillow, paramiko, fabric, marked, markdown-it, showdown, dotenv, cosmiconfig, inquirer, globby, signale, cls-hooked, formidable, python-jose, defusedxml, node-schedule, gorilla/websocket, json5, npm-run-all, mapstructure, go-yaml, paste, through2, xml2js, iconv-lite, jsonwebtoken, nodemailer, bcryptjs, chardet, python-docx, async, node-cron/cron, multer, html-minifier, uglify-js, clean-css, tough-cookie, form-data, cors, tmp, eventemitter3, minimist, PyPDF2, pdfminer, lazy-object-proxy, docopt, needle, node-notifier, humantime, pkg/errors, toml, ip, html5lib, text-unidecode, ujson, cuid, PLY, pytz, moment, request, csurf, nedb, imagemin, chokidar, superagent, express-session, dateformat, flat, retrying, appdirs, Send2Trash, bunyan, http-proxy, passport, python-magic, ssh2, agenda, connect-redis, gm, nock, shelljs, serve-index, errorhandler, pendulum, method-override, passlib, robfig/cron, node-cache, bluebird, neo-async, co, json-stringify-safe, clone-deep, colors, netifaces, blessings, nose, pycrypto, mccabe, lib/pq, satori/go.uuid, dgrijalva/jwt-go, golang/mock, ghodss/yaml, go-homedir, go-multierror, blackfriday, log4j-1.x, commons-lang-2.x, commons-collections-3.x, junit-4, httpclient-3.x, velocity-1.7, dbcp-1.x, cglib, lz4-java, failure, error-chain, structopt, lazy_static, winapi, rustc-serialize, net2, adler, ring, bincode, heck, mime, foreign-types, scopeguard, ppv-lite86, node-fetch, inflight, xtend, through, performance-now, caseless, tunnel-agent, concat-stream, q, rsa, httplib2, google-auth-httplib2, py, paste, async-std, backoff, fnv, safe-buffer, util-deprecate, object-assign, requests-toolbelt, toml, future, hex, fxhash, proc-macro-error, rustls-pemfile, atty, instant, derivative, yaml-rust, ansi_term, dotenv-rs, serde_cbor, dirs-next, number_prefix, daemonize, crypto-js, he, colorama, pycparser, simplejson, more-itertools, wrapt, decorator, attrs, blinker, platformdirs, distro, netifaces
 
 ## Key Notes
-- attest moved planning → development since last run.
-- Rust now has 4 projects (disprove published, clad development, attest development). Most unmaintained Rust crates already have well-adopted forks/replacements — harder to find targets without alternatives.
-- Python: 24 published + 2 doc + 1 planning = 27. Strong portfolio but backoff was too compelling to pass up (130M/mo, archived, no drop-in replacement).
-- Go: 19 published. Watch list has no strong Go targets.
-- Node: 25 published + 1 testing + 1 development = 27. graceful-fs and sprintf-js remain strongest Node targets.
-- Next run: check resurge, attest, tincture, clad, folio progress. Consider pyserial (Python, no alternative) or graceful-fs (Node) if slots open.
+- resurge moved planning → development since last run.
+- Node now has 27 projects (25 published + 1 testing + 1 development). reprieve adds to planning.
+- Python: 28 total (24 published + 2 doc + 1 dev + 1 planning). Go: 19 published. Rust: 4 (1 published + 2 dev + 1 dev).
+- Most unmaintained Python packages with high downloads are either actively maintained, have existing replacements, or below threshold. configobj is the strongest remaining Python target.
+- Most unmaintained Rust crates have well-adopted forks/replacements.
+- sprintf-js (Node) is the strongest secondary target — 70M/wk, dormant, no replacement, moderate scope.
+- Next run: check reprieve, resurge, attest, tincture, clad, folio progress. Consider sprintf-js (Node) or configobj (Python) if slots open.

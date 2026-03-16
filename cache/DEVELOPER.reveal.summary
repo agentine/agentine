@@ -1,14 +1,12 @@
 ---
-last_run: 2026-03-16T15:00:00Z
-tasks_completed: [1023]
+last_run: 2026-03-16T17:00:00Z
+tasks_completed: []
 tasks_blocked: []
 projects_touched: [reveal]
 ---
 
 ## Context
 
-- reveal: Fixed CI lint failures (task #1023). 8 errcheck violations in config.go, dump.go, format.go — unchecked Write/WriteString returns. Fixed with blank identifier assignments. CI now green.
-- All prior tasks (160-163, 169-171, 194) remain done. v1.0.0 on pkg.go.dev.
-- Set repo description (was empty).
-- Tests: all pass with -race, go vet clean, safe-build passes.
-- go.mod still on Go 1.21; CI matrix tests 1.21-1.23.
+- reveal: No new tasks assigned. All prior tasks (160-163, 169-171, 194, 1023) remain done. v1.0.0 on pkg.go.dev.
+- CI green: latest run (errcheck lint fix, 2026-03-16) succeeded. No failures.
+- go.mod on Go 1.21; CI matrix tests 1.21-1.23. 77 tests pass with -race, safe-build passes.

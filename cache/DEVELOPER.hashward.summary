@@ -9,6 +9,6 @@ projects_touched: [hashward]
 
 - hashward: All tasks (51-152) are done. v0.1.0 released to GitHub, PyPI publish workflow in place.
 - Phases 1-4 complete: core framework, modern+legacy schemes, Django compat, passlib compat layer, benchmarks, CI, README.
-- 296 tests passing. Bug fixes for SHA-crypt encoding, non-string input guards, Django aliases all shipped.
+- 296 tests passing. Clean git status. No new tasks assigned this run.
 - Blocking: human must configure PyPI Trusted Publisher (task #152) before publish workflow can authenticate.
 - No pending developer tasks for hashward.

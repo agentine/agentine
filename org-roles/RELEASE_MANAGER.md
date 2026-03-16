@@ -11,7 +11,7 @@ Manage releases for projects after QA sign-off. Bump versions, tag releases, pus
 Use the agent-comms API (`AGENT_COMMS.md`) for all coordination.
 
 - **Journal:** Log release versions, what changed, any issues encountered, and publish confirmation.
-- **Tasks:** Read tasks assigned to you; update statuses for `project_manager`. Assign tasks to `human` if you need external system setup (e.g., registry access, CI/CD configuration, credentials).
+- **Tasks:** Read tasks assigned to you; update statuses for `project_manager`. Assign tasks to `human` only for issues that truly require manual intervention (e.g., enabling GitHub Pages, org-level permission changes). Registry secrets and CI/CD publishing are already configured — do not create human tasks for them.
 
 ## Scope
 
@@ -34,7 +34,7 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 
        bump_version(project="{projectname}", version="{version}")
 7. Update `CHANGELOG.md` with the changes included in this release (summarize from task descriptions, journal entries, and commit history).
-8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (or similar) that triggers on GitHub releases and publishes to the appropriate registry (NPM, PyPI, etc.). Create or update it if missing. Assign a task to `human` if registry secrets (e.g., `NPM_TOKEN`, `PYPI_TOKEN`) need to be added to the repo.
+8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (from the project template). It triggers on GitHub releases and publishes to the appropriate registry. Registry auth is pre-configured — **do not create tasks for `human` about registry secrets or tokens.** PyPI uses Trusted Publishers (no token needed). NPM uses `NPM_TOKEN` from org-level secrets (already set). If the workflow file is missing, copy it from the template.
 9. Commit the version bump, changelog update, and any CI workflow changes. Create a git tag: `git tag v{version}`.
 10. Push the commit and tag to the remote: `git push && git push --tags`.
 11. Cut a GitHub release: `create_release(project="{projectname}", version="v{version}")`. The GitHub release triggers CI to publish to package registries — do not publish directly.

@@ -322,7 +322,7 @@ def build_agent_command(config: AgentConfig, project: str | None) -> list[str]:
             f"  1. Read previous context summary at @{summary_file} (if exists).\n"
             f"  2. {project_clause}\n"
             f"  3. Do your job. Note: your presence (running/idle) is managed by "
-            f"the dispatcher — do not call POST /agents or change your agent status.\n"
+            f"the dispatcher — do not manage your own agent presence.\n"
             f"  4. Finally, save a new short and concise context summary to "
             f"{summary_file} for next run. Use the format in @SUMMARY_FORMAT.md ."
         )
@@ -354,7 +354,7 @@ def build_agent_command(config: AgentConfig, project: str | None) -> list[str]:
             f"Previous context summary:\n{summary}\n\n"
             f"{project_clause}\n\n"
             f"Do your job. Your presence (running/idle) is managed by the "
-            f"dispatcher — do not call POST /agents or change your agent status.\n\n"
+            f"dispatcher — do not manage your own agent presence.\n\n"
             f"When done, save a short context summary to {summary_file}."
         )
         return [
@@ -427,7 +427,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             validate_summary(config.role, project)
             # Commit cache summary
             subprocess.run(
-                ["git", "add"] + list(Path("cache").glob("*summary")),
+                ["git", "add"] + [str(p) for p in Path("cache").glob("*summary")],
                 capture_output=True,
             )
             subprocess.run(

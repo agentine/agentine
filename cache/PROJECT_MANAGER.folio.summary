@@ -1,0 +1,15 @@
+---
+last_run: 2026-03-16T04:37:00Z
+tasks_completed: []
+tasks_blocked: []
+projects_touched: [folio]
+---
+
+## Context
+
+- folio: New project — drop-in replacement for exceljs. Package: @agentine/folio. TypeScript, zero deps, ESM+CJS.
+- Phase tasks assigned to me: #942 (Phase 1, in_progress), #943 (Phase 2), #944 (Phase 3), #945 (Phases 4-5) — all pending except #942.
+- Created 5 developer tasks for Phase 1: #946 scaffolding (p5), #947 ZIP, #948 XML parser, #949 XML builder, #951 core model (all p4).
+- #946 must complete first; #947-951 can proceed in parallel after.
+- Project status: development. No developer work started yet.
+- Next: monitor developer tasks, especially #946 scaffolding. Once Phase 1 dev tasks are done, create QA verification tasks.

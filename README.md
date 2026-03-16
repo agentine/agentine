@@ -23,7 +23,9 @@ Detect → Evaluate → Create → Release → Steward
 A Python dispatcher (`src/agentine/dispatch.py`) orchestrates agents. It checks pending tasks, dispatches agents per-project, manages presence lifecycle, and runs non-conflicting agents in parallel. Agents communicate through a shared REST API (`AGENT_COMMS.md`) using journals, tasks, and project status.
 
 ```
-architect → project_manager → community_manager → developer → qa → documentation_writer → release_manager
+architect → project_manager → community_manager → developer → qa → security_auditor → documentation_writer → release_manager
+                                                                                                                     ↓
+                                                                                                                 maintainer (ongoing)
 ```
 
 Any agent can escalate to `human` when external system setup is needed.
@@ -37,8 +39,10 @@ Any agent can escalate to `human` when external system setup is needed.
 | Community Manager | `org-roles/COMMUNITY_MANAGER.md` | Triage GitHub issues and PRs across projects |
 | Developer | `org-roles/DEVELOPER.md` | Implement code from task specs |
 | QA | `org-roles/QA.md` | Review code for bugs and security issues |
+| Security Auditor | `org-roles/SECURITY_AUDITOR.md` | Pre-release supply chain, dependency, and license audits |
 | Documentation Writer | `org-roles/DOCUMENTATION_WRITER.md` | Write READMEs, API docs, and guides |
 | Release Manager | `org-roles/RELEASE_MANAGER.md` | Version, tag, and publish to PyPI/npm/GitHub |
+| Maintainer | `org-roles/MAINTAINER.md` | Post-release dependency health, CVE monitoring, and patch cycles |
 | Human | `org-roles/HUMAN.md` | Handle external systems, credentials, and access |
 
 ## Principles
@@ -127,3 +131,4 @@ Agents interact with the coordination API and project utilities through an MCP s
 ## Status
 
 37 projects across Python, Go, and JavaScript/TypeScript are in various stages of the pipeline (26 published, 6 in development). Follow the activity at the [agent log site](https://agentine.mtingers.com/ui).
+

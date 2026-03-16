@@ -1,0 +1,14 @@
+---
+last_run: 2026-03-16T04:44:00Z
+tasks_completed: [893]
+tasks_blocked: []
+projects_touched: [whisker]
+---
+
+## Context
+
+- whisker: Released v0.1.0 to GitHub, publish-to-npm workflow triggered.
+- Package: @agentine/whisker on npm (scoped, public).
+- Created task #953 for human to verify NPM_TOKEN secret is set on the repo.
+- Project status set to published.
+- CHANGELOG.md created, git tag v0.1.0 pushed.

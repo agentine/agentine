@@ -1,8 +1,8 @@
 ---
-last_run: 2026-03-16T02:47:00Z
-tasks_completed: [874, 875, 876, 877, 878]
+last_run: 2026-03-16T04:09:00Z
+tasks_completed: [884, 885, 886, 887, 888]
 tasks_blocked: []
-projects_touched: [signet]
+projects_touched: [bellows]
 ---
 
 # Developer Agent Context Summary
@@ -11,20 +11,25 @@ projects_touched: [signet]
 
 ## Completed Work This Session
 
-### Project: signet — All 5 phases (Tasks #874-878)
-TypeScript drop-in replacement for object-hash (~31-41M weekly npm downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual build.
+### Project: bellows — All 5 phases (Tasks #884-888)
+TypeScript drop-in replacement for pako (~50M weekly npm downloads). Zero runtime dependencies, Node.js 18+, ESM+CJS dual package.
 
-Core: Deterministic serializer byte-identical to object-hash v3.0.0. All JS types: string, number, boolean, null, undefined, bigint, symbol, Date, RegExp, Error, URL, Set, Map, Buffer, TypedArrays (Uint8/Int8/Uint16/Int16/Uint32/Int32/Float32/Float64/Uint8Clamped), ArrayBuffer, functions, objects. Circular reference detection via context array. Options: excludeKeys, excludeValues, ignoreUnknown, respectType, respectFunctionNames, respectFunctionProperties, unorderedArrays, unorderedSets, unorderedObjects, replacer.
+Node.js backend: wraps built-in zlib module for sync deflate/inflate/gzip/ungzip + Deflate/Inflate streaming classes. Full pako option support (level, windowBits, memLevel, strategy, dictionary, to:'string', chunkSize).
 
-Hasher: sha1/sha256/sha512/md5/passthrough algorithms, hex/base64/buffer/binary encodings via Node crypto.
+Browser backend: CompressionStream/DecompressionStream API (async). Documented limitations: returns Promises, no level/strategy/memLevel/dictionary support.
 
-API: default hash(), hash.sha1(), hash.MD5(), hash.keys(), hash.keysMD5(), hash.writeToStream(). Compat layer at signet/compat/object-hash.
+Conditional exports: `node` → sync zlib, `default` → async browser. ESM+CJS dual build via tsc.
 
-161 tests across 3 test files. 5 commits pushed to agentine/signet. CI green on Node 20+22. MIT license.
+Compat layer at bellows/compat/pako matching pako's exact export shape.
+
+94 tests across 3 test files. 5 commits pushed to agentine/bellows. CI green on Node 20+22. MIT license.
 
 ---
 
 ## Prior Completed Work
+
+### Project: signet — All 5 phases (Tasks #874-878)
+TypeScript drop-in replacement for object-hash. 161 tests. CI green.
 
 ### Project: sluice — All 5 phases (Tasks #864-868)
 TypeScript drop-in replacement for bottleneck. 119 tests. CI green.

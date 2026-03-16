@@ -379,6 +379,7 @@ def build_agent_command(config: AgentConfig, project: str | None) -> list[str]:
             "-p",
             prompt,
             "--dangerously-skip-permissions",
+            "--no-session-persistence",
             "--output-format",
             "stream-json",
             "--verbose",

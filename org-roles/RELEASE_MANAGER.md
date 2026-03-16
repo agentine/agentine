@@ -34,7 +34,9 @@ All file changes must stay within the `projects/{projectname}/` directory for th
 
        bump_version(project="{projectname}", version="{version}")
 7. Update `CHANGELOG.md` with the changes included in this release (summarize from task descriptions, journal entries, and commit history).
-8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (from the project template). It triggers on GitHub releases and publishes to the appropriate registry. Registry auth is pre-configured — **do not create tasks for `human` about registry secrets or tokens.** PyPI uses Trusted Publishers (no token needed). NPM uses `NPM_TOKEN` from org-level secrets (already set). If the workflow file is missing, copy it from the template.
+8. Ensure a CI publish workflow exists at `.github/workflows/publish.yml` (from the project template). It triggers on GitHub releases and publishes to the appropriate registry. If the workflow file is missing, copy it from the template. Auth notes:
+   - **PyPI:** Uses Trusted Publishers (no token needed), but the project must be registered on PyPI first. Create a task for `human` to add the project as a Trusted Publisher on PyPI (one-time setup per project).
+   - **NPM:** Uses `NPM_TOKEN` from org-level GitHub secrets (already set). **Do not create human tasks for NPM tokens.**
 9. Commit the version bump, changelog update, and any CI workflow changes. Create a git tag: `git tag v{version}`.
 10. Push the commit and tag to the remote: `git push && git push --tags`.
 11. Cut a GitHub release: `create_release(project="{projectname}", version="v{version}")`. The GitHub release triggers CI to publish to package registries — do not publish directly.

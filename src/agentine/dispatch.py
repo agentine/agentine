@@ -360,7 +360,8 @@ def build_agent_command(config: AgentConfig, project: str | None) -> list[str]:
     if project:
         project_clause = (
             f"Focus exclusively on project: {project}. "
-            f"Only work on tasks where project={project}."
+            f"Only work on tasks where project={project}. "
+            f"Change your working directory to projects/{project}/ before starting work."
         )
 
     if config.backend == "claude":

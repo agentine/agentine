@@ -17,3 +17,5 @@ cache/*.session_id
 
 .env
 .dispatch.pid
+
+.DS_Store

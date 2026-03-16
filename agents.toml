@@ -5,7 +5,7 @@ prefix = "/api"                 # API path prefix (e.g. "/api" for /api/tasks, /
 
 [dispatch]
 short_break = 30            # seconds between normal iterations
-long_break = 1000           # seconds for extended breaks
+long_break =  7200          # seconds for extended breaks
 long_break_every = 4        # take a long break every N iterations
 max_workers = 4             # parallel agent slots
 retry_delays = [60, 300, 600, 1000]
@@ -16,10 +16,11 @@ oom_max_attempts = 4
 [defaults]
 backend = "claude"
 model = "claude-opus-4-6"
-effort = "max"
+effort = "high"
 
 [[agents]]
 role = "ARCHITECT"
+effort = "max"
 
 [[agents]]
 role = "PROJECT_MANAGER"
@@ -29,12 +30,21 @@ role = "COMMUNITY_MANAGER"
 
 [[agents]]
 role = "DEVELOPER"
+effort = "max"
 
 [[agents]]
 role = "QA"
+effort = "max"
 
 [[agents]]
 role = "DOCUMENTATION_WRITER"
 
 [[agents]]
 role = "RELEASE_MANAGER"
+
+[[agents]]
+role = "MAINTAINER"
+
+[[agents]]
+role = "SECURITY_AUDITOR"
+effort = "max"

@@ -20,6 +20,7 @@ PID_FILE = REPO_ROOT / ".dispatch.pid"
 # Roles that generate work and should always run (no task check)
 GENERATORS = {
     "ARCHITECT",
+    "MAINTAINER",
 }  #  "COMMUNITY_MANAGER"}
 
 # Retry strategies by exit code (None = don't retry)
@@ -223,7 +224,7 @@ def check_stale_pipeline_projects():
             and done_resp.json().get("total", 0) > 0
         )
 
-    # Phase 1: Advance testing → documentation
+    # Phase 1: Advance testing → documentation (+ create security audit task)
     resp = api("GET", "/projects?status=testing&limit=100")
     if resp and resp.ok:
         for proj in resp.json().get("items", []):
@@ -240,6 +241,37 @@ def check_stale_pipeline_projects():
                     "no pending/in_progress tasks remain",
                     name,
                 )
+                # Create security audit task if one doesn't already exist
+                sa_resp = api(
+                    "GET",
+                    f"/tasks?project={name}&username=security_auditor&limit=1",
+                )
+                has_sa_task = (
+                    sa_resp
+                    and sa_resp.ok
+                    and sa_resp.json().get("total", 0) > 0
+                )
+                if not has_sa_task:
+                    sa_payload = {
+                        "title": f"Security audit for {name}",
+                        "description": (
+                            f"QA testing complete for {name}. "
+                            "Perform pre-release security audit: dependency tree, "
+                            "supply chain analysis, license compatibility, "
+                            "secrets scan, and build integrity review."
+                        ),
+                        "username": "security_auditor",
+                        "project": name,
+                        "status": "pending",
+                    }
+                    sa_create = api("POST", "/tasks", json=sa_payload)
+                    if sa_create and sa_create.ok:
+                        sa_id = sa_create.json().get("id", "?")
+                        print(f"  TASK: created security audit #{sa_id} for {name}")
+                        journal(
+                            f"auto-created security audit task #{sa_id} for security_auditor",
+                            name,
+                        )
             else:
                 print(f"  WARNING: failed to advance {name} to documentation")
 

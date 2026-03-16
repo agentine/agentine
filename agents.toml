@@ -1,14 +1,17 @@
 # Agent configuration — defaults apply to all agents unless overridden per-agent.
 
+[api]
+prefix = ""                 # API path prefix (e.g. "/api" for /api/tasks, /api/journal, etc.)
+
 [dispatch]
-short_break = 300           # seconds between normal iterations
-long_break = 1800           # seconds for extended breaks
+short_break = 30            # seconds between normal iterations
+long_break = 1000           # seconds for extended breaks
 long_break_every = 4        # take a long break every N iterations
 max_workers = 4             # parallel agent slots
-retry_delays = [60, 300, 600]
-retry_max_attempts = 3
+retry_delays = [60, 300, 600, 1000]
+retry_max_attempts = 6
 oom_delays = [300, 600]
-oom_max_attempts = 2
+oom_max_attempts = 4
 
 [defaults]
 backend = "claude"

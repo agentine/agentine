@@ -12,6 +12,7 @@ import requests
 from mcp.server.fastmcp import FastMCP
 
 from agentine.config import (
+    API_PREFIX,
     API_URL,
     HEADERS,
     PROJECTS_DIR,
@@ -25,7 +26,7 @@ def _api(method: str, path: str, **kwargs) -> dict:
     """Make an API request and return the JSON response."""
     try:
         resp = requests.request(
-            method, f"{API_URL}{path}", headers=HEADERS, timeout=30, **kwargs
+            method, f"{API_URL}{API_PREFIX}{path}", headers=HEADERS, timeout=30, **kwargs
         )
         resp.raise_for_status()
         return resp.json()

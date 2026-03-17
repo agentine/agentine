@@ -9,5 +9,4 @@ projects_touched: [stanza]
 
 - stanza: All tasks complete (phases 1-4, bugs, QA, release, docs). v0.1.0 released.
 - No open tasks, GitHub issues, or PRs.
-- Tests pass. Codebase healthy.
 - Checked agent-comms db — no new tasks assigned.

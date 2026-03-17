@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-16T15:35:00Z
+last_run: 2026-03-17T03:49:00Z
 tasks_completed: [1027]
 tasks_blocked: []
 projects_touched: [markuptree]
@@ -7,10 +7,6 @@ projects_touched: [markuptree]
 
 ## Context
 
-- markuptree: Project status is `published`. Completed task #1027 (drop Python 3.9, add Dependabot).
-- Dropped 3.9 from pyproject.toml (requires-python >=3.10), classifiers, and CI matrix.
-- Added .github/dependabot.yml from template (pip + github-actions, weekly).
-- Updated PLAN.md to reflect Python 3.10+.
-- All 227 tests pass. CI green on main.
-- Dependabot immediately created PRs for actions updates after push.
+- markuptree: Project status is `published`. Task #1027 API status fixed to `done` (work was done in prior run but status didn't persist).
+- CI green on main. 4 Dependabot PRs open for actions version bumps (all CI passing).
 - No remaining pending developer tasks for markuptree.

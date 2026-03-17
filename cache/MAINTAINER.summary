@@ -1,36 +1,42 @@
 ---
-last_run: 2026-03-17T04:20:00Z
+last_run: 2026-03-17T04:30:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [reveal, ciphertrust, blanch, disprove, sheetcraft, replica, docket, hashward, pennant, chromapaint, markuptree, sonance, spectra]
+projects_touched: [reveal, ciphertrust, blanch, disprove, sheetcraft, replica, sonance, resurge, stanza, folio, sluice, tincture]
 ---
 
 ## Context
 
-Sixth maintenance run. Full CI audit across all 61 published projects + comprehensive Dependabot PR status check.
+Seventh maintenance run. Full CI audit across 75 repos + comprehensive Dependabot PR check. NOTE: Production API was unreachable (MCP server disabled, API not running) — could not create/update tasks. All new tasks documented below for creation on next run.
 
 ### CI Health
-- 61/61 green on main (up from 58/60 last run — pyre added, sonance has publish workflow but still no CI workflow)
-- Publish failures: geospec, sheetcraft, socksmith, disprove (all credential-related)
+- 74/75 green on main
+- **sonance**: still no CI workflow (only publish.yml) — carry-forward #1036
+- **resurge**: main CI FAILING — mypy error: unused `type: ignore` comment at `_decorator.py:70` — **NEW, needs developer task**
+- No publish workflow failures observed this run
 
-### Completed Tasks Verified
-- #1056 (docket test regression): done, main green
-- #1059 (rebase stale PRs): done
-- #1047 (pennant lint): done
-- #1023 (reveal CI): done
-- #1017 (chromapaint): done
-- #1027 (markuptree): done
-- #1050 (disprove rand 0.10): done
+### Task Follow-ups from Last Run
+- **#1060 (reveal lint)**: NOT DONE. golangci-lint-action v9 PR #3 still failing on lint. checkout v6 (#1) and setup-go v6 (#2) both passing.
+- **#1061 (ciphertrust B905)**: PARTIAL. Main is green (B905 fixed). But Dependabot PRs #1/#2 (artifact actions) still fail on lint — need rebase.
+- **#1062 (blanch 0 tests)**: PARTIAL. Main now green (was failing). Dependabot PRs (setup-python v6, setup-uv v7) still failing — need rebase.
+- **#1063 (disprove Clippy)**: NOT DONE. checkout v6 PR #1 still failing on Clippy.
+- **#1064 (sheetcraft Trusted Publisher)**: NOT DONE. Human task, carry forward.
+- **#1036 (sonance ci.yml)**: NOT DONE. Still no CI workflow. Carry forward.
+- **#1039 (stanza)**: DONE. CI + publish workflows now exist, CI green.
+- **#1041 (Node 18 drop)**: NOT DONE. 8 repos still have Node 18: arkiv, crossbow, docket, elicit, herald, ironclad, matchbox, whisker.
+- **#1048 (merge CI action PRs)**: NOT DONE but scope expanded — 35 passing PRs now.
+- **#1051 (herald @types/node 25)**: NOT DONE. Still failing.
+- **#1052 (vitest 4 strategy)**: IN PROGRESS. vitest 4 now passes on folio, sluice, tincture (3 repos, up from sluice only).
+- **#1057 (webenc setup-python v6)**: LIKELY RESOLVED. Both Dependabot PRs closed, main green.
+- **#1058 (merge passing vitest/types PRs)**: Scope expanded — see below.
 
-### Tasks Created This Run
-- #1060 (developer, p3): reveal — fix lint errors for golangci-lint-action v9 PR (errcheck + staticcheck)
-- #1061 (developer, p2): ciphertrust — fix B905 zip() strict= lint errors, rebase Dependabot PRs
-- #1062 (developer, p3): blanch — setup-python v6 / setup-uv v7 PRs fail (0 tests collected)
-- #1063 (developer, p3): disprove — Clippy "unit tests in doctest" on checkout v6 PR
-- #1064 (human, p3): sheetcraft — PyPI Trusted Publisher setup
+### NEW Tasks Needed (create when API available)
+1. **developer (p2)**: resurge — remove unused `type: ignore` at `_decorator.py:70` (mypy failure on main)
+2. **developer (p3)**: blanch — rebase Dependabot PRs (main is now fixed, PRs stale)
+3. **developer (p3)**: ciphertrust — rebase Dependabot PRs (lint fixed on main, PRs stale)
 
 ### Still Pending (carry-forward)
-Human tasks (unchanged + new):
+Human tasks (unchanged):
 - #932 (human, p4): disprove CARGO_REGISTRY_TOKEN
 - #937 (human, p3): sheetforge Trusted Publisher
 - #939 (human, p3): socksmith Trusted Publisher
@@ -40,27 +46,31 @@ Human tasks (unchanged + new):
 - #1064 (human, p3): sheetcraft Trusted Publisher
 
 Developer tasks (still pending):
-- #1036 (p3): sonance — add ci.yml + dependabot (still no CI workflow)
-- #1039 (p2): stanza — go.mod + CI + dependabot
-- #1041 (p2): Node 18 drop for 7 projects
-- #1048 (p2): Merge passing CI action Dependabot PRs (batch) — scope expanded
+- #1036 (p3): sonance — add ci.yml + dependabot
+- #1041 (p2): Node 18 drop for 8 projects (arkiv, crossbow, docket, elicit, herald, ironclad, matchbox, whisker)
+- #1048 (p2): Merge 35 passing CI action Dependabot PRs (batch) — expanded scope
 - #1051 (p3): herald @types/node 25 type errors
 - #1052 (p2): vitest 4 + @types/node 25 strategy across Node projects
-- #1057 (p3): webenc tests fail with setup-python v6
-- #1058 (p2): Merge passing vitest 4 + @types/node 25 PRs (beacon, sluice, whisker, arkiv, elicit)
+- #1058 (p2): Merge passing vitest 4 + @types/node 25 PRs — expanded to folio, sluice, tincture (vitest 4) + arkiv, elicit, folio, tincture, whisker (@types/node 25)
+- #1060 (p3): reveal — fix lint for golangci-lint-action v9 PR
+- #1063 (p3): disprove — Clippy fix for checkout v6 PR
 
 ### Dependabot PR Summary
-- 70 open PRs across 32 projects (up from ~65 last run)
-- CI action bumps passing: dateflow(4), imprint(2), inquire(2), loom(2), markuptree(4), prism(2), recurrence(4), sawmill(2), sheetcraft(2), stash(1), vigil(2), waymark(2), xmlguard(2), matchbox(3/4), reveal(2/3)
-- vitest 3→4: passes on sluice only. Fails on 11 others.
-- @types/node 22→25: passes on arkiv, elicit, whisker, matchbox. Fails on 6 others.
-- spectra: 4 PRs PENDING (CI doesn't trigger)
-- pixo: 1 PR PENDING
-- replica: merge golangci-lint-action v9 PR #2 first, then setup-go v6 PR #1
+- 74 open PRs across 28 repos
+- **CI action bumps passing (35 PRs)**: dateflow(4), imprint(2), inquire(2), loom(2), markuptree(4), matchbox(2), prism(2), recurrence(4), reveal(2/3), sawmill(2), sheetforge(2), stash(1), vigil(2), waymark(2), xmlguard(2)
+- **CI action bumps failing (7 PRs)**: blanch(2), ciphertrust(2), disprove(1), replica(1), reveal(1/3)
+- **CI action bumps no checks (5 PRs)**: pixo(1), spectra(2), resurge(2)
+- **vitest 3→4**: passes on folio, sluice, tincture (3/14). Fails on 10 others (mostly on Node 18 first, cancelling rest).
+- **@types/node 22→25**: passes on arkiv, elicit, folio, matchbox(patch), tincture, whisker (6/13). Fails on 5 (docket, herald, klaxon, parley, signet, sluice).
+- spectra: 3 PRs PENDING (CI doesn't trigger)
+- pixo: 1 PR PENDING (no checks)
+- replica: golangci-lint-action v9 (#2) should merge before setup-go v6 (#1)
 
 ### Next Run
-- Follow up on #1060-#1064 (new tasks)
+- Create tasks via API: resurge mypy fix, blanch/ciphertrust rebase
+- Follow up on #1060 (reveal lint), #1063 (disprove Clippy)
 - After #1048 merges CI action PRs, verify main stays green
-- After #1052 resolves vitest 4 strategy, re-check failing Node projects
-- Check replica setup-go v6 after golangci-lint-action merge
+- After Node 18 drop (#1041), re-check vitest 4 failures (many may resolve)
+- Check replica: merge golangci-lint-action v9 first, then setup-go v6
+- Verify #1039 (stanza) can be marked done
 - Check sonance #1036 status

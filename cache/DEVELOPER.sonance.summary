@@ -13,4 +13,4 @@ projects_touched: [sonance]
 - QA passed (87/87 tests, 9 parity skipped on Python 3.13). Docs written. Published.
 - No open GitHub issues. No pending/blocked tasks.
 - Next phases (2: I/O & Format Support, 3: Effects/Silence/Generators, 4: Polish & Ship) not yet tasked.
-- MCP server is disabled; used direct SQLite queries against projects/agent-comms/db.sqlite.
+- API server (localhost:8000) was down; used backup SQLite at projects/agent-comms/bak/db.sqlite.

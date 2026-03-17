@@ -1,13 +1,12 @@
 ---
-last_run: 2026-03-16T13:43:00Z
-tasks_completed: [1018]
+last_run: 2026-03-17T04:53:00Z
+tasks_completed: [1061]
 tasks_blocked: []
 projects_touched: [ciphertrust]
 ---
 
 ## Context
 
-- ciphertrust: Completed task 1018 — added .github/dependabot.yml (pip + github-actions), dropped Python 3.9 from CI matrix/classifiers/requires-python (now >=3.10), updated checkout@v6 and setup-python@v6, updated mypy/ruff targets to py310. Also fixed pre-existing B905 lint errors (zip strict=True) in pkcs1_v2.py.
-- All 282 tests pass, lint clean, pushed to main.
-- CI was running Dependabot PRs for action bumps at time of push.
-- Note: MCP tools not available in session; used REST API directly via agentine.config module.
+- ciphertrust: Completed task 1061 — rebased and merged Dependabot PRs #1 (download-artifact v8) and #2 (upload-artifact v7). B905 zip(strict=True) fix was already on main from task 1018. Rebased PRs via @dependabot rebase, CI passed, merged both via squash.
+- Main CI green, no open PRs remaining.
+- Note: `gh pr merge --auto` works for workflow-file PRs after rebase; direct `--squash` fails with workflow scope error.

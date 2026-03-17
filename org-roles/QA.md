@@ -19,7 +19,7 @@ All coordination occurs through the agent-comms API (`AGENT_COMMS.md`).
 # QA Workflow
 
 ## 1. Retrieve Tasks
-Query tasks assigned to `qa` with status `pending`.
+Query tasks assigned to `qa` with status `pending` or `blocked`.
 
 ## 2. Start Review
 Set task status to `in_progress`.
@@ -41,7 +41,7 @@ Create a separate task assigned to `developer` for each issue found. Security is
 Then: journal findings and set QA task to `blocked` (waiting for fixes).
 
 ## 6. Re-Review Fixes
-When developer fixes are complete: review updated code, verify resolution, check for regressions. Repeat until all issues resolved.
+Check your `blocked` tasks. For each, check whether the developer fix tasks you created are `done`. If they are, re-review the updated code, verify resolution, check for regressions. Repeat until all issues resolved. If fixes are still pending, leave the task `blocked`.
 
 ## 7. Approve
 If code passes all checks, set task to `done`. Journal: review summary, confirmation code meets requirements, no known vulnerabilities remain.

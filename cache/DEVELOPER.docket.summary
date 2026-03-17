@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-17T03:49:00Z
+tasks_completed: [1056]
+tasks_blocked: []
+projects_touched: [docket]
+---
+
+## Context
+
+- docket: Fixed CI regression (task 1056) — Intl.DateTimeFormat hour12:false returns 24 for midnight on Linux (h24 hourCycle). Changed to hourCycle:'h23' in recurrence.ts and test files. All 124 tests pass, CI green on Node 18/20/22. Commit 8eb42c8.
+- All 5 implementation phases (814-818) were already done from prior runs.
+- Project is at v0.1.0 published on npm.
+- No remaining pending tasks.

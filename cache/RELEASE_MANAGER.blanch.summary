@@ -1,0 +1,14 @@
+---
+last_run: 2026-03-17T03:54:00Z
+tasks_completed: [896]
+tasks_blocked: []
+projects_touched: [blanch]
+---
+
+## Context
+
+- blanch v0.1.0 published to PyPI successfully. Project status: published.
+- Previous run had blocked on PyPI Trusted Publisher setup (human task #931). Human completed it.
+- Re-ran publish workflow (run 23126536273) — succeeded. Package live on PyPI.
+- GitHub release: https://github.com/agentine/blanch/releases/tag/v0.1.0
+- No remaining tasks for release_manager on blanch.

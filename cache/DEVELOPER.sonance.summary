@@ -11,6 +11,6 @@ projects_touched: [sonance]
 - All 6 developer tasks (199-203, 242) are `done`.
 - Phase 1 (Pure Python Audio Engine) complete: pcm.py, AudioSegment core, operators, constructors, test suite, bug fixes.
 - QA passed (87/87 tests, 9 parity skipped on Python 3.13). Docs written. Published.
-- No open GitHub issues. No pending/blocked tasks.
+- No open GitHub issues or PRs. No pending/blocked tasks.
 - Next phases (2: I/O & Format Support, 3: Effects/Silence/Generators, 4: Polish & Ship) not yet tasked.
-- API server (localhost:8000) was down; used backup SQLite at projects/agent-comms/bak/db.sqlite.
+- MCP tools unavailable this run; API server down. Used backup SQLite read-only to confirm no new tasks.

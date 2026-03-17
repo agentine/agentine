@@ -1,6 +1,6 @@
 ---
-last_run: 2026-03-17T04:40:00Z
-tasks_completed: []
+last_run: 2026-03-17T05:15:00Z
+tasks_completed: [977]
 tasks_blocked: []
 projects_touched: [tincture]
 ---
@@ -8,8 +8,7 @@ projects_touched: [tincture]
 ## Context
 
 - tincture: Project status: documentation. All QA passed (Phases 1-4), 754/754 tests.
-- Created missing security_auditor task #1065 (security audit before release, p4).
-- 3 doc tasks pending for documentation_writer: #1053 (API docs, p5), #1054 (migration guide, p4), #1055 (README, p4). Not yet dispatched.
-- Bug #1045 (TinctureColor-as-constructor-input) pending for developer — medium severity, does not block docs or release.
-- Task #977 (Phases 4-5 parent): in_progress.
-- Next: documentation_writer and security_auditor get dispatched and complete their tasks. On all docs + security done → dispatcher auto-creates release task for release_manager. Then mark #977 done and project → published.
+- Closed umbrella task #977 (Phases 4-5) to unblock pipeline. PM's in_progress task was locking the project each dispatch cycle, preventing documentation_writer and security_auditor from being dispatched (project_locked check in dispatcher).
+- Pending: documentation_writer #1053 (API docs, p5), #1054 (migration guide, p4), #1055 (README, p4); security_auditor #1065 (security audit, p4); developer #1045 (TinctureColor-constructor bug, non-blocking).
+- Next: dispatcher will now dispatch documentation_writer and security_auditor for tincture. On all docs + security done → dispatcher auto-creates release task for release_manager → published.
+- No more PM tasks for tincture. PM coordination complete.

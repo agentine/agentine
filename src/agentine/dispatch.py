@@ -33,6 +33,7 @@ _dispatch: DispatchConfig = DispatchConfig()
 _stop_event = threading.Event()
 _children: list[subprocess.Popen] = []
 _children_lock = threading.Lock()
+_git_lock = threading.Lock()
 
 
 @dataclass
@@ -286,16 +287,17 @@ def check_stale_pipeline_projects():
                     "no pending/in_progress tasks remain",
                     name,
                 )
-                # Create security audit task if one doesn't already exist
+                # Create security audit task if no non-cancelled one exists
                 sa_resp = api(
                     "GET",
-                    f"/tasks?project={name}&username=security_auditor&limit=1",
+                    f"/tasks?project={name}&username=security_auditor&limit=10",
                 )
-                has_sa_task = (
-                    sa_resp
-                    and sa_resp.ok
-                    and sa_resp.json().get("total", 0) > 0
-                )
+                has_sa_task = False
+                if sa_resp and sa_resp.ok:
+                    for t in sa_resp.json().get("items", []):
+                        if t.get("status") != "cancelled":
+                            has_sa_task = True
+                            break
                 if not has_sa_task:
                     sa_payload = {
                         "title": f"Security audit for {name}",
@@ -328,16 +330,17 @@ def check_stale_pipeline_projects():
             if not _project_is_idle(name):
                 continue
 
-            # Check if a release_manager task already exists for this project
+            # Check if a non-cancelled release_manager task already exists
             rm_resp = api(
                 "GET",
-                f"/tasks?project={name}&username=release_manager&limit=1",
+                f"/tasks?project={name}&username=release_manager&limit=10",
             )
-            has_rm_task = (
-                rm_resp
-                and rm_resp.ok
-                and rm_resp.json().get("total", 0) > 0
-            )
+            has_rm_task = False
+            if rm_resp and rm_resp.ok:
+                for t in rm_resp.json().get("items", []):
+                    if t.get("status") != "cancelled":
+                        has_rm_task = True
+                        break
             if has_rm_task:
                 continue
 
@@ -595,21 +598,24 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             journal(f"completed {label} in {duration}s", project)
             # Validate summary format
             validate_summary(config.role, project)
-            # Commit cache summary
-            subprocess.run(
-                ["git", "add"] + [str(p) for p in Path("cache").glob("*summary")],
-                capture_output=True,
-            )
-            subprocess.run(
-                [
-                    "git",
-                    "commit",
-                    "-m",
-                    f"run_agent: commit {config.role} summary cache",
-                ],
-                capture_output=True,
-            )
-            subprocess.run(["git", "push"], capture_output=True)
+            # Commit cache summary (serialized to avoid git races between workers)
+            with _git_lock:
+                subprocess.run(
+                    ["git", "add"] + [str(p) for p in Path("cache").glob("*summary")],
+                    capture_output=True,
+                )
+                subprocess.run(
+                    [
+                        "git",
+                        "commit",
+                        "-m",
+                        f"run_agent: commit {config.role} summary cache",
+                    ],
+                    capture_output=True,
+                )
+                result = subprocess.run(["git", "push"], capture_output=True, text=True)
+                if result.returncode != 0:
+                    print(f"  WARNING: git push failed: {result.stderr.strip()}")
             return 0
 
         # Determine retry strategy

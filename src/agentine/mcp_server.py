@@ -2,7 +2,6 @@
 """Agentine MCP server — exposes agent-comms API and project commands as tools."""
 
 import datetime
-import filecmp
 import json
 import re
 import subprocess
@@ -200,9 +199,14 @@ def get_project(name: str) -> str:
 
 
 @mcp.tool()
-def create_project(name: str, description: str = "", status: str = "proposed") -> str:
-    """Create a new project in the coordination API."""
-    payload: dict = {"name": name, "status": status}
+def create_project(
+    name: str, language: str, description: str = "", status: str = "proposed"
+) -> str:
+    """Create a new project in the coordination API.
+
+    Language must be: python, go, node, or rust.
+    """
+    payload: dict = {"name": name, "language": language, "status": status}
     if description:
         payload["description"] = description
     return json.dumps(_api("POST", "/projects", json=payload), indent=2)
@@ -651,7 +655,11 @@ def sync_templates(project: str = "") -> str:
             template_file = TEMPLATES_DIR / language / f
             target_file = project_dir / f
             if template_file.exists() and target_file.exists():
-                if not filecmp.cmp(template_file, target_file, shallow=False):
+                # Render template variables before comparing
+                rendered = template_file.read_text()
+                rendered = rendered.replace("{{projectname}}", name)
+                rendered = rendered.replace("{{description}}", "")
+                if rendered != target_file.read_text():
                     drifted.append(f)
 
         if drifted:

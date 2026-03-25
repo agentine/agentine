@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-25T04:14:00Z
+last_run: 2026-03-25T04:33:00Z
 tasks_completed: []
 tasks_blocked: [997]
 projects_touched: [reprieve]
@@ -8,8 +8,8 @@ projects_touched: [reprieve]
 ## Context
 
 - reprieve: Status development. No code scaffolded — project dir has only PLAN.md.
-- Meta-task #997 correctly BLOCKED since last run. Fix released project lock for developer dispatch.
+- Meta-task #997 correctly BLOCKED since 2026-03-25T03:33:35Z. Releasing project lock for developer dispatch.
 - 6 Phase 1 developer tasks all pending: #1001 scaffold (p5), #1002 EMFILE queue (p4), #1003 close hooks (p3), #1004 wrapped fs (p3), #1005 entry point (p3), #1006 tests (p3).
-- Developer has never been dispatched to reprieve. Currently running on herald.
+- Developer currently running on herald (2 pending tasks: #1051, #1041). Never dispatched to reprieve.
 - Phases 2-4 (#998-1000) pending (PM meta-tasks).
-- Next: when developer completes Phase 1 tasks (#1001-1006), unblock #997, create QA verification task, update project to testing. Monitor #1001 scaffold first.
+- Next: when developer completes Phase 1 tasks (#1001-1006), unblock #997, create QA verification task, update project to testing.

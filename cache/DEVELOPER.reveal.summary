@@ -1,13 +1,15 @@
 ---
-last_run: 2026-03-17T04:51:00Z
-tasks_completed: [1060]
+last_run: 2026-03-25T03:08:00Z
+tasks_completed: [1072]
 tasks_blocked: []
 projects_touched: [reveal]
 ---
 
 ## Context
 
-- reveal: Completed task 1060 — fixed 5 lint errors for golangci-lint v2.11.3 compatibility. 3 errcheck in format.go (fmt.Fprintf return values), 2 staticcheck QF1001 in dump_test.go/reveal_test.go (De Morgan's law). All CI green.
-- Dependabot PR #3 (golangci-lint-action v6→v9) should now pass lint; ready for merge review.
+- reveal: Completed task 1072 — fixed golangci-lint-action v9 lint failure in Dependabot PR #3. Root cause was PR branch predated lint fixes from task 1060. Triggered @dependabot rebase, CI passed all 5 jobs, merged via squash.
+- CI now uses golangci-lint-action@v9 (golangci-lint v2.11.3) on main. All green.
+- Two new Dependabot PRs appeared: actions/checkout v6 and actions/setup-go v6 (Node.js 20→24 migration). Not yet addressed.
 - CI annotation: Node.js 20 actions deprecation warning persists (actions/checkout@v4, actions/setup-go@v5) — forced to Node.js 24 starting June 2026.
+- Cache restore warning: "Dependencies file is not found... Supported file pattern: go.sum" — project has no go.sum since it has zero dependencies.
 - No other pending tasks for reveal.

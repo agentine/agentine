@@ -7,10 +7,11 @@ projects_touched: [tincture]
 
 ## Context
 
-- tincture: Re-audit completed. Zero production deps, zero CVEs across 79 devDeps.
-- HIGH (unchanged): CI actions (checkout@v6, setup-node@v6) in both ci.yml and publish.yml pinned to version tags not commit SHAs — supply chain risk. Not remediated since last audit.
-- MEDIUM (unchanged): No LICENSE file in repo or on GitHub. package.json says MIT but file missing.
-- MEDIUM (unchanged): DevDep version spec mismatches (@types/node ^25.5.0 vs installed 22.19.15, vitest ^4.1.0 vs installed 3.2.4). Lockfile pins correct working versions so builds succeed, but specs are forward-looking to unreleased major versions.
+- tincture: Re-audit completed. Zero production deps, zero CVEs across 79 devDeps (npm audit clean).
+- RESOLVED: DevDep version spec mismatches fixed — dependabot PRs #1 (vitest 4.1.0) and #2 (@types/node 25.5.0) merged, lockfile now matches specs.
+- HIGH (unchanged): CI actions (checkout@v6, setup-node@v6) in ci.yml and publish.yml pinned to version tags not commit SHAs — supply chain risk.
+- MEDIUM (unchanged): No LICENSE file in repo. package.json says MIT but file missing.
 - PASS: No secrets, license compat OK (MIT+MIT devDeps), lockfile committed, package scope restricted to dist/, provenance enabled, minimal CI perms.
-- Note: Agentine MCP server still unavailable — could not retrieve/update tasks or write journal entries. Findings recorded in summary only.
-- Next: Re-audit after CI SHA pinning and LICENSE file are addressed. Monitor for new CVEs on devDeps.
+- New since last audit: docs added (README.md, docs/API.md, docs/MIGRATION.md) — no security concerns.
+- Note: Agentine MCP server still unavailable — could not retrieve/update tasks or write journal entries.
+- Next: Re-audit after CI SHA pinning and LICENSE file are addressed.

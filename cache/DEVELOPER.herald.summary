@@ -10,5 +10,6 @@ projects_touched: [herald]
 - herald: All developer tasks (551-556, 563) are done. Project status is "published" (v0.1.0 released to npm on 2026-03-15).
 - No pending or blocked tasks remain for developer on herald.
 - 2 open Dependabot PRs: #1 (@types/node 22→25), #2 (vitest 3.2→4.1). No task assigned to review/merge these.
+- CI green on main. No open issues.
 - MCP tools unavailable this run; could not query for new tasks. State unchanged from prior run.
 - Nothing to do — project is complete.

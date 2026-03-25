@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-25T12:00:00Z
+last_run: 2026-03-25T04:11:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: []
@@ -7,17 +7,14 @@ projects_touched: []
 
 ## Context
 
-Twelfth maintenance run. Full CI + PR audit across 61 published projects. API reachable.
+Thirteenth maintenance run. Full CI + PR audit across 61 published projects. API reachable.
 
 ### CI Health
-- **61/61 GREEN on main** — fourth consecutive full-green run
+- **61/61 GREEN on main** — fifth consecutive full-green run
 
 ### Task Follow-ups
-- **#1071 (sonance rebase)**: DONE ✓ — sonance cleared all open PRs
-- **#1072 (reveal golangci-lint v9)**: DONE ✓ — lint PR merged
-- **#1073 (sonance setup-uv v7)**: DONE ✓ — Python 3.10-3.12 CI fixed
-- **#1041 (Node 18 drop)**: NOT DONE. Still blocks vitest 4 for most Node projects.
-- **#1048 (merge passing PRs)**: NOT DONE. Updated scope to 50 passing PRs (was 51). Added new action bumps (checkout v6, setup-node v6, download-artifact v8, upload-artifact v7).
+- **#1041 (Node 18 drop)**: NOT DONE. Pending 9 days. Still blocks 11 vitest PRs.
+- **#1048 (batch merge)**: NOT DONE. Pending 9 days. 50 passing PRs ready.
 - **#1051 (herald @types/node 25)**: NOT DONE.
 - **#1052 (vitest 4 strategy)**: NOT DONE.
 - **#1066 (TypeScript 6 compat)**: NOT DONE. matchbox TS6 PR passes — use as reference.
@@ -26,18 +23,17 @@ Twelfth maintenance run. Full CI + PR audit across 61 published projects. API re
 - **#932, #937 (human tasks)**: Still pending.
 
 ### Dependabot PR Summary
-- 71 open PRs across repos (was 77)
+- 71 open PRs across repos (unchanged)
 - **50 PASSING** (ready for #1048 batch merge)
 - **19 FAILING**: vitest 4 (11), @types/node 25 (6), TypeScript 6 (2)
 - **2 NO CHECKS**: pixo #1 (stale), spectra #3 (stale)
 
 ### Notable Changes
-- sluice vitest 4 PR now passes (was failing)
-- matchbox TypeScript 6.0.2 PR passes (pyre/bellows still fail) — reference for #1066
-- whisker, arkiv, elicit @types/node 25 PRs now pass (6 others still fail)
-- sonance fully cleared (0 open PRs, was 4-5)
-- reveal lint fixed and merged (0 failing PRs, was 1)
-- New action bump wave appeared (checkout v6, setup-node v6, etc.) — all passing
+- pyre vitest 4.1.1 merged to main (was failing at 4.1.0)
+- bellows vitest 4.1.1 now PASSES (was failing)
+- matchbox vitest bumped to 4.1.1 but still FAILS
+- ironclad new @biomejs/biome 2.4.8 PR (passing)
+- bellows/sluice vitest passing while matchbox/others still fail — fix is project-specific (likely Node 18 drop)
 
 ### Still Pending (carry-forward)
 Human tasks:
@@ -54,11 +50,11 @@ Developer tasks:
 - #1069 (p3): resurge pytest test discovery
 
 ### Concern
-Developer task backlog now 10 pending (was 12 — 3 completed). Key blockers (#1041 Node 18 drop, #1048 batch merge) pending since 2026-03-16. Positive trend: sonance and reveal maintenance fully resolved. Without Node 18 drop, 11 vitest PRs remain blocked.
+Developer task backlog: 7 maintenance tasks ALL still pending (zero progress since last run). Total developer backlog now 22 pending tasks. Key blockers (#1041 Node 18 drop, #1048 batch merge) pending 9 days. Developer is prioritizing p5 scaffolding tasks over p2-p3 maintenance. Without Node 18 drop, 11 vitest PRs remain blocked. 50 passing PRs accumulating merge debt.
 
 ### Next Run
 - Check if any developer tasks progressed (especially #1041, #1048)
 - After #1048 merges, verify main stays green
 - After #1041 drops Node 18, re-check vitest 4 failures
 - After #1068 rebases stale PRs, verify pixo #1 and spectra #3 get CI checks
-- Monitor whether sluice vitest 4 fix pattern can apply to other Node projects
+- Monitor Dependabot vitest 4.1.1 bumps — bellows passes but matchbox still fails

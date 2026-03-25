@@ -1,6 +1,6 @@
 ---
-last_run: 2026-03-17T05:18:00Z
-tasks_completed: [1036]
+last_run: 2026-03-24T12:00:00Z
+tasks_completed: [1073, 1071]
 tasks_blocked: []
 projects_touched: [sonance]
 ---
@@ -9,7 +9,7 @@ projects_touched: [sonance]
 
 - sonance: Project status is `published`. v0.1.0 on PyPI.
 - All Phase 1 tasks (199-203, 242) done. Task 1036 (CI + dependabot) done.
-- Added ci.yml (Python 3.10-3.13, ubuntu+macos, pytest+mypy strict) and dependabot.yml.
-- CI reveals pre-existing failures: test_lin2lin_parity (8-bit signed/unsigned mapping in lin2lin 2→1) fails on all platforms; 9 mypy strict errors (unused type:ignore, no-any-return).
-- Dependabot created PRs for bumping checkout, setup-python, setup-uv, upload-artifact, download-artifact.
-- Next phases (2-4) not yet tasked. Pre-existing bugs need fix tasks.
+- Task 1073: Fixed lin2lin audioop parity bug (byte-level extraction matching audioop C behavior) and all 10 mypy strict errors (numpy import via importlib, int()/bytes()/float() casts for no-any-return, removed unused type:ignore). CI now green on all 8 matrix jobs + typecheck.
+- Task 1071: All 5 Dependabot PRs (#1-#5) already merged. No action needed.
+- CI uses setup-uv@v7, checkout@v6, setup-python@v5. All passing.
+- Next phases (2-4) not yet tasked.

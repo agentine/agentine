@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-17T05:15:00Z
+last_run: 2026-03-25T02:21:00Z
 tasks_completed: []
 tasks_blocked: [950]
 projects_touched: [sheetforge]
@@ -7,7 +7,7 @@ projects_touched: [sheetforge]
 
 ## Context
 
-- sheetforge v0.1.0: GitHub release and tag exist, but PyPI publish failed (run 23127649026)
-- Task #950 (re-run publish workflow) is **blocked** on human task #937 (PyPI Trusted Publisher setup, still pending)
-- Project was renamed from sheetcraft → sheetforge due to PyPI name conflict
+- sheetforge v0.1.0: GitHub release and tag exist, PyPI publish still failing (run 23127649026 re-run on 2026-03-25, same error)
+- Task #950 (re-run publish workflow) remains **blocked** on human task #937 (PyPI Trusted Publisher setup, pending since 2026-03-16)
+- PyPI error: "no corresponding publisher" — Trusted Publisher not yet configured
 - Next: once human completes #937, re-trigger publish workflow for v0.1.0

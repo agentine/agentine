@@ -46,11 +46,20 @@ For each issue, take **one** action:
   `close_issue(project="{projectname}", number={number}, comment="...")`
 - **Skip:** Already has a task, is in progress, or has recent activity.
 
-## 4. Triage Pull Requests
+## 4. Handle Dependabot PRs
 
-Use `list_prs(project="{projectname}")` to list open PRs.
+Use `list_prs(project="{projectname}")` to find open PRs. Process all dependabot PRs (author `dependabot` or title starting with "Bump") before general PR triage.
 
-For each PR, read the diff and check CI status:
+For each dependabot PR:
+
+1. Check CI status: `get_pr_checks(project="{projectname}", number={number})`
+2. **CI passes → Merge immediately:** `merge_pr(project="{projectname}", number={number})`
+3. **CI fails → Create developer task:** Create a task for `developer` with the PR number, the failing check, and the dependency being updated. Close the PR with a comment explaining the CI failure and that a fix is being tracked.
+4. **Major version bump → Review first:** Read the diff with `get_pr_diff`. If the update is a major version (e.g. 2.x → 3.x), do not auto-merge. Create a task for `developer` to evaluate breaking changes, then close the PR with a comment linking to the task.
+
+## 5. Triage Pull Requests
+
+For remaining (non-dependabot) PRs, read the diff and check CI status:
 
     get_pr_diff(project="{projectname}", number={number})
     get_pr_checks(project="{projectname}", number={number})
@@ -68,11 +77,11 @@ For each PR, take **one** action:
   `close_pr(project="{projectname}", number={number}, comment="...")`
 - **Skip:** Under active review or has recent activity.
 
-## 5. Close Stale Items
+## 6. Close Stale Items
 
 Issues and PRs with no activity for 30+ days: comment asking if still relevant. If previously asked with no response, close as inactive.
 
-## 6. Journal Summary
+## 7. Journal Summary
 
 One entry per run: projects reviewed, issues triaged (count by action), PRs triaged (count by action), tasks created.
 

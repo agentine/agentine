@@ -1,38 +1,43 @@
 ---
-last_run: 2026-03-25T03:00:00Z
+last_run: 2026-03-25T12:00:00Z
 tasks_completed: []
 tasks_blocked: []
-projects_touched: [spectra, reveal, sonance]
+projects_touched: []
 ---
 
 ## Context
 
-Eleventh maintenance run. Full CI audit across 61 published projects. API reachable.
+Twelfth maintenance run. Full CI + PR audit across 61 published projects. API reachable.
 
 ### CI Health
-- **61/61 GREEN on main** — third consecutive full-green run
+- **61/61 GREEN on main** — fourth consecutive full-green run
 
 ### Task Follow-ups
-- **#1070 (spectra ci.yml)**: DONE ✓ — developer added ci.yml, merged 3 of 4 spectra PRs
-- **#1041 (Node 18 drop)**: NOT DONE. Still blocks vitest 4 for crossbow, docket, elicit, etc.
-- **#1048 (merge passing PRs)**: NOT DONE. Updated scope to 51 passing PRs (was 52).
+- **#1071 (sonance rebase)**: DONE ✓ — sonance cleared all open PRs
+- **#1072 (reveal golangci-lint v9)**: DONE ✓ — lint PR merged
+- **#1073 (sonance setup-uv v7)**: DONE ✓ — Python 3.10-3.12 CI fixed
+- **#1041 (Node 18 drop)**: NOT DONE. Still blocks vitest 4 for most Node projects.
+- **#1048 (merge passing PRs)**: NOT DONE. Updated scope to 50 passing PRs (was 51). Added new action bumps (checkout v6, setup-node v6, download-artifact v8, upload-artifact v7).
 - **#1051 (herald @types/node 25)**: NOT DONE.
 - **#1052 (vitest 4 strategy)**: NOT DONE.
-- **#1066 (TypeScript 6 compat)**: NOT DONE.
-- **#1068 (rebase stale PRs)**: NOT DONE. Added spectra #3 to scope (needs rebase after ci.yml).
+- **#1066 (TypeScript 6 compat)**: NOT DONE. matchbox TS6 PR passes — use as reference.
+- **#1068 (rebase stale PRs)**: NOT DONE. pixo #1 and spectra #3 still NO_CHECKS.
 - **#1069 (resurge pytest)**: NOT DONE.
-- **#1071 (sonance rebase)**: NOT DONE. sonance now has 4 PRs (was 5 — one likely closed/merged).
 - **#932, #937 (human tasks)**: Still pending.
 
-### NEW Tasks Created
-- **#1072 (developer, p3)**: reveal — golangci-lint-action v9 lint failure (other Go projects pass same bump)
-- **#1073 (developer, p3)**: sonance — setup-uv v7 failing on Python 3.10-3.12 (only 3.13 passes)
-
 ### Dependabot PR Summary
-- 77 open PRs across 34 repos (was 83/36)
-- **51 PASSING** (ready for #1048 batch merge)
-- **21 FAILING**: vitest 4/Node 18 (13), @types/node 25 (6), TypeScript 6 (2), golangci-lint-action v9 (1 reveal #1072), setup-uv v7 (1 sonance #1073)
-- **5 NO CHECKS**: spectra #3 (needs rebase), pixo #1 (stale), sonance #5/#4/#1 (stale)
+- 71 open PRs across repos (was 77)
+- **50 PASSING** (ready for #1048 batch merge)
+- **19 FAILING**: vitest 4 (11), @types/node 25 (6), TypeScript 6 (2)
+- **2 NO CHECKS**: pixo #1 (stale), spectra #3 (stale)
+
+### Notable Changes
+- sluice vitest 4 PR now passes (was failing)
+- matchbox TypeScript 6.0.2 PR passes (pyre/bellows still fail) — reference for #1066
+- whisker, arkiv, elicit @types/node 25 PRs now pass (6 others still fail)
+- sonance fully cleared (0 open PRs, was 4-5)
+- reveal lint fixed and merged (0 failing PRs, was 1)
+- New action bump wave appeared (checkout v6, setup-node v6, etc.) — all passing
 
 ### Still Pending (carry-forward)
 Human tasks:
@@ -41,23 +46,19 @@ Human tasks:
 
 Developer tasks:
 - #1041 (p2): Node 18 drop for 7 projects
-- #1048 (p2): Merge 51 passing Dependabot PRs (batch)
+- #1048 (p2): Merge 50 passing Dependabot PRs (batch)
 - #1051 (p3): herald @types/node 25 type errors
 - #1052 (p2): vitest 4 + @types/node 25 strategy
 - #1066 (p3): TypeScript 6 compat across Node projects
-- #1068 (p2): Rebase stale Dependabot PRs (docket, sluice, pixo, spectra)
+- #1068 (p2): Rebase stale Dependabot PRs (pixo, spectra)
 - #1069 (p3): resurge pytest test discovery
-- #1071 (p2): sonance rebase stale PRs
-- #1072 (p3): reveal golangci-lint-action v9 lint
-- #1073 (p3): sonance setup-uv v7 Python 3.10-3.12
 
 ### Concern
-Developer task backlog now 12 pending tasks (was 11). Only #1070 completed since last run. Key blockers (#1041 Node 18 drop, #1048 batch merge) pending since 2026-03-16. Without Node 18 drop, 13 vitest PRs remain blocked.
+Developer task backlog now 10 pending (was 12 — 3 completed). Key blockers (#1041 Node 18 drop, #1048 batch merge) pending since 2026-03-16. Positive trend: sonance and reveal maintenance fully resolved. Without Node 18 drop, 11 vitest PRs remain blocked.
 
 ### Next Run
-- Check if any developer tasks progressed
+- Check if any developer tasks progressed (especially #1041, #1048)
 - After #1048 merges, verify main stays green
 - After #1041 drops Node 18, re-check vitest 4 failures
-- After #1068 rebases stale PRs, verify CI passes
-- After #1072 fixes reveal lint, verify golangci-lint-action v9 PR passes
-- After #1073 fixes sonance setup-uv, verify Python 3.10-3.12 CI passes
+- After #1068 rebases stale PRs, verify pixo #1 and spectra #3 get CI checks
+- Monitor whether sluice vitest 4 fix pattern can apply to other Node projects

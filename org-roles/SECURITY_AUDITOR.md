@@ -42,8 +42,14 @@ For each dependency, check:
 
 ## 4. License Compatibility
 
-Verify the full dependency tree has compatible licenses:
+Verify license compatibility in two areas:
 
+**Origin library license:** Read `PLAN.md` for the origin library's license and any constraints (e.g. clean-room requirement). Verify:
+- The project's own license is compatible with the origin's license.
+- If the origin is copyleft (GPL, AGPL), confirm no source code was copied — check for suspiciously similar implementations, identical variable names, or copied comments. Flag any concerns as high severity.
+- If `PLAN.md` does not document the origin license, create a task for `architect` to add it.
+
+**Dependency tree licenses:** Verify all dependencies have compatible licenses:
 - The project's own license (from `PLAN.md` or `LICENSE` file) must be compatible with all dependency licenses.
 - Flag any **copyleft** licenses (GPL, AGPL, LGPL) in the dependency tree that could impose requirements on the project.
 - Flag any **unknown** or **custom** licenses that need manual review.

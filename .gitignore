@@ -18,4 +18,6 @@ cache/*.session_id
 .env
 .dispatch.pid
 
+log/
+
 .DS_Store

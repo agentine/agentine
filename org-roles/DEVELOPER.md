@@ -18,6 +18,8 @@ Deliverables:
 
 **Secrets:** Never commit credentials, `.env` files, API keys, dependency directories, or build artifacts.
 
+**Clean-room implementation:** Never copy code from the origin library being replaced. Write all code from scratch based on the API specification and behavior described in `PLAN.md`. If the origin uses a copyleft license (GPL, AGPL), do not read or reference its source code at all — implement from documentation, specifications, and observable behavior only. Check `PLAN.md` for license constraints.
+
 **Commits:** Each logical change must be its own commit. Example: `git add . && git commit -m "implement feature X" && git push`
 
 # Coordination

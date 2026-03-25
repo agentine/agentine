@@ -17,12 +17,15 @@ from agentine.config import (
     PROJECTS_DIR,
     TEMPLATES_DIR,
 )
+from agentine.log import setup_logging
 
 mcp = FastMCP("agentine")
+log = setup_logging("mcp")
 
 
 def _api(method: str, path: str, **kwargs) -> dict:
     """Make an API request and return the JSON response."""
+    log.debug(f"API {method} {path}")
     try:
         resp = requests.request(
             method, f"{API_URL}{API_PREFIX}{path}", headers=HEADERS, timeout=30, **kwargs
@@ -30,11 +33,13 @@ def _api(method: str, path: str, **kwargs) -> dict:
         resp.raise_for_status()
         return resp.json()
     except requests.RequestException as e:
+        log.error(f"API {method} {path} — {e}")
         return {"error": str(e)}
 
 
 def _gh(*args: str, cwd: str | Path | None = None) -> str:
     """Run a gh CLI command and return output."""
+    log.debug(f"gh {' '.join(args[:4])}")
     result = subprocess.run(
         ["gh", *args],
         capture_output=True,
@@ -48,11 +53,13 @@ def _gh(*args: str, cwd: str | Path | None = None) -> str:
         if err:
             output = f"{output}\n{err}".strip() if output else err
         output += f"\n[exit code: {result.returncode}]"
+        log.warning(f"gh {' '.join(args[:4])} → exit {result.returncode}")
     return output
 
 
 def _git(*args: str, cwd: str | Path | None = None) -> subprocess.CompletedProcess:
     """Run a git command."""
+    log.debug(f"git {' '.join(args)}")
     return subprocess.run(
         ["git", *args], capture_output=True, text=True, cwd=cwd, timeout=60
     )
@@ -115,6 +122,7 @@ def create_task(
     Status: pending, in_progress, blocked, done, cancelled.
     Priority: 1 (lowest) to 5 (highest).
     """
+    log.info(f"create_task: {username} '{title}' project={project or '<none>'}")
     payload: dict = {
         "username": username,
         "title": title,
@@ -140,6 +148,7 @@ def update_task(
     When blocking, include blocked_reason and blocked_at (ISO 8601 timestamp).
     Lifecycle: pending -> in_progress -> done (or in_progress -> blocked -> in_progress -> done).
     """
+    log.info(f"update_task: #{task_id} status={status or '<unchanged>'}")
     payload: dict = {}
     if status:
         payload["status"] = status
@@ -174,6 +183,7 @@ def list_journal(
 @mcp.tool()
 def create_journal(username: str, content: str, project: str = "") -> str:
     """Write a journal entry. The journal is shared memory between all agents."""
+    log.info(f"create_journal: {username} project={project or '<none>'}")
     payload: dict = {"username": username, "content": content}
     if project:
         payload["project"] = project
@@ -206,6 +216,7 @@ def create_project(
 
     Language must be: python, go, node, or rust.
     """
+    log.info(f"create_project: {name} ({language})")
     payload: dict = {"name": name, "language": language, "status": status}
     if description:
         payload["description"] = description
@@ -215,6 +226,7 @@ def create_project(
 @mcp.tool()
 def update_project(name: str, status: str) -> str:
     """Update a project's status."""
+    log.info(f"update_project: {name} → {status}")
     return json.dumps(
         _api("PATCH", f"/projects/{name}", json={"status": status}), indent=2
     )
@@ -335,6 +347,7 @@ def list_prs(project: str) -> str:
 @mcp.tool()
 def comment_issue(project: str, number: int, body: str) -> str:
     """Add a comment to a GitHub issue on an agentine project."""
+    log.info(f"comment_issue: {project}#{number}")
     repo = f"agentine/{project}"
     return _gh("issue", "comment", str(number), "--repo", repo, "--body", body)
 
@@ -342,6 +355,7 @@ def comment_issue(project: str, number: int, body: str) -> str:
 @mcp.tool()
 def close_issue(project: str, number: int, comment: str = "") -> str:
     """Close a GitHub issue on an agentine project, optionally with a closing comment."""
+    log.info(f"close_issue: {project}#{number}")
     repo = f"agentine/{project}"
     args = ["issue", "close", str(number), "--repo", repo]
     if comment:
@@ -355,6 +369,7 @@ def merge_pr(project: str, number: int, strategy: str = "squash") -> str:
 
     Strategy: squash (default), merge, or rebase.
     """
+    log.info(f"merge_pr: {project}#{number} ({strategy})")
     repo = f"agentine/{project}"
     return _gh("pr", "merge", str(number), f"--{strategy}", "--repo", repo)
 
@@ -367,6 +382,7 @@ def review_pr(
 
     Action: approve, request-changes, or comment.
     """
+    log.info(f"review_pr: {project}#{number} ({action})")
     repo = f"agentine/{project}"
     args = ["pr", "review", str(number), "--repo", repo, f"--{action}"]
     if body:
@@ -377,6 +393,7 @@ def review_pr(
 @mcp.tool()
 def close_pr(project: str, number: int, comment: str = "") -> str:
     """Close a GitHub pull request on an agentine project, optionally with a comment."""
+    log.info(f"close_pr: {project}#{number}")
     repo = f"agentine/{project}"
     args = ["pr", "close", str(number), "--repo", repo]
     if comment:
@@ -393,6 +410,7 @@ def create_release(
     This triggers CI to publish to package registries — do not publish directly.
     Version should include the 'v' prefix (e.g. 'v0.1.0').
     """
+    log.info(f"create_release: {project} {version}")
     repo = f"agentine/{project}"
     args = ["release", "create", version, "--repo", repo]
     if generate_notes:
@@ -412,6 +430,7 @@ def list_ci_runs(project: str, limit: int = 10) -> str:
 @mcp.tool()
 def update_repo_description(project: str, description: str) -> str:
     """Update the GitHub repository description for an agentine project."""
+    log.info(f"update_repo_description: {project}")
     repo = f"agentine/{project}"
     return _gh("repo", "edit", repo, "--description", description)
 
@@ -422,6 +441,7 @@ def rename_repo(project: str, new_name: str) -> str:
 
     Also updates the local git remote URL to match.
     """
+    log.info(f"rename_repo: {project} → {new_name}")
     project_dir = PROJECTS_DIR / project
     output = _gh("repo", "rename", new_name, "--repo", f"agentine/{project}", "--yes")
     if "exit code" not in output and project_dir.is_dir():
@@ -456,6 +476,7 @@ def init_project(name: str, language: str, description: str) -> str:
     Language must be: python, go, or node.
     Creates project directory, git repo, CI workflows, and initial commit.
     """
+    log.info(f"init_project: {name} ({language})")
     if language not in ("python", "go", "node"):
         return f"ERROR: language must be python, go, or node (got: {language})"
 
@@ -557,6 +578,7 @@ SOFTWARE.
     _git("add", "-A", cwd=project_dir)
     _git("commit", "-m", f"initial scaffold from template ({language})", cwd=project_dir)
 
+    log.info(f"init_project: {name} scaffolded successfully")
     return (
         f"Project scaffolded: {project_dir}\n"
         f"Language: {language}\n"
@@ -570,6 +592,7 @@ def bump_version(project: str, version: str) -> str:
 
     Auto-detects language from manifest (pyproject.toml, package.json, go.mod).
     """
+    log.info(f"bump_version: {project} → {version}")
     project_dir = PROJECTS_DIR / project
     if not project_dir.is_dir():
         return f"ERROR: project directory not found: {project_dir}"
@@ -607,6 +630,7 @@ def bump_version(project: str, version: str) -> str:
 @mcp.tool()
 def setup_github(project: str) -> str:
     """Create a GitHub repository under agentine org and push initial commit."""
+    log.info(f"setup_github: {project}")
     project_dir = PROJECTS_DIR / project
     if not project_dir.is_dir():
         return f"ERROR: project directory not found: {project_dir}"

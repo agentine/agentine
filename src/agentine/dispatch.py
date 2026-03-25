@@ -3,19 +3,22 @@
 
 import concurrent.futures
 import json
+import logging
 import os
 import signal
 import subprocess
 import sys
 import threading
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
 from agentine.config import AgentConfig, DispatchConfig, api, load_config, API_URL, REPO_ROOT
+from agentine.log import setup_logging
 
 PID_FILE = REPO_ROOT / ".dispatch.pid"
+log = logging.getLogger("agentine.dispatcher")
 
 # Roles that generate work and should always run (no task check)
 GENERATORS = {
@@ -92,7 +95,7 @@ def clear_all_presence():
                 username = agent["username"]
                 project = agent.get("project") or None
                 label = f"{username}/{project}" if project else username
-                print(f"  cleanup: {label} was stuck as 'running', setting idle")
+                log.info(f"cleanup: {label} was stuck as 'running', setting idle")
                 set_presence(username, "idle", project)
             journal(
                 f"startup cleanup: reset {len(stuck)} stuck agent(s) to idle: "
@@ -117,7 +120,7 @@ def reset_stuck_tasks():
         return
     for task in tasks:
         api("PATCH", f"/tasks/{task['id']}", json={"status": "pending"})
-    print(f"  cleanup: reset {len(tasks)} stuck in_progress task(s) to pending")
+    log.info(f"cleanup: reset {len(tasks)} stuck in_progress task(s) to pending")
     lines = [
         f"- [{t['id']}] {t.get('project', 'unscoped')}: {t['title']} (assigned: {t['username']})"
         for t in tasks
@@ -165,13 +168,13 @@ def check_stale_blocked_tasks():
     if resp and resp.ok:
         total = resp.json().get("total", 0)
         if total > 0:
-            print(f"  WARNING: {total} task(s) blocked >3h")
+            log.warning(f"{total} task(s) blocked >3h")
             lines = []
             for task in resp.json().get("items", []):
                 lines.append(
                     f"- [{task['id']}] {task['title']} (assigned: {task['username']})"
                 )
-                print(f"    {lines[-1]}")
+                log.warning(f"  {lines[-1]}")
             journal(f"STALE BLOCKED: {total} task(s) blocked >3h:\n" + "\n".join(lines))
 
 
@@ -183,12 +186,12 @@ def check_stale_human_tasks():
     tasks = resp.json().get("items", [])
     if not tasks:
         return
-    print(f"  WARNING: {len(tasks)} pending human task(s)")
+    log.warning(f"{len(tasks)} pending human task(s)")
     lines = []
     for task in tasks:
         proj = task.get("project") or "unscoped"
         lines.append(f"- [{task['id']}] {proj}: {task['title']}")
-        print(f"    {lines[-1]}")
+        log.warning(f"  {lines[-1]}")
     journal(
         f"HUMAN ACTION NEEDED: {len(tasks)} pending task(s) "
         f"requiring manual intervention:\n" + "\n".join(lines)
@@ -233,14 +236,14 @@ def check_stale_development_projects():
         # No active tasks but completed work exists — advance to testing
         patch_resp = api("PATCH", f"/projects/{name}", json={"status": "testing"})
         if patch_resp and patch_resp.ok:
-            print(f"  ADVANCE: {name} development → testing (no active tasks)")
+            log.info(f"ADVANCE: {name} development → testing (no active tasks)")
             journal(
                 "auto-advanced project from development to testing — "
                 "no pending/in_progress tasks remain",
                 name,
             )
         else:
-            print(f"  WARNING: failed to advance {name} to testing")
+            log.warning(f"failed to advance {name} to testing")
 
 
 def check_stale_pipeline_projects():
@@ -281,7 +284,7 @@ def check_stale_pipeline_projects():
                 "PATCH", f"/projects/{name}", json={"status": "documentation"}
             )
             if patch_resp and patch_resp.ok:
-                print(f"  ADVANCE: {name} testing → documentation (no active tasks)")
+                log.info(f"ADVANCE: {name} testing → documentation (no active tasks)")
                 journal(
                     "auto-advanced project from testing to documentation — "
                     "no pending/in_progress tasks remain",
@@ -314,13 +317,13 @@ def check_stale_pipeline_projects():
                     sa_create = api("POST", "/tasks", json=sa_payload)
                     if sa_create and sa_create.ok:
                         sa_id = sa_create.json().get("id", "?")
-                        print(f"  TASK: created security audit #{sa_id} for {name}")
+                        log.info(f"TASK: created security audit #{sa_id} for {name}")
                         journal(
                             f"auto-created security audit task #{sa_id} for security_auditor",
                             name,
                         )
             else:
-                print(f"  WARNING: failed to advance {name} to documentation")
+                log.warning(f"failed to advance {name} to documentation")
 
     # Phase 2: Documentation done → ensure release_manager task exists
     resp = api("GET", "/projects?status=documentation&limit=100")
@@ -359,13 +362,13 @@ def check_stale_pipeline_projects():
             create_resp = api("POST", "/tasks", json=task_payload)
             if create_resp and create_resp.ok:
                 task_id = create_resp.json().get("id", "?")
-                print(f"  TASK: created release task #{task_id} for {name}")
+                log.info(f"TASK: created release task #{task_id} for {name}")
                 journal(
                     f"auto-created release task #{task_id} for release_manager",
                     name,
                 )
             else:
-                print(f"  WARNING: failed to create release task for {name}")
+                log.warning(f"failed to create release task for {name}")
 
 
 def validate_summary(role: str, project: str | None = None):
@@ -380,7 +383,7 @@ def validate_summary(role: str, project: str | None = None):
 
     content = path.read_text()
     if not content.startswith("---"):
-        print(f"  warning: {path} missing YAML frontmatter header")
+        log.warning(f"{path} missing YAML frontmatter header")
 
 
 def log_run(
@@ -513,15 +516,15 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         set_presence(username, "running", project)
 
         cmd = build_agent_command(config, project)
-        print(
-            f"  dispatch: role={config.role} backend={config.backend} "
+        log.info(
+            f"dispatch: role={config.role} backend={config.backend} "
             f"model={config.model} effort={config.effort} "
             f"project={project or '<all>'}"
         )
 
         started_at = utcnow()
         start_time = time.monotonic()
-        print(f"  START: {label} (attempt {attempt})")
+        log.info(f"START: {label} (attempt {attempt})")
 
         # Capture stdout to parse stream-json result event for stats
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
@@ -556,7 +559,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             proc.wait()
             exit_code = proc.returncode
         except Exception as e:
-            print(f"  ERROR: {label} — {e}")
+            log.error(f"{label} — {e}")
             exit_code = 1
         finally:
             with _children_lock:
@@ -573,8 +576,8 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         duration = int(time.monotonic() - start_time)
 
         if stats:
-            print(
-                f"  STATS: {label} — "
+            log.info(
+                f"STATS: {label} — "
                 f"in={stats.input_tokens} out={stats.output_tokens} "
                 f"cache_read={stats.cache_read_tokens} "
                 f"cost=${stats.cost_usd:.4f} turns={stats.num_turns}"
@@ -594,7 +597,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         )
 
         if exit_code == 0:
-            print(f"  DONE: {label} ({duration}s)")
+            log.info(f"DONE: {label} ({duration}s)")
             journal(f"completed {label} in {duration}s", project)
             # Validate summary format
             validate_summary(config.role, project)
@@ -615,7 +618,7 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
                 )
                 result = subprocess.run(["git", "push"], capture_output=True, text=True)
                 if result.returncode != 0:
-                    print(f"  WARNING: git push failed: {result.stderr.strip()}")
+                    log.warning(f"git push failed: {result.stderr.strip()}")
             return 0
 
         # Determine retry strategy
@@ -624,16 +627,16 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
         if strategy is None:
             if exit_code == 2:
                 msg = f"skipped {label} — bad input/config (exit 2), not retrying"
-                print(f"  SKIP: {label} — bad input/config (exit 2), not retrying")
+                log.info(f"SKIP: {label} — bad input/config (exit 2), not retrying")
             else:
                 msg = f"finished {label} (exit {exit_code})"
-                print(f"  DONE: {label} (exit {exit_code})")
+                log.info(f"DONE: {label} (exit {exit_code})")
             journal(msg, project)
             return exit_code
 
         if attempt >= strategy["max_attempts"]:
-            print(
-                f"  GIVE UP: {label} — failed {attempt} attempts (last exit {exit_code})"
+            log.error(
+                f"GIVE UP: {label} — failed {attempt} attempts (last exit {exit_code})"
             )
             journal(
                 f"gave up on {label} after {attempt} attempts (exit {exit_code})",
@@ -642,8 +645,9 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
             return exit_code
 
         delay = strategy["delays"][min(attempt - 1, len(strategy["delays"]) - 1)]
-        print(
-            f"  RETRY: {label} — exit {exit_code}, waiting {delay}s (attempt {attempt}/{strategy['max_attempts']})"
+        log.warning(
+            f"RETRY: {label} — exit {exit_code}, waiting {delay}s "
+            f"(attempt {attempt}/{strategy['max_attempts']})"
         )
         _interruptible_sleep(delay)
 
@@ -670,7 +674,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
         if config.role not in GENERATORS:
             continue
         if config.role == "ARCHITECT" and not allow_architect:
-            print(f"  SKIP: {config.role} (disabled)")
+            log.info(f"SKIP: {config.role} (disabled)")
             continue
         run_agent(config)
 
@@ -686,7 +690,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
 
         username = config.role.lower()
         if not has_work(username):
-            print(f"  SKIP: {config.role} (no pending tasks)")
+            log.debug(f"SKIP: {config.role} (no pending tasks)")
             continue
 
         projects = get_pending_projects(username)
@@ -698,11 +702,11 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
             work_queue.append((config, None))
 
     if not work_queue:
-        print("  no work queued for task-driven agents")
+        log.info("no work queued for task-driven agents")
         return
 
     # Phase 3: Execute work queue in parallel (respecting project locks)
-    print(f"  dispatching {len(work_queue)} agent/project pair(s)...")
+    log.info(f"dispatching {len(work_queue)} agent/project pair(s)...")
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=_dispatch.max_workers) as executor:
         futures: dict[concurrent.futures.Future, str] = {}
@@ -714,7 +718,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
             label = f"{config.role}" + (f"/{proj}" if proj else "")
 
             if proj and (project_locked(proj) or proj in submitted_projects):
-                print(f"  SKIP: {label} (project locked)")
+                log.info(f"SKIP: {label} (project locked)")
                 continue
 
             future = executor.submit(run_agent, config, proj)
@@ -727,7 +731,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
             try:
                 future.result()
             except Exception as e:
-                print(f"  EXCEPTION: {label} — {e}")
+                log.error(f"EXCEPTION: {label} — {e}")
 
 
 def _read_pid() -> int | None:
@@ -805,6 +809,9 @@ def _shutdown():
 def main():
     global _dispatch
 
+    # Set up file + console logging
+    setup_logging("dispatcher", console=True)
+
     # Handle subcommands
     if len(sys.argv) > 1 and sys.argv[1] == "stop":
         stop()
@@ -823,13 +830,13 @@ def main():
     allow_architect = len(sys.argv) > 1 and sys.argv[1] == "yes"
     agents, _dispatch = load_config()
 
-    print(
-        f"agentine dispatcher starting (architect={'enabled' if allow_architect else 'disabled'})"
+    log.info(
+        f"dispatcher starting (architect={'enabled' if allow_architect else 'disabled'})"
     )
-    print(f"  api: {API_URL}")
-    print(f"  agents: {', '.join(a.role for a in agents)}")
-    print(
-        f"  timing: short={_dispatch.short_break}s long={_dispatch.long_break}s "
+    log.info(f"api: {API_URL}")
+    log.info(f"agents: {', '.join(a.role for a in agents)}")
+    log.info(
+        f"timing: short={_dispatch.short_break}s long={_dispatch.long_break}s "
         f"every={_dispatch.long_break_every} workers={_dispatch.max_workers}"
     )
 
@@ -837,14 +844,14 @@ def main():
     _write_pid()
 
     # Clean up stale state from previous crashed run
-    print("startup: clearing stale agent presence...")
+    log.info("clearing stale agent presence...")
     clear_all_presence()
     reset_stuck_tasks()
 
     # Signal handler sets stop event — actual cleanup happens in _shutdown
     def handle_signal(sig, _frame):
         signame = signal.Signals(sig).name
-        print(f"\n{signame} received — shutting down...")
+        log.info(f"{signame} received — shutting down...")
         _shutdown()
         sys.exit(0)
 
@@ -854,9 +861,9 @@ def main():
     try:
         iteration = 0
         while not _is_stopping():
-            print(f"\n{'=' * 40}")
-            print(f"iteration {iteration}")
-            print(f"{'=' * 40}")
+            log.info("=" * 40)
+            log.info(f"iteration {iteration}")
+            log.info("=" * 40)
 
             dispatch_cycle(agents, allow_architect)
 
@@ -864,10 +871,10 @@ def main():
                 break
 
             if iteration > 0 and iteration % _dispatch.long_break_every == 0:
-                print(f"long break: {_dispatch.long_break}s...")
+                log.info(f"long break: {_dispatch.long_break}s...")
                 _interruptible_sleep(_dispatch.long_break)
             else:
-                print(f"short break: {_dispatch.short_break}s...")
+                log.info(f"short break: {_dispatch.short_break}s...")
                 _interruptible_sleep(_dispatch.short_break)
 
             iteration += 1

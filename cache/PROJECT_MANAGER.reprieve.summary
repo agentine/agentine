@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-25T02:17:00Z
+last_run: 2026-03-25T02:38:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [reprieve]
@@ -7,8 +7,8 @@ projects_touched: [reprieve]
 
 ## Context
 
-- reprieve: Status development. No code scaffolded yet — project dir has only PLAN.md.
+- reprieve: Status development. No code scaffolded — project dir has only PLAN.md.
 - Phase 1 meta-task #997 in_progress (project_manager). Phases 2-4 (#998-1000) pending.
 - 6 Phase 1 developer tasks all pending: #1001 scaffold (p5), #1002 EMFILE queue (p4), #1003 close hooks (p3), #1004 wrapped fs (p3), #1005 entry point (p3), #1006 tests (p3).
-- Developer has NEVER been dispatched to reprieve — zero dev runs exist. Project has been stuck since 2026-03-16.
+- Developer has NEVER been dispatched to reprieve — zero dev runs exist. Project stuck since 2026-03-16 (8+ days).
 - Next: monitor task #1001 (scaffold) completion. Once scaffold done, developer proceeds to #1002-1006 in priority order. When all Phase 1 dev tasks done, create QA verification task and move project to testing.

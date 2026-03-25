@@ -139,17 +139,24 @@ def has_work(username: str) -> bool:
     return False
 
 
-def get_pending_projects(username: str) -> list[str]:
-    """Return unique projects with pending/in_progress/blocked tasks for this agent."""
-    found: set[str] = set()
+def get_pending_projects(username: str) -> list[tuple[str, str]]:
+    """Return (project, oldest_task_date) pairs for this agent, oldest first.
+
+    Projects with the oldest outstanding tasks are prioritized so that
+    no project starves while newer ones keep getting attention.
+    """
+    oldest: dict[str, str] = {}
     for status in ("pending", "in_progress", "blocked"):
         resp = api("GET", f"/tasks?username={username}&status={status}&limit=100")
         if resp and resp.ok:
             for task in resp.json().get("items", []):
                 proj = task.get("project")
-                if proj:
-                    found.add(proj)
-    return sorted(found)
+                if not proj:
+                    continue
+                created = task.get("created_at", "")
+                if proj not in oldest or (created and created < oldest[proj]):
+                    oldest[proj] = created
+    return sorted(oldest.items(), key=lambda x: x[1])
 
 
 def project_locked(project: str) -> bool:
@@ -682,7 +689,8 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
         return
 
     # Phase 2: Collect work for task-driven agents
-    work_queue: list[tuple[AgentConfig, str | None]] = []
+    # Each entry is (config, project, oldest_task_date) for fair scheduling
+    work_queue: list[tuple[AgentConfig, str | None, str]] = []
 
     for config in agents:
         if config.role in GENERATORS:
@@ -693,17 +701,20 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
             log.debug(f"SKIP: {config.role} (no pending tasks)")
             continue
 
-        projects = get_pending_projects(username)
-        if projects:
-            for proj in projects:
-                work_queue.append((config, proj))
+        project_pairs = get_pending_projects(username)
+        if project_pairs:
+            for proj, age in project_pairs:
+                work_queue.append((config, proj, age))
         else:
             # Tasks exist but no project field — run unscoped
-            work_queue.append((config, None))
+            work_queue.append((config, None, ""))
 
     if not work_queue:
         log.info("no work queued for task-driven agents")
         return
+
+    # Sort globally by oldest task date so long-waiting projects get priority
+    work_queue.sort(key=lambda x: x[2])
 
     # Phase 3: Execute work queue in parallel (respecting project locks)
     log.info(f"dispatching {len(work_queue)} agent/project pair(s)...")
@@ -712,7 +723,7 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
         futures: dict[concurrent.futures.Future, str] = {}
         submitted_projects: set[str] = set()
 
-        for config, proj in work_queue:
+        for config, proj, _age in work_queue:
             if _is_stopping():
                 break
             label = f"{config.role}" + (f"/{proj}" if proj else "")

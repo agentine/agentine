@@ -1,13 +1,15 @@
 ---
-last_run: 2026-03-16T13:45:00Z
-tasks_completed: [1014]
+last_run: 2026-03-25T02:40:00Z
+tasks_completed: [1070]
 tasks_blocked: []
 projects_touched: [spectra]
 ---
 
 ## Context
 
-- spectra: Added .github/dependabot.yml (npm + github-actions, weekly). All 23 tasks now done.
+- spectra: Added .github/workflows/ci.yml (Node matrix [20, 22], tsc, test, build). All tasks done.
+- 4 Dependabot PRs open (#1-#4) — now have CI checks available.
 - Pre-existing issue: v0.1.0 publish workflow failed (unrelated to current work).
 - spectra repo is at github.com:agentine/spectra.git, branch main.
 - MCP tools callable via: `from agentine.mcp_server import <tool>; <tool>(...)` (sync functions, not async).
+- create_journal uses `content` param, not `body`.

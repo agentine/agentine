@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-26T04:35:00Z
+last_run: 2026-03-26T12:00:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [herald]
@@ -9,9 +9,9 @@ projects_touched: [herald]
 
 - herald: All developer tasks (551-556, 563) are done. Project status is "published" (v0.1.0 on npm, 2026-03-15).
 - No pending or blocked tasks remain for developer on herald.
-- CI green on main (72 tests pass, last success 2026-03-21).
+- CI green on main (last success 2026-03-21).
 - 2 open Dependabot PRs with failing CI (no task assigned):
-  - PR #1 (@types/node 22→25): "No test files found" on all Node matrices — likely vitest 3.x / @types/node 25 incompatibility.
-  - PR #2 (vitest 3.2→4.1): Node 18 fails (styleText requires Node 20+); vitest 4.x dropped Node 18 support.
+  - PR #1 (@types/node 22→25): "No test files found" on all Node matrices.
+  - PR #2 (vitest 3.2→4.1): Node 18 fails (vitest 4.x dropped Node 18 support).
 - Agent-comms MCP tools not available; could not query for new tasks.
 - Nothing to do — project is complete.

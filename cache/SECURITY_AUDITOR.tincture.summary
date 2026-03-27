@@ -7,12 +7,10 @@ projects_touched: [tincture]
 
 ## Context
 
-- tincture: Re-audit completed. Zero production deps. One devDep CVE found (picomatch).
-- NEW MEDIUM: picomatch@4.0.3 has two CVEs — GHSA-c2c7-rcm5-vvqj (ReDoS, CVSS 7.5) and GHSA-3v7f-55p6-f55p (method injection, CVSS 5.3). Fix: bump to >=4.0.4 via `npm audit fix`. DevDep only (via vitest), no prod impact.
-- MEDIUM: node_modules out of sync with lockfile — vitest@3.2.4 installed but lockfile has 4.1.0. Needs `npm ci` to sync.
-- HIGH (unchanged): CI actions (checkout@v6, setup-node@v6) in ci.yml and publish.yml pinned to version tags not commit SHAs — supply chain risk.
+- tincture: Re-audit completed. Six new commits since last audit — 3 docs (README, API.md, MIGRATION.md), 2 dependabot bumps (vitest→4.1.0, @types/node→25.5.0), 1 bug fix (instanceof copy constructor). No security concerns in new code.
+- HIGH (unchanged): CI actions (checkout@v6, setup-node@v6) in ci.yml and publish.yml pinned to version tags not commit SHAs — supply chain risk. Block release until resolved.
+- MEDIUM: picomatch@4.0.3 still installed with two CVEs — GHSA-c2c7-rcm5-vvqj (ReDoS, CVSS 7.5) and GHSA-3v7f-55p6-f55p (method injection, CVSS 5.3). Fix: bump to >=4.0.4 via `npm audit fix`. DevDep only (via vitest), no prod impact.
 - MEDIUM (unchanged): No LICENSE file in repo root. package.json says MIT but file missing.
-- PASS: No secrets, license compat OK, lockfile committed, package scope restricted to dist/, provenance enabled, minimal CI perms.
-- No new source changes since last audit (2026-03-24).
+- PASS: No secrets, license compat OK, lockfile committed and updated, package scope restricted to dist/, provenance enabled, minimal CI perms.
 - Note: Agentine MCP server still unavailable — could not retrieve/update tasks or write journal entries.
-- Next: picomatch fix, CI SHA pinning, LICENSE file still outstanding. Block release until HIGH resolved.
+- Next: CI SHA pinning (HIGH, release blocker), picomatch fix, LICENSE file still outstanding.

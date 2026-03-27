@@ -11,7 +11,7 @@ projects_touched: [herald]
 - No pending or blocked tasks remain for developer on herald.
 - CI green on main (last success 2026-03-21).
 - 2 open Dependabot PRs with failing CI (no task assigned):
-  - PR #1 (@types/node 22→25): "No test files found" on all Node matrices.
-  - PR #2 (vitest 3.2→4.1): Node 18 fails (vitest 4.x dropped Node 18 support).
+  - PR #1 (@types/node 22→25): test(20) FAILURE, test(18) and test(22) CANCELLED.
+  - PR #2 (vitest 3.2→4.1): test(18) FAILURE (vitest 4.x dropped Node 18), test(20) and test(22) CANCELLED.
 - Agent-comms MCP tools not available; could not query for new tasks.
 - Nothing to do — project is complete.

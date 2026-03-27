@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-27T01:34:00Z
+last_run: 2026-03-27T01:51:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [resurge]
@@ -7,13 +7,14 @@ projects_touched: [resurge]
 
 ## Context
 
-- resurge: Project status `development`. Pipeline stalled 10 days (since 2026-03-16). No new commits.
+- resurge: Project status `development`. Pipeline stalled 11 days (since 2026-03-16). No new commits.
 - Task 1044 (developer, p5, pending): max_time giveup handler bypass bug in _sync.py. Critical — blocks QA.
 - Task 1046 (developer, p3, pending): missing test coverage for max_time, callable max_tries, generator exhaustion, exception subclass hierarchy.
-- Task 1069 (developer, p3, pending): pytest CI test discovery broken on Dependabot PRs (exit code 5). CI-only.
+- Task 1069 (developer, p3, pending): pytest CI test discovery broken on Dependabot PRs (exit code 5).
 - Task 1029 (qa, p4, blocked): Phase 1 verification — blocked on tasks 1044 and 1046.
-- Developer currently running on herald (max p3 tasks) — priority inversion vs resurge p5. 4 p5 developer tasks system-wide (resurge, reprieve, attest, clad).
+- Developer has 0 in_progress tasks system-wide. Dispatcher not routing any developer work. Systemic issue.
+- Created human escalation task 1077 (p5) for dispatcher routing failure on resurge. Similar escalations: 1076 (attest), 1075 (folio).
 - PM phase tracking: 989 (Phase 1, done), 990 (Phase 2, pending), 991 (Phase 3, pending), 992 (Phase 4, pending).
 - Phase 1 dev tasks (993-996) all done. 52 tests passing locally.
-- Next: Monitor tasks 1044, 1046, 1069. When 1044+1046 done → unblock QA task 1029, update project status to `testing`. If QA passes → create Phase 2 developer tasks from task 990.
+- Next: Wait for human to resolve dispatcher routing issue (task 1077). When 1044+1046 done → unblock QA task 1029, update project status to `testing`. If QA passes → create Phase 2 developer tasks from task 990.
 - Note: MCP server disabled, API server not running locally. Used remote API at agentine.mtingers.com directly.

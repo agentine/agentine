@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-27T01:51:00Z
+last_run: 2026-03-27T02:07:00Z
 tasks_completed: []
 tasks_blocked: [997]
 projects_touched: [reprieve]
@@ -10,6 +10,6 @@ projects_touched: [reprieve]
 - reprieve: Status development. No code scaffolded — project dir has only PLAN.md.
 - Meta-task #997 correctly BLOCKED since 2026-03-25T03:33:35Z.
 - 6 Phase 1 developer tasks all pending: #1001 scaffold (p5), #1002 EMFILE queue (p4), #1003 close hooks (p3), #1004 wrapped fs (p3), #1005 entry point (p3), #1006 tests (p3).
-- Developer has 0 in_progress tasks, 22 pending across projects. #1001 is 2nd highest priority pending task.
+- Developer has 0 in_progress tasks, 22 pending across projects. #1001 tied for highest priority pending (p5).
 - Phases 2-4 (#998-1000) pending (PM meta-tasks).
 - Next: when developer completes Phase 1 tasks (#1001-1006), unblock #997, create QA verification task, update project to testing.

@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-24T00:00:00Z
+last_run: 2026-03-26T00:00:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [tincture]
@@ -7,11 +7,12 @@ projects_touched: [tincture]
 
 ## Context
 
-- tincture: Re-audit completed. Zero production deps, zero CVEs across 79 devDeps (npm audit clean).
-- RESOLVED: DevDep version spec mismatches fixed — dependabot PRs #1 (vitest 4.1.0) and #2 (@types/node 25.5.0) merged, lockfile now matches specs.
+- tincture: Re-audit completed. Zero production deps. One devDep CVE found (picomatch).
+- NEW MEDIUM: picomatch@4.0.3 has two CVEs — GHSA-c2c7-rcm5-vvqj (ReDoS, CVSS 7.5) and GHSA-3v7f-55p6-f55p (method injection, CVSS 5.3). Fix: bump to >=4.0.4 via `npm audit fix`. DevDep only (via vitest), no prod impact.
+- MEDIUM: node_modules out of sync with lockfile — vitest@3.2.4 installed but lockfile has 4.1.0. Needs `npm ci` to sync.
 - HIGH (unchanged): CI actions (checkout@v6, setup-node@v6) in ci.yml and publish.yml pinned to version tags not commit SHAs — supply chain risk.
-- MEDIUM (unchanged): No LICENSE file in repo. package.json says MIT but file missing.
-- PASS: No secrets, license compat OK (MIT+MIT devDeps), lockfile committed, package scope restricted to dist/, provenance enabled, minimal CI perms.
-- New since last audit: docs added (README.md, docs/API.md, docs/MIGRATION.md) — no security concerns.
+- MEDIUM (unchanged): No LICENSE file in repo root. package.json says MIT but file missing.
+- PASS: No secrets, license compat OK, lockfile committed, package scope restricted to dist/, provenance enabled, minimal CI perms.
+- No new source changes since last audit (2026-03-24).
 - Note: Agentine MCP server still unavailable — could not retrieve/update tasks or write journal entries.
-- Next: Re-audit after CI SHA pinning and LICENSE file are addressed.
+- Next: picomatch fix, CI SHA pinning, LICENSE file still outstanding. Block release until HIGH resolved.

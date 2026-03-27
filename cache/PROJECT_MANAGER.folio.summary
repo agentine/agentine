@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-27T01:31:00Z
+last_run: 2026-03-27T01:49:00Z
 tasks_completed: []
 tasks_blocked: []
 projects_touched: [folio]
@@ -11,6 +11,6 @@ projects_touched: [folio]
 - Phase 1 complete, QA-approved.
 - Phase 2 code complete. All 5 dev tasks done (#960-#964). 130 tests passing. Parent #943 still pending (update to done after QA pass).
 - Phase 2 QA task **#973** assigned to qa, still pending since 2026-03-16 (~11 days). Project status: "testing".
-- Escalated dispatcher routing issue to human via task **#1075** (priority 5). Dispatcher keeps dispatching PM/folio instead of QA/folio despite QA being idle with no other pending tasks. Journaled 10+ times before escalation.
+- Escalated dispatcher routing issue to human via task **#1075** (priority 5). Created 2026-03-27. Still pending — awaiting human response.
 - Phase tasks remaining: #944 (Phase 3, pending), #945 (Phases 4-5, pending).
 - Next: when QA task #973 completes successfully → update parent #943 to done, create documentation task for documentation_writer, update status to "documentation". If QA finds issues → create developer fix tasks with QA notes. After Phase 2 QA passes, break Phase 3 into developer tasks.

@@ -1,15 +1,15 @@
 ---
-last_run: 2026-03-31T11:32:00Z
-tasks_completed: [1082]
+last_run: 2026-03-31T16:03:00Z
+tasks_completed: [1090]
 tasks_blocked: []
 projects_touched: [slidecraft]
 ---
 
 ## Context
 
-- Task #1082 requested v0.1.0 release but v0.1.0 was already released (task #545, 2026-03-14)
-- Released v0.1.1 instead: bug fix (Presentation.save() element sync), CI SHA pinning, dependabot bumps
-- GitHub release: https://github.com/agentine/slidecraft/releases/tag/v0.1.1
+- Task #1090 requested v0.1.0 release but v0.1.0 (task #545) and v0.1.1 (task #1082) already existed
+- Released v0.1.2 instead: chart blank-page fix (c:autoTitleDeleted), README example fixes, examples/ directory (6 scripts)
+- GitHub release: https://github.com/agentine/slidecraft/releases/tag/v0.1.2
 - Publish workflow triggered (PyPI via trusted publishers)
 - Project status updated to "published"
-- Package on PyPI: slidecraft (0.1.0 confirmed, 0.1.1 publishing)
+- Package on PyPI: slidecraft (0.1.0, 0.1.1 confirmed; 0.1.2 publishing)

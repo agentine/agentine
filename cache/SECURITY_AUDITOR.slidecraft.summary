@@ -1,16 +1,18 @@
 ---
-last_run: 2026-03-31T11:18:00Z
-tasks_completed: [1080]
+last_run: 2026-03-31T12:22:00Z
+tasks_completed: [1089]
 tasks_blocked: []
 projects_touched: [slidecraft]
 ---
 
 ## Context
 
-- slidecraft: Pre-release security audit (task #1080) APPROVED and marked done.
-- Blocking issue resolved: task #1081 (pin CI actions to commit SHAs) completed in commit 851c64a.
-- ci.yml and publish.yml now pin actions/checkout, actions/setup-python, astral-sh/setup-uv to full 40-char SHAs.
-- No dependency, source, or config changes since initial audit (only commit since 7702000 is the SHA pinning fix).
-- Audit findings unchanged: zero runtime deps, clean secrets scan, MIT-compatible licenses, no python-pptx code copying, 1 low-severity dev-only CVE (pygments CVE-2026-4539).
-- Release is approved. No remaining security_auditor tasks for slidecraft.
-- Next: post-release monitoring — verify published package checksums, watch for new CVEs in dev dependencies.
+- slidecraft: Pre-release security audit (task #1089) for v0.1.1 APPROVED and marked done.
+- Changes since last audit (851c64a → 673cfbf): version bump 0.1.0→0.1.1, chart XML bugfix (autoTitleDeleted), examples/ directory (6 scripts), README fixes. All safe.
+- Zero runtime dependencies unchanged. Dev-only: mypy, pytest, ruff.
+- Pygments CVE-2026-4539 (low, dev-only transitive, not shipped) — unchanged from prior audit.
+- CI actions still pinned to commit SHAs. Publish uses OIDC trusted publishing. uv.lock committed.
+- Secrets scan clean. No credentials, .env files, or hardcoded secrets.
+- MIT license, compatible with origin (python-pptx MIT). Zero runtime dep license conflicts.
+- Release v0.1.1 approved. No remaining security_auditor tasks for slidecraft.
+- Next: post-release monitoring — verify published package checksums, watch for new CVEs.

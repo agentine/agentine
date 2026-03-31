@@ -307,7 +307,7 @@ def check_stale_pipeline_projects():
                     "no pending/in_progress tasks remain",
                     name,
                 )
-                # Create security audit task if no non-cancelled one exists
+                # Create security audit task if no active one exists
                 sa_resp = api(
                     "GET",
                     f"/tasks?project={name}&username=security_auditor&limit=10",
@@ -315,7 +315,7 @@ def check_stale_pipeline_projects():
                 has_sa_task = False
                 if sa_resp and sa_resp.ok:
                     for t in sa_resp.json().get("items", []):
-                        if t.get("status") != "cancelled":
+                        if t.get("status") in ("pending", "in_progress", "blocked"):
                             has_sa_task = True
                             break
                 if not has_sa_task:
@@ -350,7 +350,7 @@ def check_stale_pipeline_projects():
             if not _project_is_idle(name):
                 continue
 
-            # Check if a non-cancelled release_manager task already exists
+            # Check if an active release_manager task already exists
             rm_resp = api(
                 "GET",
                 f"/tasks?project={name}&username=release_manager&limit=10",
@@ -358,7 +358,7 @@ def check_stale_pipeline_projects():
             has_rm_task = False
             if rm_resp and rm_resp.ok:
                 for t in rm_resp.json().get("items", []):
-                    if t.get("status") != "cancelled":
+                    if t.get("status") in ("pending", "in_progress", "blocked"):
                         has_rm_task = True
                         break
             if has_rm_task:

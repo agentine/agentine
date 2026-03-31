@@ -1,5 +1,5 @@
 ---
-last_run: 2026-03-31T10:45:00Z
+last_run: 2026-03-31T10:49:00Z
 tasks_completed: []
 tasks_blocked: [1080]
 projects_touched: [slidecraft]
@@ -10,6 +10,6 @@ projects_touched: [slidecraft]
 - slidecraft: Pre-release security audit (task #1080) remains BLOCKED.
 - Blocking issue: task #1081 (pin CI actions to commit SHAs) still pending — developer has not addressed.
 - ci.yml and publish.yml still use mutable tags (@v6, @v7) for actions/checkout, actions/setup-python, astral-sh/setup-uv.
-- No new dependencies or security-relevant changes since initial audit (only bug fix for blank output, commit 7702000).
+- No new commits, dependencies, or security-relevant changes since initial audit (last commit 7702000).
 - All other audit findings from initial run still valid: zero runtime deps, clean secrets scan, MIT-compatible licenses, no code copying from python-pptx, 1 low-severity dev-only CVE (pygments CVE-2026-4539).
 - Next: re-check #1081 status. Once fixed, verify SHA pinning and approve release.

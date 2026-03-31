@@ -1,16 +1,13 @@
 ---
-last_run: 2026-03-31T11:52:00Z
-tasks_completed: [1084, 1085]
+last_run: 2026-03-31T12:09:00Z
+tasks_completed: [1087]
 tasks_blocked: []
 projects_touched: [slidecraft]
 ---
 
 ## Context
 
-- Created examples/ directory with 6 runnable scripts: basic_presentation, charts, tables, images, text_formatting, multi_slide
-- Fixed README.md code examples to be fully copy-pastable (Tables, Images, Charts sections now self-contained)
-- Fixed Image import in README to use top-level export instead of submodule path
-- Added *.pptx to .gitignore, added examples/ link in README
-- All prior work (phases 1-6, security audit, lint, blank output bug) remains done
-- 99 tests pass, lint clean
+- Fixed charts producing blank pages in PowerPoint by adding c:autoTitleDeleted element to generate_chart_xml() in src/slidecraft/pptx/shapes/chart.py
+- All 99 tests pass, lint clean, charts.pptx renders correctly
+- All prior work (phases 1-6, security audit, lint, blank output bug, examples, README fixes) remains done
 - No remaining pending tasks for slidecraft

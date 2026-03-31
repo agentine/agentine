@@ -1,0 +1,13 @@
+---
+last_run: 2026-03-31T10:30:00Z
+tasks_completed: [1078]
+tasks_blocked: []
+projects_touched: [slidecraft]
+---
+
+## Context
+
+- slidecraft: Triaged critical bug #1078 (blank output). Root cause: Presentation.save() doesn't sync slide element trees to part blobs — only syncs presentation.xml. Created developer task #1079 (priority 5) with full root cause and fix.
+- Project status set back to "development" from "documentation" for the fix.
+- Pipeline: developer #1079 (pending) → QA → release. v0.1.0 already published to PyPI; this will need a patch release (v0.1.1).
+- All other 18 tasks are done/cancelled. No other blockers.

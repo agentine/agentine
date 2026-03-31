@@ -1,13 +1,14 @@
 ---
-last_run: 2026-03-31T10:34:00Z
-tasks_completed: [1079]
+last_run: 2026-03-31T11:11:00Z
+tasks_completed: [1081]
 tasks_blocked: []
 projects_touched: [slidecraft]
 ---
 
 ## Context
 
-- Fixed blank output bug: Presentation.save() now syncs all slide element trees (_sync_blob) before writing the ZIP package
-- Added test_save_syncs_slide_blobs round-trip test (99 total tests pass, lint clean)
-- All prior tasks (phases 1-6, security audit fixes, lint fixes) are done
+- Pinned all GitHub Actions in ci.yml and publish.yml to commit SHAs (security audit fix, task #1081)
+- actions/checkout@v6 -> de0fac2e, actions/setup-python@v6 -> a309ff8b, astral-sh/setup-uv@v7 -> 37802adc
+- All prior tasks (phases 1-6, security audit fixes, lint fixes, blank output bug fix) are done
+- 99 tests pass, lint clean
 - No remaining pending tasks for slidecraft

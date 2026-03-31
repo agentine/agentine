@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Agentine dispatcher — owns agent lifecycle, presence, and scheduling."""
 
+import argparse
 import concurrent.futures
 import json
 import logging
@@ -661,8 +662,12 @@ def run_agent(config: AgentConfig, project: str | None = None) -> int:
     return 1  # stopped
 
 
-def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
-    """Run one dispatch cycle."""
+def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool, target_project: str | None = None):
+    """Run one dispatch cycle.
+
+    If *target_project* is set, generators are skipped and only tasks
+    belonging to that project are dispatched.
+    """
     if _is_stopping():
         return
 
@@ -675,15 +680,18 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
     check_stale_pipeline_projects()
 
     # Phase 1: Run generators sequentially (they create work for others)
-    for config in agents:
-        if _is_stopping():
-            return
-        if config.role not in GENERATORS:
-            continue
-        if config.role == "ARCHITECT" and not allow_architect:
-            log.info(f"SKIP: {config.role} (disabled)")
-            continue
-        run_agent(config)
+    if target_project:
+        log.info(f"SKIP: generators (targeting project {target_project})")
+    else:
+        for config in agents:
+            if _is_stopping():
+                return
+            if config.role not in GENERATORS:
+                continue
+            if config.role == "ARCHITECT" and not allow_architect:
+                log.info(f"SKIP: {config.role} (disabled)")
+                continue
+            run_agent(config)
 
     if _is_stopping():
         return
@@ -704,10 +712,13 @@ def dispatch_cycle(agents: list[AgentConfig], allow_architect: bool):
         project_pairs = get_pending_projects(username)
         if project_pairs:
             for proj, age in project_pairs:
+                if target_project and proj != target_project:
+                    continue
                 work_queue.append((config, proj, age))
         else:
-            # Tasks exist but no project field — run unscoped
-            work_queue.append((config, None, ""))
+            if not target_project:
+                # Tasks exist but no project field — run unscoped
+                work_queue.append((config, None, ""))
 
     if not work_queue:
         log.info("no work queued for task-driven agents")
@@ -823,11 +834,23 @@ def main():
     # Set up file + console logging
     setup_logging("dispatcher", console=True)
 
-    # Handle subcommands
-    if len(sys.argv) > 1 and sys.argv[1] == "stop":
+    parser = argparse.ArgumentParser(description="Agentine dispatcher")
+    parser.add_argument(
+        "command",
+        nargs="?",
+        default="run",
+        help="subcommand: stop, status, yes (run with architect enabled), or run (default)",
+    )
+    parser.add_argument(
+        "--project", "-p",
+        help="target a single project (skips generators, only dispatches tasks for this project)",
+    )
+    args = parser.parse_args()
+
+    if args.command == "stop":
         stop()
         return
-    if len(sys.argv) > 1 and sys.argv[1] == "status":
+    if args.command == "status":
         status()
         return
 
@@ -838,12 +861,14 @@ def main():
         print("  use 'agentine-dispatch stop' to stop it first")
         sys.exit(1)
 
-    allow_architect = len(sys.argv) > 1 and sys.argv[1] == "yes"
+    allow_architect = args.command == "yes"
+    target_project = args.project
     agents, _dispatch = load_config()
 
-    log.info(
-        f"dispatcher starting (architect={'enabled' if allow_architect else 'disabled'})"
-    )
+    parts = [f"architect={'enabled' if allow_architect else 'disabled'}"]
+    if target_project:
+        parts.append(f"project={target_project}")
+    log.info(f"dispatcher starting ({', '.join(parts)})")
     log.info(f"api: {API_URL}")
     log.info(f"agents: {', '.join(a.role for a in agents)}")
     log.info(
@@ -876,7 +901,7 @@ def main():
             log.info(f"iteration {iteration}")
             log.info("=" * 40)
 
-            dispatch_cycle(agents, allow_architect)
+            dispatch_cycle(agents, allow_architect, target_project)
 
             if _is_stopping():
                 break

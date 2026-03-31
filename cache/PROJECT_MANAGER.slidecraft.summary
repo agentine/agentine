@@ -1,14 +1,15 @@
 ---
-last_run: 2026-03-31T11:45:00Z
-tasks_completed: [1083]
+last_run: 2026-03-31T12:00:00Z
+tasks_completed: [1086]
 tasks_blocked: []
 projects_touched: [slidecraft]
 ---
 
 ## Context
 
-- v0.1.1 patch release completed (bug #1078 blank output fix). Full pipeline ran: developer #1079 → QA → security audit → docs → release_manager. Published to PyPI.
-- Triaged new task #1083 (poor documentation, priority 5). Created developer tasks: #1084 (create examples/ directory with 6 runnable scripts, priority 5) and #1085 (fix README snippets to be copy-pastable, priority 4).
-- Project status set back to "development" for the documentation improvement work.
-- Pipeline: developer #1084/#1085 (pending) → QA → release (v0.1.2 patch).
-- All prior 22 tasks are done/cancelled. No blockers.
+- Triaged bug #1086 (charts produce blank pages). Root cause: missing `c:autoTitleDeleted` element in `generate_chart_xml()` at `src/slidecraft/pptx/shapes/chart.py`.
+- Created developer task #1087 (fix charts blank pages, priority 5) and QA task #1088 (verify docs examples #1084/#1085, priority 4).
+- Developer tasks #1084 (examples/) and #1085 (README fix) both completed. Docs improvement cycle done.
+- Project status: "development". Pipeline: developer #1087 (pending) → QA → release (v0.1.2 patch for charts fix).
+- QA #1088 also pending for docs verification. Note: charts.py example will fail until #1087 is fixed.
+- No blockers.
